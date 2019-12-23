@@ -3,12 +3,10 @@ import {
     param2Obj
 } from '../src/utils.ts'
 
-import user from './user'
-import table from './table'
+import login from './login'
 
 const mocks = [
-    ...user,
-    ...table
+    ...login
 ]
 
 export function mockXHR() {

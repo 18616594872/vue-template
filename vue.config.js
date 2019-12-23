@@ -35,12 +35,12 @@ module.exports = {
     devServer: {
         port: port, // 端口
         proxy: {
-            // change xxx-api/login => mock/login
-            [process.env.VUE_APP_BASE_API]: {
+            // change api/login => mock/login
+            '/api': {
                 target: `http://127.0.0.1:${port}/mock`,
                 changeOrigin: true,
                 pathRewrite: {
-                    ['^' + process.env.VUE_APP_BASE_API]: ''
+                    '^/api': ''
                 }
             }
         },

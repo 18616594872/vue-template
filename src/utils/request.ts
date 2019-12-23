@@ -7,8 +7,7 @@ import {
 } from 'element-ui'
 
 const service = axios.create({
-    baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-    timeout: 5000
+    baseURL: '/api'
 })
 
 // request interceptor
@@ -21,7 +20,7 @@ service.interceptors.request.use(
         return config
     },
     (error: any) => {
-        console.log(error) // for debug
+        console.log(error)
         return Promise.reject(error)
     }
 )

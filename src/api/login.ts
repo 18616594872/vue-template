@@ -1,5 +1,13 @@
 import request from '@/utils/request.ts'
 
+export function login(data : any) {
+    return request({
+        url: '/user/login',
+        method: 'post',
+        data
+    })
+}
+
 export function getInfo(token: any) {
     return request({
         url: '/user/info',

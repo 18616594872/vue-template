@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 import {
     param2Obj
-} from '../src/utils.ts'
+} from '../src/utils'
 
 import login from './login'
 

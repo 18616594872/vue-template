@@ -1,4 +1,4 @@
-const tokens: object = {
+const tokens = {
     admin: {
         token: 'admin'
     },
@@ -7,27 +7,25 @@ const tokens: object = {
     }
 }
 
-const users: object = {
+const users = {
     'admin': {
-        roles: ['admin'],
-        introduction: 'I am a super administrator',
-        avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-        name: 'Super Admin'
+        name: 'admin',
+        routeList:'', // current user rights, super admin is empty by default
+        description: 'Super Admin',
     },
     'editor': {
-        roles: ['editor'],
-        introduction: 'I am an editor',
-        avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-        name: 'Normal Editor'
+        roles: 'test',
+        routeList:'',
+        description: 'Test Admin',
     }
 }
 
 export default [
     // user login
     {
-        url: '/user/login',
+        url: '/auth/shiro/login',
         type: 'post',
-        response: (config: any) => {
+        response: config => {
             const {
                 username
             } = config.body
@@ -42,7 +40,8 @@ export default [
             }
 
             return {
-                code: 20000,
+                code: 200,
+                msg: "success",
                 data: token
             }
         }
@@ -50,9 +49,9 @@ export default [
 
     // get user info
     {
-        url: '/user/info\.*',
+        url: '/auth/shiro/login\.*',
         type: 'get',
-        response: (config: any) => {
+        response: config => {
             const {
                 token
             } = config.query
@@ -67,7 +66,7 @@ export default [
             }
 
             return {
-                code: 20000,
+                code: 200,
                 data: info
             }
         }
@@ -77,7 +76,7 @@ export default [
     {
         url: '/user/logout',
         type: 'post',
-        response: (config: any) => {
+        response: config => {
             return {
                 code: 20000,
                 data: 'success'

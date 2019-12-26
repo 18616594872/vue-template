@@ -1,4 +1,3 @@
-
 const path = require('path')
 
 const resolve = dir => {
@@ -36,11 +35,11 @@ module.exports = {
         port: port, // 端口
         proxy: {
             // change api/login => mock/login
-            '/api': {
+            [process.env.VUE_APP_BASE_API]: {
                 target: `http://127.0.0.1:${port}/mock`,
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/api': ''
+                    ['^' + process.env.VUE_APP_BASE_API]: ''
                 }
             }
         },

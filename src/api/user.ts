@@ -1,20 +1,18 @@
 import request from '@/utils/request.ts'
+import { UserInfo } from '@/types/views/user.interface.ts'
 
-export function login(data : any) {
+export function login(data: UserInfo) {
     return request({
-        url: '/user/login',
+        url: '/auth/shiro/login',
         method: 'post',
         data
     })
 }
 
-export function getInfo(token: any) {
+export function getInfo() {
     return request({
-        url: '/user/info',
-        method: 'get',
-        params: {
-            token
-        }
+        url: `/auth/shiro/login/admin`,
+        method: 'get'
     })
 }
 
@@ -23,4 +21,4 @@ export function logout() {
         url: '/user/logout',
         method: 'post'
     })
-}
+}   

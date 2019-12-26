@@ -6,7 +6,7 @@ const path = require('path')
 const mockDir = path.join(process.cwd(), 'mock')
 
 function registerRoutes(app) {
-  let mockLastIndex
+  let mockLastIndex1
   const { default: mocks } = require('./index.js')
   for (const mock of mocks) {
     app[mock.type](mock.url, mock.response)

@@ -1,12 +1,7 @@
 import Mock from 'mockjs'
-import {
-    param2Obj
-} from '../src/utils'
-
-import login from './login'
-
+import user from './user'
 const mocks = [
-    ...login
+    ...user
 ]
 
 export function mockXHR() {
@@ -21,6 +16,22 @@ export function mockXHR() {
             }
         }
         this.proxy_send(...arguments)
+    }
+
+    function param2Obj(url) {
+        const search = url.split('?')[1]
+        if (!search) {
+            return {}
+        }
+        return JSON.parse(
+            '{"' +
+            decodeURIComponent(search)
+                .replace(/"/g, '\\"')
+                .replace(/&/g, '","')
+                .replace(/=/g, '":"')
+                .replace(/\+/g, ' ') +
+            '"}'
+        )
     }
 
     function XHR2ExpressReqWrap(respond) {

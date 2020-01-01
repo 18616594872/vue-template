@@ -1,5 +1,5 @@
-import request from '@/utils/request.ts'
-import { UserInfo } from '@/types/views/user.interface.ts'
+import request from '@/utils/request'
+import { UserInfo } from '@/types/views/user.interface'
 
 export function login(data: UserInfo) {
     return request({

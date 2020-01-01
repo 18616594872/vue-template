@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {
     getToken
-} from './common'
+} from '@/utils/common'
 import {
     Message
 } from 'element-ui'

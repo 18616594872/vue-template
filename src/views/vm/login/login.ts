@@ -3,19 +3,17 @@ import {
     Vue
 } from 'vue-property-decorator'
 import {
-    LoginData,
     FormValidate,
     RuleValidate
 } from '@/types/views/login.interface'
 import Cookies from 'js-cookie'
 
+const COOKIES_KEY: string = 'user'
+
 @Component({})
 export default class About extends Vue {
 
     // data
-    data: LoginData = {
-        pageName: 'Login'
-    }
     checked: boolean = false
     loading: boolean = false
     logining: boolean = false
@@ -44,27 +42,25 @@ export default class About extends Vue {
 
     //methods
     handleSubmit(name: any) {
-        let _this: any = this;
-        let sha256: any = require("js-sha256").sha256;
         let ref: any = this.$refs[name];
 
-        ref.validate((valid: any) => {
+        ref.validate((valid: boolean) => {
             if (valid) {
-                this.loading = true;
+                this.loading = true
                 this.checked ? this.setCookie(this.formValidate.userName, this.formValidate.passWord, 7) :
                     this.clearCookie();
-                let loginParams: any = {
-                    username: _this.formValidate.userName,
-                    password: sha256(_this.formValidate.passWord)
+                let loginParams: FormValidate = {
+                    userName: this.formValidate.userName,
+                    passWord: this.formValidate.passWord
                 };
                 this.$store.dispatch("login", loginParams).then((result: any) => {
 
-                        localStorage.setItem("userName", loginParams.username)
-                        localStorage.setItem("password", loginParams.password)
+                        localStorage.setItem("userName", loginParams.userName)
+                        localStorage.setItem("password", loginParams.passWord)
 
                         this.errTipMes = ''
                         this.loading = false
-                        _this.$router.push({
+                        this.$router.push({
                             path: "/VMMain"
                         });
 
@@ -83,9 +79,9 @@ export default class About extends Vue {
         this.errTipMes = ''
     }
     //设置cookie
-    setCookie(c_name: any, c_pwd: any, exdays: any) {
+    setCookie(c_name: string, c_pwd: string, exdays: number) {
         Cookies.set(
-            "user", {
+            COOKIES_KEY, {
                 name: c_name,
                 pwd: c_pwd
             }, {
@@ -95,22 +91,22 @@ export default class About extends Vue {
     }
     //读取cookie
     getCookie() {
-        if (Cookies.getJSON("user")) {
+        if (Cookies.getJSON(COOKIES_KEY)) {
             let {
                 name,
                 pwd
-            } = Cookies.getJSON("user");
+            } = Cookies.getJSON(COOKIES_KEY);
             this.formValidate.userName = name;
             this.formValidate.passWord = pwd;
         }
     }
     //清除cookie
     clearCookie() {
-        Cookies.remove("user");
+        Cookies.remove(COOKIES_KEY);
     }
 
     loadDefault() {
-        if (Cookies.getJSON("user")) {
+        if (Cookies.getJSON(COOKIES_KEY)) {
             this.checked = true;
         }
     }

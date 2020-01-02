@@ -25,7 +25,6 @@
 				</Button>
 			</FormItem>
 		</Form>
-		<LoginBG></LoginBG>
     </div>
 </template>
 

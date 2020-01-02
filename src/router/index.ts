@@ -1,29 +1,23 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Vue from 'vue'
+import Router from 'vue-router'
+import { constantRoutes, asyncRoutes } from './router'
 
-Vue.use(VueRouter);
+Vue.use(Router)
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home,
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-];
+const createRouter = () =>
+    new Router({
+        scrollBehavior: () => {
+        y: 0
+        },
+        routes: constantRoutes,
+        mode: 'history'
+    })
+const router: any = createRouter()
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes,
-});
+export function resetRouter() {
+  const newRouter: any = createRouter()
+  router.matcher = newRouter.matcher // 重置 router
+}
 
-export default router;
+export { constantRoutes, asyncRoutes }
+export default router

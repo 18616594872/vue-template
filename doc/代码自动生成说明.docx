@@ -1,0 +1,6 @@
+1、自动生成views中的文件：使用命令 npm run tep um mam test（必须使用三级目录）
+     说明：如果um，mam文件夹存在，就会在目录之下生成test文件夹，test文件中包含test.less\test.ts\test.vue三个文件
+     如果不存在，就会生成新的文件夹
+     同时在types/views下生成同名接口文件test.interface.ts
+2、自动生成components中的文件：使用命令 npm tep com testComponent
+     说明：会直接生成testComponent文件夹，其中包含testComponent.vue文件，可根据需求调整该文件夹的位置

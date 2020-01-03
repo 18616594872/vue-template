@@ -6,9 +6,13 @@ import {
     FormValidate,
     RuleValidate
 } from '@/types/views/login.interface'
-import Cookies from 'js-cookie'
+import {
+    setCookie,
+    getCookie,
+    clearCookie,
+    loadDefault
+} from '@/utils/common.ts'
 
-const COOKIES_KEY: string = 'user'
 
 @Component({})
 export default class About extends Vue {
@@ -36,19 +40,19 @@ export default class About extends Vue {
     errTipMes: string = ''
 
     mounted() {
-        this.getCookie();
-        this.loadDefault();
+        getCookie()
+        loadDefault()
     }
 
     //methods
-    handleSubmit(name: any) {
+    handleSubmit(name: string) {
         let ref: any = this.$refs[name];
 
         ref.validate((valid: boolean) => {
             if (valid) {
                 this.loading = true
-                this.checked ? this.setCookie(this.formValidate.userName, this.formValidate.passWord, 7) :
-                    this.clearCookie();
+                this.checked ? setCookie(this.formValidate.userName, this.formValidate.passWord, 7) :
+                    clearCookie()
                 let loginParams: FormValidate = {
                     userName: this.formValidate.userName,
                     passWord: this.formValidate.passWord
@@ -56,7 +60,7 @@ export default class About extends Vue {
                 this.$store.dispatch("login", loginParams).then((result: any) => {
 
                         localStorage.setItem("userName", loginParams.userName)
-                        localStorage.setItem("password", loginParams.passWord)
+                        localStorage.setItem("passWord", loginParams.passWord)
 
                         this.errTipMes = ''
                         this.loading = false
@@ -67,10 +71,10 @@ export default class About extends Vue {
                     })
                     .catch((err) => {
                         this.errTipMes = "用户名或密码错误"
-                        this.loading = false;
+                        this.loading = false
                     });
             } else {
-                console.log("输入不合法!");
+                console.log("输入不合法!")
             }
         });
     }
@@ -78,38 +82,7 @@ export default class About extends Vue {
         this.loading = false
         this.errTipMes = ''
     }
-    //设置cookie
-    setCookie(c_name: string, c_pwd: string, exdays: number) {
-        Cookies.set(
-            COOKIES_KEY, {
-                name: c_name,
-                pwd: c_pwd
-            }, {
-                expires: exdays
-            }
-        );
-    }
-    //读取cookie
-    getCookie() {
-        if (Cookies.getJSON(COOKIES_KEY)) {
-            let {
-                name,
-                pwd
-            } = Cookies.getJSON(COOKIES_KEY);
-            this.formValidate.userName = name;
-            this.formValidate.passWord = pwd;
-        }
-    }
-    //清除cookie
-    clearCookie() {
-        Cookies.remove(COOKIES_KEY);
-    }
 
-    loadDefault() {
-        if (Cookies.getJSON(COOKIES_KEY)) {
-            this.checked = true;
-        }
-    }
 
 
 }

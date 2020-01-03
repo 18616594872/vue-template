@@ -1,6 +1,6 @@
 <template>
-    <div class="Login-wrap">
-        <h1 class="form">后台管理系统</h1>
+	<div class="Login-wrap">
+		<h1 class="form">后台管理系统</h1>
 		<Form ref="formValidate" :model="formValidate" :rules="ruleValidate" class="demo-ruleForm login-container">
 			<h2 class="title">用户登录</h2>
 			<FormItem prop="userName">
@@ -25,12 +25,11 @@
 				</Button>
 			</FormItem>
 		</Form>
-    </div>
+	</div>
 </template>
 
 <script lang="ts" src="./login.ts"></script>
 
 <style lang="less">
-    @import './login.less';
+	@import './login.less';
 </style>
-

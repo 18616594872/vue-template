@@ -1,20 +1,22 @@
 import Cookies from 'js-cookie'
 
-const TOKEN_KEY: string = 'token'
-export const setToken = (token: string) => {
-      localStorage.setItem(TOKEN_KEY, token)
-      
+export const TOKEN_KEY: string = 'token'
+export const USERNAME_KEY: string = 'userName'
+export const PASSWORD_KEY: string = 'userName'
+export const setToken = (KEY: string, token: string) => {
+	localStorage.setItem(KEY, token)
+
 }
-export const getToken = () => {
-	const token = localStorage.getItem(TOKEN_KEY)
+export const getToken = (KEY: string) => {
+	const token = localStorage.getItem(KEY)
 	if (token) {
 		return token
 	} else {
 		return false
 	}
 }
-export const removeToken = () => {
-    localStorage.removeItem(TOKEN_KEY)
+export const removeToken = (KEY: string) => {
+	localStorage.removeItem(KEY)
 }
 
 const COOKIES_KEY: string = 'user'
@@ -38,12 +40,12 @@ export const getCookie = () => {
 			pwd
 		} = Cookies.getJSON(COOKIES_KEY)
 
-		if(name || pwd){
+		if (name || pwd) {
 			return {
 				name,
 				pwd
 			}
-		}else {
+		} else {
 			return false
 		}
 	}
@@ -52,11 +54,11 @@ export const getCookie = () => {
 export const clearCookie = () => {
 	Cookies.remove(COOKIES_KEY)
 }
- 
+
 export const loadDefault = () => {
 	if (Cookies.getJSON(COOKIES_KEY)) {
 		return true
-	}else {
+	} else {
 		return false
 	}
 }

@@ -10,7 +10,11 @@ import {
     setCookie,
     getCookie,
     clearCookie,
-    loadDefault
+    loadDefault,
+    USERNAME_KEY,
+    PASSWORD_KEY,
+    setToken
+    
 } from '@/utils/common.ts'
 
 
@@ -40,8 +44,8 @@ export default class About extends Vue {
     errTipMes: string = ''
 
     mounted() {
-        getCookie()
-        loadDefault()
+        this.input()
+        this.checked = loadDefault()
     }
 
     //methods
@@ -59,20 +63,20 @@ export default class About extends Vue {
                 };
                 this.$store.dispatch("login", loginParams).then((result: any) => {
 
-                        localStorage.setItem("userName", loginParams.userName)
-                        localStorage.setItem("passWord", loginParams.passWord)
+                    setToken(USERNAME_KEY, loginParams.userName)  //保存 用户密码用于免登陆
+					setToken(PASSWORD_KEY, loginParams.passWord)
 
-                        this.errTipMes = ''
-                        this.loading = false
-                        this.$router.push({
-                            path: "/VMMain"
-                        });
-
-                    })
-                    .catch((err) => {
-                        this.errTipMes = "用户名或密码错误"
-                        this.loading = false
+                    this.errTipMes = ''
+                    this.loading = false
+                    this.$router.push({
+                        path: "/VMMain"
                     });
+
+                })
+                .catch((err) => {
+                    this.errTipMes = "用户名或密码错误"
+                    this.loading = false
+                });
             } else {
                 console.log("输入不合法!")
             }
@@ -82,7 +86,15 @@ export default class About extends Vue {
         this.loading = false
         this.errTipMes = ''
     }
+    input(){
+        let cookie = getCookie()
+        let { formValidate } = this
 
+        if(cookie){
+            let { name, pwd } = cookie
 
-
+            formValidate.userName = name
+            formValidate.passWord = pwd
+        }
+    }
 }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {
-    getToken
+    getToken,
+    TOKEN_KEY
 } from '@/utils/common'
 import {
     Message
@@ -14,8 +15,8 @@ const service = axios.create({
 service.interceptors.request.use(
     (config: any) => {
 
-        if (getToken()) {
-            config.headers.common['Authorization'] = getToken()
+        if (getToken(TOKEN_KEY)) {
+            config.headers.common['Authorization'] = getToken(TOKEN_KEY)
         }
         return config
     },

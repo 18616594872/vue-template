@@ -14,7 +14,7 @@ import {
     USERNAME_KEY,
     PASSWORD_KEY,
     setToken
-    
+
 } from '@/utils/common.ts'
 
 
@@ -48,7 +48,7 @@ export default class About extends Vue {
         this.checked = loadDefault()
     }
 
-    //methods
+    // methods
     handleSubmit(name: string) {
         let ref: any = this.$refs[name];
 
@@ -63,20 +63,20 @@ export default class About extends Vue {
                 };
                 this.$store.dispatch("login", loginParams).then((result: any) => {
 
-                    setToken(USERNAME_KEY, loginParams.userName)  //保存 用户密码用于免登陆
-					setToken(PASSWORD_KEY, loginParams.passWord)
+                        setToken(USERNAME_KEY, loginParams.userName) // 保存 用户密码用于免登陆
+                        setToken(PASSWORD_KEY, loginParams.passWord)
 
-                    this.errTipMes = ''
-                    this.loading = false
-                    this.$router.push({
-                        path: "/VMMain"
+                        this.errTipMes = ''
+                        this.loading = false
+                        this.$router.push({
+                            path: "/VMMain"
+                        });
+
+                    })
+                    .catch((err) => {
+                        this.errTipMes = "用户名或密码错误"
+                        this.loading = false
                     });
-
-                })
-                .catch((err) => {
-                    this.errTipMes = "用户名或密码错误"
-                    this.loading = false
-                });
             } else {
                 console.log("输入不合法!")
             }
@@ -86,12 +86,17 @@ export default class About extends Vue {
         this.loading = false
         this.errTipMes = ''
     }
-    input(){
+    input() {
         let cookie = getCookie()
-        let { formValidate } = this
+        let {
+            formValidate
+        } = this
 
-        if(cookie){
-            let { name, pwd } = cookie
+        if (cookie) {
+            let {
+                name,
+                pwd
+            } = cookie
 
             formValidate.userName = name
             formValidate.passWord = pwd

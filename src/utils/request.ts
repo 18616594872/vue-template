@@ -7,6 +7,8 @@ import {
     Message
 } from 'element-ui'
 
+const AUTHORIZATION: string = 'Authorization'
+
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API
 })
@@ -16,7 +18,7 @@ service.interceptors.request.use(
     (config: any) => {
 
         if (getToken(TOKEN_KEY)) {
-            config.headers.common['Authorization'] = getToken(TOKEN_KEY)
+            config.headers.common[AUTHORIZATION] = getToken(TOKEN_KEY)
         }
         return config
     },
@@ -31,7 +33,7 @@ service.interceptors.response.use(
     (response: any) => {
         const res: any = response.data
 
-        if (res.code != 200) {
+        if (res.code !== 200) {
             Message({
                 message: res.message || 'Error',
                 type: 'error',

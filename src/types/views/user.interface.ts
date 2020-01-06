@@ -1,13 +1,13 @@
 // VUEX User.State 参数类型
 export interface UserState {
-    token?: string,
+    token?: string | false,
     name?: string,
     routelist?: string[],
     queueName?: string
 }
 export interface UserInfo {
-    username: string,
-    password: string 
+    userName: string,
+    passWord: string 
 }
 
 export interface RouteInfo {

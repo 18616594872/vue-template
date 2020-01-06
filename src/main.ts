@@ -16,8 +16,22 @@ Vue.config.productionTip = false;
 Vue.prototype.$Message = Message;
 Vue.prototype.$Modal = Modal;
 
-new Vue({
-    router,
-    store,
-    render: (h) => h(App),
-}).$mount('#app');
+async function init() {
+    try {
+        let permission = (await import("@/permission")).permission;
+        await permission();
+        return "success"
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+init().then(res => {
+    new Vue({
+        router,
+        store,
+        render: (h) => h(App)
+    }).$mount('#app');
+
+}).catch(err => {
+})

@@ -21,7 +21,7 @@ export const removeToken = (KEY: string) => {
 
 const COOKIES_KEY: string = 'user'
 
-//设置cookie
+// 设置cookie
 export const setCookie = (name: string, pwd: string, exdays: number) => {
 	Cookies.set(
 		COOKIES_KEY, {
@@ -32,7 +32,7 @@ export const setCookie = (name: string, pwd: string, exdays: number) => {
 		}
 	);
 }
-//读取cookie
+// 读取cookie
 export const getCookie = () => {
 	if (Cookies.getJSON(COOKIES_KEY)) {
 		let {
@@ -50,7 +50,7 @@ export const getCookie = () => {
 		}
 	}
 }
-//清除cookie
+// 清除cookie
 export const clearCookie = () => {
 	Cookies.remove(COOKIES_KEY)
 }

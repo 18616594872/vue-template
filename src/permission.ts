@@ -18,10 +18,10 @@ const permission = async () => {
 
         NProgress.start()
         // 确定用户是否登录
-        const hasToken: any = getToken(TOKEN_KEY)
-
+        const hasToken: string | boolean = getToken(TOKEN_KEY)
+        console.log('test')
         if (hasToken) {
-              if (to.path === '/VMLogin') { //免登陆
+               if (to.path === '/VMLogin') { // 免登陆
                   let loginParams: any = {
                     userName: getToken(USERNAME_KEY),
                     passWord: getToken(PASSWORD_KEY)
@@ -34,7 +34,7 @@ const permission = async () => {
                     }
                 )
               } else {
-                  //确定用户是否已通过getInfo获得其权限角色
+                  // 确定用户是否已通过getInfo获得其权限角色
                   const hasRoles: boolean = store.getters.name && store.getters.name.length > 0
                 
                   if (hasRoles) {

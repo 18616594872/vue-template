@@ -76,7 +76,7 @@ const actions: ActionTree < UserState, any > = {
                 } else {
                     reject(data)
                 }
-            }).catch(error => {
+            }).catch((error: any) => {
                 reject(error)
             })
         })
@@ -106,7 +106,7 @@ const actions: ActionTree < UserState, any > = {
                 }
 
 
-            }).catch(error => {
+            }).catch((error: any) => {
                 reject(error)
             })
         })
@@ -123,7 +123,7 @@ const actions: ActionTree < UserState, any > = {
                 commit('SET_QUEUENAME', [])
                 commit('SET_NAME', '')
                 commit('SET_ROUTLIST', '')
-                removeToken()
+                removeToken(TOKEN_KEY)
                 resetRouter()
 
                 resolve()

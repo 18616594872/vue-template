@@ -9,10 +9,13 @@ export function login(data: UserInfo) {
     })
 }
 
-export function getInfo() {
+export function getInfo(token: any) {
     return request({
         url: `/auth/shiro/login/admin`,
-        method: 'get'
+        method: 'get',
+        params: {
+            token
+        }
     })
 }
 

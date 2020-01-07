@@ -6,8 +6,12 @@ import {
 import {
     Message
 } from 'element-ui'
+import store from '@/store'
+import router from '@/router'
+import Vue from 'vue'
 
 const AUTHORIZATION: string = 'Authorization'
+const Log = Vue.prototype.Log
 
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API
@@ -33,23 +37,27 @@ service.interceptors.response.use(
     (response: any) => {
         const res: any = response.data
 
-        if (res.code !== 200) {
+        if (response.status !== 200) {
             Message({
                 message: res.message || 'Error',
                 type: 'error',
                 duration: 5 * 1000
             })
-
-            if (res.code === 503 || res.code === 500) {
-                // to re-login
-            }
-            return Promise.reject(new Error(res.message || 'Error'))
         } else {
-            return res
+            if (res.code === 503 || res.data === 500) {
+                store.dispatch('logout').then(() => {
+                    location.reload();
+                });
+                router.push({
+                    path: '/VMLogin'
+                })
+            } else {
+                return response
+            }
         }
     },
     (error: any) => {
-        console.log('err' + error) // for debug
+        Log.error(error) // for debug
         Message({
             message: error.message,
             type: 'error',

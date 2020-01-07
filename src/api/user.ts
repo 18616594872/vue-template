@@ -11,7 +11,7 @@ export function login(data: UserInfo) {
 
 export function getInfo(token: any) {
     return request({
-        url: `/auth/shiro/login/admin`,
+        url: `/auth/shiro/login`,
         method: 'get',
         params: {
             token

@@ -25,8 +25,7 @@ import router, {
 const state: UserState = {
     token: getToken(TOKEN_KEY),
     name: '',
-    routelist: [],
-    queueName: ''
+    routelist: []
 }
 
 // 更改state
@@ -40,9 +39,6 @@ const mutations: MutationTree < UserState > = {
     },
     SET_ROUTLIST: (state: UserState, routeList: string) => {
         state.routelist = routeList.split(',')
-    },
-    SET_QUEUENAME: (state: UserState, queueName: string) => {
-        state.queueName = queueName
     }
 }
 
@@ -64,12 +60,11 @@ const actions: ActionTree < UserState, any > = {
                 const {
                     code,
                     data,
-                } = response.data;
+                } = response.data
 
                 if (code === 200 && Object.prototype.toString.call(data) === '[object Object]') {
 
                     commit('SET_TOKEN', data.token)
-                    commit('SET_QUEUENAME', data.queueName)
                     setToken(TOKEN_KEY, data.token)
                     resolve(data)
 

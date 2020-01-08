@@ -131,7 +131,6 @@
                             <Button type="info" class="normalBtn" :disabled="findPath('/UM/tunnelCustomer/list')?false:true"
                                 @click="goToMoudle({ path:'/UM/tunnelCustomer/list'})">
                                 <div>
-                                    <img :src="customer" :width="imgWidth">
                                     <div :style="{fontSize:mySize}">企业客户</div>
                                 </div>
                             </Button>

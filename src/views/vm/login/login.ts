@@ -62,9 +62,8 @@ export default class About extends Vue {
                     passWord: this.formValidate.passWord
                 };
                 this.$store.dispatch("login", loginParams).then((result: any) => {
-
+                        console.log('test')
                         setToken(USERNAME_KEY, loginParams.userName) // 保存 用户密码用于免登陆
-                        setToken(PASSWORD_KEY, loginParams.passWord)
 
                         this.errTipMes = ''
                         this.loading = false

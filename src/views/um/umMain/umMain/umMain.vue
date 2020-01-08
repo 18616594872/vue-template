@@ -8,7 +8,7 @@
                     <Col span="14">
                     <span class="Icon"></span>
                     <div style="padding-top: 1vh;">
-                        <img :src="mainName" style="height: 3vh">
+                        <!-- <img :src="mainName" style="height: 3vh"> -->
                     </div>
                     </Col>
                     <Col span="6" offset="4">

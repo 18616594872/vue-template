@@ -6,17 +6,6 @@ import {
     FormValidate,
     RuleValidate
 } from '@/types/views/login.interface'
-import {
-    setCookie,
-    getCookie,
-    clearCookie,
-    loadDefault,
-    USERNAME_KEY,
-    PASSWORD_KEY,
-    setToken
-
-} from '@/utils/common.ts'
-
 
 @Component({})
 export default class About extends Vue {
@@ -43,11 +32,6 @@ export default class About extends Vue {
     }
     errTipMes: string = ''
 
-    mounted() {
-        this.input()
-        this.checked = loadDefault()
-    }
-
     // methods
     handleSubmit(name: string) {
         let ref: any = this.$refs[name];
@@ -55,21 +39,16 @@ export default class About extends Vue {
         ref.validate((valid: boolean) => {
             if (valid) {
                 this.loading = true
-                this.checked ? setCookie(this.formValidate.userName, this.formValidate.passWord, 7) :
-                    clearCookie()
                 let loginParams: FormValidate = {
                     userName: this.formValidate.userName,
                     passWord: this.formValidate.passWord
                 };
                 this.$store.dispatch("login", loginParams).then((result: any) => {
 
-                        setToken(USERNAME_KEY, loginParams.userName) // 保存 用户密码用于免登陆
-                        setToken(PASSWORD_KEY, loginParams.passWord)
-
                         this.errTipMes = ''
                         this.loading = false
                         this.$router.push({
-                            path: "/VMMain"
+                            path: "/UMMain"
                         });
 
                     })
@@ -85,21 +64,5 @@ export default class About extends Vue {
     changeLogBtnState() {
         this.loading = false
         this.errTipMes = ''
-    }
-    input() {
-        let cookie = getCookie()
-        let {
-            formValidate
-        } = this
-
-        if (cookie) {
-            let {
-                name,
-                pwd
-            } = cookie
-
-            formValidate.userName = name
-            formValidate.passWord = pwd
-        }
     }
 }

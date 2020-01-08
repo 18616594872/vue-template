@@ -32,7 +32,6 @@ export default class UMMain extends Vue {
     patrol: string = require("@/assets/images/um/patrol.png")
     overhaul: string = require("@/assets/images/um/overhaul.png")
     enterGallery: string = require("@/assets/images/um/enterGallery.png")
-    mainName: string = require("@/assets/images/um/maxTunnelHome.png")
 
     timerChange: any
     fullHeight: number = window.innerHeight

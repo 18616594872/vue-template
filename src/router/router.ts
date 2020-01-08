@@ -26,4 +26,9 @@ export const asyncRoutes: any[] = [
         component: (resolve: any) =>
             require(["@/views/vm/visualizations/visualizations.vue"], resolve)
     },
+    {
+        path: '/UMMain',
+        name: 'ummain',
+        component: (resolve: any) => require(["@/views/um/umMain/umMain/umMain.vue"], resolve),
+    }
 ]

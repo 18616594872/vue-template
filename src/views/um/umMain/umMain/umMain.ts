@@ -96,8 +96,6 @@ export default class UMMain extends Vue {
                 String(path.path)
             ) < 0
         ) {
-            // sessionStorage.setItem("selectedName", "");
-            // sessionStorage.setItem("refreshAddress","")
             this.$router.push(path);
         }
     }
@@ -111,10 +109,6 @@ export default class UMMain extends Vue {
                 this.$store
                     .dispatch("logout")
                     .then(() => {
-                        // sessionStorage.removeItem("UMUser");
-                        // localStorage.removeItem('Authorization')
-                        // localStorage.removeItem('userName')
-                        // localStorage.removeItem('password')
                         this.$router.push("/VMlogin");
                     })
                     .catch((msg: string) => {
@@ -159,10 +153,6 @@ export default class UMMain extends Vue {
             }
         });
         return result;
-    }
-
-    showAboutUs() {
-        console.log('showAboutUs')
     }
 
     beforeDestroy() {

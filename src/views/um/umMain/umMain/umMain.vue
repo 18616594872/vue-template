@@ -1,52 +1,37 @@
 <template>
-    <div class="main" :style="{height:fullHeight+'px'}">
+    <div class="main">
         <!--Top标题-->
         <Row>
             <Col span="24">
-            <div id="top" class="topOpacity">
-                <Row>
-                    <Col span="14">
-                    <span class="Icon"></span>
-                    <div style="padding-top: 1vh;">
-                        <!-- <img :src="mainName" style="height: 3vh"> -->
-                    </div>
-                    </Col>
-                    <Col span="6" offset="4">
-                    <div style="float: right;padding-top: 0px;padding-right: 5px;">
-                        <Dropdown divided @click.native="showAboutUs">
-                            <a>
-                                <Icon type="ios-information-circle" color="#fff" title="关于我们" class="about"></Icon>
-                            </a>
-                        </Dropdown>
-                        <!-- <showAboutUs v-bind="aboutUs"></showAboutUs> -->
-                    </div>
-                    <div style="float: right;padding-top: 1vmin;">
-                        <Dropdown divided @click.native="logout">
-                            <a>
-                                <Icon type="md-power" color="#fff" class="power"></Icon>
-                            </a>
-                        </Dropdown>
-                    </div>
-                    </Col>
-                </Row>
-            </div>
+                <div class="topOpacity">
+                    <Row>
+                        <Col span="14">
+                            <span class="title">后台管理系统</span>
+                        </Col>
+                        <Col span="6" offset="4">
+                            <div class="logoutBtn">
+                                <Dropdown divided @click.native="logout">
+                                    <a>
+                                        <Icon type="md-power" color="#fff" class="power"></Icon>
+                                    </a>
+                                </Dropdown>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
             </Col>
         </Row>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        
         <!--菜单内容-->
-        <div class="modals">
+        <div class="menus">
             <Row type="flex" justify="center" align="top" class="code-row-bg">
                 <!--运维管理 + 其他-->
                 <Col span="6" offset="1">
                     <Row>
-                        <h2 style="font-size: 2.4vmin">运维管理</h2>
+                        <h2 class="menusTitle">运维管理</h2>
                         <Col span="16">
                             <Button type="info" class="widthBtn btn-nenghao"
-                                :disabled="findPath('/UM/virtualInspect')?false:true"
+                                :disabled="findPath('/UM/virtualInspect') ? false : true"
                                 @click="goToMoudle({ path:'/UM/virtualInspect'})">
                                 <div>
                                     <img :src="virtualInspect" :width="imgWidth">
@@ -126,7 +111,7 @@
                 <!--运营和应急-->
                 <Col span="4" offset="1">
                     <Row>
-                        <h2 style="font-size: 2.4vmin">运营管理</h2>
+                        <h2 class="menusTitle">运营管理</h2>
                         <Col span="12">
                             <Button type="info" class="normalBtn" :disabled="findPath('/UM/tunnelCustomer/list')?false:true"
                                 @click="goToMoudle({ path:'/UM/tunnelCustomer/list'})">
@@ -188,7 +173,7 @@
 
                 <!--综合监控-->
                 <Col span="6" offset="1">
-                    <h2 style="font-size: 2.4vmin">综合监控</h2>
+                    <h2 class="menusTitle">综合监控</h2>
                     <Col span="8">
                         <Button class="btn-xunjian normalBtn" type="info" :disabled="findPath('/UM/IntegratedMonitoring')?false:true"
                             @click="goToMoudle({ path:'/UM/IntegratedMonitoring'})">

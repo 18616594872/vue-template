@@ -32,7 +32,8 @@ const {
     CheckboxGroup,
     Checkbox,
     ButtonGroup,
-    Spin
+    Spin,
+    Dropdown
 } = require('view-design')
 
 const iview = {
@@ -68,6 +69,7 @@ const iview = {
         Vue.component('Checkbox', Checkbox)
         Vue.component('ButtonGroup', ButtonGroup)
         Vue.component('Spin', Spin)
+        Vue.component('Dropdown', Dropdown)
     }
 }
 

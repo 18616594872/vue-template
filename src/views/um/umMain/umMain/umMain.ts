@@ -34,7 +34,6 @@ export default class UMMain extends Vue {
     enterGallery: string = require("@/assets/images/um/enterGallery.png")
 
     timerChange: any
-    fullHeight: number = window.innerHeight
     nowTime: any = null
     nowDate: any = null
     mySize: string = "1.4rem"
@@ -55,7 +54,6 @@ export default class UMMain extends Vue {
     updateTime() {
         this.nowTime = new extendDate().format("hh:mm:ss");
         this.nowDate = extendDate.getSimpleDate();
-        this.fullHeight = window.innerHeight;
         if (window.innerWidth <= 1400) {
             this.mySize = "1.8vmin";
             this.smSize = "10px";

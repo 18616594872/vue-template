@@ -84,16 +84,16 @@ export class extendDate extends Date {
                     date[k] : ("00" + date[k]).substr(("" + date[k]).length));
             }
         }
-        return this
+        return format
     }
     static getSimpleDate() {
-        let date: extendDate = this.dataInstance.format('yyyy年MM月dd日')
+        let date: string = this.dataInstance.format('yyyy年MM月dd日')
         let week: string = "星期" + "日一二三四五六".charAt(new Date().getDay())
 
         return date + " " + week
     }
     static getFormatTime() {
-        let date: extendDate = this.dataInstance.format('yyyy年MM月dd日 hh:mm:ss')
+        let date: string = this.dataInstance.format('yyyy年MM月dd日 hh:mm:ss')
         let week: string = "星期" + "日一二三四五六".charAt(new Date().getDay())
 
         return date + " " + week

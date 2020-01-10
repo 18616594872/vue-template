@@ -34,11 +34,8 @@ export default class UMMain extends Vue {
     enterGallery: string = require("@/assets/images/um/enterGallery.png")
 
     timerChange: any
-    nowTime: any = null
-    nowDate: any = null
-    mySize: string = "1.4rem"
-    smSize: string = "16px"
-    imgWidth: string = "52px"
+    nowTime: string = ''
+    nowDate: string = ''
     safeDays: number = 0
 
     get routers(): any[] {
@@ -54,21 +51,6 @@ export default class UMMain extends Vue {
     updateTime() {
         this.nowTime = new extendDate().format("hh:mm:ss");
         this.nowDate = extendDate.getSimpleDate();
-        if (window.innerWidth <= 1400) {
-            this.mySize = "1.8vmin";
-            this.smSize = "10px";
-            this.imgWidth = "50vw";
-        } else {
-            if (window.innerWidth <= 1920) {
-                this.mySize = "1.5vmin";
-                this.smSize = "16px";
-                this.imgWidth = "50vw";
-            } else {
-                this.mySize = "1.5vmin";
-                this.smSize = "16px";
-                this.imgWidth = "100vw";
-            }
-        }
     }
 
     init() {

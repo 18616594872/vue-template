@@ -1,7 +1,9 @@
 import Mock from 'mockjs'
 import user from './user'
+import visual from './visual'
 const mocks = [
-    ...user
+    ...user,
+    ...visual
 ]
 
 export function mockXHR() {

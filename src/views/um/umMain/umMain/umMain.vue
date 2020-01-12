@@ -187,7 +187,7 @@
                         <Button class="normalBtn" type="info" :disabled="findPath('/UM/TunnelSafety')?false:true"
                             @click="goToMoudle({ path:'/UM/TunnelSafety'})">
                             <div>
-                                <img class="entranceImg" :width="imgWidth">
+                                <img class="entranceImg" :src="safe">
                                 <div class="entranceTitle">安防监测</div>
                             </div>
                         </Button>

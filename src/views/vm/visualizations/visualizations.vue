@@ -2,8 +2,10 @@
    <div id="VMMain">
 		<div class="MainContent">
 			<div class="VmHead">
+				
 			</div>
 			<div class="AlarmModule">
+				<alarm-module></alarm-module>
 			</div>
 			<div class="CommonModule">
 			</div>

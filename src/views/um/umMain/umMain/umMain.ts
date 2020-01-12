@@ -72,7 +72,7 @@ export default class UMMain extends Vue {
 
     goToMoudle(path: any) {
         if (
-            String(this.$router.history.current.fullPath).indexOf(
+            String((this.$router as any).history.current.fullPath).indexOf(
                 String(path.path)
             ) < 0
         ) {
@@ -99,9 +99,9 @@ export default class UMMain extends Vue {
     }
 
     findPath(url: string) {
-        let tempUrl = url.split("/").filter(a => a != "");
-        let len = tempUrl.length;
-        let result = false;
+        let tempUrl = url.split("/").filter(a => a !== "")
+        let len = tempUrl.length
+        let result = false
         //根据vux中的权限表盘的用户是否有菜单权限
         this.routers.forEach(b => {
             let index: number = 0
@@ -110,29 +110,29 @@ export default class UMMain extends Vue {
                 b.path.replace("/", "").toLowerCase() ==
                 tempUrl[index].toLowerCase()
             ) {
-                curItem = b.children;
-                index++;
-                result = true;
+                curItem = b.children
+                index++
+                result = true
                 while (index < len && curItem && result) {
                     let temp = curItem.filter(
                         (c: any) =>
                         c.path
                         .toLowerCase()
                         .indexOf(tempUrl[index].toLowerCase()) > -1
-                    );
+                    )
                     if (temp.length > 0) {
                         if (index < len - 1 && temp[0].children) {
-                            curItem = temp[0].children;
+                            curItem = temp[0].children
                         }
-                        index++;
-                        result = true;
+                        index++
+                        result = true
                     } else {
-                        result = false;
+                        result = false
                     }
                 }
             }
         });
-        return result;
+        return result
     }
 
     beforeDestroy() {

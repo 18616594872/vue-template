@@ -1,11 +1,8 @@
 import { Component, Vue } from 'vue-property-decorator'
-import AlarmModule from "./components/alarmModule/alarmModule.vue";
+// import from "@/components" // 组件
+// import {  } from '@/api/moduleTitle.ts'
 
-@Component({
-    components: {
-        AlarmModule
-    }
-})
+@Component({})
 export default class About extends Vue {
 
     // data

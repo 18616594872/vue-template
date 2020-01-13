@@ -6,7 +6,8 @@ import {
     Total,
     CarouselInfo,
     Refresh,
-    YearAndMonthAlarm
+    YearAndMonthAlarm,
+    AlarmPart
 } from '@/types/views/alarmModule.interface'
 import ModuleTitle from '../moduleTitle/moduleTitle.vue'
 // import SimplePieChart from '@/components/common/chart/chartComponent/chartComponent.vue'
@@ -88,35 +89,37 @@ export default class About extends Vue {
     getTotalAlarmCount() {
         this.getListYearAndMonthAlarmCount()
             .then((result: YearAndMonthAlarm[]) => {
-                console.log(result)
                 result.forEach((item: YearAndMonthAlarm) => {
-                    if (item.key === "year") {
-                        this.yearTotal.number = item.value
-                        this.yearTotal.isRise = item.isRise
+                    let {
+                        key,
+                        value,
+                        isRise
+                    } = item
+                    let {
+                        yearTotal,
+                        monthTotal
+                    } = this
+
+                    if (key === "year") {
+                        yearTotal.number = value
+                        yearTotal.isRise = isRise
                     } else {
-                        this.monthTotal.number = item.value;
-                        this.monthTotal.isRise = item.isRise;
+                        monthTotal.number = value
+                        monthTotal.isRise = isRise
                     }
-                });
+                })
             })
-            .finally(() => {
-                let _this = this;
-                if (this.refresh.total) {
-                    setTimeout(() => {
-                        _this.getTotalAlarmCount();
-                    }, this.refresh.time);
-                }
-            });
+            .catch((err: any) => {
+                (this as any).Log.warn(err)
+            })
     }
     getAlarmList() {
         this.getListNewAlarms()
-            .then((result: any) => {
+            .then((result: AlarmPart[]) => {
                 if (result) {
-                    this.words = [];
-                    result.forEach((alarm: any) => {
+                    this.words = []
+                    result.forEach((alarm: AlarmPart) => {
                         let info =
-                            alarm.description +
-                            " " +
                             alarm.alarmLevel +
                             " " +
                             alarm.location +
@@ -231,59 +234,27 @@ export default class About extends Vue {
                     data
                 } = rel.data
                 if (code === 200) {
-                   return data
+                    return data
                 }
             })
-            .catch(() => {
-                (this as any).Log.info("main.ts运行结束")
+            .catch((err: any) => {
+                (this as any).Log.warn(err)
             })
     }
     getListNewAlarms() {
-        return new Promise((resolve: any, reject: any) => {
-            listNewAlarms()
-                .then((rel: any) => {
-                    let {
-                        code,
-                        data
-                    } = rel.data
-                    if (code === 200) {
-                        resolve(data)
-                    }
-                })
-                .catch(() => {
-                    resolve([{
-                        alarmDate: 1574831828000,
-                        alarmLevel: "提示",
-                        id: 171530,
-                        location: "实验路5区-综合舱",
-                        name: "温度测试告警"
-                    }, {
-                        alarmDate: 1574826228000,
-                        alarmLevel: "提示",
-                        id: 171529,
-                        location: "经二路4区-综合舱",
-                        name: "温度测试告警"
-                    }, {
-                        alarmDate: 1574826228000,
-                        alarmLevel: "一般",
-                        id: 171528,
-                        location: "经二路3区-综合舱",
-                        name: "温度测试告警"
-                    }, {
-                        alarmDate: 1574826228000,
-                        alarmLevel: "严重",
-                        id: 171529,
-                        location: "经二路2区-综合舱",
-                        name: "温度测试告警"
-                    }, {
-                        alarmDate: 1574826228000,
-                        alarmLevel: "危急",
-                        id: 171529,
-                        location: "经二路1区-综合舱",
-                        name: "温度测试告警"
-                    }])
-                })
-        })
+        return listNewAlarms()
+            .then((rel: any) => {
+                let {
+                    code,
+                    data
+                } = rel.data
+                if (code === 200) {
+                    return data
+                }
+            })
+            .catch((err: any) => {
+                (this as any).Log.warn(err)
+            })
     }
     getListAlarms() {
         return new Promise((resolve: any, reject: any) => {
@@ -297,26 +268,8 @@ export default class About extends Vue {
                         resolve(data)
                     }
                 })
-                .catch(() => {
-                    resolve([{
-                        key: "古城大街",
-                        val: 0
-                    }, {
-                        key: "实验路",
-                        val: 5
-                    }, {
-                        key: "经三路",
-                        val: 3
-                    }, {
-                        key: "经二路",
-                        val: 2
-                    }, {
-                        key: "纬三路",
-                        val: 0
-                    }, {
-                        key: "监控中心",
-                        val: 0
-                    }])
+                .catch((err: any) => {
+                    (this as any).Log.warn(err)
                 })
         })
     }

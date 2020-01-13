@@ -26,3 +26,11 @@ export interface YearAndMonthAlarm {
     value: number,
     isRise: boolean
 }
+
+export interface AlarmPart {
+    alarmTime: number,
+    alarmLevel: string,
+    id: number,
+    location: string,
+    name: number
+}

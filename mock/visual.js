@@ -101,5 +101,34 @@ export default [{
                 }]
             }
         }
+    },
+    {
+        url: '/mam/tunnels/alarm-count',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    key: "古城大街",
+                    val: 0
+                }, {
+                    key: "实验路",
+                    val: 5
+                }, {
+                    key: "经三路",
+                    val: 3
+                }, {
+                    key: "经二路",
+                    val: 2
+                }, {
+                    key: "纬三路",
+                    val: 0
+                }, {
+                    key: "监控中心",
+                    val: 0
+                }]
+            }
+        }
     }
 ]

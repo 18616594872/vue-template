@@ -37,3 +37,8 @@ export interface AlarmPart {
     color?: string,
     buttonText?: string
 }
+
+export interface AlarmCount {
+    key: string,
+    val: number
+}

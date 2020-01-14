@@ -7,7 +7,8 @@ import {
     CarouselInfo,
     Refresh,
     YearAndMonthAlarm,
-    AlarmPart
+    AlarmPart,
+    AlarmCount
 } from '@/types/views/alarmModule.interface'
 import ModuleTitle from '../moduleTitle/moduleTitle.vue'
 // import SimplePieChart from '@/components/common/chart/chartComponent/chartComponent.vue'
@@ -79,8 +80,8 @@ export default class About extends Vue {
 
     mounted() {
         this.getTotalAlarmCount()
-        this.getAlarmList();
-        // this.drawPieChart();
+        this.getAlarmList()
+        this.drawPieChart()
     }
 
     // methods
@@ -141,11 +142,15 @@ export default class About extends Vue {
             carouselInfo.curPage * carouselInfo.pageSize
         )
 
-        carouselInfo.curPage = carouselInfo.curPage === carouselInfo.totalPage ? 1 : carouselInfo.totalPage ++
+        carouselInfo.curPage = carouselInfo.curPage > carouselInfo.totalPage ? 1 : ++ carouselInfo.curPage
+
+        if(carouselInfo.isCarousel) {
+            carouselInfo.intervalId = setInterval(() => this.carousel(), carouselInfo.time)
+        }
 
     }
     drawPieChart() {
-        this.getListAlarms().then((result: any) => {
+        this.getListAlarms().then((result: AlarmCount[]) => {
             if (result) {
 
                 let _series: Series = {
@@ -154,7 +159,7 @@ export default class About extends Vue {
                     data: []
                 }
 
-                result.forEach((tunnel: any) => {
+                result.forEach((tunnel: AlarmCount) => {
 
                     _series.data.push({
                         key: tunnel.key,
@@ -178,7 +183,7 @@ export default class About extends Vue {
     }
     changeState() {
         let { carouselInfo } = this
-        carouselInfo.isCarousel = !carouselInfo.isCarousel;
+        carouselInfo.isCarousel = !carouselInfo.isCarousel
         if (carouselInfo.isCarousel) {
             carouselInfo.intervalId = setInterval(() => this.carousel(), this.carouselInfo.time)
         } else {
@@ -197,7 +202,7 @@ export default class About extends Vue {
                 }
             })
             .catch((err: any) => {
-                (this as any).Log.warn(err)
+                log.warn(err)
             })
     }
     getListNewAlarms() {
@@ -212,7 +217,7 @@ export default class About extends Vue {
                 }
             })
             .catch((err: any) => {
-                (this as any).Log.warn(err)
+                log.warn(err)
             })
     }
     getListAlarms() {
@@ -232,8 +237,7 @@ export default class About extends Vue {
     }
 
     beforeDestroy() {
-        clearInterval(this.carouselInfo.intervalId);
-        this.carouselInfo.intervalId = 0;
+        clearInterval(this.carouselInfo.intervalId)
         this.refresh.total = false;
         this.refresh.list = false;
     }

@@ -32,5 +32,8 @@ export interface AlarmPart {
     alarmLevel: string,
     id: number,
     location: string,
-    name: number
+    name: number,
+    bgColor?: string,
+    color?: string,
+    buttonText?: string
 }

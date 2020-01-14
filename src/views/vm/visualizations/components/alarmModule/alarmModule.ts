@@ -21,6 +21,11 @@ import {
     ChartBindData,
     ChartType
 } from '@/types/chart.Interface'
+import {
+    extendDate
+} from '@/utils/common.ts'
+
+const log = Vue.prototype.Log
 
 @Component({
     components: {
@@ -52,7 +57,7 @@ export default class About extends Vue {
             title: ''
         }
     }
-    words: string[] = ["暂无告警"]
+    // words: string[] = ["暂无告警"]
     alarmShowData: any = []
     alarmAllData: any[] = []
     carouselInfo: CarouselInfo = {
@@ -73,16 +78,9 @@ export default class About extends Vue {
     }
 
     mounted() {
-        this.iconSize = window.innerWidth * 0.009;
-        this.getTotalAlarmCount();
+        this.getTotalAlarmCount()
         this.getAlarmList();
-        this.drawPieChart();
-        let _this = this;
-        if (this.carouselInfo.isCarousel) {
-            this.carouselInfo.intervalId = setInterval(() => {
-                _this.carousel();
-            }, this.carouselInfo.time);
-        }
+        // this.drawPieChart();
     }
 
     // methods
@@ -117,70 +115,34 @@ export default class About extends Vue {
         this.getListNewAlarms()
             .then((result: AlarmPart[]) => {
                 if (result) {
-                    this.words = []
-                    result.forEach((alarm: AlarmPart) => {
-                        let info =
-                            alarm.alarmLevel +
-                            " " +
-                            alarm.location +
-                            " " +
-                            alarm.alarmTime;
-                        this.words.push(info);
-                    });
-                    this.alarmAllData = result;
-                    this.alarmAllData.forEach((alarm: any) => {
-                        alarm.alarmLevel = alarm.alarmLevel.slice(0, 2);
-                        alarm.alarmDate = new Date(alarm.alarmDate).format('MM-dd hh:mm:ss')
-                        switch (alarm.alarmLevel) {
-                            case "提示":
-                                alarm.bgColor = "#0066ff";
-                                alarm.color = "#fff";
-                                alarm.buttonText = "提示"
-                                break;
-                            case "一般":
-                                alarm.bgColor = "#ffff00";
-                                alarm.color = "#333";
-                                alarm.buttonText = "一般"
-                                break;
-                            case "严重":
-                                alarm.bgColor = "#ffae00";
-                                alarm.color = "#333";
-                                alarm.buttonText = "修复中"
-                                break;
-                            case "危急":
-                                alarm.bgColor = "#ff0000";
-                                alarm.color = "#fff";
-                                alarm.buttonText = "处理中"
-                                break;
-                        }
-                    });
 
-                    this.carouselInfo.totalPage =
-                        result.length % this.carouselInfo.pageSize === 0 ?
-                        result.length / this.carouselInfo.pageSize :
-                        Math.floor((result.length / this.carouselInfo.pageSize)) + 1;
-                    this.carousel();
+                    result.forEach((alarm: AlarmPart) => {
+                        alarm.alarmDate = new extendDate(alarm.alarmDate).format('MM-dd hh:mm:ss')
+                    })
+
+                    this.alarmAllData = result
+                    this.carouselInfo.totalPage = Math.ceil(result.length / this.carouselInfo.pageSize)
+                    this.carousel()
                 }
             })
-            .finally(() => {
-                let _this = this;
-                if (this.refresh.list) {
-                    setTimeout(() => {
-                        _this.getAlarmList();
-                    }, this.refresh.time);
-                }
-            });
+            .catch((err: any) => {
+                log.warn(err)
+            })
     }
     carousel() {
-        this.alarmShowData = this.alarmAllData.slice(
-            (this.carouselInfo.curPage - 1) * this.carouselInfo.pageSize,
-            this.carouselInfo.curPage * this.carouselInfo.pageSize
-        );
-        if (this.carouselInfo.curPage === this.carouselInfo.totalPage) {
-            this.carouselInfo.curPage = 1;
-        } else {
-            this.carouselInfo.curPage += 1;
-        }
+        let {
+            alarmShowData,
+            alarmAllData,
+            carouselInfo
+        } = this
+
+        this.alarmShowData = alarmAllData.slice(
+            (carouselInfo.curPage - 1) * carouselInfo.pageSize,
+            carouselInfo.curPage * carouselInfo.pageSize
+        )
+
+        carouselInfo.curPage = carouselInfo.curPage === carouselInfo.totalPage ? 1 : carouselInfo.totalPage ++
+
     }
     drawPieChart() {
         this.getListAlarms().then((result: any) => {
@@ -215,15 +177,12 @@ export default class About extends Vue {
         })
     }
     changeState() {
-        this.carouselInfo.isCarousel = !this.carouselInfo.isCarousel;
-        if (this.carouselInfo.isCarousel) {
-            let _this = this;
-            this.carouselInfo.intervalId = setInterval(() => {
-                _this.carousel();
-            }, this.carouselInfo.time);
+        let { carouselInfo } = this
+        carouselInfo.isCarousel = !carouselInfo.isCarousel;
+        if (carouselInfo.isCarousel) {
+            carouselInfo.intervalId = setInterval(() => this.carousel(), this.carouselInfo.time)
         } else {
-            clearInterval(this.carouselInfo.intervalId);
-            this.carouselInfo.intervalId = 0;
+            clearInterval(this.carouselInfo.intervalId)
         }
     }
     getListYearAndMonthAlarmCount() {
@@ -257,21 +216,19 @@ export default class About extends Vue {
             })
     }
     getListAlarms() {
-        return new Promise((resolve: any, reject: any) => {
-            listAlarmCount()
-                .then((rel: any) => {
-                    let {
-                        code,
-                        data
-                    } = rel.data
-                    if (code === 200) {
-                        resolve(data)
-                    }
-                })
-                .catch((err: any) => {
-                    (this as any).Log.warn(err)
-                })
-        })
+        return listAlarmCount()
+            .then((rel: any) => {
+                let {
+                    code,
+                    data
+                } = rel.data
+                if (code === 200) {
+                    return data
+                }
+            })
+            .catch((err: any) => {
+                log.warn(err)
+            })
     }
 
     beforeDestroy() {

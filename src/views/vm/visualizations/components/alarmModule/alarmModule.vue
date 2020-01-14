@@ -26,7 +26,7 @@
         </div>
         <div class="alarms">
             <span style="font-size: 1.5vmin;line-height: 2.8vmin;color: #fff;">告警信息</span>
-            <Icon type="android-volume-up" color="#fff" :size="iconSize"></Icon>
+            <Icon type="android-volume-up" color="#fff" :size="17"></Icon>
             <div class="play" @click="changeState">
                 <Icon :type="carouselInfo.isCarousel ? 'ios-pause' : 'ios-play'" class="playIcon"></Icon>
             </div>
@@ -46,8 +46,8 @@
                     </Col>
                     <Col span="3" class="colSpan">
                     <div
-                        :style="{backgroundColor: alarm.bgColor, textAlign: 'center', borderRadius: '5px',color: alarm.color }">
-                        {{alarm.buttonText}}</div>
+                        :style="{backgroundColor: alarm.alarmStyle.bgColor, textAlign: 'center', borderRadius: '5px',color: alarm.alarmStyle.color }">
+                        {{alarm.alarmStyle.buttonText}}</div>
                     </Col>
                 </div>
             </Row>

@@ -1,4 +1,11 @@
-import request from '@/utils/request.ts'
+import request from '@/utils/request'
+
+export function listTunnelStatus() {
+    return request({
+        url: '/common/tunnel-status/statistics',
+        method: 'get',
+    })
+}
 
 export function getRunMessage() {
     return request({
@@ -6,3 +13,11 @@ export function getRunMessage() {
         method: 'get'
     })
 }
+
+export function getCables() {
+    return request({
+        url: 'oam/cable-type/cables/total',
+        method: 'get'
+    })
+}
+

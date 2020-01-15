@@ -7,7 +7,7 @@ import {
 } from '@/utils/common'
 import {
     getRunMessage
-} from '@/api/commonModule.ts'
+} from '@/api/commonModule'
 
 @Component({})
 export default class UMMain extends Vue {

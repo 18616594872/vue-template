@@ -1,5 +1,5 @@
-import router from './router'
-import store from './store'
+import router from '@/router'
+import store from '@/store'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'; // Progress 进度条样式
 import {
@@ -7,7 +7,7 @@ import {
     TOKEN_KEY,
     USERNAME_KEY,
     PASSWORD_KEY
-} from '@/utils/common.ts' // get token from cookie
+} from '@/utils/common' // get token from cookie
 
 NProgress.configure({
     showSpinner: false

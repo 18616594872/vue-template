@@ -1,4 +1,4 @@
-import request from '@/utils/request.ts'
+import request from '@/utils/request'
 
 export function test(data: any) {
     return request({

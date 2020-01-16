@@ -1,14 +1,19 @@
-import { Component, Vue } from 'vue-property-decorator'
-// import from "@/components" // 组件
-// import {  } from '@/api/moduleTitle.ts'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({})
 export default class About extends Vue {
 
-    // data
+    //prop
+    @Prop()name!: string
+    @Prop({
+        default: true
+    })showFlag!: boolean
+    @Prop({
+        default: ''
+    })turnTo!: string
 
     mounted() {
-        //
+
     }
 
     // 初始化函数

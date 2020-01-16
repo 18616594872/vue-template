@@ -16,7 +16,7 @@ import {
     listYearAndMonthAlarmCount,
     listNewAlarms,
     listAlarmCount
-} from '@/api/alarmModule.ts'
+} from '@/api/alarmModule'
 import {
     Series,
     ChartBindData,
@@ -24,7 +24,7 @@ import {
 } from '@/types/chart.Interface'
 import {
     extendDate
-} from '@/utils/common.ts'
+} from '@/utils/common'
 
 const log = Vue.prototype.Log
 

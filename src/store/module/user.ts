@@ -1,7 +1,7 @@
 import {
     UserState,
     UserInfo
-} from '@/types/views/user.interface.ts'
+} from '@/types/views/user.interface'
 import {
     GetterTree,
     MutationTree,
@@ -11,13 +11,13 @@ import {
     login,
     getInfo,
     logout
-} from '@/api/user.ts'
+} from '@/api/user'
 import {
     setToken,
     getToken,
     removeToken,
     TOKEN_KEY
-} from '@/utils/common.ts'
+} from '@/utils/common'
 import router, {
     resetRouter
 } from '@/router'

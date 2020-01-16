@@ -11,7 +11,7 @@ import {
     AlarmCount
 } from '@/types/views/alarmModule.interface'
 import ModuleTitle from '../moduleTitle/moduleTitle.vue'
-// import SimplePieChart from '@/components/common/chart/chartComponent/chartComponent.vue'
+import SimplePieChart from '@/components/common/chart/chartComponent.vue'
 import {
     listYearAndMonthAlarmCount,
     listNewAlarms,
@@ -30,7 +30,7 @@ const log = Vue.prototype.Log
 
 @Component({
     components: {
-        // SimplePieChart,
+        SimplePieChart,
         ModuleTitle
     }
 })
@@ -58,23 +58,20 @@ export default class About extends Vue {
             title: ''
         }
     }
-    // words: string[] = ["暂无告警"]
-    alarmShowData: any = []
-    alarmAllData: any[] = []
+    alarmShowData: AlarmPart[] = []
+    alarmAllData: AlarmPart[] = []
     carouselInfo: CarouselInfo = {
         intervalId: 0,
-        totalId: 0,
-        listId: 0,
         totalPage: 0,
         pageSize: 4,
         curPage: 1,
         isCarousel: true,
-        time: 2000
+        time: 1000
     }
     refresh: Refresh = {
         total: true,
         list: true,
-        time: 300000,
+        time: 300 * 1000,
         intervalId: 0
     }
 
@@ -142,9 +139,10 @@ export default class About extends Vue {
             carouselInfo.curPage * carouselInfo.pageSize
         )
 
-        carouselInfo.curPage = carouselInfo.curPage > carouselInfo.totalPage ? 1 : ++ carouselInfo.curPage
+        carouselInfo.curPage = carouselInfo.curPage >= carouselInfo.totalPage ? 1 : ++ carouselInfo.curPage
 
         if(carouselInfo.isCarousel) {
+            clearInterval(carouselInfo.intervalId)
             carouselInfo.intervalId = setInterval(() => this.carousel(), carouselInfo.time)
         }
 
@@ -153,30 +151,20 @@ export default class About extends Vue {
         this.getListAlarms().then((result: AlarmCount[]) => {
             if (result) {
 
-                let _series: Series = {
-                    name: '管廊告警统计',
-                    unit: '条',
-                    data: []
-                }
-
-                result.forEach((tunnel: AlarmCount) => {
-
-                    _series.data.push({
-                        key: tunnel.key,
-                        value: tunnel.val
-                    })
-                })
-
                 this.pieChart.option = {
                     title: {
                         show: false
                     }
                 }
-
+    
                 // 设置传输的数据
                 this.pieChart.data = {
                     title: '管廊告警统计',
-                    series: _series
+                    series: {
+                        name: '管廊告警统计',
+                        unit: '条',
+                        data: result
+                    }
                 }
             }
         })
@@ -187,7 +175,7 @@ export default class About extends Vue {
         if (carouselInfo.isCarousel) {
             carouselInfo.intervalId = setInterval(() => this.carousel(), this.carouselInfo.time)
         } else {
-            clearInterval(this.carouselInfo.intervalId)
+            clearInterval(carouselInfo.intervalId)
         }
     }
     getListYearAndMonthAlarmCount() {
@@ -238,8 +226,8 @@ export default class About extends Vue {
 
     beforeDestroy() {
         clearInterval(this.carouselInfo.intervalId)
-        this.refresh.total = false;
-        this.refresh.list = false;
+        this.refresh.total = false
+        this.refresh.list = false
     }
 
 }

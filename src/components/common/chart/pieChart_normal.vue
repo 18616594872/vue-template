@@ -17,7 +17,6 @@
         EChartOption,
         ECharts
     } from 'echarts'
-
     @Component({})
     export default class About extends Vue {
 
@@ -45,6 +44,7 @@
         }
 
         mounted() {
+            
             this.initData()
             this.drawChart()
             this.resizeChart()

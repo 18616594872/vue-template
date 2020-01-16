@@ -1,5 +1,5 @@
 <template>
-    <PieChartNormal v-bind="$attrs" v-if="$attrs.bindData.type === 400"></PieChartNormal>
+    <PieChartNormal v-bind="bindData" v-if="bindData.type === 400"></PieChartNormal>
 </template>
 
 <script lang="ts">
@@ -22,9 +22,9 @@
         }
     })
     export default class About extends Vue {
-        mounted(){
-            console.log(this.$attrs)
-        }
+        @Prop({
+            required: true
+        }) bindData!: ChartBindData
     }
 </script>
 

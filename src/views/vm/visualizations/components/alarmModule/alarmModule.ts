@@ -55,7 +55,8 @@ export default class About extends Vue {
         id: 'tunnelAlarmPieChart',
         type: ChartType.PIECHART_NORMAL,
         data: {
-            title: ''
+            title: '',
+            series: []
         }
     }
     alarmShowData: AlarmPart[] = []
@@ -114,7 +115,7 @@ export default class About extends Vue {
             .then((result: AlarmPart[]) => {
                 if (result) {
 
-                    result.forEach((alarm: AlarmPart) => {
+                    result.forEach((alarm: any) => {
                         alarm.alarmDate = new extendDate(alarm.alarmDate).format('MM-dd hh:mm:ss')
                     })
 
@@ -139,9 +140,9 @@ export default class About extends Vue {
             carouselInfo.curPage * carouselInfo.pageSize
         )
 
-        carouselInfo.curPage = carouselInfo.curPage >= carouselInfo.totalPage ? 1 : ++ carouselInfo.curPage
+        carouselInfo.curPage = carouselInfo.curPage >= carouselInfo.totalPage ? 1 : ++carouselInfo.curPage
 
-        if(carouselInfo.isCarousel) {
+        if (carouselInfo.isCarousel) {
             clearInterval(carouselInfo.intervalId)
             carouselInfo.intervalId = setInterval(() => this.carousel(), carouselInfo.time)
         }
@@ -151,26 +152,38 @@ export default class About extends Vue {
         this.getListAlarms().then((result: AlarmCount[]) => {
             if (result) {
 
+                let _series: Series = {
+                    name: '管廊告警统计',
+                    unit: '条',
+                    data: []
+                }
+
+                result.forEach((tunnel: any) => {
+
+                    _series.data.push({
+                        key: tunnel.key,
+                        value: tunnel.val
+                    })
+                })
+
                 this.pieChart.option = {
                     title: {
                         show: false
                     }
                 }
-    
+
                 // 设置传输的数据
                 this.pieChart.data = {
                     title: '管廊告警统计',
-                    series: {
-                        name: '管廊告警统计',
-                        unit: '条',
-                        data: result
-                    }
+                    series: _series
                 }
             }
         })
     }
     changeState() {
-        let { carouselInfo } = this
+        let {
+            carouselInfo
+        } = this
         carouselInfo.isCarousel = !carouselInfo.isCarousel
         if (carouselInfo.isCarousel) {
             carouselInfo.intervalId = setInterval(() => this.carousel(), this.carouselInfo.time)

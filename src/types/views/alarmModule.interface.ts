@@ -5,8 +5,8 @@ export interface Total {
 
 export interface CarouselInfo {
     intervalId: number,
-    totalId: number,
-    listId: number,
+    totalId?: number,
+    listId?: number,
     totalPage: number,
     pageSize: number,
     curPage: number,

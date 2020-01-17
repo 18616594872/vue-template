@@ -14,10 +14,3 @@ export function getRunMessage() {
     })
 }
 
-export function getCables() {
-    return request({
-        url: 'oam/cable-type/cables/total',
-        method: 'get'
-    })
-}
-

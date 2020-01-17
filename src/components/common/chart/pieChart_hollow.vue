@@ -1,5 +1,5 @@
 <template>
-    <div class="pieChart_normal-wrap" :id="id" ref="element"></div>
+    <div class="pieChart_hollow-wrap" :id="id" ref="element"></div>
 </template>
 
 <script lang="ts">
@@ -17,6 +17,7 @@
         EChartOption,
         ECharts
     } from 'echarts'
+
     @Component({})
     export default class About extends Vue {
 
@@ -44,7 +45,6 @@
         }
 
         mounted() {
-            
             this.initData()
             this.drawChart()
             this.resizeChart()
@@ -54,15 +54,24 @@
             this.myChart = (this as any).$echarts.init(document.getElementById(this.id))
             // 初始化的样式
             let theme = (this as any).EChartsTheme
-            let constFontSize: string = '9%'
-            let legendFontSize: string = '7%'
+            let constFontSize: string = '8%'
+            let legendFontSize: string = '6%'
             let initOption: EChartOption = {
                 title: {
                     textStyle: {
                         color: theme.titleColor,
                         fontSize: this.getFontSize('9%')
                     },
-                    left: 'center'
+                    left: 'center',
+                    top: 'middle'
+                },
+                graphic: {
+                    type: "text",
+                    style: {
+                        text: '',
+                        fill: theme.textColor,
+                        fontSize: this.getFontSize("9%")
+                    }
                 },
                 legend: {
                     orient: 'vertical',
@@ -72,9 +81,9 @@
                         fontSize: this.getFontSize(legendFontSize)
                     },
                     icon: 'circle',
-					itemGap: 2,
-					itemWidth: this.getFontSize(legendFontSize) * 2,
-					itemHeight: this.getFontSize(legendFontSize),
+                    itemGap: 2,
+                    itemWidth: this.getFontSize(legendFontSize) * 2,
+                    itemHeight: this.getFontSize(legendFontSize),
                 },
                 tooltip: {
                     trigger: 'item',
@@ -82,16 +91,23 @@
                 },
                 series: [{
                     type: 'pie',
-                    radius: ['0%', '55%'],
+                    radius: ['40%', '55%'],
                     avoidLabelOverlap: false,
                     label: {
                         formatter: '{b}',
                         fontSize: this.getFontSize(constFontSize),
-                        textColor: theme.textColor
+                        textColor: theme.textColor,
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                color: theme.textColor,
+                                fontSize: this.getFontSize('10%'),
+                                fontWeight: "bold"
+                            }
+                        }
                     },
                     labelLine: {
-                        length: this.getFontSize("10%"),
-                        length2: this.getFontSize("4%")
+                        show: true
                     },
                     data: []
                 }],
@@ -198,10 +214,10 @@
     }
 </script>
 
+
 <style lang="less">
-    .pieChart_normal-wrap {
-        height: 100%;
+    .pieChart_hollow-wrap {
         width: 100%;
+        height: 100%;
     }
 </style>
-

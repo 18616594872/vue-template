@@ -8,6 +8,7 @@
 				<alarm-module></alarm-module>
 			</div>
 			<div class="CommonModule">
+                <common-module></common-module>
 			</div>
 			<div class="EquipmentModule">
 			</div>

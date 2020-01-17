@@ -9,6 +9,8 @@ import {
     Message,
     Modal
 } from 'view-design';
+/** 引入日志控制文件 */
+import '@/utils/log'
 
 Vue.use(iview)
 
@@ -20,9 +22,10 @@ Vue.prototype.$Modal = Modal;
 
 async function init() {
     try {
+        let request = (await import("@/utils/config")).default;
+        await request();
         let permission = (await import("@/permission")).permission;
         await permission();
-        return "success"
     } catch (error) {
         throw new Error(error)
     }

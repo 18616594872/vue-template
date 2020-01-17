@@ -4,36 +4,27 @@ import {
 } from 'vue-property-decorator'
 import {
     RunMessage,
-    BarChart,
     Title
 } from '@/types/views/commonModule.interface'
-// import ModuleTitle from '@/components/VM/ModuleTitle/ModuleTitle.vue'
 import ModuleTitle from '../moduleTitle/moduleTitle.vue'
-// import HollowPieChart from '@/components/common/chart/pieChart_hollow/pieChart_hollow.vue'
-import HollowPieChart from '@/components/common/chart/chartComponent/chartComponent.vue'
-import ProgressBarChart from '@/components/common/chart/progressBarChart/progressBarChart.vue'
+import HollowPieChart from '@/components/common/chart/chartComponent.vue'
 import {
     listTunnelStatus,
-    getRunMessage,
-    getCables
+    getRunMessage
 } from '@/api/commonModule'
 import {
     Series,
     ChartType,
     ChartBindData
 } from '@/types/chart.Interface'
-
+import { extendDate } from '@/utils/common.ts'
 @Component({
     components: {
         ModuleTitle,
-        HollowPieChart,
-        ProgressBarChart
+        HollowPieChart
     }
 })
 export default class About extends Vue {
-
-    mainBG: string = require('@/assets/images/bv/module_bg.png')
-
     // data
     title: Title = {
         name: '基本信息',
@@ -55,25 +46,9 @@ export default class About extends Vue {
         safe: 20
     }
 
-    barChart: BarChart = {
-        id: 'barChartId',
-        title: '管线已建设',
-        titleColor: '#eee',
-        unit: 'km',
-        yAxis: {
-            nameData: [],
-            valueData: []
-        },
-        series: {
-            data: [],
-            borderData: []
-        }
-    }
-
     mounted() {
         this.listTunnelStatus()
         this.getRunMessage()
-        this.getCables()
     }
 
     listTunnelStatus() {
@@ -150,29 +125,8 @@ export default class About extends Vue {
                     data
                 } = res.data
                 if (code === 200) {
-                    this.runMessage.startTime = new Date(data.startTime).format('yyyy-MM-dd')
+                    this.runMessage.startTime = new extendDate(data.startTime).format('yyyy-MM-dd')
                     this.runMessage.safe = data.safe
-                    resolve()
-                }
-            }).catch(error => {
-                reject(error)
-            })
-        })
-    }
-
-    getCables() {
-        return new Promise((resolve, reject) => {
-            getCables().then(res => {
-                let {
-                    code,
-                    data
-                } = res.data
-                if (code === 200) {
-                    data.forEach((item: any) => {
-                        this.barChart.yAxis.nameData.push(item.name)
-                        this.barChart.series.data.push(item.percent)
-                        this.barChart.series.borderData.push(100)
-                    })
                     resolve()
                 }
             }).catch(error => {

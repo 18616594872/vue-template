@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 import user from './user'
 import visual from './visual'
+console.log(visual)
 const mocks = [
     ...user,
     ...visual

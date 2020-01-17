@@ -1,0 +1,7 @@
+{
+    "LogConfig": {
+        "open": true,
+        "level": "debug"
+    },
+    "EChartsTheme": "dark"
+}

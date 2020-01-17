@@ -1,4 +1,4 @@
-export default [{
+export const AlarmInterface = [{
         url: '/mam/year/month/alarm',
         type: 'get',
         response: () => {
@@ -132,3 +132,23 @@ export default [{
         }
     }
 ]
+
+export const CommonInterface = [{
+    url: '/common/tunnel-status/statistics',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                unit: "条",
+                name: "正常",
+                value: 6
+            }, {
+                unit: "条",
+                name: "455",
+                value: 0
+            }]
+        }
+    }
+}]

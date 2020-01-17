@@ -16,9 +16,6 @@
 				<div class="ivu-form-item-error-tip">{{errTipMes}}</div>
 			</FormItem>
 			<FormItem>
-				<checkbox v-model="checked" checked class="remember">一周内记住密码</checkbox>
-			</FormItem>
-			<FormItem>
 				<Button type="primary" style="width:100%;" @click="handleSubmit('formValidate')" :loading="loading">
 					<span v-if="!loading">登录</span>
 					<span v-else>Loading...</span>

@@ -1,5 +1,5 @@
 <template>
-    <div class="CommonModule-wrap" :style="{background: 'url('+ mainBG +') no-repeat', backgroundSize: '100% 100%'}">
+    <div class="CommonModule-wrap">
         <div class="commonTitle">
             <module-title v-bind="title"></module-title>
         </div>
@@ -26,9 +26,6 @@
                         {{item.value}}</span>
                 </div>
             </div>
-        </div>
-        <div class="rightBox">
-            <progress-bar-chart :data="barChart" :id="barChart.id" />
         </div>
     </div>
 </template>

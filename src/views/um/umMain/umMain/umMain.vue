@@ -242,12 +242,6 @@
                         <Col span="24">
                             <p class="date">{{nowDate}}</p>
                         </Col>
-                        <Col span="24" class="homePageLeftDay">
-                            <span style="font-size: 2.4vmin">
-                                安全运营
-                                <span class="days">{{safeDays}}</span>天
-                            </span>
-                        </Col>
                     </Row>
                 </Col>
             </Row>

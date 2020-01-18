@@ -1,4 +1,4 @@
-export const AlarmInterface = [{
+export default [{
         url: '/mam/year/month/alarm',
         type: 'get',
         response: () => {
@@ -130,25 +130,79 @@ export const AlarmInterface = [{
                 }]
             }
         }
-    }
-]
+    },
+    {
+        url: '/common/tunnel-status/statistics',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    unit: "条",
+                    name: "正常",
+                    value: 6
+                }, {
+                    unit: "条",
+                    name: "455",
+                    value: 0
+                }]
+            }
+        }
+    },
+    {
+        url: '/omm/equipments/status-percentage',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                        name: "运行",
+                        value: "6%"
+                    },
+                    {
+                        name: "停运",
+                        value: "13%"
+                    },
+                    {
+                        name: "故障",
+                        value: "63%"
+                    },
+                    {
+                        name: "其他",
+                        value: "18%"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        url: '/omm/equipments/overview',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                        key: "安防",
+                        val: [{
+                            val: 82,
+                            key: "运行"
+                        }, {
+                            val: 97,
+                            key: "停运"
+                        }, {
+                            val: 46,
+                            key: "故障"
+                        }, {
+                            val: 67,
+                            key: "其他"
+                        }]
+                    }
 
-export const CommonInterface = [{
-    url: '/common/tunnel-status/statistics',
-    type: 'get',
-    response: () => {
-        return {
-            code: 200,
-            msg: "success",
-            data: [{
-                unit: "条",
-                name: "正常",
-                value: 6
-            }, {
-                unit: "条",
-                name: "455",
-                value: 0
-            }]
+                ]
+            }
         }
     }
-}]
+]

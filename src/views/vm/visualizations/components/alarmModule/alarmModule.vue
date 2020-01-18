@@ -32,7 +32,7 @@
             </div>
             <Row :gutter="16" style="margin-top: 0.3vh;">
                 <div :key="index" v-for="(alarm,index) in alarmShowData" class="alarm-row" :style="{top:(index * 3) + 'vmin'}">
-                    <Col span="1" offset="1" >
+                    <Col span="1" >
                     <Icon type="ios-checkmark-circle" color="#0196ff" style="font-size: 1.6vmin"></Icon>
                     </Col>
                     <Col span="5" offset="1" class="colSpan">

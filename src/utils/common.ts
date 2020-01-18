@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import Vue from 'vue'
 
 export const TOKEN_KEY: string = 'token'
 export const USERNAME_KEY: string = 'userName'
@@ -65,6 +66,7 @@ export const loadDefault = () => {
 
 export class extendDate extends Date {
     private static dataInstance: extendDate = new extendDate()
+    
     format(format: string) {
         let date: any = {
             "M+": this.getMonth() + 1,
@@ -100,3 +102,4 @@ export class extendDate extends Date {
     }
 
 }
+Vue.prototype.data = extendDate

@@ -1,16 +1,17 @@
 <template>
-   <div id="VMMain">
+	<div id="VMMain">
 		<div class="MainContent">
 			<div class="VmHead">
-				
+
 			</div>
 			<div class="AlarmModule">
 				<alarm-module></alarm-module>
 			</div>
 			<div class="CommonModule">
-                <common-module></common-module>
+				<common-module></common-module>
 			</div>
 			<div class="EquipmentModule">
+				<equipment-module></equipment-module>
 			</div>
 			<div class="InspectModule">
 			</div>
@@ -25,12 +26,11 @@
 			<div class="VideoModule">
 			</div>
 		</div>
-    </div>
+	</div>
 </template>
 
 <script lang="ts" src="./visualizations.ts"></script>
 
 <style lang="less">
-    @import './visualizations.less';
+	@import './visualizations.less';
 </style>
-

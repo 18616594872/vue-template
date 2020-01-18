@@ -7,10 +7,3 @@ export function listTunnelStatus() {
     })
 }
 
-export function getRunMessage() {
-    return request({
-        url: '/common/tunnels/run-message',
-        method: 'get'
-    })
-}
-

@@ -5,9 +5,6 @@ import {
 import {
     extendDate
 } from '@/utils/common'
-import {
-    getRunMessage
-} from '@/api/commonModule'
 
 @Component({})
 export default class UMMain extends Vue {
@@ -33,41 +30,22 @@ export default class UMMain extends Vue {
     overhaul: string = require("@/assets/images/um/overhaul.png")
     enterGallery: string = require("@/assets/images/um/enterGallery.png")
 
-    timerChange: any
+    timerChange: number = 0
     nowTime: string = ''
     nowDate: string = ''
-    safeDays: number = 0
 
     get routers(): any[] {
-        return this.$store.state.permission.routers;
+        return this.$store.state.permission.routers
     }
 
     mounted() {
         this.updateTime()
-        this.init()
-        this.timerChange = setInterval(this.updateTime, 1000);
+        this.timerChange = setInterval(this.updateTime, 1000)
     }
 
     updateTime() {
-        this.nowTime = new extendDate().format("hh:mm:ss");
-        this.nowDate = extendDate.getSimpleDate();
-    }
-
-    init() {
-        return new Promise((resolve, reject) => {
-            getRunMessage().then(res => {
-                let {
-                    code,
-                    data
-                } = res.data
-                if (code === 200) {
-                    this.safeDays = data.safe
-                    resolve()
-                }
-            }).catch(error => {
-                reject(error)
-            })
-        })
+        this.nowTime = new extendDate().format("hh:mm:ss")
+        this.nowDate = extendDate.getSimpleDate()
     }
 
     goToMoudle(path: any) {

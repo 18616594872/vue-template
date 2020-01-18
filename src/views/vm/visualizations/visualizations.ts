@@ -4,11 +4,12 @@ import {
 } from 'vue-property-decorator'
 import AlarmModule from "./components/alarmModule/alarmModule.vue"
 import CommonModule from "./components/commonModule/commonModule.vue"
-
+import EquipmentModule from "./components/equipmentModule/equipmentModule.vue"
 @Component({
     components: {
         AlarmModule,
-        CommonModule
+        CommonModule,
+        EquipmentModule
     }
 })
 export default class About extends Vue {

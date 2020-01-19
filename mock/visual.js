@@ -220,5 +220,31 @@ export default [{
                 ]
             }
         }
+    },
+    {
+        url: '/mam/complexobj-datas',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                        other: 0,
+                        fault: 1,
+                        typeId: 10,
+                        close: 30,
+                        opent: 0
+                    },
+                    {
+                        other: 250,
+                        fault: 1,
+                        typeId: 56,
+                        close: 6,
+                        opent: 0
+                    }
+
+                ]
+            }
+        }
     }
 ]

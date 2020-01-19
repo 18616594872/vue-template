@@ -1,7 +1,15 @@
-import { Component, Vue } from 'vue-property-decorator'
-import { EquipmentType, Title } from '@/types/views/controllerModule.interface'
+import {
+    Component,
+    Vue
+} from 'vue-property-decorator'
+import {
+    EquipmentType,
+    Title
+} from '@/types/views/controllerModule.interface'
 import ModuleTitle from '../moduleTitle/moduleTitle.vue'
-import { listComplexobjData } from '@/api/controllerModule.ts'
+import {
+    listComplexobjData
+} from '@/api/controllerModule.ts'
 
 @Component({
     components: {
@@ -9,7 +17,6 @@ import { listComplexobjData } from '@/api/controllerModule.ts'
     }
 })
 export default class About extends Vue {
-    // title: string = "控制类监测"
     title: Title = {
         name: '控制类监测',
         showFlag: true,
@@ -28,7 +35,7 @@ export default class About extends Vue {
     }
     baiye: EquipmentType = {
         name: "电动百叶",
-        url: require("@/assets/images/vm/百叶-开.png"),
+        url: require("@/assets/images/vm/layer-open.png"),
         open: 0,
         close: 0,
         fault: 0,
@@ -36,19 +43,19 @@ export default class About extends Vue {
     }
     fengji: EquipmentType = {
         name: "风机",
-        url: require("@/assets/images/vm/风机.png"),
+        url: require("@/assets/images/vm/draught_fan.png"),
         open: 0,
         close: 0
     }
     zhaoming: EquipmentType = {
         name: "照明",
-        url: require("@/assets/images/vm/照明-开.png"),
+        url: require("@/assets/images/vm/light-open.png"),
         open: 0,
         close: 0
     }
     shuibeng: EquipmentType = {
         name: "水泵",
-        url: require("@/assets/images/vm/水泵.png"),
+        url: require("@/assets/images/vm/water_pump.png"),
         open: 0,
         close: 0
     }
@@ -66,13 +73,11 @@ export default class About extends Vue {
                                 this.jinggai.open = result[index].open
                                 this.jinggai.close = result[index].close + result[index].other
                                 this.jinggai.fault = result[index].fault
-                                // this.jinggai.other = result[index].other
                                 break;
                             case 58:
                                 this.baiye.open = result[index].open
                                 this.baiye.close = result[index].close + result[index].other
                                 this.baiye.fault = result[index].fault
-                                // this.baiye.other = result[index].other
                                 break;
                             case 10:
                                 this.fengji.open = result[index].open
@@ -93,31 +98,27 @@ export default class About extends Vue {
                     }
                 },
                 (error: any) => {
-                    this.Log.info(error);
+                    (this as any).Log.info(error)
                 }
             )
-            .finally(() => {
-                if (this.isFresh) {
-                    let _this = this
-                    setTimeout(() => {
-                        _this.getComplexobjDatas()
-                    }, _this.freshTime)
-                }
-            });
+            .catch((err: any) => {
+                (this as any).Log.info(err)
+            })
     }
     getListComplexobjData() {
-        return new Promise((resolve: any, reject: any) => {
-            listComplexobjData()
-                .then((rel: any) => {
-                    let { code, data } = rel.data
-                    if (code === 200) {
-                        resolve(data)
-                    }
-                })
+        return listComplexobjData()
+        .then((rel: any) => {
+            let {
+                code,
+                data
+            } = rel.data
+            if (code === 200) {
+                return data
+            }
         })
     }
     beforeDestroy() {
         this.isFresh = false
     }
-    
+
 }

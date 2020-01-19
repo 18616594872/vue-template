@@ -20,6 +20,7 @@
 			<div class="MeasureModule">
 			</div>
 			<div class="MotionModule">
+				<controller-module></controller-module>
 			</div>
 			<div class="ThreeDimensionsModule">
 			</div>

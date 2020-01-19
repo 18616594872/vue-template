@@ -25,10 +25,6 @@
 						<div>故障</div>
 						<div>{{jinggai.fault}}</div>
 					</div>
-					<!-- <div class="content">
-						<div>其他</div>
-						<div>{{jinggai.other}}</div>
-					</div> -->
 				</div>
 			</div>
 			<div class="infoBox">
@@ -51,10 +47,6 @@
 						<div>故障</div>
 						<div>{{baiye.fault}}</div>
 					</div>
-					<!-- <div class="content">
-						<div>其他</div>
-						<div>{{baiye.other}}</div>
-					</div> -->
 				</div>
 			</div>
 		</div>

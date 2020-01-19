@@ -1,4 +1,4 @@
-import { EChartOption } from 'echarts';
+import { EChartOption } from 'echarts'
 
 
 /**

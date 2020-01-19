@@ -14,9 +14,12 @@ import {
 import {
     Series,
     ChartBindData,
-    ChartType
+    ChartType,
+    BaseData
 } from '@/types/chart.Interface'
-import { AlarmCount } from '@/types/views/alarmModule.interface'
+import {
+    AlarmCount
+} from '@/types/views/alarmModule.interface'
 
 @Component({
     components: {
@@ -38,7 +41,8 @@ export default class About extends Vue {
         id: 'stackBarId',
         type: ChartType.BARCHART_STACK,
         data: {
-            title: '各类型设备状态'
+            title: '',
+            series: []
         }
     }
 
@@ -55,7 +59,7 @@ export default class About extends Vue {
             } = res.data
             if (code === 200) {
                 this.stateDataLists = data
-                
+
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)
@@ -68,20 +72,18 @@ export default class About extends Vue {
                 code,
                 data
             } = res.data
-            if (code === 200 && !data.length) {
+            if (code === 200) {
 
                 let _series: Series[] = []
-                data[0].val.forEach((item: {
-                    val: number,
-                    key: string
-                }) => {
+
+                data[0].val.forEach((item: { val: number, key: string }) => {
                     _series.push({
                         name: item.key,
                         unit: '个',
                         data: []
                     })
                 })
-
+                
                 data.forEach((element: {
                     key: string,
                     val: Array < {
@@ -89,9 +91,9 @@ export default class About extends Vue {
                         key: string
                     } >
                 }) => {
-                    element.val.forEach(item1 => {
-                        _series.forEach(item2 => {
-                            if (item1.key == item2.name) {
+                    element.val.forEach((item1: any) => {
+                        _series.forEach((item2: any) => {
+                            if (item1.key === item2.name) {
                                 item2.data.push({
                                     key: element.key,
                                     value: item1.val
@@ -99,7 +101,7 @@ export default class About extends Vue {
                             }
                         })
                     })
-                });
+                })
 
                 this.bindData.data = {
                     title: '各类型设备数量',

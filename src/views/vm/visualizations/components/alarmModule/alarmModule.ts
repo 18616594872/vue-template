@@ -130,7 +130,6 @@ export default class About extends Vue {
     }
     carousel() {
         let {
-            alarmShowData,
             alarmAllData,
             carouselInfo
         } = this

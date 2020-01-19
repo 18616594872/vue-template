@@ -199,6 +199,22 @@ export default [{
                             val: 67,
                             key: "其他"
                         }]
+                    },
+                    {
+                        key: "视频",
+                        val: [{
+                            val: 82,
+                            key: "运行"
+                        }, {
+                            val: 97,
+                            key: "停运"
+                        }, {
+                            val: 46,
+                            key: "故障"
+                        }, {
+                            val: 67,
+                            key: "其他"
+                        }]
                     }
 
                 ]

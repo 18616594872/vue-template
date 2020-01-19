@@ -46,15 +46,16 @@
         }
 
         mounted() {
+            console.log(this.data)
             this.initData()
             this.drawChart()
             this.resizeChart()
         }
 
         initData() {
-            this.myChart = this.$echarts.init(document.getElementById(this.id))
+            this.myChart = (this as any).$echarts.init(document.getElementById(this.id))
             // 初始化的样式
-            let theme = this.EChartsTheme
+            let theme = (this as any).EChartsTheme
             let constFontSize: string = '6%'
             let initOption: EChartOption = {
                 title: {

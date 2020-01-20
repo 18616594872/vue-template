@@ -46,7 +46,6 @@
         }
 
         mounted() {
-            console.log(this.data)
             this.initData()
             this.drawChart()
             this.resizeChart()

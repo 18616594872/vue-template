@@ -1,4 +1,5 @@
 export interface EquipmentType {
+    typeId: number,
     name: string,
     url: string,
     open: number,

@@ -229,18 +229,31 @@ export default [{
                 code: 200,
                 msg: "success",
                 data: [{
-                        other: 0,
-                        fault: 1,
+                        close: 1,
                         typeId: 10,
-                        close: 30,
-                        opent: 0
+                        open: 0
                     },
                     {
-                        other: 250,
                         fault: 1,
                         typeId: 56,
                         close: 6,
-                        opent: 0
+                        open: 0
+                    },
+                    {
+                        fault: 19,
+                        typeId: 58,
+                        close: 42,
+                        open: 32 
+                    },
+                    {
+                        close: 1,
+                        typeId: 12,
+                        open: 9 
+                    },
+                    {
+                        close: 0,
+                        typeId: 59,
+                        open: 0 
                     }
 
                 ]

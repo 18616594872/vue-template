@@ -14,6 +14,7 @@
 				<equipment-module></equipment-module>
 			</div>
 			<div class="InspectModule">
+				<inspect-module></inspect-module>
 			</div>
 			<div class="MapModule">
 			</div>

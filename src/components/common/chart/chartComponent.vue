@@ -2,12 +2,14 @@
     <PieChartNormal v-bind="bindData" v-if="bindData.type === 400"></PieChartNormal>
     <PieChartHollow v-bind="bindData" v-else-if="bindData.type === 410"></PieChartHollow>
     <BarChartStack v-bind="bindData" v-else-if="bindData.type === 120"></BarChartStack>
+    <BarChartMultiple v-bind="bindData" v-else-if="bindData.type === 110"></BarChartMultiple>
 </template>
 
 <script lang="ts">
     import PieChartNormal from '@/components/common/chart/pieChart_normal.vue' 
     import PieChartHollow from '@/components/common/chart/pieChart_hollow.vue'
     import BarChartStack from '@/components/common/chart/barChart_stack.vue'
+    import BarChartMultiple from '@/components/common/chart/barChart_multiple.vue'
 
     import {
         ChartBindData,
@@ -24,7 +26,8 @@
         components: {
             PieChartNormal,
             PieChartHollow,
-            BarChartStack
+            BarChartStack,
+            BarChartMultiple
         }
     })
     export default class About extends Vue {

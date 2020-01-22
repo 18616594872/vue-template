@@ -10,7 +10,7 @@ import {
     Title
 } from '@/types/views/inspectModule.interface'
 import ModuleTitle from '../moduleTitle/moduleTitle.vue'
-import MultipleBarChart from '@/components/common/chart/chartComponent/chartComponent.vue'
+import MultipleBarChart from '@/components/common/chart/chartComponent.vue'
 import {
     getInspectNum,
     listInspectData
@@ -76,81 +76,75 @@ export default class About extends Vue {
     }
 
     listInspectData() {
-        return new Promise((resolve, reject) => {
-            listInspectData().then(res => {
-                let {
-                    code,
-                    data
-                } = res.data
-                if (code === 200) {
+        return listInspectData().then(res => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
 
-                    if (data.length == 0) return
+                if (data.length == 0) return
 
-                    let _series: Series[] = []
-                    data[0].val.forEach((item: {
+                let _series: Series[] = []
+                data[0].val.forEach((item: {
+                    val: number,
+                    key: string
+                }) => {
+                    _series.push({
+                        name: item.key,
+                        unit: '次',
+                        data: []
+                    })
+                })
+
+                data.forEach((element: {
+                    key: string,
+                    val: Array < {
                         val: number,
                         key: string
-                    }) => {
-                        _series.push({
-                            name: item.key,
-                            unit: '次',
-                            data: []
+                    } >
+                }) => {
+                    element.val.forEach(item1 => {
+                        _series.forEach(item2 => {
+                            if (item1.key == item2.name) {
+                                item2.data.push({
+                                    key: element.key,
+                                    value: item1.val
+                                })
+                            }
                         })
                     })
+                });
 
-                    data.forEach((element: {
-                        key: string,
-                        val: Array < {
-                            val: number,
-                            key: string
-                        } >
-                    }) => {
-                        element.val.forEach(item1 => {
-                            _series.forEach(item2 => {
-                                if (item1.key == item2.name) {
-                                    item2.data.push({
-                                        key: element.key,
-                                        value: item1.val
-                                    })
-                                }
-                            })
-                        })
-                    });
-
-                    this.bindData.data = {
-                        title: '巡检缺陷维修统计',
-                        series: _series
-                    }
-
-                    resolve()
+                this.bindData.data = {
+                    title: '巡检缺陷维修统计',
+                    series: _series
                 }
-            }).catch(error => {
-                reject(error)
-            })
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
         })
     }
 
     getInspectNum() {
-        return new Promise((resolve, reject) => {
-            getInspectNum().then(res => {
-                let {
-                    code,
-                    data
-                } = res.data
-                if (code === 200) {
-                    this.taskCount.nowYearTaskCount = data[0].taskCount.nowYearTaskCount
-                    this.taskCount.isRise = data[0].taskCount.isRise
-                    this.defectCount.nowYearDefectCount = data[1].defectCount.nowYearTaskCount
-                    this.defectCount.isRise = data[1].defectCount.isRise
-                    this.maintenanceCount.nowYearOrderCount = data[2].maintenanceCount.nowYearTaskCount
-                    this.maintenanceCount.isRise = data[2].maintenanceCount.isRise
-                    this.maintenanceRateCount.nowYearOrderPercentage = data[3].maintenanceRateCount.nowYearTaskCount
-                    this.maintenanceRateCount.isRise = data[3].maintenanceRateCount.isRise
-                    resolve()
-                }
-            }).catch(error => {
-                reject(error)
-            })
+        return getInspectNum().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.taskCount.nowYearTaskCount = data[0].taskCount.nowYearTaskCount
+                this.taskCount.isRise = data[0].taskCount.isRise
+                this.defectCount.nowYearDefectCount = data[1].defectCount.nowYearTaskCount
+                this.defectCount.isRise = data[1].defectCount.isRise
+                this.maintenanceCount.nowYearOrderCount = data[2].maintenanceCount.nowYearTaskCount
+                this.maintenanceCount.isRise = data[2].maintenanceCount.isRise
+                this.maintenanceRateCount.nowYearOrderPercentage = data[3].maintenanceRateCount.nowYearTaskCount
+                this.maintenanceRateCount.isRise = data[3].maintenanceRateCount.isRise
+                
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
         })
     }
 

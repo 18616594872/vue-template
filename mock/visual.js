@@ -243,19 +243,121 @@ export default [{
                         fault: 19,
                         typeId: 58,
                         close: 42,
-                        open: 32 
+                        open: 32
                     },
                     {
                         close: 1,
                         typeId: 12,
-                        open: 9 
+                        open: 9
                     },
                     {
                         close: 0,
                         typeId: 59,
-                        open: 0 
+                        open: 0
                     }
 
+                ]
+            }
+        }
+    }, {
+        url: '/omm/equipments/comprehensive-compared',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                        taskCount: {
+                            nowYearTaskCount: 51,
+                            isRise: true
+                        }
+                    },
+                    {
+                        defectCount: {
+                            nowYearTaskCount: 99,
+                            isRise: true
+                        }
+                    },
+                    {
+                        maintenanceCount: {
+                            nowYearTaskCount: 70,
+                            isRise: false
+                        }
+                    },
+                    {
+                        maintenanceRateCount: {
+                            nowYearTaskCount: 33,
+                            isRise: false
+                        }
+                    }
+                ]
+            }
+        }
+    }, {
+        url: '/omm/equipments/maintenance',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                        val: [{
+                            val: 40,
+                            key: "已维修"
+                        }, {
+                            val: 25,
+                            key: "未维修"
+                        }],
+                        key: "2019年02月"
+                    }, {
+                        val: [{
+                            val: 20,
+                            key: "已维修"
+                        }, {
+                            val: 45,
+                            key: "未维修"
+                        }],
+                        key: "2019年03月"
+                    }, {
+                        val: [{
+                            val: 10,
+                            key: "已维修"
+                        }, {
+                            val: 30,
+                            key: "未维修"
+                        }],
+                        key: "2019年04月"
+                    },
+                    {
+                        val: [{
+                            val: 40,
+                            key: "已维修"
+                        }, {
+                            val: 35,
+                            key: "未维修"
+                        }],
+                        key: "2019年05月"
+                    },
+                    {
+                        val: [{
+                            val: 45,
+                            key: "已维修"
+                        }, {
+                            val: 30,
+                            key: "未维修"
+                        }],
+                        key: "2019年06月"
+                    },
+                    {
+                        val: [{
+                            val: 5,
+                            key: "已维修"
+                        }, {
+                            val: 45,
+                            key: "未维修"
+                        }],
+                        key: "2019年07月"
+                    }
                 ]
             }
         }

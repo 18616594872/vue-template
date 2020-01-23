@@ -71,19 +71,17 @@ export default class About extends Vue {
         window.onresize = () => {
             return (() => {
                 this.circleWidth = (window.innerHeight / 100) * 6.2;
-            })();
+            })()
         };
     }
 
     listInspectData() {
-        return listInspectData().then(res => {
+        return listInspectData().then((res: any) => {
             let {
                 code,
                 data
             } = res.data
             if (code === 200) {
-
-                if (data.length == 0) return
 
                 let _series: Series[] = []
                 data[0].val.forEach((item: {
@@ -104,8 +102,8 @@ export default class About extends Vue {
                         key: string
                     } >
                 }) => {
-                    element.val.forEach(item1 => {
-                        _series.forEach(item2 => {
+                    element.val.forEach((item1: any) => {
+                        _series.forEach((item2: any) => {
                             if (item1.key == item2.name) {
                                 item2.data.push({
                                     key: element.key,
@@ -130,18 +128,26 @@ export default class About extends Vue {
         return getInspectNum().then((res: any) => {
             let {
                 code,
-                data
+                data: [{
+                    taskCount
+                }, {
+                    defectCount
+                }, {
+                    maintenanceCount
+                }, {
+                    maintenanceRateCount
+                }]
             } = res.data
             if (code === 200) {
-                this.taskCount.nowYearTaskCount = data[0].taskCount.nowYearTaskCount
-                this.taskCount.isRise = data[0].taskCount.isRise
-                this.defectCount.nowYearDefectCount = data[1].defectCount.nowYearTaskCount
-                this.defectCount.isRise = data[1].defectCount.isRise
-                this.maintenanceCount.nowYearOrderCount = data[2].maintenanceCount.nowYearTaskCount
-                this.maintenanceCount.isRise = data[2].maintenanceCount.isRise
-                this.maintenanceRateCount.nowYearOrderPercentage = data[3].maintenanceRateCount.nowYearTaskCount
-                this.maintenanceRateCount.isRise = data[3].maintenanceRateCount.isRise
-                
+                this.taskCount.nowYearTaskCount = taskCount.nowYearTaskCount
+                this.taskCount.isRise = taskCount.isRise
+                this.defectCount.nowYearDefectCount = defectCount.nowYearTaskCount
+                this.defectCount.isRise = defectCount.isRise
+                this.maintenanceCount.nowYearOrderCount = maintenanceCount.nowYearTaskCount
+                this.maintenanceCount.isRise = maintenanceCount.isRise
+                this.maintenanceRateCount.nowYearOrderPercentage = maintenanceRateCount.nowYearTaskCount
+                this.maintenanceRateCount.isRise = maintenanceRateCount.isRise
+
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)

@@ -24,6 +24,7 @@
 				<controller-module></controller-module>
 			</div>
 			<div class="ThreeDimensionsModule">
+				<motion-module></motion-module>
 			</div>
 			<div class="VideoModule">
 			</div>

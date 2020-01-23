@@ -7,13 +7,16 @@ import CommonModule from "./components/commonModule/commonModule.vue"
 import EquipmentModule from "./components/equipmentModule/equipmentModule.vue"
 import ControllerModule from './components/controllerModule/controllerModule.vue'
 import InspectModule from "./components/inspectModule/inspectModule.vue"
+import MotionModule from "./components/motionModule/motionModule.vue"
+
 @Component({
     components: {
         AlarmModule,
         CommonModule,
         EquipmentModule,
         ControllerModule,
-        InspectModule
+        InspectModule,
+        MotionModule
     }
 })
 export default class About extends Vue {

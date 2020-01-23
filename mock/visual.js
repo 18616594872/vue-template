@@ -301,64 +301,46 @@ export default [{
                 code: 200,
                 msg: "success",
                 data: [{
-                        val: [{
-                            val: 40,
-                            key: "已维修"
-                        }, {
-                            val: 25,
-                            key: "未维修"
-                        }],
-                        key: "2019年02月"
+                    val: [{
+                        val: 40,
+                        key: "已维修"
                     }, {
-                        val: [{
-                            val: 20,
-                            key: "已维修"
-                        }, {
-                            val: 45,
-                            key: "未维修"
-                        }],
-                        key: "2019年03月"
+                        val: 25,
+                        key: "未维修"
+                    }],
+                    key: "2019年02月"
+                }, {
+                    val: [{
+                        val: 20,
+                        key: "已维修"
                     }, {
-                        val: [{
-                            val: 10,
-                            key: "已维修"
-                        }, {
-                            val: 30,
-                            key: "未维修"
-                        }],
-                        key: "2019年04月"
-                    },
-                    {
-                        val: [{
-                            val: 40,
-                            key: "已维修"
-                        }, {
-                            val: 35,
-                            key: "未维修"
-                        }],
-                        key: "2019年05月"
-                    },
-                    {
-                        val: [{
-                            val: 45,
-                            key: "已维修"
-                        }, {
-                            val: 30,
-                            key: "未维修"
-                        }],
-                        key: "2019年06月"
-                    },
-                    {
-                        val: [{
-                            val: 5,
-                            key: "已维修"
-                        }, {
-                            val: 45,
-                            key: "未维修"
-                        }],
-                        key: "2019年07月"
-                    }
-                ]
+                        val: 45,
+                        key: "未维修"
+                    }],
+                    key: "2019年03月"
+                }]
+            }
+        }
+    }, {
+        url: '/oam/tunnels/energies/every-month',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    key: "19年2月",
+                    val: [{
+                        val: 6194.49,
+                        key: "古城大街"
+                    }]
+                }, {
+                    key: "19年3月",
+                    val: [{
+                        val: 2194.49,
+                        key: "古城大街"
+                    }]
+                }]
             }
         }
     }

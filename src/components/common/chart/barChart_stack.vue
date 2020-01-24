@@ -18,6 +18,9 @@
         EChartOption,
         ECharts
     } from 'echarts'
+    import {
+        chartFontSize
+    } from '@/utils/common'
 
     @Component({})
     export default class About extends Vue {
@@ -45,6 +48,10 @@
             this.drawChart()
         }
 
+        get chartFont() {
+            return new chartFontSize(this.$refs.element)
+        }
+
         mounted() {
             this.initData()
             this.drawChart()
@@ -60,7 +67,7 @@
                 title: {
                     textStyle: {
                         color: theme.titleColor,
-                        fontSize: this.getFontSize('10%')
+                        fontSize: this.chartFont.getFontSize('10%')
                     },
                     left: 'center'
                 },
@@ -69,7 +76,7 @@
                     bottom: ' 2%',
                     textStyle: {
                         color: theme.titleColor,
-                        fontSize: this.getFontSize(constFontSize)
+                        fontSize: this.chartFont.getFontSize(constFontSize)
                     }
                 },
                 grid: {
@@ -91,7 +98,7 @@
                     },
                     axisLabel: {
                         color: theme.borderColor,
-                        fontSize: this.getFontSize(constFontSize)
+                        fontSize: this.chartFont.getFontSize(constFontSize)
                     },
                     data: []
                 },
@@ -99,7 +106,7 @@
                     type: "value",
                     nameTextStyle: {
                         color: theme.borderColor,
-                        fontSize: this.getFontSize(constFontSize)
+                        fontSize: this.chartFont.getFontSize(constFontSize)
                     },
                     axisLine: {
                         lineStyle: {
@@ -108,7 +115,7 @@
                     },
                     axisLabel: {
                         color: theme.borderColor,
-                        fontSize: this.getFontSize(constFontSize),
+                        fontSize: this.chartFont.getFontSize(constFontSize),
                         formatter: function (value: number, index: number): any {
                             let res: string = ''
 
@@ -133,7 +140,7 @@
                 series: [{
                     type: 'bar',
                     stack: 'stack',
-                    barMaxWidth: this.getSizeByWidth('7%'),
+                    barMaxWidth: this.chartFont.getSizeByWidth('7%'),
                     data: []
                 }],
                 textStyle: {
@@ -206,50 +213,11 @@
         }
 
         resizeChart() {
-            let _this = this;
             window.addEventListener("resize", () => {
-                _this.myChart.resize();
-                _this.drawChart();
-            });
+                this.myChart.resize();
+                this.drawChart();
+            })
         }
-
-        /**
-         * 获取字体大小
-         */
-        getFontSize(val: number | string): number {
-            return Math.min(this.getSizeByWidth(val), this.getSizeByHeight(val))
-        }
-
-        /**
-         * 根据element的宽度获取百分比
-         */
-        getSizeByWidth(val: number | string): number {
-            if (typeof val === "number") return val;
-            if (typeof val === "string") {
-                if (val.indexOf("%") > 0) {
-                    let tmp = parseFloat(val.replace("%", "")) / 100;
-                    let height = (this.$refs.element as HTMLElement).offsetWidth;
-                    return Math.round(height * tmp);
-                }
-            }
-            return 0;
-        }
-
-        /**
-         * 根据element的高度度获取百分比
-         */
-        getSizeByHeight(val: number | string): number {
-            if (typeof val === "number") return val;
-            if (typeof val === "string") {
-                if (val.indexOf("%") > 0) {
-                    let tmp = parseFloat(val.replace("%", "")) / 100;
-                    let height = (this.$refs.element as HTMLElement).offsetHeight;
-                    return Math.round(height * tmp);
-                }
-            }
-            return 0;
-        }
-
 
     }
 </script>

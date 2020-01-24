@@ -17,6 +17,10 @@
         EChartOption,
         ECharts
     } from 'echarts'
+    import {
+        chartFontSize
+    } from '@/utils/common'
+
     @Component({})
     export default class About extends Vue {
 
@@ -43,8 +47,12 @@
             this.drawChart()
         }
 
+        get chartFont() {
+            return new chartFontSize(this.$refs.element)
+        }
+
         mounted() {
-            
+
             this.initData()
             this.drawChart()
             this.resizeChart()
@@ -60,7 +68,7 @@
                 title: {
                     textStyle: {
                         color: theme.titleColor,
-                        fontSize: this.getFontSize('9%')
+                        fontSize: this.chartFont.getFontSize('9%')
                     },
                     left: 'center'
                 },
@@ -69,12 +77,12 @@
                     left: 'left',
                     textStyle: {
                         color: theme.textColor,
-                        fontSize: this.getFontSize(legendFontSize)
+                        fontSize: this.chartFont.getFontSize(legendFontSize)
                     },
                     icon: 'circle',
-					itemGap: 2,
-					itemWidth: this.getFontSize(legendFontSize) * 2,
-					itemHeight: this.getFontSize(legendFontSize),
+                    itemGap: 2,
+                    itemWidth: this.chartFont.getFontSize(legendFontSize) * 2,
+                    itemHeight: this.chartFont.getFontSize(legendFontSize),
                 },
                 tooltip: {
                     trigger: 'item',
@@ -86,12 +94,12 @@
                     avoidLabelOverlap: false,
                     label: {
                         formatter: '{b}',
-                        fontSize: this.getFontSize(constFontSize),
+                        fontSize: this.chartFont.getFontSize(constFontSize),
                         textColor: theme.textColor
                     },
                     labelLine: {
-                        length: this.getFontSize("10%"),
-                        length2: this.getFontSize("4%")
+                        length: this.chartFont.getFontSize("10%"),
+                        length2: this.chartFont.getFontSize("4%")
                     },
                     data: []
                 }],
@@ -151,48 +159,10 @@
         }
 
         resizeChart() {
-            let _this = this;
             window.addEventListener("resize", () => {
-                _this.myChart.resize();
-                _this.drawChart();
+                this.myChart.resize()
+                this.drawChart()
             });
-        }
-
-        /**
-         * 获取字体大小
-         */
-        getFontSize(val: number | string): number {
-            return Math.min(this.getSizeByWidth(val), this.getSizeByHeight(val))
-        }
-
-        /**
-         * 根据element的宽度获取百分比
-         */
-        getSizeByWidth(val: number | string): number {
-            if (typeof val === "number") return val;
-            if (typeof val === "string") {
-                if (val.indexOf("%") > 0) {
-                    let tmp = parseFloat(val.replace("%", "")) / 100;
-                    let height = (this.$refs.element as HTMLElement).offsetWidth;
-                    return Math.round(height * tmp);
-                }
-            }
-            return 0;
-        }
-
-        /**
-         * 根据element的高度度获取百分比
-         */
-        getSizeByHeight(val: number | string): number {
-            if (typeof val === "number") return val;
-            if (typeof val === "string") {
-                if (val.indexOf("%") > 0) {
-                    let tmp = parseFloat(val.replace("%", "")) / 100;
-                    let height = (this.$refs.element as HTMLElement).offsetHeight;
-                    return Math.round(height * tmp);
-                }
-            }
-            return 0;
         }
 
     }
@@ -204,4 +174,3 @@
         width: 100%;
     }
 </style>
-

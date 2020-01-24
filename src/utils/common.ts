@@ -66,7 +66,7 @@ export const loadDefault = () => {
 
 export class extendDate extends Date {
     private static dataInstance: extendDate = new extendDate()
-    
+
     format(format: string) {
         let date: any = {
             "M+": this.getMonth() + 1,
@@ -102,4 +102,35 @@ export class extendDate extends Date {
     }
 
 }
-Vue.prototype.data = extendDate
+
+export class chartFontSize {
+    
+    constructor(private element: any){}
+    
+    getFontSize(val: number | string): number {
+        return Math.min(this.getSizeByWidth(val), this.getSizeByHeight(val))
+    }
+    getSizeByWidth(val: number | string): number {
+        if (typeof val === "number") return val
+        if (typeof val === "string") {
+            if (val.indexOf("%") > 0) {
+                let tmp = parseFloat(val.replace("%", "")) / 100
+                let height = (this.element as HTMLElement).offsetWidth
+                return Math.round(height * tmp);
+            }
+        }
+        return 0
+    }
+    getSizeByHeight(val: number | string): number {
+        if (typeof val === "number") return val
+        if (typeof val === "string") {
+            if (val.indexOf("%") > 0) {
+                let tmp = parseFloat(val.replace("%", "")) / 100;
+                let height = (this.element as HTMLElement).offsetHeight
+                return Math.round(height * tmp)
+            }
+        }
+        return 0
+    }
+
+}

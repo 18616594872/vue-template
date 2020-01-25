@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-    import PieChartNormal from '@/components/common/chart/pieChart_normal.vue' 
+    import PieChartNormal from '@/components/common/chart/pieChart_normal.vue'
     import PieChartHollow from '@/components/common/chart/pieChart_hollow.vue'
     import BarChartStack from '@/components/common/chart/barChart_stack.vue'
     import BarChartMultiple from '@/components/common/chart/barChart_multiple.vue'
@@ -38,7 +38,7 @@
             required: true
         }) bindData!: ChartBindData
 
-        
+
     }
 </script>
 

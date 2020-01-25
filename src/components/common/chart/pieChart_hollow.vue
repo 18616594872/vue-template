@@ -175,9 +175,9 @@
 
         resizeChart() {
             window.addEventListener("resize", () => {
-                this.myChart.resize();
-                this.drawChart();
-            });
+                this.myChart.resize()
+                this.drawChart()
+            })
         }
 
     }

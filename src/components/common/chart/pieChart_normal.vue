@@ -162,7 +162,7 @@
             window.addEventListener("resize", () => {
                 this.myChart.resize()
                 this.drawChart()
-            });
+            })
         }
 
     }

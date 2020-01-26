@@ -4,6 +4,7 @@
     <BarChartStack v-bind="bindData" v-else-if="bindData.type === 120"></BarChartStack>
     <BarChartMultiple v-bind="bindData" v-else-if="bindData.type === 110"></BarChartMultiple>
     <LineChartMultiple v-bind="bindData" v-else-if="bindData.type === 210"></LineChartMultiple>
+    <GaugeChartNormal v-bind="bindData" v-else-if="bindData.type === 500"></GaugeChartNormal>
 </template>
 
 <script lang="ts">

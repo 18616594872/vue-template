@@ -20,7 +20,7 @@
     } from 'echarts'
     import {
         chartFontSize
-    } from '@/utils/common'
+    } from '@/utils/common' 
 
     @Component({})
     export default class About extends Vue {

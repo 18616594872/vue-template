@@ -39,7 +39,7 @@ export default class About extends Vue {
         id: 'inspectModule_barChartId',
         type: ChartType.BARCHART_MULTIPLE,
         data: {
-            title: '巡检缺陷维修统计'
+            title: ''
         }
     }
 

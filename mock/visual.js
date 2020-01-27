@@ -351,28 +351,30 @@ export default [{
                 code: 200,
                 msg: "success",
                 data: [{
-                    key: "19年2月",
-                    val: [{
-                        location: "古城大街-22区-综合舱",
-                        type: {
-                            control: false,
-                            createTime: "2019-11-12T11:08:44.000+0000",
-                            dataType: 1,
-                            dataTypeName: "模拟量输入",
-                            equipmentTypeId: 3,
-                            equipmentTypeName: "环境",
-                            id: 1,
-                            name: "温度",
-                            nationalMax: 0,
-                            nationalMin: 0,
-                            normalMax: 0,
-                            normalMin: 0,
-                            reset: false,
-                            unit: "℃",
-                            updateTime: "2019-11-12T11:08:44.000+0000"
-                        },
-                        value: 26
-                    }]
+                    id: 1,
+                    name: "温度",
+                    unit: "℃",
+                    value: 26
+                },{
+                    id: 2,
+                    name: "温度",
+                    unit: "℃",
+                    value: 26
+                },{
+                    id: 3,
+                    name: "温度",
+                    unit: "℃",
+                    value: 26
+                },{
+                    id: 4,
+                    name: "温度",
+                    unit: "℃",
+                    value: 26
+                },{
+                    id: 5,
+                    name: "温度",
+                    unit: "℃",
+                    value: 26
                 }]
             }
         }

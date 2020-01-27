@@ -9,7 +9,7 @@ import ModuleTitle from '../moduleTitle/moduleTitle.vue'
 import SimpleGauge from '@/components/common/chart/chartComponent.vue'
 import {
     listMeasTriggerCount
-} from '@/api/measureModule.ts'
+} from '@/api/measureModule'
 import {
     ChartBindData,
     ChartType
@@ -29,8 +29,6 @@ export default class About extends Vue {
         showFlag: true,
         turnTo: '综合监控'
     }
-    iconSize: number = window.innerWidth * 0.012
-    fetchTime: number = 5000
     gaugeCharts: ChartBindData[] = []
     dataInterval: any = null
     dataTimeout: any = {
@@ -43,13 +41,10 @@ export default class About extends Vue {
 
     //methods
     getToDayExtreDatas() {
-        let _this = this;
-
         let colors = ['#00ff00', '#ff0000', '#0000ff']
         this.getListMeasTriggerCount().then(
                 (result: any) => {
                     if (result) {
-
                         result.forEach((a: any) => {
                             a.alarmRange = [{
                                     min: 30,
@@ -93,13 +88,12 @@ export default class About extends Vue {
                             let min: number = a.alarmRange[0].min as number
                             let max: number = a.alarmRange[a.alarmRange.length - 1].max as number
                             let axisColors: any[] = []
-                            // tslint:disable-next-line:prefer-for-of
                             for (let index = 0; index < a.alarmRange.length; index++) {
                                 const element = a.alarmRange[index];
                                 axisColors.push([(element.max - min) / (max - min), colors[element.level]])
                             }
 
-                            _this.gaugeCharts.push({
+                            this.gaugeCharts.push({
                                 id: "gaugeChartsId_" + a.id,
                                 type: ChartType.GAUGECHART_NORMAL,
                                 data: {
@@ -126,20 +120,10 @@ export default class About extends Vue {
                                     }]
                                 }
                             })
-                        });
+                        })
                     }
-                },
-                (error: any) => {
-                    _this.Log.info(error);
                 }
             )
-            .finally(() => {
-                if (_this.dataTimeout.todayExtreFlag) {
-                    setTimeout(() => {
-                        _this.getToDayExtreDatas()
-                    }, _this.fetchTime)
-                }
-            });
 
     }
     getListMeasTriggerCount() {
@@ -150,26 +134,9 @@ export default class About extends Vue {
                     data
                 } = rel.data
                 if (code === 200) {
-
-                    let newDate: any[] = data.map((item: any) => {
-                        let {
-                            location,
-                            type,
-                            value
-                        } = item
-                        return Object.assign({
-                            location
-                        }, type, {
-                            value
-                        })
-                    })
-                    return newDate
+                    return data
                 }
             })
-    }
-
-    beforeDestroy() {
-        this.dataTimeout.todayExtreFlag = false
     }
 
 }

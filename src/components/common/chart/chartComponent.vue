@@ -13,7 +13,7 @@
     import BarChartStack from '@/components/common/chart/barChart_stack.vue'
     import BarChartMultiple from '@/components/common/chart/barChart_multiple.vue'
     import LineChartMultiple from '@/components/common/chart/lineChart_multiple.vue'
-
+    import GaugeChartNormal from '@/components/common/chart/pieChart_normal.vue'
     import {
         ChartBindData,
         ChartType
@@ -31,7 +31,8 @@
             PieChartHollow,
             BarChartStack,
             BarChartMultiple,
-            LineChartMultiple
+            LineChartMultiple,
+            GaugeChartNormal
         }
     })
     export default class About extends Vue {

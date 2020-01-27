@@ -8,6 +8,7 @@ import EquipmentModule from "./components/equipmentModule/equipmentModule.vue"
 import ControllerModule from './components/controllerModule/controllerModule.vue'
 import InspectModule from "./components/inspectModule/inspectModule.vue"
 import MotionModule from "./components/motionModule/motionModule.vue"
+import MeasureModule from "./components/measureModule/measureModule.vue"
 
 @Component({
     components: {
@@ -16,7 +17,8 @@ import MotionModule from "./components/motionModule/motionModule.vue"
         EquipmentModule,
         ControllerModule,
         InspectModule,
-        MotionModule
+        MotionModule,
+        MeasureModule
     }
 })
 export default class About extends Vue {

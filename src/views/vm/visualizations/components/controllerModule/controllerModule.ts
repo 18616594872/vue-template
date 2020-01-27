@@ -9,7 +9,7 @@ import {
 import ModuleTitle from '../moduleTitle/moduleTitle.vue'
 import {
     listComplexobjData
-} from '@/api/controllerModule.ts'
+} from '@/api/controllerModule'
 
 @Component({
     components: {

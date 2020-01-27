@@ -18,7 +18,7 @@ import {
 } from '@/types/chart.Interface'
 import {
     extendDate
-} from '@/utils/common.ts'
+} from '@/utils/common'
 
 @Component({
     components: {

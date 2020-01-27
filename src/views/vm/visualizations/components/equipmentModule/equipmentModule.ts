@@ -4,7 +4,7 @@ import {
 } from 'vue-property-decorator'
 import {
     Title
-} from '@/types/views/equipmentModule.interface.ts'
+} from '@/types/views/equipmentModule.interface'
 import ModuleTitle from '../moduleTitle/moduleTitle.vue'
 import StackBar from '@/components/common/chart/chartComponent.vue'
 import {

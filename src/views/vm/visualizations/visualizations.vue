@@ -19,6 +19,7 @@
 			<div class="MapModule">
 			</div>
 			<div class="MeasureModule">
+				<measure-module></measure-module>
 			</div>
 			<div class="MotionModule">
 				<controller-module></controller-module>

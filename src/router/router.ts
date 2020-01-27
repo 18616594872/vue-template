@@ -30,5 +30,19 @@ export const asyncRoutes: any[] = [
         path: '/UMMain',
         name: 'ummain',
         component: (resolve: any) => require(["@/views/um/umMain/umMain/umMain.vue"], resolve),
+    },
+    {
+        path: '/VM',
+        name: '可视化主页',
+        component: (resolve: any) =>
+            require(["@/views/vm/overviewMain/overviewMain.vue"], resolve),
+        children: [
+            {
+                path: '/VM/environment',
+                name: '综合监控',
+                component: (resolve: any) =>
+                    require(["@/views/vm/environmentMonitor/environmentMonitor.vue"], resolve)
+            },
+        ]
     }
 ]

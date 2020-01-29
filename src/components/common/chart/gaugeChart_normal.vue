@@ -19,7 +19,7 @@
         ECharts
     } from 'echarts'
     import {
-        chartFontSize
+        ChartFontSize
     } from '@/utils/common'
 
     @Component({})
@@ -42,7 +42,7 @@
         myChart!: ECharts
 
         get chartFont() {
-            return new chartFontSize(this.$refs.element)
+            return new ChartFontSize(this.$refs.element)
         }
 
         @Watch('data', {

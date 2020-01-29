@@ -71,7 +71,6 @@
             </Collapse>
         </div>
         <canvas class="canvas-wrap"></canvas>
-        <!-- <div class="showTunnelEnv"  @click="getMousePos"></div> -->
         <div :style="{background: 'url('+ environmentSpotIMG +') 100% 100% no-repeat', backgroundSize: '100% 100%'}"
             class="spot-wrap" v-show="isWithCanvas">
             <div :key="index" class="spot-line-wrap" v-for="(item ,index) in SpotData">

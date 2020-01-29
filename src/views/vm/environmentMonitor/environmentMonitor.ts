@@ -125,82 +125,37 @@ export default class About extends Vue {
 
     isShow: number = -1
 
-    getMousePos(event: any) {
-        let e = event || window.event;
-        let c = document.getElementsByTagName('canvas')[0] as HTMLCanvasElement
-        let widthNum = 100
-        let heightNum = 100
-        let dot = 8
-        c.setAttribute('height', heightNum + 'px')
-        c.setAttribute('width', widthNum + 'px')
-        c.style.left = e.pageX + 'px'
-        c.style.top = e.pageY + 'px'
-        let ctx = c.getContext("2d") as CanvasRenderingContext2D;
-        // 绘制点
-        ctx.beginPath();
-        // 绘制定点
-        ctx.arc(widthNum / 2, dot, dot, 0, 2 * Math.PI)
-        ctx.strokeStyle = "#00f0ff";
-        ctx.fillStyle = "#00f0ff";
-        ctx.fill();
-        ctx.stroke();
-        ctx.closePath();
-        // 绘制折线
-        ctx.beginPath();
-        // 折线开始位置
-        ctx.moveTo(widthNum / 2, dot);
-        // 第一个折
-        ctx.lineTo(dot, heightNum / 2);
-        // 第二个折
-        ctx.lineTo(dot, heightNum)
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = "#00f0ff";
-        ctx.stroke();
-        ctx.closePath();
-        this.isWithCanvas = true
-        let s = document.getElementsByClassName('spot-wrap')[0] as HTMLDivElement
-        s.style.left = Number(e.pageX) - 100 + 'px'
-        s.style.top = Number(e.pageY) + Number(heightNum) + 'px'
-    }
-
     mounted() {
-        // this.init()
         this.listEnvironmentMonitorData()
         this.listSecurityData()
     }
 
     listEnvironmentMonitorData() {
-        return new Promise((resolve, reject) => {
-            listEnvironmentMonitorData().then(res => {
-                let {
-                    code,
-                    data,
-                    msg
-                } = res.data
-                if (code === 200) {
-                    this.EMData.environmentMonitorInfo = data
-                    resolve()
-                }
-            }).catch(error => {
-                reject(error)
-            })
+        return listEnvironmentMonitorData().then(res => {
+            let {
+                code,
+                data,
+                msg
+            } = res.data
+            if (code === 200) {
+                this.EMData.environmentMonitorInfo = data
+            }
+        }).catch(error => {
+            (this as any).Log.warn(error)
         })
     }
 
     listSecurityData() {
-        return new Promise((resolve, reject) => {
-            listSecurityData().then((res: any) => {
-                let {
-                    code,
-                    data
-                } = res.data
-                if (code === 200) {
-                    this.SEData.securityMonitorInfo = data
-                    resolve()
-                }
-            }).catch((error: any) => {
-                reject(error)
-            })
+        return listSecurityData().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.SEData.securityMonitorInfo = data
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
         })
     }
 

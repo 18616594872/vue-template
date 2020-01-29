@@ -39,7 +39,7 @@ export default class About extends Vue {
         this.getToDayExtreDatas();
     }
 
-    //methods
+    // methods
     getToDayExtreDatas() {
         let colors = ['#00ff00', '#ff0000', '#0000ff']
         this.getListMeasTriggerCount().then(
@@ -88,10 +88,9 @@ export default class About extends Vue {
                             let min: number = a.alarmRange[0].min as number
                             let max: number = a.alarmRange[a.alarmRange.length - 1].max as number
                             let axisColors: any[] = []
-                            for (let index = 0; index < a.alarmRange.length; index++) {
-                                const element = a.alarmRange[index];
+                            for (let element of a.alarmRange){
                                 axisColors.push([(element.max - min) / (max - min), colors[element.level]])
-                            }
+                            
 
                             this.gaugeCharts.push({
                                 id: "gaugeChartsId_" + a.id,
@@ -110,8 +109,8 @@ export default class About extends Vue {
                                 option: {
                                     series: [{
                                         type: 'gauge',
-                                        min: min,
-                                        max: max,
+                                        min,
+                                        max,
                                         axisLine: {
                                             lineStyle: {
                                                 color: axisColors

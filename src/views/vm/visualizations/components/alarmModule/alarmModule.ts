@@ -26,8 +26,6 @@ import {
     extendDate
 } from '@/utils/common'
 
-const log = Vue.prototype.Log
-
 @Component({
     components: {
         SimplePieChart,
@@ -125,7 +123,7 @@ export default class About extends Vue {
                 }
             })
             .catch((err: any) => {
-                log.warn(err)
+                (this as any).Log.warn(err)
             })
     }
     carousel() {
@@ -202,7 +200,7 @@ export default class About extends Vue {
                 }
             })
             .catch((err: any) => {
-                log.warn(err)
+                (this as any).Log.warn(err)
             })
     }
     getListNewAlarms() {
@@ -217,7 +215,7 @@ export default class About extends Vue {
                 }
             })
             .catch((err: any) => {
-                log.warn(err)
+                (this as any).Log.warn(err)
             })
     }
     getListAlarms() {
@@ -232,7 +230,7 @@ export default class About extends Vue {
                 }
             })
             .catch((err: any) => {
-                log.warn(err)
+                (this as any).Log.warn(err)
             })
     }
 

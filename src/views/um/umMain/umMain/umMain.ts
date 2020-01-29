@@ -80,12 +80,12 @@ export default class UMMain extends Vue {
         let tempUrl = url.split("/").filter(a => a !== "")
         let len = tempUrl.length
         let result = false
-        //根据vux中的权限表盘的用户是否有菜单权限
+        // 根据vux中的权限表盘的用户是否有菜单权限
         this.routers.forEach(b => {
             let index: number = 0
             let curItem: any
             if (
-                b.path.replace("/", "").toLowerCase() ==
+                b.path.replace("/", "").toLowerCase() ===
                 tempUrl[index].toLowerCase()
             ) {
                 curItem = b.children

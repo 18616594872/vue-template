@@ -82,7 +82,7 @@ export class extendDate extends Date {
         }
         for (let k in date) {
             if (new RegExp("(" + k + ")").test(format)) {
-                format = format.replace(RegExp.$1, RegExp.$1.length == 1 ?
+                format = format.replace(RegExp.$1, RegExp.$1.length === 1 ?
                     date[k] : ("00" + date[k]).substr(("" + date[k]).length));
             }
         }
@@ -103,15 +103,17 @@ export class extendDate extends Date {
 
 }
 
-export class chartFontSize {
-    
-    constructor(private element: any){}
-    
+export class ChartFontSize {
+
+    constructor(private element: any) {}
+
     getFontSize(val: number | string): number {
         return Math.min(this.getSizeByWidth(val), this.getSizeByHeight(val))
     }
     getSizeByWidth(val: number | string): number {
-        if (typeof val === "number") return val
+        if (typeof val === "number") {
+            return val
+        }
         if (typeof val === "string") {
             if (val.indexOf("%") > 0) {
                 let tmp = parseFloat(val.replace("%", "")) / 100
@@ -122,7 +124,9 @@ export class chartFontSize {
         return 0
     }
     getSizeByHeight(val: number | string): number {
-        if (typeof val === "number") return val
+        if (typeof val === "number") {
+            return val
+        }
         if (typeof val === "string") {
             if (val.indexOf("%") > 0) {
                 let tmp = parseFloat(val.replace("%", "")) / 100;

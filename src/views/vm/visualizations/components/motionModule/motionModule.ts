@@ -71,7 +71,7 @@ export default class About extends Vue {
                     }) => {
                         element.val.forEach((item1: any) => {
                             _series.forEach((item2: any) => {
-                                if (item1.key == item2.name) {
+                                if (item1.key === item2.name) {
                                     item2.data.push({
                                         key: element.key,
                                         value: item1.val

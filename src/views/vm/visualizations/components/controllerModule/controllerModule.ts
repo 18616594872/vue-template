@@ -64,7 +64,7 @@ export default class About extends Vue {
     mounted() {
         this.getComplexobjDatas()
     }
-    //methods
+    // methods
     getComplexobjDatas() {
         this.getListComplexobjData().then(
                 (result: any) => {
@@ -74,7 +74,9 @@ export default class About extends Vue {
                                 item.open = complex.open
                                 item.close = complex.close
 
-                                if (complex.typeId == 56 || complex.typeId == 58) item.fault = complex.fault
+                                if (complex.typeId === 56 || complex.typeId === 58){
+                                    item.fault = complex.fault
+                                } 
                             }
                         })
 

@@ -6,12 +6,12 @@ import Vue from 'vue'
 enum LogLevel {
     /** 严重错误 主要是程序的错误 */
     ERROR = 1,
-    /** 一般警告，比如参数丢失 */
-    WARN = 2,
-    /** 一般要显示的信息，比如登录登出 */
-    INFO = 3,
-    /** 程序的调试信息 */
-    DEBUG = 4
+        /** 一般警告，比如参数丢失 */
+        WARN = 2,
+        /** 一般要显示的信息，比如登录登出 */
+        INFO = 3,
+        /** 程序的调试信息 */
+        DEBUG = 4
 }
 
 /**
@@ -54,20 +54,28 @@ class LogUtil {
         }
     }
 
-    public error(message?: any, ...parameters: any[]): void {
-        if (this.canShow(LogLevel.ERROR)) console.error(message, parameters);
+    public error(message ? : any, ...parameters: any[]): void {
+        if (this.canShow(LogLevel.ERROR)) {
+            console.error(message, parameters)
+        }
     }
 
-    public warn(message?: any, ...parameters: any[]): void {
-        if (this.canShow(LogLevel.WARN)) console.warn(message, parameters);
+    public warn(message ? : any, ...parameters: any[]): void {
+        if (this.canShow(LogLevel.WARN)) {
+            console.warn(message, parameters)
+        }
     }
 
-    public info(message?: any, ...parameters: any[]): void {
-        if (this.canShow(LogLevel.INFO)) console.info(message, parameters);
+    public info(message ? : any, ...parameters: any[]): void {
+        if (this.canShow(LogLevel.INFO)) {
+            console.info(message, parameters)
+        }
     }
 
-    public debug(message?: any, ...parameters: any[]): void {
-        if (this.canShow(LogLevel.DEBUG)) console.log(message, parameters);
+    public debug(message ? : any, ...parameters: any[]): void {
+        if (this.canShow(LogLevel.DEBUG)) {
+            console.log(message, parameters)
+        }
     }
 
     /**

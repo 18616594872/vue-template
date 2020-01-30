@@ -7,25 +7,20 @@ import {
     SecurityMonitorData,
     EquState
 } from '@/types/views/environmentMonitor.interface'
-import BrokenLine from '@/components/common/brokenLine/brokenLine.vue'
 import {
     listEnvironmentMonitorData,
     listSecurityData
 } from '@/api/environmentMonitor'
 
-@Component({
-    components: {
-        BrokenLine
-    }
-})
+@Component({})
 export default class About extends Vue {
 
-    environmentMonitorIMG: string = require("@/assets/images/bv/tunnel-bg.png")
-    collapseIMG: string = require("@/assets/images/bv/env-info-bg.png")
-    titleIMG: string = require("@/assets/images/bv/info-title.png")
-    pageTitleIMG: string = require("@/assets/images/bv/page-title-bg.png")
-    environmentSpotIMG: string = require("@/assets/images/bv/spot-bg.png")
-    tunnelIcon: string = require("@/assets/images/bv/tunnel-icon.png")
+    environmentMonitorIMG: string = require("@/assets/images/vm/tunnel-bg.png")
+    collapseIMG: string = require("@/assets/images/vm/env-info-bg.png")
+    titleIMG: string = require("@/assets/images/vm/info-title.png")
+    pageTitleIMG: string = require("@/assets/images/vm/page-title-bg.png")
+    environmentSpotIMG: string = require("@/assets/images/vm/spot-bg.png")
+    tunnelIcon: string = require("@/assets/images/vm/tunnel-icon.png")
 
     // data
     EMData: EnvironmentMonitorData = {

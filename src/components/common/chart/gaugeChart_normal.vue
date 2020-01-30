@@ -116,7 +116,7 @@
                         offsetCenter: [0, '75%'],
                         fontSize: this.chartFont.getFontSize('12%')
                     },
-                    //指针
+                    // 指针
                     pointer: {
                         width: this.chartFont.getFontSize('2%')
                     },
@@ -143,7 +143,9 @@
             this.myChart.showLoading()
             // 整合数据
             let series: Series = this.data.series as Series
-            if (!series || series.data.length == 0) return
+            if (!series || series.data.length === 0) {
+                return
+            }
 
             // 获得最终option
             let _option: any = {
@@ -165,7 +167,9 @@
             }
 
             this.myChart.setOption(_option)
-            if (this.option) this.myChart.setOption(this.option)
+            if (this.option) {
+                this.myChart.setOption(this.option)
+            }
             this.myChart.hideLoading()
         }
 

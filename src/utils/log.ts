@@ -54,25 +54,25 @@ class LogUtil {
         }
     }
 
-    public error(message ? : any, ...parameters: any[]): void {
+    public error(message ?: any, ...parameters: any[]): void {
         if (this.canShow(LogLevel.ERROR)) {
             console.error(message, parameters)
         }
     }
 
-    public warn(message ? : any, ...parameters: any[]): void {
+    public warn(message ?: any, ...parameters: any[]): void {
         if (this.canShow(LogLevel.WARN)) {
             console.warn(message, parameters)
         }
     }
 
-    public info(message ? : any, ...parameters: any[]): void {
+    public info(message ?: any, ...parameters: any[]): void {
         if (this.canShow(LogLevel.INFO)) {
             console.info(message, parameters)
         }
     }
 
-    public debug(message ? : any, ...parameters: any[]): void {
+    public debug(message ?: any, ...parameters: any[]): void {
         if (this.canShow(LogLevel.DEBUG)) {
             console.log(message, parameters)
         }

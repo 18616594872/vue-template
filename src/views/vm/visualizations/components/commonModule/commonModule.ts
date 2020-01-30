@@ -17,7 +17,7 @@ import {
     ChartBindData
 } from '@/types/chart.Interface'
 import {
-    extendDate
+    ExtendDate
 } from '@/utils/common'
 
 @Component({
@@ -63,7 +63,9 @@ export default class About extends Vue {
             } = res.data
             if (code === 200) {
 
-                if (!data.length) return
+                if (!data.length) {
+                    return
+                }
 
                 let total: number = 0
                 data.forEach((ele: any) => {
@@ -117,7 +119,7 @@ export default class About extends Vue {
         })
     }
     refreshDate() {
-        this.intervalId = setInterval(() => this.nowTime = new extendDate().format("hh:mm:ss"), 1000)
+        this.intervalId = setInterval(() => this.nowTime = new ExtendDate().format("hh:mm:ss"), 1000)
     }
     beforeDestroy() {
         clearInterval(this.intervalId)

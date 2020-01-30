@@ -74,9 +74,9 @@ export default class About extends Vue {
                                 item.open = complex.open
                                 item.close = complex.close
 
-                                if (complex.typeId === 56 || complex.typeId === 58){
+                                if (complex.typeId === 56 || complex.typeId === 58) {
                                     item.fault = complex.fault
-                                } 
+                                }
                             }
                         })
 

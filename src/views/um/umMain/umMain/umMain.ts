@@ -3,7 +3,7 @@ import {
     Vue
 } from 'vue-property-decorator'
 import {
-    extendDate
+    ExtendDate
 } from '@/utils/common'
 
 @Component({})
@@ -44,8 +44,8 @@ export default class UMMain extends Vue {
     }
 
     updateTime() {
-        this.nowTime = new extendDate().format("hh:mm:ss")
-        this.nowDate = extendDate.getSimpleDate()
+        this.nowTime = new ExtendDate().format("hh:mm:ss")
+        this.nowDate = ExtendDate.getSimpleDate()
     }
 
     goToMoudle(path: any) {

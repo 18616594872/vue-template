@@ -23,7 +23,7 @@ import {
     ChartType
 } from '@/types/chart.Interface'
 import {
-    extendDate
+    ExtendDate
 } from '@/utils/common'
 
 @Component({
@@ -114,7 +114,7 @@ export default class About extends Vue {
                 if (result) {
 
                     result.forEach((alarm: any) => {
-                        alarm.alarmDate = new extendDate(alarm.alarmDate).format('MM-dd hh:mm:ss')
+                        alarm.alarmDate = new ExtendDate(alarm.alarmDate).format('MM-dd hh:mm:ss')
                     })
 
                     this.alarmAllData = result

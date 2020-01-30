@@ -121,7 +121,9 @@
 
             // 整合数据
             let series: Series = this.data.series as Series
-            if (!series) return
+            if (!series) {
+                return
+            }
 
             // 整理数据
             let _series: EChartOption.SeriesPie[] = []
@@ -137,7 +139,7 @@
             _series.push({
                 name: series.name,
                 type: 'pie',
-                data: data
+                data
             })
 
 
@@ -154,7 +156,9 @@
             }
 
             this.myChart.setOption(_option)
-            if (this.option) this.myChart.setOption(this.option)
+            if (this.option) {
+                this.myChart.setOption(this.option)
+            }
             this.myChart.hideLoading()
         }
 

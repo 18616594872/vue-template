@@ -123,7 +123,7 @@
                     axisLabel: {
                         color: theme.borderColor,
                         fontSize: this.chartFont.getFontSize(constFontSize),
-                        formatter: function (value: number, index: number): any {
+                        formatter: (value: number, index: number) => {
                             let res: string = ''
 
                             if (value >= 10000) {
@@ -167,7 +167,9 @@
             this.myChart.showLoading()
             // 整合数据
             let series: Series[] = this.data.series as Series[]
-            if (!series || series.length == 0) return
+            if (!series || series.length === 0) {
+                return
+            }
 
             // 整理x轴
             let _xAxisData: string[] = []
@@ -190,7 +192,9 @@
                     data: _yAxisData
                 })
                 _legends.push(element.name)
-                if (element.unit) _unit = '单位(' + element.unit + ')'
+                if (element.unit) {
+                    _unit = '单位(' + element.unit + ')'
+                }
             })
 
             // 获得最终option
@@ -213,7 +217,9 @@
             }
 
             this.myChart.setOption(_option)
-            if (this.option) this.myChart.setOption(this.option)
+            if (this.option) {
+                this.myChart.setOption(this.option)
+            }
             this.myChart.hideLoading()
         }
 

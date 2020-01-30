@@ -45,8 +45,9 @@ const mutations: MutationTree < UserState > = {
 const actions: ActionTree < UserState, any > = {
     // user login
     login({
-        commit
-    }, userInfo: UserInfo) {
+            commit
+        },
+        userInfo: UserInfo) {
         const {
             userName,
             passWord

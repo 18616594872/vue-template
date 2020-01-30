@@ -7,7 +7,7 @@ import {
     Day
 } from '@/types/views/tunnelIntroduction.interface'
 import {
-    extendDate
+    ExtendDate
 } from '@/utils/common.ts'
 import {
     listTunnelIntroductionData,
@@ -59,8 +59,8 @@ export default class About extends Vue {
     }
     openFlight: boolean = true
 
-    get date(){
-        return new extendDate()
+    get date() {
+        return new ExtendDate()
     }
     mounted() {
         this.listTunnelIntroductionData()
@@ -96,7 +96,7 @@ export default class About extends Vue {
                 this.equipmentStatisticsData.forEach((item: any) => {
                     this.totalEquipment += item.eVal
                 })
-            
+
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)
@@ -107,7 +107,7 @@ export default class About extends Vue {
         setInterval(() => {
             this.Day.nowDate = this.date.format('yyyy年MM月dd日')
             this.Day.nowTime = this.date.format('HH:mm:ss')
-            this.Day.nowWeek = extendDate.getFormatTime()
+            this.Day.nowWeek = ExtendDate.getFormatTime()
         }, 1000);
     }
 

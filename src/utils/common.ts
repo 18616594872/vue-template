@@ -64,8 +64,8 @@ export const loadDefault = () => {
     }
 }
 
-export class extendDate extends Date {
-    private static dataInstance: extendDate = new extendDate()
+export class ExtendDate extends Date {
+    private static dataInstance: ExtendDate = new ExtendDate()
 
     format(format: string) {
         let date: any = {

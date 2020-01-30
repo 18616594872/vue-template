@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 16px;
+}
+html, body {
+    overflow: hidden;
+}
+
+.enter-enter-active {
+    transition: opacity .75s;
+}
+.enter-enter {
+    opacity: 0;
+}
+.enter-enter-to {
+    opacity: 1;
+}
+
+ul li {
+    list-style: none;
+}
+
+// 重写iview-btn样式
+.ivu-btn-primary {
+    color: #fff;
+    background-image: linear-gradient(to right , #2781fc, #83bcff);
+    border:1px solid #83bcff;
+}
+.ivu-btn-error {
+    color: #fff;
+    background-image: linear-gradient(to right , #ff4a4a, #ff8484);
+    border:1px solid #ff8484;
+}
+.ivu-btn-warning {
+    color: #fff;
+    background-image: linear-gradient(to right , #d5ba11, #f2df9b);
+    border:1px solid #f2df9b;
+}
+.ivu-btn-primary.btn-return {
+    position: absolute;
+    right: 66px;
+    top: 83px;
+    font-size: 28px;
+    line-height: 50px;
+    height: 50px;
+    color: #fff;
+    background-image: linear-gradient(to right , #0066ff, #67a2fb);
+    border: 1px solid #67a2fb;
+}
+.cm-title {
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+.search-width {
+    width: 60%;
+}
+.ivu-col {
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+.ivu-page {
+    position: absolute;
+    right: 1%;
+}
+
+.ivu-table, .ivu-table:before {
+    background-color: #f0f8ff00;
+}
+.ivu-table{
+    th, td {
+        background-color: #f0f8ff00;
+        color: @font-color-theme;
+        border-bottom-color: #293036;
+    }
+}
+.ivu-form {
+    .ivu-form-item-label {
+        font-size: @font-medium-s;
+        font-weight: bold;
+    }
+} 

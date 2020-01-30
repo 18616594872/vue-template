@@ -5,13 +5,13 @@ import echarts from 'echarts';
 import store from '@/store';
 import iview from '@/iview';
 import '@/assets/less/theme.less';
+import '@/assets/less/common.less';
 import 'view-design/dist/styles/iview.css';
 import {
     Message,
     Modal
 } from 'view-design';
-/** 引入日志控制文件 */
-import '@/utils/log'
+import '@/utils/log';
 
 Vue.use(iview)
 
@@ -39,5 +39,4 @@ init().then(res => {
         render: (h) => h(App)
     }).$mount('#app');
 
-}).catch(err => {
 })

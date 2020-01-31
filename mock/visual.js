@@ -378,5 +378,109 @@ export default [{
                 }]
             }
         }
+    }, {
+        url: '/mam/tunnels/environment/measobjs',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    tunnelKey: "1",
+                    tunnelName: "古城大街",
+                    isNormal: false,
+                    list:[{
+                        id: "1-1",
+                        name: "温度",
+                        isNormalMax: false,
+                        isNormalMin: true,
+                        maxVal: 23,
+                        minVal: 18,
+                        unit: "℃"
+                    }]
+                },{
+                    tunnelKey: "2",
+                    tunnelName: "古城大街",
+                    isNormal: false,
+                    list:[{
+                        id: "2-1",
+                        name: "温度",
+                        isNormalMax: false,
+                        isNormalMin: true,
+                        maxVal: 23,
+                        minVal: 18,
+                        unit: "℃"
+                    }]
+                },{
+                    tunnelKey: "3",
+                    tunnelName: "古城大街",
+                    isNormal: false,
+                    list:[{
+                        id: "3-1",
+                        name: "温度",
+                        isNormalMax: false,
+                        isNormalMin: true,
+                        maxVal: 23,
+                        minVal: 18,
+                        unit: "℃"
+                    }]
+                }]
+            }
+        }
+    }, {
+        url: '/mam/tunnels/security/measobjs',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    tunnelKey: "1",
+                    tunnelName: "古城大街",
+                    isNormal: false,
+                    list:[{
+                        id: "1-11",
+                        name: "照明",
+                        open: "开",
+                        openVal: 40,
+                        close: "关",
+                        closeVal: 60,
+                        broken: "故障",
+                        brokenVal: 10,
+                        
+                    }]
+                },{
+                    tunnelKey: "2",
+                    tunnelName: "古城大街",
+                    isNormal: false,
+                    list:[{
+                        id: "1-12",
+                        name: "照明",
+                        open: "开",
+                        openVal: 40,
+                        close: "关",
+                        closeVal: 60,
+                        broken: "故障",
+                        brokenVal: 10,
+                        
+                    }]
+                },{
+                    tunnelKey: "3",
+                    tunnelName: "古城大街",
+                    isNormal: false,
+                    list:[{
+                        id: "1-13",
+                        name: "照明",
+                        open: "开",
+                        openVal: 40,
+                        close: "关",
+                        closeVal: 60,
+                        broken: "故障",
+                        brokenVal: 10,
+                        
+                    }]
+                }]
+            }
+        }
     }
 ]

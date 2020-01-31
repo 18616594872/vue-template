@@ -16,9 +16,6 @@ import {
 export default class About extends Vue {
 
     environmentMonitorIMG: string = require("@/assets/images/vm/tunnel-bg.png")
-    collapseIMG: string = require("@/assets/images/vm/env-info-bg.png")
-    titleIMG: string = require("@/assets/images/vm/info-title.png")
-    pageTitleIMG: string = require("@/assets/images/vm/page-title-bg.png")
     environmentSpotIMG: string = require("@/assets/images/vm/spot-bg.png")
     tunnelIcon: string = require("@/assets/images/vm/tunnel-icon.png")
 
@@ -118,22 +115,24 @@ export default class About extends Vue {
         heading: 1.780236
     }
 
-    isShow: number = -1
-
     mounted() {
         this.listEnvironmentMonitorData()
         this.listSecurityData()
     }
 
     listEnvironmentMonitorData() {
+        let {
+            EMData: {
+                environmentMonitorInfo
+            }
+        } = this
         return listEnvironmentMonitorData().then(res => {
             let {
                 code,
-                data,
-                msg
+                data
             } = res.data
             if (code === 200) {
-                this.EMData.environmentMonitorInfo = data
+                environmentMonitorInfo = data
             }
         }).catch(error => {
             (this as any).Log.warn(error)
@@ -141,21 +140,22 @@ export default class About extends Vue {
     }
 
     listSecurityData() {
+        let {
+            SEData: {
+                securityMonitorInfo
+            }
+        } = this
         return listSecurityData().then((res: any) => {
             let {
                 code,
                 data
             } = res.data
             if (code === 200) {
-                this.SEData.securityMonitorInfo = data
+                securityMonitorInfo = data
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)
         })
-    }
-
-    choosedfault(index: number) {
-        this.isShow = index
     }
 
     zoomTo(idString: string) {

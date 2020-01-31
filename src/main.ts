@@ -5,7 +5,6 @@ import echarts from 'echarts';
 import store from '@/store';
 import iview from '@/iview';
 import '@/assets/less/theme.less';
-import '@/assets/less/common.less';
 import 'view-design/dist/styles/iview.css';
 import {
     Message,

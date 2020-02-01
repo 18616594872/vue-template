@@ -13,24 +13,19 @@ import {
     listTunnelIntroductionData,
     listEquipmentStatisticsData
 } from '@/api/tunnelIntroduction'
-import Bim from '@/components/bim/bim.vue'
 
 
-@Component({
-    components: {
-        Bim
-    }
-})
+@Component({})
 export default class About extends Vue {
 
-    tunnelIntroductIMG: string = require('@/assets/images/bv/operatManage-bg.png')
-    pageTitleIMG: string = require("@/assets/images/bv/page-title-bg.png")
-    tunnelCollapseIMG: string = require("@/assets/images/bv/energy-bg.png")
-    guideIcon: string = require("@/assets/images/bv/guide-icon.png")
-    tunnelIcon: string = require("@/assets/images/bv/tunnel-icon.png")
-    equipmentIcon: string = require("@/assets/images/bv/equipment-icon.png")
-    timeIMG: string = require("@/assets/images/bv/time-bg.png")
-    timeIcon: string = require("@/assets/images/bv/time-icon.png")
+    tunnelIntroductIMG: string = require('@/assets/images/vm/operatManage-bg.png')
+    // pageTitleIMG: string = require("@/assets/images/vm/page-title-bg.png")
+    // tunnelCollapseIMG: string = require("@/assets/images/vm/energy-bg.png")
+    guideIcon: string = require("@/assets/images/vm/guide-icon.png")
+    tunnelIcon: string = require("@/assets/images/vm/tunnel-icon.png")
+    equipmentIcon: string = require("@/assets/images/vm/equipment-icon.png")
+    // timeIMG: string = require("@/assets/images/vm/time-bg.png")
+    timeIcon: string = require("@/assets/images/vm/time-icon.png")
 
     // data
     TData: TunnelIntroductionData = {
@@ -48,14 +43,6 @@ export default class About extends Vue {
         nowTime: '',
         nowWeek: '',
         safeOperatDay: 66
-    }
-    cameraAngle: any = {
-        longitude: 112.488275,
-        latitude: 37.713998,
-        height: -3.13,
-        roll: 6.283185,
-        pitch: -0.174532,
-        heading: 1.780236
     }
     openFlight: boolean = true
 

@@ -43,6 +43,12 @@ export const asyncRoutes: any[] = [
                 component: (resolve: any) =>
                     require(["@/views/vm/environmentMonitor/environmentMonitor.vue"], resolve)
             },
+            {
+                path: '/VM/tunnelIntroduct',
+                name: '管廊简介',
+                component: (resolve: any) =>
+                    require(["@/views/vm/tunnelIntroduction/tunnelIntroduction.vue"], resolve)
+            }
         ]
     }
 ]

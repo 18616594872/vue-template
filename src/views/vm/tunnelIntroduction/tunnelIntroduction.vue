@@ -1,19 +1,16 @@
 <template>
     <div class="tunnelIntroduction-wrap">
         <div class="imgBG-wrap">
-            <!-- <img :src="tunnelIntroductIMG" /> -->
-            <bim ref="tunnelIntroBim" :cameraPosition="cameraAngle" :openFlight="openFlight"></bim>
+            <img :src="tunnelIntroductIMG" />
         </div>
         <router-link :to="{name: 'VMMain'}">
             <Button class="btn-return" type="primary">返回</Button>
         </router-link>
-        <div class="page-title"
-            :style="{background: 'url('+ pageTitleIMG +') 100% 100% no-repeat', backgroundSize: '40% 100%', backgroundPositionX: 'center',position: 'relative'}">
+        <div class="page-title">
             管廊简介
         </div>
         <!-- 管廊简介 -->
-        <div class="tunnel-collapse-wrap"
-            :style="{background: 'url('+ tunnelCollapseIMG +') 100% 100% no-repeat', backgroundSize: '100% 100%'}">
+        <div class="tunnel-collapse-wrap">
             <div class="title">
                 <img :src="guideIcon" class="guide-icon" />
                 管廊简介：
@@ -31,8 +28,7 @@
             </Collapse>
         </div>
         <!-- 廊内设备统计 -->
-        <div class="equipment-statistics-wrap"
-            :style="{background: 'url('+ tunnelCollapseIMG +') 100% 100% no-repeat', backgroundSize: '100% 100%'}">
+        <div class="equipment-statistics-wrap">
             <div class="title">
                 <img :src="guideIcon" class="guide-icon" />
                 廊内设备统计：
@@ -50,14 +46,12 @@
             </section>
         </div>
         <!-- 管廊公司 -->
-        <div class="tunnel-company-wrap"
-            :style="{background: 'url('+timeIMG +') 100% 100% no-repeat', backgroundSize: '100% 100%'}">
+        <div class="tunnel-company-wrap">
             <img class="tunnel-company-logo" :src="timeIcon">
             晋源综合管廊
         </div>
         <!-- 时间 -->
-        <div class="time-wrap"
-            :style="{background: 'url('+timeIMG +') 100% 100% no-repeat', backgroundSize: '100% 100%'}">
+        <div class="time-wrap">
             <div class="hms-wrap">
                 <img :src="timeIcon">
                 {{Day.nowTime}}

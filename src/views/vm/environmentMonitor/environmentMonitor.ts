@@ -4,8 +4,7 @@ import {
 } from 'vue-property-decorator'
 import {
     EnvironmentMonitorData,
-    SecurityMonitorData,
-    EquState
+    SecurityMonitorData
 } from '@/types/views/environmentMonitor.interface'
 import {
     listEnvironmentMonitorData,
@@ -16,103 +15,14 @@ import {
 export default class About extends Vue {
 
     environmentMonitorIMG: string = require("@/assets/images/vm/tunnel-bg.png")
-    environmentSpotIMG: string = require("@/assets/images/vm/spot-bg.png")
     tunnelIcon: string = require("@/assets/images/vm/tunnel-icon.png")
 
     // data
     EMData: EnvironmentMonitorData = {
-        value: '1',
-        environmentMonitorInfo: []
-
+        isTrue: false
     }
     SEData: SecurityMonitorData = {
-        value: '1',
-        securityMonitorInfo: []
-    }
-
-    equState: EquState = {
-        id: '',
-        objTypeId: ''
-    }
-
-    SpotData: any[] = [{
-            spotKey: '温度',
-            spotVal: '30℃'
-        },
-        {
-            spotKey: '湿度',
-            spotVal: '13%RH'
-        },
-        {
-            spotKey: '氧气',
-            spotVal: '13%'
-        },
-        {
-            spotKey: '甲烷',
-            spotVal: '36LEL'
-        },
-        {
-            spotKey: '硫化氢',
-            spotVal: '3ppm'
-        },
-        {
-            spotKey: '一氧化碳',
-            spotVal: '3ppm'
-        }
-    ]
-
-    canvasPos: any = {
-        position: 'absolute',
-        left: '',
-        top: ''
-    }
-
-    isWithCanvas: boolean = false
-
-    objType: any[] = [{
-            id: 1,
-            typeName: '温度',
-            normalMin: -15,
-            mormalMax: 40
-        },
-        {
-            id: 2,
-            typeName: '湿度',
-            normalMin: 5,
-            normalMax: 95
-        },
-        {
-            id: 3,
-            typeName: '氧气',
-            normalMin: 15,
-            normalMax: 28
-        },
-        {
-            id: 5,
-            typeName: '甲烷',
-            normalMin: 0,
-            normalMax: 50
-        },
-        {
-            id: 4,
-            typeName: '硫化氢',
-            normalMin: 0,
-            normalMax: 50
-        },
-        {
-            id: 6,
-            typeName: '一氧化碳',
-            normalMin: 0,
-            normalMax: 100
-        }
-    ]
-    cameraAngle: any = {
-        longitude: 112.488275,
-        latitude: 37.713998,
-        height: -3.13,
-        roll: 6.283185,
-        pitch: -0.174532,
-        heading: 1.780236
+        isTrue: false
     }
 
     mounted() {
@@ -122,17 +32,19 @@ export default class About extends Vue {
 
     listEnvironmentMonitorData() {
         let {
-            EMData: {
-                environmentMonitorInfo
-            }
+            EMData
         } = this
-        return listEnvironmentMonitorData().then(res => {
+        return listEnvironmentMonitorData().then((res: any) => {
             let {
                 code,
                 data
             } = res.data
             if (code === 200) {
-                environmentMonitorInfo = data
+                this.EMData = {
+                    isTrue: true,
+                    value: '1',
+                    environmentMonitorInfo: data
+                }
             }
         }).catch(error => {
             (this as any).Log.warn(error)
@@ -141,9 +53,7 @@ export default class About extends Vue {
 
     listSecurityData() {
         let {
-            SEData: {
-                securityMonitorInfo
-            }
+            SEData
         } = this
         return listSecurityData().then((res: any) => {
             let {
@@ -151,20 +61,14 @@ export default class About extends Vue {
                 data
             } = res.data
             if (code === 200) {
-                securityMonitorInfo = data
+                this.SEData = {
+                    isTrue: true,
+                    value: '1',
+                    securityMonitorInfo: data
+                }
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)
         })
-    }
-
-    zoomTo(idString: string) {
-        let elementId = idString.split(',')[0];
-        let typeId = idString.split(',')[1];
-        (this.$refs.envMonitorBim as any).zoomTo(elementId)
-        this.equState = {
-            id: elementId,
-            objTypeId: typeId
-        }
     }
 }

@@ -355,22 +355,22 @@ export default [{
                     name: "温度",
                     unit: "℃",
                     value: 26
-                },{
+                }, {
                     id: 2,
                     name: "温度",
                     unit: "℃",
                     value: 26
-                },{
+                }, {
                     id: 3,
                     name: "温度",
                     unit: "℃",
                     value: 26
-                },{
+                }, {
                     id: 4,
                     name: "温度",
                     unit: "℃",
                     value: 26
-                },{
+                }, {
                     id: 5,
                     name: "温度",
                     unit: "℃",
@@ -389,7 +389,7 @@ export default [{
                     tunnelKey: "1",
                     tunnelName: "古城大街",
                     isNormal: false,
-                    list:[{
+                    list: [{
                         id: "1-1",
                         name: "温度",
                         isNormalMax: false,
@@ -398,11 +398,11 @@ export default [{
                         minVal: 18,
                         unit: "℃"
                     }]
-                },{
+                }, {
                     tunnelKey: "2",
                     tunnelName: "古城大街",
                     isNormal: false,
-                    list:[{
+                    list: [{
                         id: "2-1",
                         name: "温度",
                         isNormalMax: false,
@@ -411,11 +411,11 @@ export default [{
                         minVal: 18,
                         unit: "℃"
                     }]
-                },{
+                }, {
                     tunnelKey: "3",
                     tunnelName: "古城大街",
                     isNormal: false,
-                    list:[{
+                    list: [{
                         id: "3-1",
                         name: "温度",
                         isNormalMax: false,
@@ -438,7 +438,7 @@ export default [{
                     tunnelKey: "1",
                     tunnelName: "古城大街",
                     isNormal: false,
-                    list:[{
+                    list: [{
                         id: "1-11",
                         name: "照明",
                         open: "开",
@@ -447,13 +447,13 @@ export default [{
                         closeVal: 60,
                         broken: "故障",
                         brokenVal: 10,
-                        
+
                     }]
-                },{
+                }, {
                     tunnelKey: "2",
                     tunnelName: "古城大街",
                     isNormal: false,
-                    list:[{
+                    list: [{
                         id: "1-12",
                         name: "照明",
                         open: "开",
@@ -462,13 +462,13 @@ export default [{
                         closeVal: 60,
                         broken: "故障",
                         brokenVal: 10,
-                        
+
                     }]
-                },{
+                }, {
                     tunnelKey: "3",
                     tunnelName: "古城大街",
                     isNormal: false,
-                    list:[{
+                    list: [{
                         id: "1-13",
                         name: "照明",
                         open: "开",
@@ -477,9 +477,56 @@ export default [{
                         closeVal: 60,
                         broken: "故障",
                         brokenVal: 10,
-                        
+
                     }]
                 }]
+            }
+        }
+    }, {
+        url: '/omm/equipments/statistics',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                        eVal: 30,
+                        eKey: "温度"
+                    },
+                    {
+                        eVal: 25,
+                        eKey: "湿度"
+                    },
+                    {
+                        eVal: 40,
+                        eKey: "氧气"
+                    }
+                ]
+            }
+        }
+    }, {
+        url: '/common/tunnels/conditions',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                        id: 1,
+                        name: "古城大街",
+                        description: "古城大街"
+                    },
+                    {
+                        id: 2,
+                        name: "古城大街",
+                        description: "古城大街"
+                    },
+                    {
+                        id: 3,
+                        name: "古城大街",
+                        description: "古城大街"
+                    }
+                ]
             }
         }
     }

@@ -1,13 +1,13 @@
-export interface TunnelIntroductionData {
-    value: string
-    tunnelInfo: any[]
+
+import { baseData } from './environmentMonitor.interface'
+
+interface tunnelData {
+    id: number,
+    name: string,
+    description: string
 }
 
-export interface Day {
-    nowDate: string,
-    nowTime: string,
-    nowWeek: string,
-    safeOperatDay: number
-
+export interface TunnelIntroductionData extends baseData{
+    tunnelInfo?: tunnelData[]
 }
 

@@ -1,16 +1,28 @@
-
-export interface EnvironmentMonitorData {
-    environmentMonitorInfo?: any[],
-    value?: string
+export interface baseData {
+    value?: string,
+    isTrue?: boolean
 }
 
-export interface SecurityMonitorData {
-    securityMonitorInfo?: any[],
-    value?: string
+interface securtiyData {
+    tunnelKey: string,
+    tunnelName:string,
+    isNormal: boolean,
+    list:any[]
 }
 
-export interface EquState {
-    id?: string | number
-    objTypeId?: string | number 
+interface environInfo {
+    tunnelKey: string,
+    tunnelName: string,
+    isNormal: boolean,
+    list: any[]
 }
+
+export interface EnvironmentMonitorData extends baseData{
+    environmentMonitorInfo?: environInfo[]
+}
+
+export interface SecurityMonitorData extends baseData{
+    securityMonitorInfo?: securtiyData[]
+}
+
 

@@ -15,7 +15,7 @@
                 <img :src="guideIcon" class="guide-icon" />
                 管廊简介：
             </div>
-            <Collapse v-model="TData.value" accordion @on-change="changFlyRoute">
+            <Collapse v-model="TData.value" accordion v-if="TData.isTrue">
                 <Panel :name="item.id+''" v-for="(item, index) in TData.tunnelInfo" :key="index">
                     <span>
                         <img :src="tunnelIcon" />
@@ -48,19 +48,12 @@
         <!-- 管廊公司 -->
         <div class="tunnel-company-wrap">
             <img class="tunnel-company-logo" :src="timeIcon">
-            晋源综合管廊
+            可视化管廊
         </div>
         <!-- 时间 -->
         <div class="time-wrap">
-            <div class="hms-wrap">
-                <img :src="timeIcon">
-                {{Day.nowTime}}
-            </div>
-            <div class="ymd-wrap">
-                {{Day.nowDate}}{{Day.nowWeek}}
-            </div>
             <div class="safe-operat-wrap">
-                系统已安全运行&nbsp;<span class="safe-days">{{Day.safeOperatDay}}</span>&nbsp;天
+                系统已安全运行&nbsp;<span class="safe-days">{{safeOperatDay}}</span>&nbsp;天
             </div>
         </div>
     </div>

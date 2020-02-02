@@ -11,13 +11,11 @@
         <div class="env-collapse-wrap">
             <div class="title">
                 环境监测</div>
-            <Collapse accordion v-model="EMData.value">
-                <Panel :key="index" :name="item.tunnelKey" v-for="(item, index) in EMData.environmenttMonitorInfo">
+            <Collapse accordion v-model="EMData.value" v-if="EMData.isTrue">
+                <Panel :key="index" :name="item.tunnelKey" v-for="(item, index) in EMData.environmentMonitorInfo">
                     <span>
                         <img :src="tunnelIcon" />
                         {{ item.tunnelName }}
-                        <Button class="status-btn" type="primary" v-show="item.isNormal===true">正常</Button>
-                        <Button class="status-btn" type="error" v-show="item.isNormal===false">故障</Button>
                     </span>
                     <div :key="tep.id" class="details-wrap" slot="content" v-for="tep in item.list">
                         <div class="details">{{ tep.name }}</div>
@@ -33,7 +31,7 @@
         <div class="sec-collapse-wrap">
             <div class="title">
                 安防监测</div>
-            <Collapse accordion v-model="SEData.value">
+            <Collapse accordion v-model="SEData.value" v-if="SEData.isTrue">
                 <Panel :key="index" :name="item.tunnelKey" v-for="(item, index) in SEData.securityMonitorInfo">
                     <span>
                         <img :src="tunnelIcon" />
@@ -60,13 +58,6 @@
                     </div>
                 </Panel>
             </Collapse>
-        </div>
-        <div :style="{background: 'url('+ environmentSpotIMG +') 100% 100% no-repeat', backgroundSize: '100% 100%'}"
-            class="spot-wrap" v-show="isWithCanvas">
-            <div :key="index" class="spot-line-wrap" v-for="(item ,index) in SpotData">
-                <div>{{item.spotKey}}</div>
-                <div>{{item.spotVal}}</div>
-            </div>
         </div>
     </div>
 </template>

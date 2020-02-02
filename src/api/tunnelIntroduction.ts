@@ -1,23 +1,15 @@
 import request from '@/utils/request.ts'
 
-export function listTunnelIntroductionData(data: any) {
+export function listTunnelIntroductionData() {
     return request({
         url: '/common/tunnels/conditions',
-        method: 'post',
-        data
+        method: 'get'
     })
 }
 
 export function listEquipmentStatisticsData() {
     return request({
         url: '/omm/equipments/statistics',
-        method: 'get'
-    })
-}
-
-export function getGlendaleFlyRoute(tunnelId: any) {
-    return request({
-        url: `common/tunnels/${tunnelId}/tunnel-points`,
         method: 'get'
     })
 }

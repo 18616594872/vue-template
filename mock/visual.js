@@ -529,5 +529,49 @@ export default [{
                 ]
             }
         }
+    }, {
+        url: '/em/plans/list',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                        planName: "预案1",
+                        id: 1
+                    },
+                    {
+                        planName: "预案2",
+                        id: 2
+                    },
+                ]
+            }
+        }
+    }, {
+        url: '/omm/equipments/alarm',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                        eKey: 1,
+                        normalNum: 1,
+                        unNormalNum: 1,
+                        hiddenNum: 1,
+                        repairNum: 1,
+                        othersNum: 1
+                    },
+                    {
+                        eKey: 2,
+                        normalNum: 1,
+                        unNormalNum: 1,
+                        hiddenNum: 1,
+                        repairNum: 1,
+                        othersNum: 1
+                    }
+                ]
+            }
+        }
     }
 ]

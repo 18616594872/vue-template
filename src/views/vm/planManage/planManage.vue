@@ -70,12 +70,6 @@
                         {{item.btnContent}}
                     </Button>
                 </ButtonGroup>
-                <div class="simulate-speed">
-                    模拟速度：
-                    <Select v-model="SPData.model">
-                        <Option v-for="(item, index) in SPData.speedOption" :key="index" :value="item.id">{{item.speed}}</Option>
-                    </Select>
-                </div>
             </section>
         </div>  
     </div>

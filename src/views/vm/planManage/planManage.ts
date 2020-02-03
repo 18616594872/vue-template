@@ -45,18 +45,6 @@ export default class About extends Vue {
         }
     ]
 
-    SPData: SimulateSpeed = {
-        model: 1,
-        speedOption: [{
-                id: 1,
-                speed: '正常x1.0'
-            },
-            {
-                id: 2,
-                speed: '加速x1.25'
-            }
-        ]
-    }
     mounted() {
         this.listAlarmData()
         this.listPlanData()

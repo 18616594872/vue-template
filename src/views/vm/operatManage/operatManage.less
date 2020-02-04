@@ -1,0 +1,86 @@
+.operatManage-wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: @border-color-theme1; 
+    .imgBG-wrap {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        // z-index: -1;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .page-title {
+        font-size: 46px;
+        text-align: center;
+        background: url('../../../assets/images/vm/page-title-bg.png') 100% 100% no-repeat;
+        background-size: 40% 100%;
+        background-position-x: center;
+        position: relative
+    }
+    .energy-statistics-wrap, .customer-wrap {
+        position: absolute;
+        top: 200px;
+        .title {
+            font-size: 18px;
+            margin-top: 20px;
+            padding-left: 30px;
+            .guide-icon {
+                vertical-align: middle;
+            }
+        }
+    }
+    .energy-statistics-wrap {
+        width: 610px;
+        left: 60px;
+        background: url('../../../assets/images/vm/energy-bg.png') 100% 100% no-repeat;
+        background-size: 100% 100%;
+        .line-chart-wrap {
+            width: 100%;
+            height: 400px;
+        }
+    }
+    .customer-wrap{
+        width: 300px;
+        right: 60px;
+        background: url('../../../assets/images/vm/customer-bg.png') 100% 100% no-repeat;
+        background-size: 100% 100%;
+        .customer-title, .customer-info {
+            display: flex;
+            div {
+                flex: 0 0 50%;
+                text-align: center;
+            }
+        }
+        .customer-title {
+            font-size: 16px;
+            line-height: 36px;
+        }
+        .customer-info-wrap {
+            padding-bottom: 10px;
+            height: 135px;
+            overflow-y: auto;
+            .customer-info {
+                font-size: 14px;
+                line-height: 25px;
+            }
+        }
+        .customer-info-wrap::-webkit-scrollbar{
+            width: 4px;
+            height: 4px;
+        }
+        .customer-info-wrap::-webkit-scrollbar-thumb{
+            border-radius: 5px;
+            box-shadow: inset 0 0 5px rgb(27, 102, 207);
+            background: rgba(0, 0, 0, 0.2)
+        }
+        .customer-info-wrap::-webkit-scrollbar-track{
+            border-radius: 4px;
+            box-shadow: inset 0 0 5px rgb(235, 227, 235);
+            background: rgba(0, 0, 0, 0.1)
+        }
+    }
+}

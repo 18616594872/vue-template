@@ -3,9 +3,7 @@ import {
     Vue
 } from "vue-property-decorator"
 import {
-    PlanManageData,
-    TotalNumData,
-    SimulateSpeed
+    TotalNumData
 } from '@/types/views/planManage.interface'
 import {
     listAlarmData,
@@ -28,7 +26,7 @@ export default class About extends Vue {
         totalOtherNum: 0
     }
 
-    PData: PlanManageData = {
+    PData: any = {
         model: 1,
         planInfo: [
         ]
@@ -51,7 +49,7 @@ export default class About extends Vue {
     }
 
     listAlarmData() {
-        return listAlarmData().then(res => {
+        return listAlarmData().then((res: any) => {
             let {
                 code,
                 data

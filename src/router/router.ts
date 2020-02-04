@@ -54,7 +54,13 @@ export const asyncRoutes: any[] = [
                 name: '预案管理',
                 component: (resolve: any) =>
                     require(["@/views/vm/planManage/planManage.vue"], resolve)
-            }
+            },
+            {
+                path: '/VM/operatManage',
+                name: '运营管理',
+                component: (resolve: any) =>
+                    require(["@/views/vm/operatManage/operatManage.vue"], resolve)
+            },
         ]
     }
 ]

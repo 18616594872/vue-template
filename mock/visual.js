@@ -573,5 +573,23 @@ export default [{
                 ]
             }
         }
+    }, {
+        url: '/common/companies/cables/total',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    key: '公司1',
+                    val: 10
+                },
+                {
+                    key: '公司1',
+                    val: 10
+                }
+                ]
+            }
+        }
     }
 ]

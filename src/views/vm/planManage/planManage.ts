@@ -28,8 +28,7 @@ export default class About extends Vue {
 
     PData: any = {
         model: 1,
-        planInfo: [
-        ]
+        planInfo: []
     }
 
     btnInfo: any[] = [{

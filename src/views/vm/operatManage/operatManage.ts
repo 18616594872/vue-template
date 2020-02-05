@@ -31,7 +31,6 @@ export default class About extends Vue {
     }
 
     customerData: any[] = []
-    enableTilt: boolean = false
 
     mounted() {
         this.listEnergyData()
@@ -46,7 +45,6 @@ export default class About extends Vue {
                     data
                 } = res.data
                 if (code === 200) {
-                    if (data.length == 0) return
 
                     let _series: Series[] = []
                     data[0].val.forEach((item: {
@@ -92,7 +90,7 @@ export default class About extends Vue {
 
     listCustomerData() {
         return listCustomerData()
-            .then(res => {
+            .then((res: any) => {
                 let {
                     code,
                     data

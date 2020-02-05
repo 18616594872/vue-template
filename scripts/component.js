@@ -7,7 +7,7 @@ const basePath = path.resolve(__dirname, '../src')
 
 const dirParentName = process.argv[2]
 const dirSecondParentName = process.argv[3]
-const dirName = process.argv[6]
+const dirName = process.argv[4]
 const capPirName = dirName.substring(0, 1).toUpperCase() + dirName.substring(1)
 
 if (!dirName) {
@@ -20,60 +20,52 @@ if (!dirName) {
  * @msg: vue页面模版
  */
 const VueTep = `<template>
-    <div class="${dirName}-wrap">
-        {{data.pageName}}
-    </div>
+  <div class="${dirName}-wrap">
+    {{data.componentName}}
+  </div>
 </template>
 
-<script lang="ts" src="./${dirName}.ts"></script>
+<script lang="ts">
+  import { Component, Vue, Prop } from "vue-property-decorator"
+  // import {  } from "@/components" // 组件
 
-<style lang="less">
-    @import './${dirName}.less';
+  @Component({})
+  export default class About extends Vue {
+    // prop
+    @Prop({
+      required: false,
+      default: ''
+    }) name!: string
+
+    created() {
+      //
+    }
+    
+    activated() {
+      //
+    }
+
+    mounted() {
+      //
+    }
+
+  }
+</script>
+
+<style lang="scss">
+  @import "@/assets/scss/variables";
+
+  .${dirName}-wrap {
+    width: 100%;
+  }
 </style>
 
 `
 
-// ts 模版
-const tsTep = `import { Component, Vue } from 'vue-property-decorator'
-// import from "@/components" // 组件
-// import {  } from '@/api/${dirName}.ts'
-
-@Component({})
-export default class About extends Vue {
-
-    // data
-    data: ${capPirName}Data = {
-        pageName: '${dirName}'
-    }
-
-    mounted() {
-        //
-    }
-
-    // 初始化函数
-    init() {
-        //
-    }
-    
-}
-`
-
-// less 模版
-const lessTep = `
-.${dirName}-wrap {
-    width: 100%;
-}
-`
-
-// api 接口模版
-const apiTep = `import request from '@/utils/request.ts'
-
-export function test(data: any) {
-    return request({
-        url: '',
-        method: 'post',
-        data
-    })
+// interface 模版
+const interfaceTep = `// ${dirName}.Data 参数类型
+export interface ${capPirName}Data {
+  componentName: string
 }
 
 `
@@ -90,14 +82,12 @@ function mkdirsSync(dirname) {
         }
     }
 }
-mkdirsSync(`${basePath}/views/${dirParentName}/${dirSecondParentName}/${dirName}`,() => {
+mkdirsSync(`${basePath}/components/${dirParentName}/${dirSecondParentName}/${dirName}`, () => {
     console.log('done');
 })
 
-process.chdir(`${basePath}/views/${dirParentName}/${dirSecondParentName}/${dirName}`) // cd dirName
+process.chdir(`${basePath}/components/${dirParentName}/${dirSecondParentName}/${dirName}`) // cd dirName
 fs.writeFileSync(`${dirName}.vue`, VueTep) // vue 
-fs.writeFileSync(`${dirName}.ts`, tsTep) // ts
-fs.writeFileSync(`${dirName}.less`, lessTep) // less
 
 process.chdir(`${basePath}/api`); // cd api
 fs.writeFileSync(`${dirName}.ts`, apiTep) // api

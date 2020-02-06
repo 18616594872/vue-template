@@ -11,3 +11,14 @@ declare global {
     }
   }
 }
+
+declare module 'vue/types/vue' {
+  interface Vue {
+      VIEWER: any,
+      LAYERSNAME: any
+  }
+}
+
+declare let SuperMap: any
+declare let Cesium: any
+

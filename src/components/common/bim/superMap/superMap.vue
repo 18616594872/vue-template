@@ -9,7 +9,7 @@
         Component,
         Vue,
         Prop
-    } from "vue-property-decorator"
+    } from "vue-property-decorator" 
 
     @Component({})
     export default class About extends Vue {
@@ -20,7 +20,7 @@
         }) name!: string
 
         mounted() {
-            this.createHtml()
+            // this.createHtml()
         }
 
         createHtml(){
@@ -32,10 +32,7 @@
                         )
                         .end()
 
-                    this.VIEWER= new Cesium.Viewer('simple3DBox', {
-                        navigation: this.navigation,
-                        infoBox: this.infoBox
-                    })
+                    this.VIEWER= new Cesium.Viewer('simple3DBox')
                     resolve()
                 } else {
                     reject()

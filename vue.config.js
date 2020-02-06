@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 const resolve = dir => {
     return path.join(__dirname, dir)
@@ -30,6 +31,17 @@ module.exports = {
         extract: true, // 是否使用css分离插件
         sourceMap: false, // 开启 CSS source maps?
         loaderOptions: {} // css预设器配置项
+    },
+    configureWebpack: {
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: 'jquery'
+            })
+        ],
+        externals: {
+            Cesium: 'Cesium',
+            zlib: 'Zlib'
+        }
     },
     devServer: {
         port: port, // 端口

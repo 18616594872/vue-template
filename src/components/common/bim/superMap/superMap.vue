@@ -1,6 +1,6 @@
 <template>
     <div class="superMap-wrap">
-        <div class="cesiumContainer" id="cesiumContainer" v-cancellation></div>
+        <div class="cesiumContainer" id="cesiumContainer"></div>
     </div>
 </template>
 
@@ -20,24 +20,6 @@
         }) name!: string
 
         mounted() {
-            // this.createHtml()
-        }
-
-        createHtml(){
-            return new Promise((resolve, reject) => {
-                if (!this.VIEWER) {
-                    $('#cesiumContainer')
-                        .prepend(
-                            "<div id='simple3DBox' style='position: relative;height: 100%;width: 100%'></div>"
-                        )
-                        .end()
-
-                    this.VIEWER= new Cesium.Viewer('simple3DBox')
-                    resolve()
-                } else {
-                    reject()
-                }
-            })
         }
 
     }

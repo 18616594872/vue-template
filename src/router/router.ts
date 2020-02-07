@@ -62,5 +62,11 @@ export const asyncRoutes: any[] = [
                     require(["@/views/vm/operatManage/operatManage.vue"], resolve)
             },
         ]
+    },
+    ,
+    {
+        path: '/UM',
+        name: 'um',
+        component: (resolve: any) => require(["@/views/um/mainPage/mainPage.vue"], resolve)
     }
 ]

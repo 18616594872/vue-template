@@ -7,7 +7,7 @@ import {
 } from '@/types/views/tunnelIntroduction.interface'
 import {
     ExtendDate
-} from '@/utils/common.ts'
+} from '@/utils/common'
 import {
     listTunnelIntroductionData,
     listEquipmentStatisticsData

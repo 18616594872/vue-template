@@ -1,0 +1,63 @@
+
+.integratedMonitoring-wrap {
+    width: 100%;
+    height: 100%;
+    .top-wrap {
+        display: flex;
+        height: 66%;
+        margin: auto 20px;
+        .type-data-wrap {
+            width: 540px;
+            .doughnut-wrap {
+                margin-top: 10px;
+                height: 48%;
+                .doughnut-box {
+                    background: @box-background-color-theme;
+                    height: 90%;
+                    border-bottom-left-radius: 8px;
+                    border-bottom-right-radius: 8px;
+                }
+            }
+            .temp-humidity-wrap {
+                position: relative;
+                border: 0.00521rem solid transparent;
+                top: 22px;
+                // height: 258px;
+                height: 45.7%;
+                .select-temp {
+                    position: absolute;
+                    right: 5px;
+                    top: 7px;
+                    z-index: 99999;
+                    background: @box-background-color-theme;
+                }
+                .mixedLineAndBar-box {
+                    height: 78%;
+                    background: @box-background-color-theme;
+                    border-bottom-left-radius: 8px;
+                    border-bottom-right-radius: 8px;
+                }
+            }
+        }
+        .overview-data-wrap {
+            width: 710px;
+            margin: 10px 20px 20px 20px;
+        }
+        .video-wrap {
+            margin: 10px 0px 20px 0px;
+            width: 585px;
+        }
+    }
+    .bottom-wrap {
+        display: flex;
+        height: 34%;
+        margin: auto 20px;
+        .data-details-wrap,
+        .entrance-guard-wrap {
+            flex: 1;
+        }
+        .data-details-wrap {
+            margin-right: 20px;
+        }
+    }
+}

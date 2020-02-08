@@ -1,5 +1,5 @@
 
-import { baseData } from './environmentMonitor.interface'
+import { baseData } from '@/types/views/environmentMonitor.interface'
 
 interface tunnelData {
     id: number,

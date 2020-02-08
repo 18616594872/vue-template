@@ -3,20 +3,11 @@ import {
     Vue
 } from 'vue-property-decorator'
 import {
-    listTunnelInfo
-} from '@/api/tunnelManage'
-import SelectTemp from '@/components/common/selectTemp/selectTemp.vue'
-import {
     SelectData,
     TitleBlock
 } from '@/types/components/selectTemp.interface'
-import MixedLineAndBar from '@/components/common/chart/chartComponent/chartComponent.vue'
-import Title from '@/components/um/umtitle/umtitle.vue'
-import DataOverview from '@/views/um/mam/dataOverview/dataOverview.vue'
-import VideoDisplay from '@/views/um/mam/videoDisplay/videoDisplay.vue'
-import DataDetails from '@/views/um/mam/dataDetails/dataDetails.vue'
-import TirggerData from '@/views/um/mam/triggerData/triggerData.vue'
-import HollowPieChart from '@/components/common/chart/chartComponent/chartComponent.vue'
+import MixedLineAndBar from '@/components/common/chart/chartComponent.vue'
+import HollowPieChart from '@/components/common/chart/chartComponent.vue'
 import {
     Series,
     ChartBindData,
@@ -26,13 +17,7 @@ import {
 
 @Component({
     components: {
-        SelectTemp,
         MixedLineAndBar,
-        Title,
-        DataOverview,
-        VideoDisplay,
-        DataDetails,
-        TirggerData,
         HollowPieChart
     }
 })
@@ -189,7 +174,6 @@ export default class About extends Vue {
 
     mounted() {
         this.initDoughnut()
-        this.listTunnelInfo()
         this.initMixedLineAndBar()
     }
 
@@ -266,30 +250,6 @@ export default class About extends Vue {
             title: '对象个数',
             series: _series
         }
-    }
-
-    listTunnelInfo() {
-        let params = {
-            tunnel: true
-        }
-        return new Promise((resolve, reject) => {
-            listTunnelInfo(params).then(res => {
-                let {
-                    code,
-                    data,
-                    msg
-                } = res.data
-                if (code === 200) {
-                    this.tunnels = data
-                    this.tunnelSelect.selectOption = this.tunnels
-                    resolve()
-                } else {
-                    this.$Message.error('查询管廊信息失败！')
-                }
-            }).catch(error => {
-                reject(error)
-            })
-        })
     }
 
     propMsg(choosedItem: any) {

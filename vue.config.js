@@ -25,23 +25,16 @@ module.exports = {
         config.resolve.alias
             .set('@', resolve('src'))
             .set('_c', resolve('src/components'))
+        const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
+        types.forEach(type =>
+            addStyleResource(config.module.rule('less').oneOf(type))
+        )
     },
     css: {
         modules: false, // 启用 CSS modules
         extract: true, // 是否使用css分离插件
         sourceMap: false, // 开启 CSS source maps?
         loaderOptions: {} // css预设器配置项
-    },
-    configureWebpack: {
-        plugins: [
-            new webpack.ProvidePlugin({
-                $: 'jquery'
-            })
-        ],
-        externals: {
-            Cesium: 'Cesium',
-            zlib: 'Zlib'
-        }
     },
     devServer: {
         port: port, // 端口
@@ -56,5 +49,24 @@ module.exports = {
             }
         },
         after: require('./mock/mock-server.js')
+    },
+    pluginOptions: {
+        'style-resources-loader': {
+            preProcessor: 'less',
+            patterns: []
+        }
     }
+}
+
+function addStyleResource(rule) {
+    rule
+        .use('style-resource')
+        .loader('style-resources-loader')
+        .options({
+            patterns: [
+                // 需要全局导入的less路径
+                path.resolve(__dirname, './src/assets/less/common.less'),
+                path.resolve(__dirname, './src/assets/less/variables.less')
+            ]
+        })
 }

@@ -3,7 +3,7 @@
     <div class="sys-logo">
       <img :src="logo" class="logo" />
     </div>
-    <div class="sys-title" @click="backToMain">综合管廊智慧管理平台</div>
+    <div class="sys-title" @click="backToMain">后台管理平台</div>
     <div class="navigation-wrap">
       <ul class="ul-wrap">
         <li class="select-li-wrap">
@@ -198,7 +198,6 @@
 
 
 <style lang="less">
-  @import '../../assets/less/variables';
   .UMTopPage-wrap {
     width: 100%;
     height: 57px;

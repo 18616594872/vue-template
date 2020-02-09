@@ -100,7 +100,7 @@
 </script>
 
 <style lang="less">
-    @import '../../assets/less/variables';
+    
     .UMLeftMenu-wrap {
         width: 100%;
         height: 100%;

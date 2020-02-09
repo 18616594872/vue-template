@@ -16,7 +16,6 @@
 <script lang="ts" src="./mainPage.ts"></script>
 
 <style lang="less">
-    @import '../../../assets/less/variables';
     @import './mainPage.less';
 </style>
 

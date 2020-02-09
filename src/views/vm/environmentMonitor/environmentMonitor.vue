@@ -65,6 +65,5 @@
 <script lang="ts" src="./environmentMonitor.ts"></script>
 
 <style lang="less">
-    @import '../../../assets/less/variables';
     @import "./environmentMonitor.less";
 </style>

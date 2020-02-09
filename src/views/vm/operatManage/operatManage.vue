@@ -42,6 +42,5 @@
 <script lang="ts" src="./operatManage.ts"></script>
 
 <style lang="less">
-    @import '../../../assets/less/variables';
     @import './operatManage.less';
 </style>

@@ -62,6 +62,5 @@
 <script lang="ts" src="./tunnelIntroduction.ts"></script>
 
 <style lang="less">
-    @import '../../../assets/less/variables';
     @import './tunnelIntroduction.less';
 </style>

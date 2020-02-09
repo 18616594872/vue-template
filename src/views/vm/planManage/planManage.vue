@@ -78,7 +78,6 @@
 <script lang="ts" src="./planManage.ts"></script>
 
 <style lang="less">
-    @import '../../../assets/less/variables';
     @import './planManage.less';
 </style>
 

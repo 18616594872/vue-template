@@ -1,10 +1,12 @@
 import Mock from 'mockjs'
 import user from './user'
 import visual from './visual'
-console.log(visual)
+import um from './um'
+
 const mocks = [
     ...user,
-    ...visual
+    ...visual,
+    ...um
 ]
 
 export function mockXHR() {

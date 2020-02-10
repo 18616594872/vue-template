@@ -1,6 +1,7 @@
 <template>
     <div class="mainPage-wrap layout-wrap">
-        <UMTopPage :data="navBar" :defaultPath="toPath" :refeshPath="refeshPath" @bingSend="propMsg" @bingIsShow="propIsShowLeftMenu"/>
+        <UMTopPage :data="navBar" :defaultPath="toPath" :refeshPath="refeshPath" @bingSend="propMsg"
+            @bingIsShow="propIsShowLeftMenu" />
         <div class="main-content-wrap">
             <UMLeftMenu class="left-menu" v-if="isShowLeftMenu" :data="leftMenu.children"/>
             <div class="content-wrap">

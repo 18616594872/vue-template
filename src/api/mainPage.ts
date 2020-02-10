@@ -1,10 +1,9 @@
 import request from '@/utils/request'
 
-export function test(data: any) {
+export function getNavBarNum() {
     return request({
-        url: '',
-        method: 'post',
-        data
+        url: '/um/mamPage/navBar',
+        method: 'get'
     })
 }
 

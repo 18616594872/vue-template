@@ -7,7 +7,9 @@ import UMLeftMenu from "@/components/um/umleftMenu.vue"
 import {
     Route
 } from 'vue-router'
-import { getNavBarNum } from '@/api/mainPage.ts'
+import {
+    getNavBarNum
+} from '@/api/mainPage'
 
 @Component({
     components: {
@@ -23,7 +25,7 @@ export default class About extends Vue {
     toPath: string = ''
     refeshPath: string = ''
 
-    mounted(){
+    mounted() {
         this.getNavBarList()
     }
 
@@ -35,13 +37,23 @@ export default class About extends Vue {
         this.isShowLeftMenu = isShowLeftMenu
     }
 
-    getNavBarList(){
-        return getNavBarNum().then((res: any)=>{
-            this.navBar = res
+    getNavBarList() {
+        return getNavBarNum().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.navBar = data
+            }
+        }).catch(error => {
+            (this as any).Log.warn(error)
         })
+
     }
 
-    beforeRouteEnter(to: Route, from: Route, next: any): void {
+    beforeRouteEnter(to: Route, from: Route, next: any) {
+        console.log(from, to, next)
         if (from.path === '/UMMain') {
             next((vm: any) => {
                 vm.toPath = to.path
@@ -55,7 +67,7 @@ export default class About extends Vue {
         }
     }
 
-    beforeRouteUpdate(to: Route, from: Route, next: () => void): void {
+    beforeRouteUpdate(to: Route, from: Route, next: () => void) {
         sessionStorage.setItem('fromPath', from.path)
         next()
     }

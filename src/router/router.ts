@@ -74,6 +74,11 @@ export const asyncRoutes: any[] = [
                 name: '综合监控',
                 component: (resolve: any) => require(["@/views/um/mam/integratedMonitoring/integratedMonitoring.vue"], resolve)
             },
+            {
+                path: '/UM/operationManagement',
+                name: '运营管理',
+                component: (resolve: any) => require(["@/views/um/oam/operationManagement/operationManagement.vue"], resolve)
+            }
         ]
     }
 ]

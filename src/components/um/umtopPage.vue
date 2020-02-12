@@ -44,19 +44,12 @@
         logo: string = require("@/assets/images/um/logo.png")
         tips: string = require("@/assets/images/um/tips.png")
         headSign: string = require("@/assets/images/um/my-info.png")
-
         defaultValue: string = "1"
-
         itemMenu: any[] = []
-
         itemNavigation: any[] = []
-
         leftMenu: any[] = []
-
         currentIndex: number = 0
-
         isShowLeftMenu: boolean = false
-
         isSessionStorage!: any
         secondMenu!: any
 

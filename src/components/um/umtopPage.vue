@@ -1,8 +1,5 @@
 <template>
     <div class="UMTopPage-wrap">
-        <div class="sys-logo">
-            <img :src="logo" class="logo" />
-        </div>
         <div class="sys-title" @click="backToMain">后台管理平台</div>
         <div class="navigation-wrap">
             <ul class="ul-wrap">
@@ -38,16 +35,18 @@
         Inject
     } from "vue-property-decorator"
     import Utils from "./utils"
+    import {
+        ModuleItem,
+        SubFunModuleItem,
+        DetailSubFunModuleItem
+    } from '@/types/components/umtopPage.interface.ts'
     @Component({})
     export default class About extends Vue {
 
-        logo: string = require("@/assets/images/um/logo.png")
         tips: string = require("@/assets/images/um/tips.png")
         headSign: string = require("@/assets/images/um/my-info.png")
         defaultValue: string = "1"
-        itemMenu: any[] = []
         itemNavigation: any[] = []
-        leftMenu: any[] = []
         currentIndex: number = 0
         isShowLeftMenu: boolean = false
         isSessionStorage!: any
@@ -57,7 +56,7 @@
         @Prop({
             required: false,
             default: ''
-        }) data!: any[]
+        }) itemMenu!: ModuleItem[]
 
         @Prop({
             required: false,
@@ -69,18 +68,20 @@
             default: ''
         }) refeshPath!: ''
 
-        @Watch('data', {
+        @Watch('itemMenu', {
             deep: true
         })
-        onDataChanged(newVal: any, oldVal: any) {
-            this.init()
+        onItemMenu() {
+            this.changeNavParent({
+                id: this.defaultValue
+            }) // 接收传入数据页面初始化调用首选项
         }
 
         @Watch('defaultPath', {
             deep: true
         })
         onWatchDefaultPath(newVal: any, oldVal: any) {
-            this.data.forEach(item => {
+            this.itemMenu.forEach(item => {
                 // ummain 点击跳转导致
                 if (item.children[0].url === newVal) {
                     this.changeNavParent(item.id)
@@ -95,8 +96,8 @@
         })
         onWatchRefreshPath(newVal: any, oldVal: any) {
             // f5 刷新
-            this.data.forEach((item: any, index: number) => {
-                item.children.forEach((ele: any, idx: number) => {
+            this.itemMenu.forEach((item: ModuleItem, index: number) => {
+                item.children.forEach((ele: SubFunModuleItem, idx: number) => {
                     // 无左侧菜单
                     if (ele.url) {
                         if (ele.url === newVal) {
@@ -106,15 +107,14 @@
                     }
                     // 有左侧菜单
                     else if (ele.children) {
-                        ele.children.forEach((tep: any, orderIndex: number) => {
-                            if (tep.url === newVal) {
-                                this.refreshNacParent(item.id)
+                        ele.children.forEach((tep: DetailSubFunModuleItem) => {
+                            if (tep.url === newVal || tep.url === sessionStorage.getItem(
+                                    'fromPath')) {
+                                this.changeNavParent({
+                                    id: item.id,
+                                    index: idx
+                                })
                                 this.defaultValue = item.id
-                                this.chooseNav(idx, ele)
-                            } else if (tep.url === sessionStorage.getItem('fromPath')) {
-                                this.refreshNacParent(item.id)
-                                this.defaultValue = item.id
-                                this.chooseNav(idx, ele)
                             }
                         })
                     }
@@ -123,65 +123,47 @@
         }
 
         @Emit('bingSend')
-        send(leftMenu: any[]) {}
+        send(leftMenu: DetailSubFunModuleItem[]) {}
 
         @Emit('bingIsShow')
         isShow(isShowLeftMenu: boolean) {}
 
-        mounted() {
-            this.init()
-        }
+        changeNavParent(param: any) {
+            let navParam = typeof param === 'string' ? {
+                id: param
+            } : param
+            let {
+                itemMenu
+            } = this
 
-        init() {
-            this.itemMenu = this.data
-        }
-
-        // 一级菜单、二级菜单
-        changeNavParent(id: string) {
-            this.itemMenu.forEach((item: any) => {
-                if (id === item.id) {
-                    this.currentIndex = 0
+            itemMenu.forEach((item: ModuleItem) => {
+                if (navParam.id === item.id) {
                     this.itemNavigation = item.children
-                    this.isShowLeftMenu = false
-                    this.isShow(this.isShowLeftMenu)
-                    this.chooseNav(0, this.itemNavigation[0])
+                    this.chooseNav(navParam.index || 0, this.itemNavigation[0])
                 }
             })
-        }
 
-        // 刷新一级菜单 二级菜单 不自动跳二级菜单第一个
-        refreshNacParent(id: string) {
-            this.itemMenu.forEach((item: any) => {
-                if (id === item.id) {
-                    this.currentIndex = 0
-                    this.itemNavigation = item.children
-                    this.isShowLeftMenu = false
-                    this.isShow(this.isShowLeftMenu)
-                }
-            })
         }
 
         // 三级菜单
-        chooseNav(index: number, item: any) {
+        chooseNav(index: number, leftMenu: SubFunModuleItem) {
             this.currentIndex = index
-            this.leftMenu = []
-            // 针对没有子菜单的二级菜单，直接跳
-            if (item.url) {
-                this.$router.push(item.url)
-                this.isShowLeftMenu = false
-                this.isShow(this.isShowLeftMenu)
+
+            if (leftMenu.url) {
+                this.$router.push(leftMenu.url)
+                this.isShow(false)
             }
-            if (item.children) {
-                this.leftMenu = item
-                this.send(this.leftMenu)
-                this.isShowLeftMenu = true
-                this.isShow(this.isShowLeftMenu)
-                let forLeft = {
+
+            if (leftMenu.children) {
+                this.send(leftMenu.children)
+                this.isShow(true)
+
+                Utils.$emit('callLeft', {
                     index: 0,
-                    item: (this.leftMenu as any).children[0]
-                }
-                Utils.$emit('callLeft', forLeft)
+                    item: (leftMenu as any).children[0]
+                })
             }
+
         }
 
         backToMain() {
@@ -197,33 +179,22 @@
         height: 57px;
         display: flex;
 
-        .sys-logo {
-            margin-left: 13px;
-            margin-top: 4px;
-
-            .logo {
-                width: 60px;
-                height: 48px;
-            }
-        }
-
         .sys-title {
             width: 370px;
-            height: 37px;
+            height: 57px;
             font-size: 36px;
             font-family: STXingkai;
             font-weight: bold;
-            color: rgba(224, 228, 231, 1);
-            margin-top: 11px;
+            color: #e0e4e7;
             margin-left: 16px;
             cursor: pointer;
+            padding-top: 10px;
         }
 
         .navigation-wrap {
-            margin-left: 30px;
-            margin-top: 19px;
             font-size: 16px;
             flex: 1;
+            margin: 19px 20rem 0 10rem;
 
             .select-wrap {
                 width: 120px;
@@ -241,8 +212,6 @@
                 }
 
                 .ivu-select-item {
-                    // color: @base-black-color5;
-                    // font-weight: 600;
                     font-weight: bold;
                     color: rgba(224, 228, 231, 1);
                     font-weight: 21px;
@@ -302,8 +271,6 @@
 
             .item-select {
                 color: @base-black-color5;
-                /*去掉默认的下拉三角*/
-                // -webkit-appearance: none;   
                 outline: none;
                 background: none;
                 border: none;
@@ -330,7 +297,6 @@
 
             .line {
                 height: 2px;
-                width: 44%;
                 background: radial-gradient(white 12%, #4c4545 80%);
                 margin-top: 10px;
             }

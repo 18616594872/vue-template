@@ -1,16 +1,16 @@
 <template>
     <div class="mainPage-wrap layout-wrap">
-        <UMTopPage :data="navBar" :defaultPath="toPath" :refeshPath="refeshPath" @bingSend="propMsg"
+        <UMTopPage :itemMenu="navBar" :defaultPath="toPath" :refeshPath="refeshPath" @bingSend="propMsg"
             @bingIsShow="propIsShowLeftMenu" />
-        <!-- <div class="main-content-wrap">
-            <UMLeftMenu class="left-menu" v-if="isShowLeftMenu" :data="leftMenu.children"/>
+        <div class="main-content-wrap">
+            <UMLeftMenu class="left-menu" v-if="isShowLeftMenu" :data="leftMenu"/>
             <div class="content-wrap">
                 <router-view></router-view>
             </div>
-        </div> -->
-        <!-- <div class="footer-wrap">
+        </div>
+        <div class="footer-wrap">
             2019-2020
-        </div> -->
+        </div>
     </div>
 </template>
 

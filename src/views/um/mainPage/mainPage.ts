@@ -34,6 +34,7 @@ export default class About extends Vue {
     }
 
     propIsShowLeftMenu(isShowLeftMenu: boolean) {
+        console.log(isShowLeftMenu)
         this.isShowLeftMenu = isShowLeftMenu
     }
 

@@ -48,20 +48,12 @@
         defaultValue: string = "1"
         itemNavigation: any[] = []
         currentIndex: number = 0
-        isShowLeftMenu: boolean = false
-        isSessionStorage!: any
-        secondMenu!: any
 
         // prop
         @Prop({
             required: false,
             default: ''
         }) itemMenu!: ModuleItem[]
-
-        @Prop({
-            required: false,
-            default: ''
-        }) defaultPath!: ''
 
         @Prop({
             required: false,
@@ -77,24 +69,10 @@
             }) // 接收传入数据页面初始化调用首选项
         }
 
-        @Watch('defaultPath', {
-            deep: true
-        })
-        onWatchDefaultPath(newVal: any, oldVal: any) {
-            this.itemMenu.forEach(item => {
-                // ummain 点击跳转导致
-                if (item.children[0].url === newVal) {
-                    this.changeNavParent(item.id)
-                    this.defaultValue = item.id
-                }
-
-            })
-        }
-
         @Watch('refeshPath', {
             deep: true
         })
-        onWatchRefreshPath(newVal: any, oldVal: any) {
+        onWatchRefreshPath(newVal: string) {
             // f5 刷新
             this.itemMenu.forEach((item: ModuleItem, index: number) => {
                 item.children.forEach((ele: SubFunModuleItem, idx: number) => {

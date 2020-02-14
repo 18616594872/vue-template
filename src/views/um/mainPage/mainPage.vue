@@ -1,6 +1,6 @@
 <template>
     <div class="mainPage-wrap layout-wrap">
-        <UMTopPage :itemMenu="navBar" :defaultPath="toPath" :refeshPath="refeshPath" @bingSend="propMsg"
+        <UMTopPage :itemMenu="navBar" :refeshPath="refeshPath" @bingSend="propMsg"
             @bingIsShow="propIsShowLeftMenu" />
         <div class="main-content-wrap">
             <UMLeftMenu class="left-menu" v-if="isShowLeftMenu" :data="leftMenu"/>

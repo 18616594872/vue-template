@@ -10,6 +10,9 @@ import {
 import {
     getNavBarNum
 } from '@/api/mainPage'
+import {
+    DetailSubFunModuleItem
+} from '@/types/components/umtopPage.interface.ts'
 
 @Component({
     components: {
@@ -22,19 +25,17 @@ export default class About extends Vue {
     navBar: object[] = []
     leftMenu: any[] = []
     isShowLeftMenu: boolean = false
-    toPath: string = ''
     refeshPath: string = ''
 
     mounted() {
         this.getNavBarList()
     }
 
-    propMsg(leftMenu: any[]) {
+    propMsg(leftMenu: DetailSubFunModuleItem[]) {
         this.leftMenu = leftMenu
     }
 
     propIsShowLeftMenu(isShowLeftMenu: boolean) {
-        console.log(isShowLeftMenu)
         this.isShowLeftMenu = isShowLeftMenu
     }
 
@@ -54,12 +55,7 @@ export default class About extends Vue {
     }
 
     beforeRouteEnter(to: Route, from: Route, next: any) {
-        console.log(from, to, next)
-        if (from.path === '/UMMain') {
-            next((vm: any) => {
-                vm.toPath = to.path
-            });
-        } else if (from.path === '/') {
+        if (from.path === '/') {
             next((vm: any) => {
                 vm.refeshPath = to.path
             })

@@ -3,7 +3,7 @@
         <UMTopPage :itemMenu="navBar" :refeshPath="refeshPath" @bingSend="propMsg"
             @bingIsShow="propIsShowLeftMenu" />
         <div class="main-content-wrap">
-            <UMLeftMenu class="left-menu" v-if="isShowLeftMenu" :data="leftMenu"/>
+            <UMLeftMenu class="left-menu" v-if="isShowLeftMenu" :menuData="leftMenu"/>
             <div class="content-wrap">
                 <router-view></router-view>
             </div>

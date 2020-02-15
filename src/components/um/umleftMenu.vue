@@ -9,9 +9,6 @@
             <ul class="menu-content-ul">
                 <li v-for="(item, index) in menuData" :key="index" @click="choosedMenu(index, item)"
                     :class="{ 'active-li': currentIndex === index }">
-                    <div>
-                        <img :src="item.picUrl" class="menu-item-icon" />
-                    </div>
                     <div v-show="isPickUp">
                         {{item.menuName}}
                     </div>
@@ -29,7 +26,16 @@
         Watch,
         Emit
     } from "vue-property-decorator"
-    import Utils from "./utils"
+    import {
+        DetailSubFunModuleItem
+    } from '@/types/components/umtopPage.interface.ts'
+    import {
+        SESSIONLTMENU,
+        setSession,
+        getSession
+    } from '@/utils/common.ts'
+
+
     @Component({})
     export default class About extends Vue {
 
@@ -37,42 +43,36 @@
         @Prop({
             required: false,
             default: ''
-        }) data!: any[]
+        }) menuData!: DetailSubFunModuleItem[]
 
-        currentIndex: number = 0
+        // watch
+        @Watch('menuData')
+        onMenuDataChange(newVal: DetailSubFunModuleItem[]) {
+            this.initMenulist(newVal)
+        }
 
+        // data
+        currentIndex: number | string = 0
         isOpen: boolean = false
         isPickUp: boolean = true
 
-        menuData: any[] = []
-
         mounted() {
             this.initRefresh()
-            // top页面二级菜单第一次被点击时，默认加载一个子节点
-            let that = this
-            Utils.$on('callLeft', function (forLeft: any) {
-                that.choosedMenu(forLeft.index, forLeft.item);
-            })
         }
 
         initRefresh() {
-            this.menuData = this.data
-            let index = Number(sessionStorage.getItem("lastIndex"))
-            if (sessionStorage.getItem('leftMenu') === null) {
-                this.choosedMenu(0, this.menuData[0])
+            let leftMenuId: string | false = getSession(SESSIONLTMENU)
+
+            if (!leftMenuId) {
+                this.initMenulist(this.menuData)
             } else {
-                this.menuData.forEach((ele: any) => {
-                    if (sessionStorage.getItem('leftMenu') === ele.id) {
-                        if (sessionStorage.getItem('fromPath') !== null) {
-                            this.refreshChoosedMenu(index)
-                        } else {
-                            this.choosedMenu(index, ele)
-                        }
+                this.menuData.forEach((ele: DetailSubFunModuleItem, index: number) => {
+                    if (ele.id === leftMenuId) {
+                        this.choosedMenu(index, ele)
                     }
                 })
             }
         }
-
         toggle() {
             this.isOpen = !this.isOpen
             this.isPickUp = !this.isPickUp
@@ -84,23 +84,23 @@
                 (this.$refs['UMLeftMenu-wrap'] as HTMLElement).style.transition = '.5s'
             }
         }
+        initMenulist(newVal: DetailSubFunModuleItem[]) {
+            let [firstMenu, ...otherMenus] = newVal // 监听详情列表改变，保存收个详情选项
 
-        choosedMenu(index: number, item: any) {
+            this.choosedMenu(0, firstMenu)
+        }
+        choosedMenu(index: string | number, item: DetailSubFunModuleItem) {
+
             this.currentIndex = index
             this.$router.push(item.url)
-            sessionStorage.setItem("lastIndex", index.toString())
-            sessionStorage.setItem("leftMenu", item.id)
+            setSession(SESSIONLTMENU, item.id) // 保存当前列对象id
         }
 
-        refreshChoosedMenu(index: number) {
-            this.currentIndex = index
-            sessionStorage.setItem("lastIndex", index.toString())
-        }
+
     }
 </script>
 
 <style lang="less">
-    
     .UMLeftMenu-wrap {
         width: 100%;
         height: 100%;
@@ -147,11 +147,6 @@
                         font-size: 18px;
                         font-weight: bold;
                         color: #75777A;
-                    }
-
-                    .menu-item-icon {
-                        width: 16px;
-                        vertical-align: middle;
                     }
                 }
 

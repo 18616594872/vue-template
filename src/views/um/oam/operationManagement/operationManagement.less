@@ -1,4 +1,84 @@
 
 .operationManagement-wrap {
     width: 100%;
+    height: 100%;
+    .top-wrap {
+        display: flex;
+        height: 64%;
+        padding-top: 18px;
+       
+        .left-wrap {
+            width: 540px;
+            margin-left: 20px;
+            
+            .tunnel-customer-wrap {
+                background: @box-background-color-theme;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                height: 420px;
+            }
+        }
+        .center-wrap {
+            width: 740px;
+            margin-left: 29px;
+
+            .ivu-row-flex-space-around {
+                padding-top: 20px;
+                padding-right: 20px;
+                background: @box-background-color-theme;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+
+                .monitor-data-wrap {
+                    padding-left: 0.10417rem;
+                    height: 137px;
+                }
+                .monitor-data-wrap.col-span-12 {
+                    width: 50%;
+                }
+            }
+
+            
+        }
+        .right-wrap {
+            width: 540px;
+            margin-left: 29px;
+            
+            .tunnel-space-wrap {
+                background: @box-background-color-theme;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                height: 420px;
+            }
+        }
+    }
+    .bottom-wrap {
+        display: flex;
+        height: 40%;
+       
+        .tunnel-contract-wrap, .energy-consumption-wrap {
+            flex: 1;
+            margin-left: 26px;
+        }
+        .tunnel-contract-wrap {
+            margin-left: 20px;
+
+            .contractChart{
+                background: @box-background-color-theme;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                height: 260px;
+            }
+        }
+        .energy-consumption-wrap {
+            margin-right: 20px;
+
+            .energyChart{
+                background: @box-background-color-theme;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                height: 260px;
+            }
+        }
+    }
 }

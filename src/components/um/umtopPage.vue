@@ -34,7 +34,6 @@
         Emit,
         Inject
     } from "vue-property-decorator"
-    import Utils from "./utils"
     import {
         ModuleItem,
         SubFunModuleItem,
@@ -122,7 +121,6 @@
             })
 
         }
-
         // 三级菜单
         chooseNav(index: number, leftMenu: SubFunModuleItem) {
             this.currentIndex = index
@@ -135,15 +133,9 @@
             if (leftMenu.children) {
                 this.send(leftMenu.children)
                 this.isShow(true)
-
-                Utils.$emit('callLeft', {
-                    index: 0,
-                    item: (leftMenu as any).children[0]
-                })
             }
 
         }
-
         backToMain() {
             this.$router.push('/UMMain')
         }

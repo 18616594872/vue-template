@@ -64,6 +64,21 @@ export const loadDefault = () => {
     }
 }
 
+export const SESSIONLTMENU: string = 'leftTreeMenu'
+
+export const setSession = (KEY: string, token: string) => {
+    sessionStorage.setItem(KEY, token)
+
+}
+export const getSession = (KEY: string) => {
+    const token = sessionStorage.getItem(KEY)
+    if (token) {
+        return token
+    } else {
+        return false
+    }
+}
+
 export class ExtendDate extends Date {
     private static dataInstance: ExtendDate = new ExtendDate()
 

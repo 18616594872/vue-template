@@ -1,10 +1,16 @@
 import request from '@/utils/request'
 
-export function test(data: any) {
+export function moniterDataList() {
     return request({
-        url: '',
-        method: 'post',
-        data
+        url: '/um/operation/moniter/data',
+        method: 'get'
+    })
+}
+
+export function customerDataList(){
+    return request({
+        url: '/um/operation/customer',
+        method: 'get'
     })
 }
 

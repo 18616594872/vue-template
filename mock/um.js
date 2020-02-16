@@ -5,12 +5,10 @@ export default [{
         return {
             code: 200,
             msg: "success",
-            data: [
-                { 
-                    id: '1', 
-                    navBarParentName: '综合监控', 
-                    children: [
-                        { 
+            data: [{
+                    id: '1',
+                    navBarParentName: '综合监控',
+                    children: [{
                             id: '1-1',
                             navBarName: '监控总览',
                             url: '/UM/IntegratedMonitoring'
@@ -18,8 +16,7 @@ export default [{
                         {
                             id: '1-2',
                             navBarName: '监控详情',
-                            children: [
-                                { 
+                            children: [{
                                     id: '1-2-1',
                                     menuName: '环境监测',
                                     url: ''
@@ -46,13 +43,12 @@ export default [{
                                 }
                             ]
                         }
-                    ] 
+                    ]
                 },
                 {
                     id: '2',
                     navBarParentName: '运营管理',
-                    children: [
-                        {
+                    children: [{
                             id: '2-1',
                             navBarName: '运营总览',
                             url: '/UM/operationManagement'
@@ -60,8 +56,7 @@ export default [{
                         {
                             id: '2-2',
                             navBarName: '运营详情',
-                            children: [
-                                {
+                            children: [{
                                     id: '2-2-1',
                                     menuName: '能耗管理',
                                     url: '/UM/energyConsumption'
@@ -83,8 +78,7 @@ export default [{
                 {
                     id: '3',
                     navBarParentName: '运维管理',
-                    children: [
-                        { 
+                    children: [{
                             id: '3-1',
                             navBarName: '运维总览',
                             url: '/UM/patrolScheme'
@@ -92,8 +86,7 @@ export default [{
                         {
                             id: '3-2',
                             navBarName: '巡检详情',
-                            children: [
-                                { 
+                            children: [{
                                     id: '3-2-1',
                                     menuName: '巡检管理',
                                     url: '/UM/patrolManage'
@@ -111,6 +104,86 @@ export default [{
                             ]
                         }
                     ]
+                }
+            ]
+        }
+    }
+}, {
+    url: '/um/operation/moniter/data',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                    data: [{
+                        value: '18',
+                        name: '可用管线数'
+                    }]
+                },
+                {
+                    data: [{
+                        value: '30',
+                        name: '设计管线数'
+                    }]
+                },
+                {
+                    data: [{
+                        value: '12',
+                        name: '已用管线数'
+                    }]
+                },
+                {
+                    data: [{
+                        value: '27',
+                        name: '企业客户'
+                    }]
+                },
+                {
+                    data: [{
+                        value: '6',
+                        name: '本月总能耗'
+                    }]
+                },
+                {
+                    data: [{
+                        value: '14',
+                        name: '合同'
+                    }]
+                },
+                {
+                    data: [{
+                        value: '22',
+                        name: '年度总能耗'
+                    }]
+                },
+                {
+                    data: [{
+                        value: '89',
+                        name: '历史总能耗'
+                    }]
+                }
+            ]
+        }
+    }
+}, {
+    url: '/um/operation/customer',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                    key: '北京',
+                    value: 3
+                },
+                {
+                    key: '太原',
+                    value: 2
+                },
+                {
+                    key: '上海',
+                    value: 1
                 }
             ]
         }

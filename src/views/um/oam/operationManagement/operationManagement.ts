@@ -3,82 +3,46 @@ import {
     Vue
 } from 'vue-property-decorator'
 import Chart from '@/components/common/chart/chartComponent.vue'
+import Title from '@/components/um/umtitle.vue'
+import DataBox from '@/components/um/dataBox.vue'
 import {
     ChartBindData,
     ChartType
 } from '@/types/chart.Interface'
+import {
+    MonitorData,
+    TitleInterface
+} from '@/types/views/operationManagement.interface'
+import {
+    moniterDataList,
+    customerDataList
+} from '@/api/operationManagement'
 
 @Component({
     components: {
-        Chart
+        Chart,
+        DataBox,
+        Title
     }
 })
 export default class OperationManagement extends Vue {
 
-    monitorData: any[] = [{
-            data: [{
-                value: '18',
-                name: '可用管线数'
-            }]
-        },
-        {
-            data: [{
-                value: '30',
-                name: '设计管线数'
-            }]
-        },
-        {
-            data: [{
-                value: '12',
-                name: '已用管线数'
-            }]
-        },
-        {
-            data: [{
-                value: '27',
-                name: '企业客户'
-            }]
-        },
-        {
-            data: [{
-                value: '6',
-                name: '本月总能耗'
-            }]
-        },
-        {
-            data: [{
-                value: '14',
-                name: '合同'
-            }]
-        },
-        {
-            data: [{
-                value: '22',
-                name: '年度总能耗'
-            }]
-        },
-        {
-            data: [{
-                value: '89',
-                name: '历史总能耗'
-            }]
-        }
-    ]
-    dataOverviewTitle: any = {
+    monitorDataList: MonitorData[] = []
+    dataOverviewTitle: TitleInterface = {
         titleIcon: require('@/assets/images/um/data-overview-icon.png'),
-        title: '数据总览'
+        text: '数据总览'
     }
-    contractTitle: any = {
-        title: '管廊合同统计'
+    contractTitle: TitleInterface = {
+        text: '管廊合同统计'
     }
-    energyTitle: any = {
-        title: '管廊能耗统计'
+    energyTitle: TitleInterface = {
+        text: '管廊能耗统计'
     }
-    spaceTitle: any = {
-        title: '管廊空间管理'
+    spaceTitle: TitleInterface = {
+        text: '管廊空间管理'
     }
-    customerTitle: any = {
-        title: '管廊客户管理'
+    customerTitle: TitleInterface = {
+        text: '管廊客户管理'
     }
     contractData: ChartBindData = {
         id: 'operationManageContract',
@@ -281,19 +245,7 @@ export default class OperationManagement extends Vue {
             series: {
                 name: '客户',
                 unit: '个',
-                data: [{
-                        key: '北京',
-                        value: 3
-                    },
-                    {
-                        key: '太原',
-                        value: 2
-                    },
-                    {
-                        key: '上海',
-                        value: 1
-                    }
-                ]
+                data: []
             }
         },
         option: {
@@ -315,5 +267,39 @@ export default class OperationManagement extends Vue {
         }
     }
 
+    mounted() {
+        this.getMonitorDataList()
+        this.getCustomerDataList()
+    }
+    getMonitorDataList() {
+        return moniterDataList().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.monitorDataList = data
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
+        })
+    }
+    getCustomerDataList() {
+        let {
+            data
+        } = this.customerData
+        return customerDataList().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                console.log(this.customerData.data.series)
+                // this.customerData.data.series.data = data
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
+        })
+    }
 
 }

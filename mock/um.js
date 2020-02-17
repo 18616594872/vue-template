@@ -188,4 +188,64 @@ export default [{
             ]
         }
     }
+}, {
+    url: '/um/operation/energy',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                    key: '1月',
+                    value: 20
+                },
+                {
+                    key: '2月',
+                    value: 8
+                },
+                {
+                    key: '3月',
+                    value: 10
+                },
+                {
+                    key: '4月',
+                    value: 5
+                },
+                {
+                    key: '5月',
+                    value: 5
+                }
+            ]
+        }
+    }
+}, {
+    url: '/um/operation/space',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                    key: '古城大街',
+                    value: 8
+                },
+                {
+                    key: '实验路',
+                    value: 5
+                },
+                {
+                    key: '经二路',
+                    value: 3
+                },
+                {
+                    key: '经三路',
+                    value: 5
+                },
+                {
+                    key: '纬三路',
+                    value: 5
+                }
+            ]
+        }
+    }
 }]

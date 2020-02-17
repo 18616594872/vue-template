@@ -9,7 +9,7 @@
         Component,
         Vue,
         Prop
-    } from "vue-property-decorator" 
+    } from "vue-property-decorator"
 
     @Component({})
     export default class About extends Vue {
@@ -19,8 +19,7 @@
             default: ''
         }) name!: string
 
-        mounted() {
-        }
+        mounted() {}
 
     }
 </script>

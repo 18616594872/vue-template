@@ -198,7 +198,7 @@ export default class About extends Vue {
             series: [{
                 type: 'pie',
                 itemStyle: {
-                    color: function (item: any) {
+                    color: (item: any) => {
                         let dataColor = [{
                                 leftColor: '#f0b975',
                                 rightColor: '#fe5c54',
@@ -270,13 +270,13 @@ export default class About extends Vue {
             }
         ]
 
-        this.AnalogData2.forEach(element => {
+        this.AnalogData2.forEach((element: any) => {
             _series[0].data.push({
                 key: element.key,
                 value: element.val
             })
         })
-        this.AnalogData3.forEach(element => {
+        this.AnalogData3.forEach((element: any) => {
             _series[1].data.push({
                 key: element.key,
                 value: element.val

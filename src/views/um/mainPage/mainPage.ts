@@ -12,7 +12,7 @@ import {
 } from '@/api/mainPage'
 import {
     DetailSubFunModuleItem
-} from '@/types/components/umtopPage.interface.ts'
+} from '@/types/components/umtopPage.interface'
 
 @Component({
     components: {

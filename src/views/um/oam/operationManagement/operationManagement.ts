@@ -15,7 +15,9 @@ import {
 } from '@/types/views/operationManagement.interface'
 import {
     moniterDataList,
-    customerDataList
+    customerDataList,
+    energyDataList,
+    spaceDataList
 } from '@/api/operationManagement'
 
 @Component({
@@ -81,82 +83,7 @@ export default class OperationManagement extends Vue {
         type: ChartType.LINECHART_MULTIPLE,
         data: {
             title: '',
-            series: [{
-                    name: '古城大街',
-                    unit: '千瓦时',
-                    data: [{
-                            key: '1月',
-                            value: 20
-                        },
-                        {
-                            key: '2月',
-                            value: 8
-                        },
-                        {
-                            key: '3月',
-                            value: 10
-                        },
-                        {
-                            key: '4月',
-                            value: 5
-                        },
-                        {
-                            key: '5月',
-                            value: 5
-                        }
-                    ]
-                },
-                {
-                    name: '实验路',
-                    unit: '千瓦时',
-                    data: [{
-                            key: '1月',
-                            value: 10
-                        },
-                        {
-                            key: '2月',
-                            value: 14
-                        },
-                        {
-                            key: '3月',
-                            value: 10
-                        },
-                        {
-                            key: '4月',
-                            value: 5
-                        },
-                        {
-                            key: '5月',
-                            value: 9
-                        }
-                    ]
-                },
-                {
-                    name: '经二路',
-                    unit: '千瓦时',
-                    data: [{
-                            key: '1月',
-                            value: 12
-                        },
-                        {
-                            key: '2月',
-                            value: 19
-                        },
-                        {
-                            key: '3月',
-                            value: 7
-                        },
-                        {
-                            key: '4月',
-                            value: 9
-                        },
-                        {
-                            key: '5月',
-                            value: 5
-                        }
-                    ]
-                }
-            ]
+            series: []
         }
     }
     spaceData: ChartBindData = {
@@ -164,57 +91,7 @@ export default class OperationManagement extends Vue {
         type: ChartType.BARCHART_STACK,
         data: {
             title: '',
-            series: [{
-                    name: '已用管线',
-                    unit: '条',
-                    data: [{
-                            key: '古城大街',
-                            value: 8
-                        },
-                        {
-                            key: '实验路',
-                            value: 5
-                        },
-                        {
-                            key: '经二路',
-                            value: 3
-                        },
-                        {
-                            key: '经三路',
-                            value: 5
-                        },
-                        {
-                            key: '纬三路',
-                            value: 5
-                        }
-                    ]
-                },
-                {
-                    name: '可用管线',
-                    unit: '条',
-                    data: [{
-                            key: '古城大街',
-                            value: 2
-                        },
-                        {
-                            key: '实验路',
-                            value: 5
-                        },
-                        {
-                            key: '经二路',
-                            value: 6
-                        },
-                        {
-                            key: '经三路',
-                            value: 2
-                        },
-                        {
-                            key: '纬三路',
-                            value: 3
-                        }
-                    ]
-                }
-            ]
+            series: []
         },
         option: {
             legend: {
@@ -242,11 +119,7 @@ export default class OperationManagement extends Vue {
         type: ChartType.PIECHART_NORMAL,
         data: {
             title: '',
-            series: {
-                name: '客户',
-                unit: '个',
-                data: []
-            }
+            series: []
         },
         option: {
             legend: {
@@ -270,6 +143,8 @@ export default class OperationManagement extends Vue {
     mounted() {
         this.getMonitorDataList()
         this.getCustomerDataList()
+        this.getEnergyDataList()
+        this.getSpaceDataList()
     }
     getMonitorDataList() {
         return moniterDataList().then((res: any) => {
@@ -285,17 +160,51 @@ export default class OperationManagement extends Vue {
         })
     }
     getCustomerDataList() {
-        let {
-            data
-        } = this.customerData
         return customerDataList().then((res: any) => {
             let {
                 code,
                 data
             } = res.data
             if (code === 200) {
-                console.log(this.customerData.data.series)
-                // this.customerData.data.series.data = data
+                this.customerData.data.series = {
+                    name: '客户',
+                    unit: '个',
+                    data
+                }
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
+        })
+    }
+    getEnergyDataList() {
+        return energyDataList().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.energyData.data.series = [{
+                    name: '古城大街',
+                    unit: '千瓦时',
+                    data
+                }]
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
+        })
+    }
+    getSpaceDataList() {
+        return spaceDataList().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.spaceData.data.series = [{
+                    name: '已用管线',
+                    unit: '条',
+                    data
+                }]
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)

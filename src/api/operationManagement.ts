@@ -7,10 +7,23 @@ export function moniterDataList() {
     })
 }
 
-export function customerDataList(){
+export function customerDataList() {
     return request({
         url: '/um/operation/customer',
         method: 'get'
     })
 }
 
+export function energyDataList() {
+    return request({
+        url: '/um/operation/energy',
+        method: 'get'
+    })
+}
+
+export function spaceDataList() {
+    return request({
+        url: '/um/operation/space',
+        method: 'get'
+    })
+}

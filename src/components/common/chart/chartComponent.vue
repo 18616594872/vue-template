@@ -5,6 +5,7 @@
     <BarChartMultiple v-bind="bindData" v-else-if="bindData.type === 110"></BarChartMultiple>
     <LineChartMultiple v-bind="bindData" v-else-if="bindData.type === 210"></LineChartMultiple>
     <GaugeChartNormal v-bind="bindData" v-else-if="bindData.type === 500"></GaugeChartNormal>
+    <BarChartNormal v-bind="bindData" v-else-if="bindData.type === 100"></BarChartNormal>
 </template>
 
 <script lang="ts">
@@ -14,6 +15,7 @@
     import BarChartMultiple from '@/components/common/chart/barChart_multiple.vue'
     import LineChartMultiple from '@/components/common/chart/lineChart_multiple.vue'
     import GaugeChartNormal from '@/components/common/chart/pieChart_normal.vue'
+    import BarChartNormal from '@/components/common/chart/barChart_normal.vue'
     import {
         ChartBindData,
         ChartType
@@ -27,6 +29,7 @@
 
     @Component({
         components: {
+            BarChartNormal,
             PieChartNormal,
             PieChartHollow,
             BarChartStack,

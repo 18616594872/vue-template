@@ -5,8 +5,7 @@
  * @param {string} title 页面标题
  */
 
-export const constantRoutes: any[] = [
-    {
+export const constantRoutes: any[] = [{
         path: '/VMLogin',
         name: 'VMLogin',
         component: (resolve: any) =>
@@ -19,8 +18,7 @@ export const constantRoutes: any[] = [
 
 ]
 
-export const asyncRoutes: any[] = [
-    {
+export const asyncRoutes: any[] = [{
         path: '/VMMain',
         name: 'VMMain',
         component: (resolve: any) =>
@@ -36,8 +34,7 @@ export const asyncRoutes: any[] = [
         name: '可视化主页',
         component: (resolve: any) =>
             require(["@/views/vm/overviewMain/overviewMain.vue"], resolve),
-        children: [
-            {
+        children: [{
                 path: '/VM/environment',
                 name: '综合监控',
                 component: (resolve: any) =>
@@ -62,14 +59,12 @@ export const asyncRoutes: any[] = [
                     require(["@/views/vm/operatManage/operatManage.vue"], resolve)
             },
         ]
-    },
-    ,
+    }, ,
     {
         path: '/UM',
         name: 'um',
         component: (resolve: any) => require(["@/views/um/mainPage/mainPage.vue"], resolve),
-        children:[
-            {
+        children: [{
                 path: '/UM/IntegratedMonitoring',
                 name: '综合监控',
                 component: (resolve: any) => require(["@/views/um/mam/integratedMonitoring/integratedMonitoring.vue"], resolve)
@@ -78,6 +73,11 @@ export const asyncRoutes: any[] = [
                 path: '/UM/operationManagement',
                 name: '运营管理',
                 component: (resolve: any) => require(["@/views/um/oam/operationManagement/operationManagement.vue"], resolve)
+            },
+            {
+                path: '/UM/energyConsumption',
+                name: '能耗管理',
+                component: (resolve: any) => require(["@/views/um/oam/energyConsumption/energyConsumption.vue"], resolve)
             }
         ]
     }

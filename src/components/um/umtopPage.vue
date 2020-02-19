@@ -162,7 +162,7 @@
         }
 
         .navigation-wrap {
-            font-size: 16px;
+            font-size: 0.9rem;
             flex: 1;
             margin: 19px 20rem 0 10rem;
 

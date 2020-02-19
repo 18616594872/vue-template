@@ -28,6 +28,12 @@ export enum ChartType {
     PIECHART_3D = 420,
     /** 仪表盘 */
     GAUGECHART_NORMAL = 500,
+     /** 雷达图 */
+    RADARCHART_NORMAL = 600,
+     /** 半圆环进度条 */
+    SEMICIRCLE_NORMAL = 700,
+    /** 2.5D饼图 */
+    PIRCHART_CUSTOMIZED = 430,
 }
 
 

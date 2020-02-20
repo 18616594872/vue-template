@@ -49,13 +49,6 @@
                                         @click="queryEnergies"
                                         size="small"
                                     >查询</Button>
-                                    <Button
-                                        type="primary"
-                                        icon="ios-download-outline"
-                                        class="export"
-                                        @click="exportData"
-                                        size="small"
-                                    >导出</Button>
                                 </div>
                             </Col>
                         </Row>
@@ -81,20 +74,6 @@
             </Col>
             <Col span="14">
                 <div class="lineChartWrapper">
-                    <div style="position: absolute;top: 1vmin;right: 2vmin;">
-                        <span style="font-size: 1.22vmin;">周期：</span>
-                        <Select
-                            v-model="period"
-                            @on-change="changePeriod(period)"
-                            style=" width:4vw"
-                        >
-                            <Option
-                                v-for="item in periodList"
-                                :value="item.val"
-                                :key="item.val"
-                            >{{ item.key }}</Option>
-                        </Select>
-                    </div>
                     <Chart
                         style="width:90vmin;height:100%"
                         :bindData="lineChart"

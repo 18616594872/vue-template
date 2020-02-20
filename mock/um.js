@@ -248,4 +248,34 @@ export default [{
             ]
         }
     }
+}, {
+    url: '/oam/enery/table',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                    tunnelName: '古城大街',
+                    powerConsumption: '33'
+                },
+                {
+                    tunnelName: '实验路',
+                    powerConsumption: '14'
+                },
+                {
+                    tunnelName: '经二路',
+                    powerConsumption: '04'
+                },
+                {
+                    tunnelName: '经三路',
+                    powerConsumption: '11'
+                },
+                {
+                    tunnelName: '纬三路',
+                    powerConsumption: '89'
+                }
+            ]
+        }
+    }
 }]

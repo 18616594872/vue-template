@@ -2,7 +2,8 @@ import { Component, Vue } from 'vue-property-decorator'
 import Chart from "@/components/common/chart/chartComponent.vue" 
 import { ChartBindData, ChartType } from '@/types/chart.Interface.ts'
 import { ExtendDate } from '@/utils/common'
-
+import { TableInterface } from '@/types/views/energyConsumption.interface.ts'
+import { tableList } from '@/api/energyConsumption.ts'
 @Component({
     components: {
         Chart
@@ -13,24 +14,6 @@ export default class EnergyConsumption extends Vue {
     startTime: any 
     endTime: any
     period: number = 3
-    periodList: any[] = [
-        {
-            key: '日',
-            val: 1
-        },
-        {
-            key: '周',
-            val: 2
-        },
-        {
-            key: '月',
-            val: 3
-        },
-        {
-            key: '年',
-            val: 4
-        }
-    ]
     tableColumn: any[] = [
         {
             title: "管廊名称",
@@ -43,8 +26,7 @@ export default class EnergyConsumption extends Vue {
             align: "center"
         }
     ]
-    tableData: any[] = []
-    isCollapsed: boolean = false
+    tableData: TableInterface[] = []
     pieChart: ChartBindData = {
         id: 'tunnelenergyConsumption',
         type: ChartType.PIECHART_NORMAL,
@@ -219,46 +201,18 @@ export default class EnergyConsumption extends Vue {
     }
 
     mounted() {
-        this.queryEnergies();
-        this.changePeriod();
     }
 
     queryEnergies() {
-        this.tableData = [
-            {
-                tunnelName: '古城大街',
-                powerConsumption: 551816.33
-            },
-            {
-                tunnelName: '实验路',
-                powerConsumption: 110563.14
-            },
-            {
-                tunnelName: '经二路',
-                powerConsumption: 109538.04
-            },
-            {
-                tunnelName: '经三路',
-                powerConsumption: 111102.11
-            },
-            {
-                tunnelName: '纬三路',
-                powerConsumption: 554971.89
+        return tableList().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.tableData = data
             }
-        ]
-    }
-   
-    changePeriod() {
-        console.log('changed')
-    }
-
-    exportData() {
-        (this.$refs.table as any).exportCsv({
-            filename:
-                "各管廊能耗统计" +
-                new ExtendDate().format("yyyy-MM-dd"),
-            original: false
-        });
+        })
     }
     
 }

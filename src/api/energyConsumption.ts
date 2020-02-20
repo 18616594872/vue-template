@@ -1,10 +1,9 @@
 import request from '@/utils/request'
 
-export function test(data: any) {
+export function tableList() {
     return request({
-        url: '',
-        method: 'post',
-        data
+        url: '/oam/enery/table',
+        method: 'get'
     })
 }
 

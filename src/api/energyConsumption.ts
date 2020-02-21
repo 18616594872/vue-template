@@ -7,3 +7,24 @@ export function tableList() {
     })
 }
 
+export function energyConsumptionDataList() {
+    return request({
+        url: '/oam/enery/tunnelEnergyConsumptionData',
+        method: 'get'
+    })
+}
+
+export function energyAverageECDataList() {
+    return request({
+        url: '/oam/enery/averageEC',
+        method: 'get'
+    })
+}
+
+export function energyPeriodECDataList() {
+    return request({
+        url: '/oam/enery/periodEC',
+        method: 'get'
+    })
+}
+

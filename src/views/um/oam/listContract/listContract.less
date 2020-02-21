@@ -1,0 +1,146 @@
+.fontColor() {
+    color: rgb(224, 228, 231);
+}
+.btnBGColor(@startColor: #7c83f2,@endColor: #2734e1) {
+    background-color: -webkit-linear-gradient(left, @startColor, @endColor);
+    background: -o-linear-gradient(right, @startColor, @endColor);
+    background: -moz-linear-gradient(right, @startColor, @endColor);
+    background: linear-gradient(to right, @startColor, @endColor);
+}
+
+.listContract-wrap {
+    width: 100%;
+
+    .queryCondition {
+        height: 100px;
+        line-height: 45px;
+        padding: 0 20px;
+        margin-top: 30px;
+
+        .conditionTitle {
+            font-size: @font-medium-s;
+        }
+        .ivu-input, .ivu-select-selection {
+           background: transparent;
+           .fontColor();
+        }
+
+        .ivu-input-suffix i {
+            .fontColor();
+        }
+    }
+
+    .list {
+        margin-top: 10px;
+        padding: 10px;
+        position: relative;
+        height: 700px;
+        width: 93.2vw;
+
+        .nullData {
+            font-size: 26px;
+            text-align: center;
+            color: #fff;
+        }
+        .ivu-tabs-tab {
+            .fontColor();
+            font-size: @font-large-s;
+        }
+        .cardWrap {
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 60vh;
+
+            .contracts {
+                background: @box-background-color-theme;
+                width: 90%;
+                height: 30vh;
+                margin: 10px auto;
+                border-radius: 8px;
+                position: relative;
+                display: table;
+
+                .contractName {
+                    text-align: center;
+                    padding: 20px 0 10px 0;
+                    font-size: @font-large;
+                    font-weight: bold;
+                    .fontColor();
+                    cursor: pointer;
+                }
+
+                .item {
+                    margin: 10px;
+                    .fontColor();
+
+                    .title {
+                        display: inline-block;
+                        font-size: @font-medium;
+                        width: 38%;
+                        text-align: right;
+                    }
+                    .info {
+                        display: inline-block;
+                        font-size: @font-medium;
+                        width: 60%;
+                    }
+                    .red {
+                        color: rgb(255, 102, 0);
+                    }
+                }
+                .edit {
+                    .btnBGColor();
+                }
+                .read {
+                    .btnBGColor(#dcd77c, #cabf11);
+                }
+                .del {
+                    .btnBGColor(#e49b9b, #f61a1a);
+                }
+                .read, .edit, .del {
+                    border-color: #3e4f61;
+                    border-radius: 8px;
+                    font-size: @font-medium-s;
+                    .fontColor();
+                    margin: 0.6vmin 1vmin;
+                }
+            }
+
+            &::-webkit-scrollbar {
+                width: 0.4vmin;
+                height: 0.4vmin;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 1vmin;
+                box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+                background: #83a6ed;
+            }
+            &::-webkit-scrollbar-track {
+                box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+                border-radius: 1vmin;
+                background: #ededed;
+            }
+        }
+
+        .table {
+            .ivu-btn:last-child {
+                .btnBGColor(#e49b9b, #f61a1a);
+            }
+            .ivu-btn:first-child {
+                .btnBGColor();
+            }
+            .ivu-btn:nth-child(2) {
+                .btnBGColor(#dcd77c, #cabf11);
+            }
+            .ivu-btn:last-child, .ivu-btn:first-child, .ivu-btn:nth-child(2) {
+                border-color: #3e4f61;
+                border-radius: 8px;
+                font-size: @font-medium-s;
+                margin: 0.6vmin 1vmin;
+            }
+            .ivu-table-row:hover {
+                background: #31343670;
+            }
+        }
+    }
+}

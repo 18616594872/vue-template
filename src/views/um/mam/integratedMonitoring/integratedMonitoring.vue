@@ -20,15 +20,6 @@
         
             </div>
         </div>
-        <!-- <div class="bottom-wrap">
-            <div class="data-details-wrap">
-                
-            </div>
-            <div class="entrance-guard-wrap">
-               
-            </div>
-        </div> -->
-        integratedMonitoring-wrap
     </div>
 </template>
 

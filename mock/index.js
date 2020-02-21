@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 import user from './user'
 import visual from './visual'
-import um from './um'
+import um from './umMock'
 
 const mocks = [
     ...user,

@@ -99,3 +99,21 @@ export interface ChartData {
      */
     series?: Series | Series[]
 }
+
+/**
+ * 雷达图的data，value为number[], name为string
+ */
+
+export interface RadarData {
+    value: number[],
+    name: string
+}
+
+/**
+ * 雷达图的radar，text为string类型，max为number类型
+ */
+
+export interface RadarIndicator {
+    text: string,
+    max?: number
+}

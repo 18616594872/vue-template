@@ -25,7 +25,6 @@
                             <Col span="9" offset="1">
                                 <span class="table_time_span">起始时间：</span>
                                 <DatePicker
-                                    v-model="startTime"
                                     type="date"
                                     placeholder="选择时间"
                                     style="width:61%"
@@ -34,7 +33,6 @@
                             <Col span="9">
                                 <span class="table_time_span">结束时间：</span>
                                 <DatePicker
-                                    v-model="endTime"
                                     type="date"
                                     placeholder="选择时间"
                                     style="width: 61%"

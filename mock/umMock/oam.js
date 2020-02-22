@@ -299,7 +299,7 @@ export default [{
         }
     }
 }, {
-    url: '/oam/contract/contractTypeGrid',
+    url: '/oam/contract/grid/contractTypeGrid',
     type: 'get',
     response: () => {
         return {

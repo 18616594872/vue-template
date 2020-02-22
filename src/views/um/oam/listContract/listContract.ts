@@ -11,6 +11,7 @@ import {
     Page,
     keyVal
 } from '@/types/common.interface'
+import { contractDataList, contractDetail } from '@/types/views/listContract.interface'
 
 @Component({})
 export default class ListContract extends Vue {
@@ -27,7 +28,6 @@ export default class ListContract extends Vue {
         contractName: null,
         startTime: null,
         endTime: null,
-        companyId: null,
         contractStatus: null
     }
     selectList: any = {
@@ -83,7 +83,6 @@ export default class ListContract extends Vue {
             name: this.conditions.contractName,
             startTime: new Date(this.conditions.startTime).getTime(),
             endTime: new Date(this.conditions.endTime).getTime(),
-            companyId: this.conditions.companyId,
             payType: this.conditions.payment,
             contractStatus: this.conditions.contractStatus
         }
@@ -103,11 +102,16 @@ export default class ListContract extends Vue {
     }
 
     getSelectOptions() {
-        this.getPayTypeList().then((res: keyVal[]) => {
-            this.selectList.payTypes = res
+        let {
+            getPayTypeList,
+            getContractStatusList,
+            selectList
+        } = this
+        getPayTypeList().then((res: keyVal[]) => {
+            selectList.payTypes = res
         })
-        this.getContractStatusList().then((res: keyVal[]) => {
-            this.selectList.contractStatus = res
+        getContractStatusList().then((res: keyVal[]) => {
+            selectList.contractStatus = res
         })
     }
 
@@ -117,25 +121,25 @@ export default class ListContract extends Vue {
     }
 
     search() {
-        if (!this.customerName && this.conditions.companyId) {
-            this.conditions.companyId = null;
-        }
         if (
             new Date(this.conditions.startTime) >
             new Date(this.conditions.endTime)
         ) {
-            this.$Message.error("开始时间必须小于结束时间！");
-            return;
+            this.$Message.error("开始时间必须小于结束时间！")
+            return
         }
-        this.getContractDatagrid().then((result: any) => {
+
+        this.getContractDatagrid().then((result: contractDataList) => {
+
             this.contractList = [];
             this.contractData = result.list;
             if (!result.list.length) {
-                this.isNullData = true;
+                this.isNullData = true
+                return
             } else {
-                this.isNullData = false;
+                this.isNullData = false
             }
-            result.list.forEach((contract: any) => {
+            result.list.forEach((contract: contractDetail) => {
                 this.contractList.push({
                     id: contract.id,
                     companyName: contract.company.name,
@@ -190,24 +194,6 @@ export default class ListContract extends Vue {
         }
     }
 
-    del(id: string) {
-        this.$Modal.confirm({
-            title: "合同信息",
-            content: "<p>确定删除吗？</p>",
-            onOk: () => {
-                let _this = this;
-                this.delelteContract(id).then(
-                    result => {
-                        _this.resetPageAndSearch();
-                    },
-                    error => {
-                        _this.Log.info(error);
-                    }
-                );
-            }
-        });
-    }
-
     handlePage(value: number) {
         this.page.current = value;
         this.search();
@@ -218,11 +204,6 @@ export default class ListContract extends Vue {
         this.resetPageAndSearch();
     }
 
-    getcompanyId(data: any) {
-        this.conditions.companyId = data.id;
-        this.customerName = data.name.toString();
-    }
-
     getPayTypeList() {
         return getPayType()
             .then((res: any) => {
@@ -231,7 +212,8 @@ export default class ListContract extends Vue {
                     data
                 } = res.data
                 if (code === 200) {
-                    return data
+                    let [ gridData ] = data
+                    return gridData
                 }
             })
             .catch((error: any) => {
@@ -269,23 +251,5 @@ export default class ListContract extends Vue {
             .catch((error: any) => {
                 (this as any).Log.warn(error)
             })
-    }
-
-    delelteContract(id: string) {
-        return new Promise((resolve: any, reject: any) => {
-            delelteContract(id)
-                .then((res: any) => {
-                    let {
-                        code,
-                        data
-                    } = res.data
-                    if (code === 200) {
-                        this.$Message.success('删除成功')
-                    }
-                })
-                .catch((err) => {
-                    this.Log.info(err)
-                })
-        })
     }
 }

@@ -16,7 +16,7 @@ export function getContractStatus() {
 
 export function contractDatagrid() {
     return request({
-        url: '/oam/contract/contractTypeGrid',
+        url: '/oam/contract/grid/contractTypeGrid',
         method: 'get'
     })
 }

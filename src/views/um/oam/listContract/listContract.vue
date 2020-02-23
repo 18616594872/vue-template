@@ -64,7 +64,6 @@
                 </Col>
                 <Col span="6">
                     <Button type="primary" @click="resetPageAndSearch" icon="ios-search">查询</Button>
-                    <Button type="primary" @click="turnPage('', 'add')" style="margin-left: 6px;">添加</Button>
                 </Col>
             </Row>
         </div>
@@ -104,11 +103,6 @@
                                             <div class="title">付款方式：</div>
                                             <div class="info">{{ item.payType }}</div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <Button size="small" @click="turnPage(item.id, 'edit')" class="edit">编辑</Button>
-                                        <Button size="small" @click="turnPage(item.id, 'read')" class="read">详情</Button>
-                                        <Button size="small" @click="del(item.id)" class="del">删除</Button>
                                     </div>
                                 </div>
                             </div>

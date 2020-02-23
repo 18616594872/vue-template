@@ -1,0 +1,109 @@
+.fontColor() {
+    color: rgb(224, 228, 231);
+}
+.btn() {
+    border-color: #3e4f61;
+    border-radius: 8px;
+    font-size: @font-medium;
+}
+.btnBGColor(@startColor: #7c83f2,@endColor: #2734e1) {
+    background-color: -webkit-linear-gradient(left, @startColor, @endColor);
+    background: -o-linear-gradient(right, @startColor, @endColor);
+    background: -moz-linear-gradient(right, @startColor, @endColor);
+    background: linear-gradient(to right, @startColor, @endColor);
+}
+
+.listCustomer-wrap {
+    width: 100%;
+
+    .conditions {
+        height: 6vh;
+        line-height: 6vh;
+        padding-left: 10px;
+        margin-top: 30px;
+
+        .conditionTitle {
+            font-size: @font-medium-s;
+        }
+        .ivu-input, .ivu-select-selection {
+            background: transparent;
+            .fontColor();
+         }
+    }
+
+    .list {
+        margin-top: 10px;
+        padding: 10px;
+        position: relative;
+        height: 700px;
+        width: 93.2vw;
+
+        .ivu-tabs-tab {
+            .fontColor();
+            font-size: @font-large-s;
+        }
+
+        .cardWrap {
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 60vh;
+
+            .infoList {
+                width: 80%;
+                margin: 10px auto;
+                padding: 5px 0px;
+                .fontColor();
+                background: @box-background-color-theme;
+                border-radius: 8px;
+
+                .company {
+                    text-align: center;
+                    font-size: @font-large;
+                    line-height: 40px;
+                }
+                .columns {
+                    line-height: 32px;
+                    font-size: @font-medium-s;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                .option {
+                    line-height: 40px;
+
+                    .edit {
+                        .btnBGColor();
+                        .btn();
+                    }
+                    .read {
+                        .btnBGColor(#dcd77c, #cabf11);
+                        .btn();
+                    }
+                    .del {
+                        .btnBGColor(#e49b9b, #f61a1a);
+                        .btn();
+                    }
+                }
+
+                .crtTime {
+                    font-size: @font-medium-s;
+                    line-height: 40px;
+                }
+            }
+        }
+    }
+    .table {
+        .ivu-btn:first-child {
+            .btnBGColor();
+            .btn();
+        }
+        .ivu-btn:last-child {
+            .btnBGColor(#e49b9b, #f61a1a);
+            .btn();
+        }
+        .ivu-btn:nth-child(2) {
+            .btnBGColor(#dcd77c, #cabf11);
+            .btn();
+        }
+    }
+}

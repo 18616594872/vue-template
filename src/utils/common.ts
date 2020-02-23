@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie'
-import Vue from 'vue'
 
 export const TOKEN_KEY: string = 'token'
 export const USERNAME_KEY: string = 'userName'

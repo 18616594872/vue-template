@@ -11,7 +11,13 @@ import {
     Page,
     keyVal
 } from '@/types/common.interface'
-import { contractDataList, contractDetail } from '@/types/views/listContract.interface'
+import {
+    ExtendDate
+} from '@/utils/common'
+import {
+    contractDataList,
+    contractDetail
+} from '@/types/views/listContract.interface'
 
 @Component({})
 export default class ListContract extends Vue {
@@ -72,21 +78,7 @@ export default class ListContract extends Vue {
             align: "center"
         }
     ]
-    contractData: any[] = []
-
-    get param() {
-        return {
-            pageNum: this.page.current,
-            pageSize: this.page.pageSize,
-            id: this.conditions.contractId ?
-                this.conditions.contractId : null,
-            name: this.conditions.contractName,
-            startTime: new Date(this.conditions.startTime).getTime(),
-            endTime: new Date(this.conditions.endTime).getTime(),
-            payType: this.conditions.payment,
-            contractStatus: this.conditions.contractStatus
-        }
-    }
+    contractData: contractDetail[] = []
 
     mounted() {
         this.getSelectOptions()
@@ -129,69 +121,32 @@ export default class ListContract extends Vue {
             return
         }
 
-        this.getContractDatagrid().then((result: contractDataList) => {
+        this.getContractDatagrid().then(([result]: contractDataList[]) => {
 
-            this.contractList = [];
-            this.contractData = result.list;
             if (!result.list.length) {
                 this.isNullData = true
                 return
-            } else {
-                this.isNullData = false
             }
+
+            this.isNullData = false
+            this.contractList = []
+            this.contractData = result.list
+
             result.list.forEach((contract: contractDetail) => {
                 this.contractList.push({
                     id: contract.id,
                     companyName: contract.company.name,
                     name: contract.name,
-                    contact: contract.company.mail,
                     tel: contract.company.phone,
                     payType: contract.payTypeName,
                     contractStatus: contract.contractStatusName,
-                    contractStartTime: new Date(contract.contractStartTime).format(
-                        "yyyy-MM-dd"
-                    ),
-                    contractEndTime: new Date(contract.contractEndTime).format(
-                        "yyyy-MM-dd"
-                    ),
-                    crtTime: new Date(contract.crtTime).format(
+                    crtTime: new ExtendDate(contract.crtTime).format(
                         "yyyy-MM-dd hh:mm:ss"
                     )
-                });
-                this.page.total = result.total;
-            });
-        });
-    }
-
-    turnPage(id: string, type: string) {
-        switch (type) {
-            case 'add':
-                this.$router.push({
-                    name: '添加合同',
-                    params: {
-                        pageType: type
-                    }
                 })
-                break;
-            case 'read':
-                this.$router.push({
-                    name: '查看合同',
-                    params: {
-                        pageType: type,
-                        id
-                    }
-                })
-                break;
-            case 'edit':
-                this.$router.push({
-                    name: '编辑合同',
-                    params: {
-                        pageType: type,
-                        id
-                    }
-                })
-                break;
-        }
+            })
+            this.page.total = result.total
+        })
     }
 
     handlePage(value: number) {
@@ -212,8 +167,7 @@ export default class ListContract extends Vue {
                     data
                 } = res.data
                 if (code === 200) {
-                    let [ gridData ] = data
-                    return gridData
+                    return data
                 }
             })
             .catch((error: any) => {

@@ -321,4 +321,27 @@ export default [{
             }]
         }
     }
+}, {
+    url: '/oam/customer',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                list: [{
+                    id: 1,
+                    name: 'xxx公司',
+                    crtTime: '2020-01-15 13:03:23',
+                    address:"浦东新区",
+                    phone: '0231-6352923',
+                    account: 1,
+                    mail:'xxxx@163.com',
+                    creditNo: '优良',
+                    bank: '上海银行'
+                }],
+                total: 1
+            }]
+        }
+    }
 }]

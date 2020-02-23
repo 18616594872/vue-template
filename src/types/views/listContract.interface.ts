@@ -1,6 +1,6 @@
 export interface contractDataList{
     list: contractDetail[],
-    totle: number
+    total: number
 }
 
 export interface contractDetail {

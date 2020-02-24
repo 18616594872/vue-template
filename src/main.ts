@@ -11,6 +11,7 @@ import {
     Modal
 } from 'view-design';
 import '@/utils/log';
+import '@/assets/less/custom.less'
 
 Vue.use(iview)
 

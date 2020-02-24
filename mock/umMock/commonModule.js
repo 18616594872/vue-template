@@ -19,7 +19,7 @@ export default [{
                             children: [{
                                     id: '1-2-1',
                                     menuName: '环境监测',
-                                    url: ''
+                                    url: '/UM/environmentalMonitor'
                                 },
                                 {
                                     id: '1-2-2',
@@ -59,7 +59,7 @@ export default [{
                             children: [{
                                     id: '2-2-1',
                                     menuName: '能耗管理',
-                                    url: '/UM/energyConsumption'
+                                    url: '/UM/environmentalMonitor'
                                 },
                                 {
                                     id: '2-2-2',
@@ -106,6 +106,105 @@ export default [{
                     ]
                 }
             ]
+        }
+    }
+},{
+    url: '/mam/environment/equipmentType',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                id: 1,
+                title: '湿度'
+            },
+            {
+                id: 2,
+                title: '湿度'
+            },
+            {
+                id: 3,
+                title: '硫化氢'
+            },
+            {
+                id: 4,
+                title: '一氧化碳'
+            },
+            {
+                id: 5,
+                title: '氧气'
+            },
+            {
+                id: 6,
+                title: '甲烷'
+            }]
+        }
+    }
+},{
+    url: '/mam/environment/equipmentType',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                id: 1,
+                title: '湿度'
+            },
+            {
+                id: 2,
+                title: '湿度'
+            },
+            {
+                id: 3,
+                title: '硫化氢'
+            },
+            {
+                id: 4,
+                title: '一氧化碳'
+            },
+            {
+                id: 5,
+                title: '氧气'
+            },
+            {
+                id: 6,
+                title: '甲烷'
+            }]
+        }
+    }
+},{
+    url: '/mam/environment/equipmentType',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                id: 1,
+                title: '湿度'
+            },
+            {
+                id: 2,
+                title: '湿度'
+            },
+            {
+                id: 3,
+                title: '硫化氢'
+            },
+            {
+                id: 4,
+                title: '一氧化碳'
+            },
+            {
+                id: 5,
+                title: '氧气'
+            },
+            {
+                id: 6,
+                title: '甲烷'
+            }]
         }
     }
 }]

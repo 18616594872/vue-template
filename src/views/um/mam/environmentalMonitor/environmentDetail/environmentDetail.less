@@ -1,0 +1,46 @@
+.fontColor() {
+    color: rgb(224, 228, 231);
+}
+.btn() {
+    border-color: #3e4f61;
+    border-radius: 8px;
+    font-size: @font-medium;
+}
+.btnBGColor(@startColor: #7c83f2,@endColor: #2734e1) {
+    background-color: -webkit-linear-gradient(left, @startColor, @endColor);
+    background: -o-linear-gradient(right, @startColor, @endColor);
+    background: -moz-linear-gradient(right, @startColor, @endColor);
+    background: linear-gradient(to right, @startColor, @endColor);
+}
+
+.environmentDetail-wrap {
+    margin: 0 2rem;
+
+    .table {
+        height: 42rem;
+        border: 1px solid #000;
+        background: linear-gradient(to bottom right, rgb(41,48,54), rgb(120, 124, 127) rgb(41,48,54));
+
+        .ivu-btn:first-child {
+            .btnBGColor();
+            .btn();
+        }
+
+        .ivu-btn:last-child {
+            .btnBGColor(#e49b9b, #f61a1a);
+            .btn();
+        }
+
+        .ivu-btn:nth-child(2) {
+            .btnBGColor(#dcd77c, #cabf11);
+            .btn();
+        }
+        
+        .ivu-table-row:hover {
+            background: #31343670;
+        }
+    }
+    .page {
+        margin-top: 1rem;
+    }
+}

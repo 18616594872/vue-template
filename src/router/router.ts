@@ -88,6 +88,11 @@ export const asyncRoutes: any[] = [{
                 path: '/UM/listCustomer',
                 name: '客户管理',
                 component: (resolve: any) => require(["@/views/um/oam/listCustomer/listCustomer.vue"], resolve)
+            },
+            {
+                path: '/UM/environmentalMonitor',
+                name: '环境监测',
+                component: (resolve: any) => require(["@/views/um/mam/environmentalMonitor/environmentalMonitor.vue"], resolve)
             }
         ]
     }

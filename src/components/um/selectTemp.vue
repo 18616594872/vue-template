@@ -47,7 +47,7 @@
         watchData(newVal: any, oldVal: any) {
             if (newVal.length !== 0) {
                 if ((this.data as SelectData).defaultValue !== undefined) {
-                    this.choosedLi(newVal[(this.data as SelectData).defaultValue])
+                    this.choosedLi(newVal[(this.data as any).defaultValue])
                 }
             }
         }

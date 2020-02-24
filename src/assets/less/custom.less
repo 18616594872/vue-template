@@ -1,0 +1,117 @@
+@import './variables.less';
+
+.layout-wrap {
+    background: @background-color-theme;
+    height: 100vh;
+    width: 100vh;
+    overflow: hidden;
+    color: @font-color-theme;
+}
+
+.search-btn {
+    background: @base-black-color2;
+    padding: @padding-distance5;
+    color: @font-color-theme;
+    border-radius: @border-radius1;
+    border: none;
+}
+
+.search-btn:hover, .search-btn:active, .search-btn:focus {
+    outline: none;
+    background: @base-black-color3;
+}
+
+.search-wrap {
+    background: @base-black-color3;
+    padding: @padding-distance2;
+    width: 100%;
+}
+
+.content-wrap {
+    // background: @background-color-theme;
+    color: @font-color-theme;
+}
+
+.menu-wrap {
+    flex-direction: column;
+}
+
+.menu-bar {
+    height: @height1;
+    line-height: 1.5;
+    padding: @padding-distance3;
+    font-size: @font-medium-s;
+    font-weight: 400;
+}
+
+.choosed-menu-bar {
+    background: @base-blue-color3;
+}
+
+.left-menu-ul {
+    width: 100%;
+}
+
+.left-menu-li {
+    background: @base-black-color2;
+    padding: @padding-distance4;
+    color: @base-black-color4;
+    width: 100%;
+    margin: 2px 4px;
+    height: @height1;
+    line-height: 1.5;
+    vertical-align: top;
+    border-radius: 4px;
+    padding: 6px 12px;
+    width: 100px;
+}
+
+.choosed-left-menu-li {
+    color: @base-black-color6;
+    background: @base-blue-color2;
+    position: absolute;
+}
+.choosed-left-menu-li::after {
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    content: '';
+    border-width: 10px;
+    border-left-color: @base-blue-color2;
+    position: absolute;
+    right: -20px;
+}
+.label-wrap {
+    background: #3A434C;
+    padding: 7px 14px;
+    width: auto;
+    border-radius: 4px;
+    display: inline-block;
+}
+.btn {
+    padding: 7px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+}
+.btn.default-btn {
+    background-color: #3A434C;
+}
+.btn.primary-btn {
+    background-color: #697C98;
+}
+.btn.blue-btn {
+    background-color: #7F93FF;
+}
+.btn.btn-ghost-error {
+    background-color: #af4141;
+}
+.btn.btn-small {
+    font-size: 12px;
+    padding: 0px 7px;
+}
+.label-wrap.page-title {
+    font-size: @font-medium;
+    font-weight: bold;
+    margin-left: 10px;
+}

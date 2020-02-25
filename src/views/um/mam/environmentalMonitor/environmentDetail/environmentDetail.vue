@@ -1,6 +1,6 @@
 <template>
     <div class="environmentDetail-wrap">
-        <Table :columns="equipTypeDataTitle" :data="equipTypeDataList" class="table"></Table>
+        <Table :columns="equipTypeDataTitle" :data="equipTypeDataList" class="environTable"></Table>
         <Page
             class="page"
             :total="page.total"

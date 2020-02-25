@@ -4,6 +4,7 @@ import {
 } from 'vue-property-decorator'
 import publicMonitorDetails from '@/components/um/publicMonitorDetails.vue'
 import environmentDetail from './environmentDetail/environmentDetail.vue'
+import environmentList from './environmentList/environmentList.vue'
 import {
     MonitorType
 } from '@/types/views/environmentalMonitor.interface.ts'
@@ -14,7 +15,8 @@ import {
 @Component({
     components: {
         publicMonitorDetails,
-        environmentDetail
+        environmentDetail,
+        environmentList
     }
 })
 export default class About extends Vue {

@@ -8,6 +8,10 @@ import {
 import {
     Page
 } from '@/types/common.interface'
+import {
+    ExtendDate
+} from '@/utils/common'
+import { equipmentTypeDataList } from '@/api/environmentDetail'
 
 @Component({})
 export default class About extends Vue {
@@ -20,44 +24,56 @@ export default class About extends Vue {
     }
     equipTypeDataTitle: any[] = [
         {
-            title: "企业名称",
+            title: "对象名",
             key: "name",
             align: "center"
         },
         {
-            title: "信用代码",
-            key: "creditNo",
+            title: "所属管廊",
+            key: "tunnel",
             align: "center"
         },
         {
-            title: "开户行",
-            key: "bank",
+            title: "所属区域",
+            key: "area",
             align: "center"
         },
         {
-            title: "账号",
-            key: "account",
+            title: "舱室",
+            key: "store",
             align: "center"
         },
         {
-            title: "注册地址",
-            key: "address",
+            title: "具体位置",
+            key: "location",
             align: "center"
         },
         {
-            title: "注册电话",
-            key: "phone",
+            title: "创建时间",
+            align: "center",
+            render: (h: any, params: any) => {
+                return h(
+                    "div",
+                    new ExtendDate(params.row.crtTime).format(
+                        "yyyy-MM-dd hh:mm:ss"
+                    )
+                );
+            }
+        },
+        {
+            title: "数值",
+            key: "curValue",
             align: "center"
         },
         {
-            title: "邮箱",
-            key: "mail",
-            align: "center"
+            title: "是否正常",
+            align: "center",
+            key: "isNormal"
         },
         {
             title: "操作",
             align: "center",
-            render: (h: any) => {
+            render: (h: any, params: any) => {
                 return h("div", [
                     h(
                         "Button",
@@ -72,11 +88,11 @@ export default class About extends Vue {
                             },
                             on: {
                                 click: () => {
-                                    alert('')
+                                    console.log(params)
                                 }
                             }
                         },
-                        "编辑"
+                        "查看历史数据"
                     )
                 ]);
             }
@@ -89,7 +105,7 @@ export default class About extends Vue {
     }
 
     getEquipTypeDataList(){
-        customerDataList().then(
+        equipmentTypeDataList().then(
             (result: any) => {
                 let {
                     code,
@@ -99,6 +115,7 @@ export default class About extends Vue {
                     let [{list, total}] = data
 
                     this.equipTypeDataList = list
+                    console.log()
                     this.page.total = total
                 }
             },

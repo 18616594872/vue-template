@@ -37,7 +37,8 @@ const {
     Poptip,
     Tabs,
     TabPane,
-    InputNumber
+    InputNumber,
+    Card
 } = require('view-design')
 
 const iview = {
@@ -78,6 +79,7 @@ const iview = {
         Vue.component('Tabs', Tabs)
         Vue.component('TabPane', TabPane)
         Vue.component('InputNumber', InputNumber)
+        Vue.component('Card', Card)
     }
 }
 

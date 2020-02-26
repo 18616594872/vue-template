@@ -68,19 +68,14 @@ export default class About extends Vue {
                 } = res.data
                 if (code === 200) {
                     this.monitorTypeList = data
-                    // this.monitorTypeList = data.map((item: MonitorType, index: number) => {
-                    //     if(index === 0){
-                    //         return item.titleImg = this.monitorTypeImg[index].checkStatus
-                    //     }
-                    //     return item.titleImg = this.monitorTypeImg[index].defaultStatus
-
-                    // })
-                    // console.log(this.monitorTypeList)
                 }
             })
             .catch((error: any) => {
                 (this as any).Log.warn(error)
             })
+    }
+    getDetailList(condition: any){
+        console.log(condition)
     }
 
 }

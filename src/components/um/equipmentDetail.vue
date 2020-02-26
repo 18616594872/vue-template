@@ -1,32 +1,34 @@
 <template>
     <div class="equipDetail-wrap" @click="locationEquimpent">
-        <Card class="clickStatic" :style="{backgroundColor:click?'#a1cacb':'transparent'}">
-            <p slot="title" style="font-size: 1.66vmin;height: 1.7vmin;line-height: 1.66vmin">{{Obj.objtypeName}}</p>
-            <div class="monitorType">{{Obj.ObjName}}</div>
-            <!-- 数值正常时 -->
-
-            <img src="" class="img"> 
-            <img src="../../../../assets/UM/fault.png" class="img" v-if="!inRange">
-
-            <p class="value">
-                {{ inRange ? Obj.ObjVal : '故障' }}
-                <span style="font-size: 2vmin" v-if="inRange">{{ Obj.unit }}</span>
+            <ul class="quip-title-ul">
+                <li class="quip-title-li">
+                    <img :src="srcImg" class="img"> 
+                    <img src="../../assets/images/um/fault.png" class="img" v-if="!inRange">
+                </li>
+                <li class="quip-title-li"> 
+                    <h2 >{{equipDetailData.ObjName}}</h2>
+                    <p >{{equipDetailData.location}}</p>
+                </li>
+            </ul>
+            <p class="quip-center-span">
+                <span class="value">{{ inRange ? equipDetailData.ObjVal : '故障' }}</span>
+                <span style="font-size: 2vmin" v-if="inRange">{{ equipDetailData.unit }}</span>
             </p>
-            <p class="time" v-if="isTimeShow">采集时间：{{ Obj.time }}</p>
-            <div class="extre">
-                <div class="min" v-if="Obj.minNormal != null">
-                    <Icon type="arrow-up-c"></Icon>
-                    <span>{{Obj.minNormal}}</span>
-                </div>
-                <div class="max" v-if="Obj.maxNormal != null">
-                    <Icon type="arrow-down-c"></Icon>
-                    <span>{{Obj.maxNormal}}</span>
-                </div>
-                <div class="historyData">
-                    <button class="historyDataBtn" @click="queryHistoryData(Obj)">历史数据</button>
-                </div>
-            </div>
-        </Card>
+
+            <ul class="quip-bottom-ul">
+                <li class="quip-bottom-li">
+                    <p class="time" v-if="isTimeShow">{{ equipDetailData.time }}</p>
+                    <p class="time" >{{ equipDetailData.objtypeName }}</p>
+                </li>
+                <li class="quip-bottom-li"> 
+                    <div class="min" v-if="equipDetailData.minNormal != null">
+                        <img :src="srcImg" class="img"> 
+                    </div>
+                    <div class="max" v-if="equipDetailData.maxNormal != null">
+                    </div>
+                </li>
+            </ul>
+            
     </div>
 </template>
 
@@ -51,15 +53,18 @@
             default: () => {
                 let equipDetail: EquipDataInterface = {
                     id: "",
-                    objtypeName: "",
-                    ObjName: "",
-                    ObjVal: 0,
+                    objtypeName: "古城大街 21区 污水仓",
+                    ObjName: "温度检测仪",
+                    ObjVal: 30,
                     objtypeId: 6,
                     clickStatus: false,
                     datatypeId: "",
                     minValue: 0,
                     maxValue: 100,
-                    time: ""
+                    time: "2017-12-5 13:41:00",
+                    location: "K0+245",
+                    unit: "%Rh",
+                    minNormal: 10
                 }
                 return equipDetail
             }
@@ -161,7 +166,9 @@
         changeImg(Img: string){
             let _this = this
             return function(){
-                    _this.srcImg = _this.normal ? `${Img}-normal` : ( _this.inRange ? `${Img}-error` : '' )
+                    let img: string = _this.normal ? `${Img}-normal` : ( _this.inRange ? `${Img}-error` : '' )
+
+                    _this.srcImg = require(`@/assets/images/um/${img}.png`)
             }
         }
 
@@ -177,104 +184,61 @@
         height: 100%;
         background: rgb(68, 76, 86);
 
-       .valueclass {
-    float: left;
-    z-index: 1001;
-    line-height: 100px;
-    height: 100px;
-    background-color: #49cecc;
-    color: #0f4f5a;
-    font-size: 70px;
-    font-family: "7LED";
-}
+        .quip-title-ul {
+            overflow: hidden;
+            padding-top: 4%;
 
-.clickStatic:focus,
-.clickStatic:hover {
-    /* color: #fff;*/
-    background-color: #49cecc;
-}
+            .quip-title-li {
+                float: left;    
 
-.clickStatic {
-    background-color: white;
-    border-radius: 10px;
-    margin: 1vh 0;
-    text-align: center;
-    height: 28vh;
-}
+            }
 
-.value {
-    margin-top: 2%;
-    font-size: 3vmin;
-    height: 4vh;
-}
+            >:first-child {
+                width: 30%;
+                margin-left: 5%;
 
-.min {
-    position: absolute;
-    top: 0;
-    left: 2%;
-    color: rgb(45, 140, 240);
-}
+                .img {
+                    width: 70%
+                }
+            }
+            >:last-child {
+                width: 55%;
+                text-align: center;
+            }
+        }
+        
+        .quip-center-span {
 
-.max {
-    position: absolute;
-    top: 0;
-    right: 44%;
-    color: red;
-}
+            .value {
+                font-weight: bold;
+                font-size: 3rem;
+                margin-right: 1rem;
+            }
+        }
 
-.extre {
-    position: relative;
-    height: 3vh;
-    font-size: 1.66vmin;
-}
+        .quip-bottom-ul {
+            
+            overflow: hidden;
 
-.img {
-    width: 28%;
-    height: 28%;
-    margin-top: 1%;
-}
+            .quip-bottom-li {
+                float: left;    
+            }
 
-.time {
-    margin: 0.4vh 0;
-    font-size: 1.6vmin;
-}
+            >:first-child {
+                width: 70%;
+                text-align: center;
+                font-size: 1.6vmin;
 
-.monitorType {
-    font-size: 1.66vmin;
-    position: absolute;
-    top: 4.5vmin;
-    text-align: center;
-    width: 82%;
-    color: #fff;
-}
+            }
+            >:last-child {
+                width: 22%;
+                margin-left: -4%;
 
- .ivu-card-head {
-    border-bottom: none;
-    padding: 1.4vmin 1.6vmin;
-}
-
-.ivu-card-bordered {
-    border: none;
-}
-
-.ivu-card-head p {
-    color: #fff;
-}
-
-.ivu-card-body {
-    color: #fff;
-    padding: 2.6vmin;
-}
-.historyData {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-.historyDataBtn {
-    font-size: 0.8vmin;
-    border-radius: 0.4vmin;
-    padding: 0 0.4vmin;
-} 
+                .img {
+                    width: 70%
+                }
+            }
+        }
 
     }
     

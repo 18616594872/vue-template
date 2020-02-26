@@ -1,5 +1,5 @@
 export default [{
-        url: '/mam/environment/equipmentType',
+        url: '/mam/environment/common/equipmentType',
         type: 'get',
         response: () => {
             return {
@@ -7,27 +7,27 @@ export default [{
                 msg: "success",
                 data: [{
                         id: 1,
-                        title: '湿度'
+                        name: '湿度'
                     },
                     {
                         id: 2,
-                        title: '湿度'
+                        name: '湿度'
                     },
                     {
                         id: 3,
-                        title: '硫化氢'
+                        name: '硫化氢'
                     },
                     {
                         id: 4,
-                        title: '一氧化碳'
+                        name: '一氧化碳'
                     },
                     {
                         id: 5,
-                        title: '氧气'
+                        name: '氧气'
                     },
                     {
                         id: 6,
-                        title: '甲烷'
+                        name: '甲烷'
                     }
                 ]
             }

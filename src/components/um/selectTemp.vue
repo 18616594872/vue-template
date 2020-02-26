@@ -47,13 +47,28 @@
         watchData(newVal: any, oldVal: any) {
             if (newVal.length !== 0) {
                 if ((this.data as SelectData).defaultValue !== undefined) {
-                    this.choosedLi(newVal[(this.data as any).defaultValue])
+                    newVal.forEach((item: any) => {
+                        if(item.id === this.data.defaultValue){
+                            this.choosedLi(item)
+                        }
+                    })
                 }
             }
         }
 
         @Emit('on-change')
         send(choosedItem: any) {}
+
+        mounted() {
+            if(this.data.defaultValue !== undefined) {
+                this.data.selectOption.forEach((option: any) => {
+                    if(option.id === this.data.defaultValue){
+                        this.choosedLi(option)
+                    }
+                })
+                
+            }
+        }
 
         chooedValue() {
             if (this.data.selectOption.length === 0) {

@@ -29,6 +29,7 @@ export default [
             const {
                 userName
             } = config.body
+            
             const token = tokens[userName]
 
             // mock error

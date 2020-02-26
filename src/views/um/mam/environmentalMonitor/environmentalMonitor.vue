@@ -1,6 +1,6 @@
 <template>
     <div class="environmentalMonitor-wrap">
-        <public-monitor-details :equipmentType="monitorTypeList"></public-monitor-details>
+        <public-monitor-details :equipmentType="monitorTypeList" @condition-change="getDetailList"></public-monitor-details>
         <environment-detail v-if="false" />
         <environment-list v-if="true"/>
     </div>

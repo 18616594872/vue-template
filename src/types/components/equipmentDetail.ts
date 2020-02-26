@@ -9,6 +9,8 @@ export interface EquipDataInterface {
     minValue: number,
     maxValue: number,
     time: string,
+    location: string,
+    unit: string,
     minNormal?: number,
     maxNormal?: number
 }

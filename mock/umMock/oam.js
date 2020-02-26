@@ -1,3 +1,43 @@
+const areas = {
+    '1': [{
+            key: 1,
+            val: '1区'
+        },
+        {
+            key: 2,
+            val: '2区'
+        },
+        {
+            key: 3,
+            val: '3区'
+        }
+    ],
+    '2': [{
+            key: 1,
+            val: '1区'
+        },
+        {
+            key: 2,
+            val: '2区'
+        }
+    ]
+}
+const stores = {
+    '1': [{
+            key: 1,
+            val: '污水仓'
+        },
+        {
+            key: 2,
+            val: '燃气舱'
+        }
+    ],
+    '2': [{
+        key: 2,
+        val: '燃气舱'
+    }
+    ]
+}
 export default [{
     url: '/oam/operation/moniter/data',
     type: 'get',
@@ -333,15 +373,72 @@ export default [{
                     id: 1,
                     name: 'xxx公司',
                     crtTime: '2020-01-15 13:03:23',
-                    address:"浦东新区",
+                    address: "浦东新区",
                     phone: '0231-6352923',
                     account: 1,
-                    mail:'xxxx@163.com',
+                    mail: 'xxxx@163.com',
                     creditNo: '优良',
                     bank: '上海银行'
                 }],
                 total: 1
             }]
+        }
+    }
+}, {
+    url: '/oam/common/tunnels',
+    type: 'get',
+    response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: [{
+                key: 1,
+                val: "古城大街"
+            }, {
+                key: 2,
+                val: "实验路"
+            }, {
+                key: 3,
+                val: "经二路"
+            }, {
+                key: 4,
+                val: "经三路"
+            }, {
+                key: 5,
+                val: "纬三路"
+            }, ]
+        }
+    }
+}, {
+    url: '/oam/common/areas',
+    type: 'post',
+    response: config => {
+        const {
+            areaId
+        } = config.body
+        
+        const areaList = areas[areaId]
+
+        return {
+            code: 200,
+            msg: "success",
+            data: areaList
+        }
+    }
+}, {
+    url: '/oam/common/stores',
+    type: 'post',
+    response: config => {
+        const {
+            storeId
+        } = config.body
+        
+        const storeList = stores[storeId]
+
+        return {
+            code: 200,
+            msg: "success",
+            data: storeList
         }
     }
 }]

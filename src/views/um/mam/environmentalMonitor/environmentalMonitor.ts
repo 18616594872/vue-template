@@ -6,11 +6,14 @@ import publicMonitorDetails from '@/components/um/publicMonitorDetails.vue'
 import environmentDetail from './environmentDetail/environmentDetail.vue'
 import environmentList from './environmentList/environmentList.vue'
 import {
-    MonitorType
+    MonitorType,
+    Codition
 } from '@/types/views/environmentalMonitor.interface.ts'
 import {
-    equipmentTypeList
+    equipmentTypeList,
 } from '@/api/environmentalMonitor'
+import { equipmentTypeDataList } from '@/api/environmentDetail'
+import { ExtendDate } from '@/utils/common'
 
 @Component({
     components: {
@@ -23,42 +26,14 @@ export default class About extends Vue {
 
     // data
     monitorTypeList: MonitorType[] = []
-    monitorTypeImg: any[] = [
-        {
-            id: 1,
-            defaultStatus: '1',
-            checkStatus: '-1'
-        },
-        {
-            id: 2,
-            defaultStatus: '2',
-            checkStatus: '-2'
-        },
-        {
-            id: 3,
-            defaultStatus: '3',
-            checkStatus: '-3'
-        },
-        {
-            id: 4,
-            defaultStatus: '4',
-            checkStatus: '-4'
-        },
-        {
-            id: 5,
-            defaultStatus: '5',
-            checkStatus: '-5'
-        },
-        {
-            id: 6,
-            defaultStatus: '6',
-            checkStatus: '-6'
-        }
-    ]
+    equipTypeCardList: any[] = []
+    equipTypeTableList: any[] = []
+    showCard: boolean = true
 
     mounted() {
         this.getMonitorTypeList()
     }
+
     getMonitorTypeList() {
         equipmentTypeList()
             .then((res: any) => {
@@ -74,8 +49,46 @@ export default class About extends Vue {
                 (this as any).Log.warn(error)
             })
     }
-    getDetailList(condition: any){
-        console.log(condition)
+    getDetailList(condition: Codition){
+        
+        equipmentTypeDataList(condition).then(
+            (result: any) => {
+                let {
+                    code,
+                    data
+                } = result.data
+                if (code === 200) {
+                    this.equipTypeTableList = data
+
+                    this.equipTypeCardList.splice(0)
+                    data.forEach((a: any) => {
+                        let o = <any>{}
+                        o = a
+                        o.ObjName = a.name
+                        o.ObjVal = a.curValue
+                        o.clickStatus = false
+                        o.objtypeId = condition.objtypeId
+                        o.time =
+                            a.time == undefined || a.time == "" ?
+                            "" :
+                            new ExtendDate(a.time).format(
+                                "yyyy-MM-dd hh:mm:ss"
+                            )
+                        this.equipTypeCardList.push(o)
+                    })
+
+                    console.log(this.equipTypeCardList)
+
+                }
+            },
+            (error: any) => {
+                (this as any).Log.warn(error)
+            }
+        )
+    }
+
+    getPageStatus(show: boolean){
+        this.showCard = show
     }
 
 }

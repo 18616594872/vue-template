@@ -7,16 +7,20 @@
                     {{ item.name }}
                 </li>
             </ul>
+            <div class="rightJump">
+                <span><Icon type="logo-buffer" @click="switchCard"/></span>
+                <span><Icon type="md-grid" @click="switchTable"/></span>
+            </div>
         </div>
         <Row class="condition-wrap">
             <Col span="4">
-                <SelectTemp class="select-temp-wrap" :data="tunnelSelect" @on-change="tunnelChange" />
+            <SelectTemp class="select-temp-wrap" :data="tunnelSelect" @on-change="tunnelChange" />
             </Col>
             <Col span="4">
-                <SelectTemp class="select-temp-wrap" :data="areaSelect" @on-change="areaChange" />
+            <SelectTemp class="select-temp-wrap" :data="areaSelect" @on-change="areaChange" />
             </Col>
             <Col span="4">
-                <SelectTemp class="select-temp-wrap" :data="storeSelect" @on-change="storeChange" />
+            <SelectTemp class="select-temp-wrap" :data="storeSelect" @on-change="storeChange" />
             </Col>
         </Row>
     </div>
@@ -31,7 +35,8 @@
         Watch
     } from "vue-property-decorator"
     import {
-        MonitorType
+        MonitorType,
+        Codition
     } from '@/types/views/environmentalMonitor.interface.ts'
     import {
         SelectData
@@ -87,12 +92,16 @@
         }) equipmentType!: MonitorType[]
 
         @Emit('condition-change')
-        send(choosedItem: any) {}
+        send(choosedItem: Codition) {}
+        @Emit('switch')
+        switchPage(show: boolean){
+
+        }
 
         @Watch("equipmentType", {
             deep: true
         })
-        onEquipmentType(newVal: any){
+        onEquipmentType(newVal: any) {
             let [first, ...othent] = newVal // 监听设备类型变化 默认选中首项数据
             this.equipmentTypeId = first.id
         }
@@ -102,29 +111,23 @@
         }
 
         changEquipmentType(index: number, data: any) {
-            let {
-                tunnelSelect: {
-                    defaultValue
-                },
-                areaSelect,
-                storeSelect
-            } = this
 
-            if(this.equipmentTypeId !== data.id){
+            if (this.equipmentTypeId !== data.id) {
                 this.isActive = index // 改变选中下坐标颜色
                 this.equipmentTypeId = data.id
 
-                this.send({
-                    tunnelId: defaultValue === 0 ? null : defaultValue,
-                    storeId: storeSelect.defaultValue === 0 ? null : storeSelect.defaultValue,
-                    areaId: areaSelect.defaultValue === 0 ? null : areaSelect.defaultValue,
-                    objtypeId: data.id
-                })
+                this.queryDataCondition()
 
             }
         }
-        
-        transform(data: any){
+        switchCard(){
+            this.switchPage(true)
+        }
+        switchTable(){
+            this.switchPage(false)
+        }
+
+        transform(data: any) {
             return data.map((tunnel: any) => {
                 let o = < any > {}
                 o.id = tunnel.key
@@ -138,7 +141,25 @@
             let [firstTunnel, ...otherTunnel] = await this.getTunnelList()
             await this.getAreaList(firstTunnel.id)
             await this.getStoreList(firstTunnel.id)
+            await this.queryDataCondition()
 
+        }
+        queryDataCondition() {
+            let {
+                tunnelSelect: {
+                    defaultValue
+                },
+                areaSelect,
+                storeSelect,
+                equipmentTypeId
+            } = this
+
+            this.send({
+                tunnelId: defaultValue === 0 ? null : defaultValue,
+                storeId: storeSelect.defaultValue === 0 ? null : storeSelect.defaultValue,
+                areaId: areaSelect.defaultValue === 0 ? null : areaSelect.defaultValue,
+                objtypeId: equipmentTypeId
+            })
         }
         // 获取管舱
         getTunnelList(): Promise < any > {
@@ -208,73 +229,31 @@
             )
         }
         tunnelChange(data: any) {
-            let {
-                tunnelSelect,
-                areaSelect: {
-                    defaultValue
-                },
-                storeSelect,
-                equipmentTypeId
-            } = this
-            if (tunnelSelect.defaultValue !== data.id) {
+
+            if (this.tunnelSelect.defaultValue !== data.id) {
                 this.getAreaList(data.id)
                 this.getStoreList(data.id)
 
-                tunnelSelect.defaultValue = data.id
-
-                this.send({
-                    tunnelId: data.id === 0 ? null : data.id,
-                    storeId: storeSelect.defaultValue === 0 ? null : storeSelect.defaultValue,
-                    areaId: defaultValue === 0 ? null : defaultValue,
-                    objtypeId: equipmentTypeId
-                })
+                this.tunnelSelect.defaultValue = data.id
+                this.queryDataCondition()
             }
         }
-        areaChange(data: any){
-            let {
-                tunnelSelect: {
-                    defaultValue
-                },
-                areaSelect,
-                storeSelect,
-                equipmentTypeId
-            } = this
+        areaChange(data: any) {
+            if (this.areaSelect.defaultValue !== data.id) {
 
-            if(areaSelect.defaultValue !== data.id){
+                this.areaSelect.defaultValue = data.id
+                this.queryDataCondition()
 
-                areaSelect.defaultValue = data.id
-
-                this.send({
-                    tunnelId: defaultValue === 0 ? null : defaultValue,
-                    storeId: storeSelect.defaultValue === 0 ? null : storeSelect.defaultValue,
-                    areaId: data.id === 0 ? null : data.id,
-                    objtypeId: equipmentTypeId
-                })
-
-            } 
+            }
         }
-        storeChange(data: any){
-            let {
-                tunnelSelect: {
-                    defaultValue
-                },
-                areaSelect,
-                storeSelect,
-                equipmentTypeId
-            } = this
+        storeChange(data: any) {
 
-            if(storeSelect.defaultValue !== data.id){
+            if (this.storeSelect.defaultValue !== data.id) {
 
-                storeSelect.defaultValue = data.id
+                this.storeSelect.defaultValue = data.id
+                this.queryDataCondition()
 
-                this.send({
-                    tunnelId: defaultValue === 0 ? null : defaultValue,
-                    storeId: data.id === 0 ? null : data.id,
-                    areaId: areaSelect.defaultValue === 0 ? null : areaSelect.defaultValue,
-                    objtypeId: equipmentTypeId
-                })
-
-            } 
+            }
         }
 
     }
@@ -308,6 +287,25 @@
                 .title-img {
                     width: 0.07rem;
                     height: 0.08rem;
+                }
+            }
+
+            .rightJump {
+                width: 8rem;
+                float: right;
+                margin-right: 1.2rem;
+                line-height: 100%;
+
+                >span {
+                    display: inline-block;
+                    font-size: 1.8rem;
+
+                    >i {
+                        cursor: pointer;
+                    }
+                }
+                >:first-child {
+                    margin: 0 2.1rem 0 0.9rem;
                 }
             }
         }

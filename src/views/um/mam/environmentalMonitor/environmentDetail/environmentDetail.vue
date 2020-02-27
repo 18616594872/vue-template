@@ -10,10 +10,7 @@
             show-total
             :page-size-opts="[12,24,36]"
             placement="top"
-            @on-change="handlePage"
-            @on-page-size-change="handlePageSize"
             show-elevator
-            :style="pageStyle"
         ></Page>
     </div>
 </template>

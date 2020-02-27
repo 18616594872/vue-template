@@ -1,4 +1,8 @@
-import { Component, Vue } from 'vue-property-decorator'
+import {
+    Component,
+    Vue,
+    Prop
+} from 'vue-property-decorator'
 import equipmentDetail from '@/components/um/equipmentDetail.vue'
 
 @Component({
@@ -8,26 +12,13 @@ import equipmentDetail from '@/components/um/equipmentDetail.vue'
 })
 export default class About extends Vue {
 
-    // data
-    equipmentDataList: any[] = [
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {}
-    ]
-
-    mounted() {
-        //
-    }
-
-    // 初始化函数
-    init() {
-        //
-    }
+    // prop
+    @Prop({
+        required: true,
+    })
+    equipmentDataList!: any[]
     
+    mounted() {
+    }
+
 }

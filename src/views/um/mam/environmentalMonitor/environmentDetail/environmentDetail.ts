@@ -1,6 +1,7 @@
 import {
     Component,
-    Vue
+    Vue,
+    Prop
 } from 'vue-property-decorator'
 import {
     customerDataList
@@ -11,7 +12,7 @@ import {
 import {
     ExtendDate
 } from '@/utils/common'
-import { equipmentTypeDataList } from '@/api/environmentDetail'
+
 
 @Component({})
 export default class About extends Vue {
@@ -45,7 +46,7 @@ export default class About extends Vue {
         },
         {
             title: "具体位置",
-            key: "location",
+            key: "description",
             align: "center"
         },
         {
@@ -98,31 +99,11 @@ export default class About extends Vue {
             }
         }
     ]
-    equipTypeDataList: any[] = []
 
-    mounted() {
-        this.getEquipTypeDataList()
-    }
-
-    getEquipTypeDataList(){
-        equipmentTypeDataList().then(
-            (result: any) => {
-                let {
-                    code,
-                    data
-                } = result.data
-                if (code === 200) {
-                    let [{list, total}] = data
-
-                    this.equipTypeDataList = list
-                    console.log()
-                    this.page.total = total
-                }
-            },
-            (error: any) => {
-                (this as any).Log.warn(error)
-            }
-        )
-    }
+    @Prop({
+        required: true,
+        default:[]
+    })
+    equipTypeDataList!: any[]
 
 }

@@ -7,3 +7,10 @@ export function equipmentTypeList() {
     })
 }
 
+export function listDetailData(data: any){
+    return request({
+        url: '/mam/environmentDetail/measobjs/list',
+        method: 'post',
+        data
+    })
+}

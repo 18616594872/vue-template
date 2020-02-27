@@ -1,8 +1,10 @@
 <template>
     <div class="environmentalMonitor-wrap">
-        <public-monitor-details :equipmentType="monitorTypeList" @condition-change="getDetailList"></public-monitor-details>
-        <environment-detail v-if="false" />
-        <environment-list v-if="true"/>
+        <public-monitor-details :equipmentType="monitorTypeList" @condition-change="getDetailList" @switch="getPageStatus">
+        </public-monitor-details>
+        <environment-list v-if="showCard" :equipmentDataList="equipTypeCardList"/>
+        <environment-detail v-else :equipTypeDataList="equipTypeTableList" />
+        
     </div>
 </template>
 
@@ -11,4 +13,3 @@
 <style lang="less">
     @import './environmentalMonitor.less';
 </style>
-

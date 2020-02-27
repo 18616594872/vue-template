@@ -35,25 +35,41 @@ export default [{
     },
     {
         url: '/mam/environmentDetail/equipmentTypeDetailData',
-        type: 'get',
+        type: 'post',
         response: () => {
             return {
                 code: 200,
                 msg: "success",
                 data: [{
-                    list: [{
-                        name: '湿度检测仪',
-                        tunnel: '古城大街',
-                        area: '22区',
-                        store: '综合仓',
-                        location: 'K0+445',
-                        crtTime: '1280977330000',
-                        curValue: '69',
-                        isNormal: '正常',
-
-                    }],
+                    name: '湿度检测仪',
+                    tunnel: '古城大街',
+                    area: '22区',
+                    store: '综合仓',
+                    description: 'K0+445',
+                    crtTime: '1280977330000',
+                    curValue: '69',
+                    isNormal: '正常',
+                    maxValue: 85,
+                    maxNormal: 25,
+                    storeId: 1006,
+                    datatypeId: 1,
+                    minNormal: 15,
+                    unit: "%",
+                    minValue: -20,
+                    tunnelId: 1,
                     total: 1
                 }]
+            }
+        }
+    },
+    {
+        url: '/mam/environmentDetail/measobjs/list',
+        type: 'post',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: []
             }
         }
     }

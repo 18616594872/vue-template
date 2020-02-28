@@ -9,15 +9,24 @@
                 <div class="temp-humidity-wrap">
                     <div class="title">
                         <Title :data="tempHumidityTitle"/>
+                        <SelectTemp class="select-temp" :data="tunnelSelect" @bingSend="propMsg"/>
                     </div>
                     <MixedLineAndBar :bindData="mixedLineAndBarData" class="mixedLineAndBar-box"/>
                 </div>
             </div>
             <div class="overview-data-wrap">
-               
+                <DataOverview />
             </div>
             <div class="video-wrap">
-        
+                <VideoDisplay />
+            </div>
+        </div>
+        <div class="bottom-wrap">
+            <div class="data-details-wrap">
+                <DataDetails />
+            </div>
+            <div class="entrance-guard-wrap">
+                <TirggerData />
             </div>
         </div>
     </div>

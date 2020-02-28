@@ -3,10 +3,21 @@ import {
     Vue
 } from 'vue-property-decorator'
 import {
-    SelectData,
     TitleBlock
+} from '@/types/components/umtitle.interface'
+import {
+    listTunnelInfo
+} from '@/api/integratedMonitoring'
+import SelectTemp from '@/components/common/selectTemp/selectTemp.vue'
+import {
+    SelectData
 } from '@/types/components/selectTemp.interface'
 import MixedLineAndBar from '@/components/common/chart/chartComponent.vue'
+import Title from '@/components/um/umtitle/umtitle.vue'
+import DataOverview from '@/views/um/mam/dataOverview/dataOverview.vue'
+import VideoDisplay from '@/views/um/mam/videoDisplay/videoDisplay.vue'
+import DataDetails from '@/views/um/mam/dataDetails/dataDetails.vue'
+import TirggerData from '@/views/um/mam/triggerData/triggerData.vue'
 import HollowPieChart from '@/components/common/chart/chartComponent.vue'
 import {
     Series,
@@ -17,7 +28,13 @@ import {
 
 @Component({
     components: {
+        SelectTemp,
         MixedLineAndBar,
+        Title,
+        DataOverview,
+        VideoDisplay,
+        DataDetails,
+        TirggerData,
         HollowPieChart
     }
 })
@@ -174,6 +191,7 @@ export default class About extends Vue {
 
     mounted() {
         this.initDoughnut()
+        this.listTunnelInfo()
         this.initMixedLineAndBar()
     }
 
@@ -198,7 +216,7 @@ export default class About extends Vue {
             series: [{
                 type: 'pie',
                 itemStyle: {
-                    color: (item: any) => {
+                    color: function (item: any) {
                         let dataColor = [{
                                 leftColor: '#f0b975',
                                 rightColor: '#fe5c54',
@@ -252,6 +270,26 @@ export default class About extends Vue {
         }
     }
 
+    listTunnelInfo() {
+        let params = {
+            tunnel: true
+        }
+        return listTunnelInfo(params).then(res => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.tunnels = data
+                this.tunnelSelect.selectOption = this.tunnels
+            } else {
+                this.$Message.error('查询管廊信息失败！')
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
+        })
+    }
+
     propMsg(choosedItem: any) {
         this.choosedITunnelId = choosedItem.id
     }
@@ -270,13 +308,13 @@ export default class About extends Vue {
             }
         ]
 
-        this.AnalogData2.forEach((element: any) => {
+        this.AnalogData2.forEach(element => {
             _series[0].data.push({
                 key: element.key,
                 value: element.val
             })
         })
-        this.AnalogData3.forEach((element: any) => {
+        this.AnalogData3.forEach(element => {
             _series[1].data.push({
                 key: element.key,
                 value: element.val

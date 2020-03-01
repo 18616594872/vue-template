@@ -8,12 +8,12 @@ import {
 import {
     listTunnelInfo
 } from '@/api/integratedMonitoring'
-import SelectTemp from '@/components/common/selectTemp/selectTemp.vue'
+import SelectTemp from '@/components/um/selectTemp.vue'
 import {
     SelectData
 } from '@/types/components/selectTemp.interface'
 import MixedLineAndBar from '@/components/common/chart/chartComponent.vue'
-import Title from '@/components/um/umtitle/umtitle.vue'
+import Title from '@/components/um//umtitle.vue'
 import DataOverview from '@/views/um/mam/dataOverview/dataOverview.vue'
 import VideoDisplay from '@/views/um/mam/videoDisplay/videoDisplay.vue'
 import DataDetails from '@/views/um/mam/dataDetails/dataDetails.vue'

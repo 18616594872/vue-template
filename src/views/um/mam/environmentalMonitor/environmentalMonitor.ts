@@ -77,8 +77,6 @@ export default class About extends Vue {
                         this.equipTypeCardList.push(o)
                     })
 
-                    console.log(this.equipTypeCardList)
-
                 }
             },
             (error: any) => {

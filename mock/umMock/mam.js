@@ -72,5 +72,39 @@ export default [{
                 data: []
             }
         }
+    },
+    {
+        url: '/mam/dataOverview/monitor/list',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    data: [{
+                        value: '18℃',
+                        name: '最低温'
+                    }, {
+                        value: '28℃',
+                        name: '最高温'
+                    }]
+                },
+                {
+                    data: [{
+                        value: '325',
+                        name: '对象总数'
+                    }]
+                },
+                {
+                    data: [{
+                        value: '1200',
+                        name: '无报警对象'
+                    }, {
+                        value: '1500',
+                        name: '监测对象总数'
+                    }]
+                }]
+            }
+        }
     }
 ]

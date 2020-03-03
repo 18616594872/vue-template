@@ -5,7 +5,7 @@ import {
 import {
     TitleBlock
 } from '@/types/components/umtitle.interface'
-import Title from '@/components/um/umtitle/umtitle.vue'
+import Title from '@/components/um/umtitle.vue'
 import SelectTemp from '@/components/um/selectTemp.vue'
 import {
     SelectData

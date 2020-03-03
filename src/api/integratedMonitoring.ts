@@ -7,3 +7,11 @@ export function listTunnelInfo(data: any) {
         data
     })
 }
+
+export function listEuqipData(data: any) {
+    return request({
+        url: '/oam/contract/payType',
+        method: 'post',
+        data
+    })
+}

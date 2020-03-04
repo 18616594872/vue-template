@@ -125,7 +125,6 @@
 
         mounted() {
             this.checkValue()
-            console.log(this.srcImg)
             if (this.equipDetailData.time != "") {
                 this.isTimeShow = true;
             }

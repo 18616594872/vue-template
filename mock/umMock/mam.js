@@ -106,5 +106,49 @@ export default [{
                 }]
             }
         }
+    },
+    {
+        url: '/mam/integrated/objData',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    value: 26,
+                    key: '温度'
+                },
+                {
+                    value: 20,
+                    key: '湿度'
+                },
+                {
+                    value: 8,
+                    key: '氧气'
+                }]
+            }
+        }
+    },
+    {
+        url: '/mam/integrated/average',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    key: '1区',
+                    val: '20'
+                },
+                {
+                    key: '2区',
+                    val: '22'
+                },
+                {
+                    key: '3区',
+                    val: '19'
+                }]
+            }
+        }
     }
 ]

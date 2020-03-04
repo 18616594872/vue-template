@@ -1,17 +1,15 @@
 import request from '@/utils/request.ts'
 
-export function listTunnelInfo(data: any) {
+export function listAverageGesInfo() {
     return request({
-        url: '/oam/contract/payType',
-        method: 'post',
-        data
+        url: '/mam/integrated/average',
+        method: 'get'
     })
 }
 
-export function listEuqipData(data: any) {
+export function listObjData() {
     return request({
-        url: '/oam/contract/payType',
-        method: 'post',
-        data
+        url: '/mam/integrated/objData',
+        method: 'get'
     })
 }

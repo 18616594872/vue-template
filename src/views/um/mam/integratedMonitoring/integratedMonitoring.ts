@@ -19,7 +19,7 @@ import {
 import MixedLineAndBar from '@/components/common/chart/chartComponent.vue'
 import Title from '@/components/um/umtitle.vue'
 import DataOverview from '@/views/um/mam/dataOverview/dataOverview.vue'
-import VideoDisplay from '@/views/um/mam/videoDisplay/videoDisplay.vue'
+// import VideoDisplay from '@/views/um/mam/videoDisplay/videoDisplay.vue'
 import DataDetails from '@/views/um/mam/dataDetails/dataDetails.vue'
 import TirggerData from '@/views/um/mam/triggerData/triggerData.vue'
 import HollowPieChart from '@/components/common/chart/chartComponent.vue'
@@ -36,7 +36,7 @@ import {
         MixedLineAndBar,
         Title,
         DataOverview,
-        VideoDisplay,
+        // VideoDisplay,
         DataDetails,
         TirggerData,
         HollowPieChart

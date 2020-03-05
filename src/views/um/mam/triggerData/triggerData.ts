@@ -1,11 +1,11 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { TitleBlock } from '@/types/components/umtitle.interface'
-import Title from '@/components/um/umtitle/umtitle.vue'
-import SelectTemp from '@/components/common/selectTemp/selectTemp.vue'
+import Title from '@/components/um/umtitle.vue'
+import SelectTemp from '@/components/um/selectTemp.vue'
 import { SelectData } from '@/types/components/selectTemp.interface'
 import { listTunnelInfo } from '@/api/tunnelManage'
-import CrossBarChart from '@/components/common/chart/chartComponent/chartComponent.vue'
-import SimpleBarChart from '@/components/common/chart/chartComponent/chartComponent.vue'
+import CrossBarChart from '@/components/common/chart/chartComponent.vue'
+import SimpleBarChart from '@/components/common/chart/chartComponent.vue'
 import { Series, ChartBindData, ChartType } from '@/types/chart.Interface'
 
 @Component({

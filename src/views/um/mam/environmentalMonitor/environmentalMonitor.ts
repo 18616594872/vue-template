@@ -3,7 +3,6 @@ import {
     Vue
 } from 'vue-property-decorator'
 import publicMonitorDetails from '@/components/um/publicMonitorDetails.vue'
-import environmentDetail from './environmentDetail/environmentDetail.vue'
 import environmentList from './environmentList/environmentList.vue'
 import {
     MonitorType,
@@ -11,14 +10,15 @@ import {
 } from '@/types/views/environmentalMonitor.interface.ts'
 import {
     equipmentTypeList,
+    equipmentTypeDataList
 } from '@/api/environmentalMonitor'
-import { equipmentTypeDataList } from '@/api/environmentDetail'
-import { ExtendDate } from '@/utils/common'
+import {
+    ExtendDate
+} from '@/utils/common'
 
 @Component({
     components: {
         publicMonitorDetails,
-        environmentDetail,
         environmentList
     }
 })
@@ -26,9 +26,14 @@ export default class About extends Vue {
 
     // data
     monitorTypeList: MonitorType[] = []
-    equipTypeCardList: any[] = []
-    equipTypeTableList: any[] = []
-    showCard: boolean = true
+    equipTypeList: {
+        card: any[],
+        table: any[]
+    } = {
+        card: [],
+        table: []
+    }
+    showCard: boolean = true // 展示详情 或 表格
 
     mounted() {
         this.getMonitorTypeList()
@@ -49,8 +54,10 @@ export default class About extends Vue {
                 (this as any).Log.warn(error)
             })
     }
-    getDetailList(condition: Codition){
-        
+    getDetailList(condition: Codition) {
+        let {
+            equipTypeList
+        } = this
         equipmentTypeDataList(condition).then(
             (result: any) => {
                 let {
@@ -58,11 +65,11 @@ export default class About extends Vue {
                     data
                 } = result.data
                 if (code === 200) {
-                    this.equipTypeTableList = data
+                    equipTypeList.table = data
 
-                    this.equipTypeCardList.splice(0)
+                    equipTypeList.card.splice(0)
                     data.forEach((a: any) => {
-                        let o = <any>{}
+                        let o = < any > {}
                         o = a
                         o.ObjName = a.name
                         o.ObjVal = a.curValue
@@ -74,7 +81,9 @@ export default class About extends Vue {
                             new ExtendDate(a.time).format(
                                 "yyyy-MM-dd hh:mm:ss"
                             )
-                        this.equipTypeCardList.push(o)
+                        o.objtypeName =
+                            a.tunnel + a.area + a.store
+                        equipTypeList.card.push(o)
                     })
 
                 }
@@ -85,7 +94,7 @@ export default class About extends Vue {
         )
     }
 
-    getPageStatus(show: boolean){
+    getPageStatus(show: boolean) {
         this.showCard = show
     }
 

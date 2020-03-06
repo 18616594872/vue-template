@@ -14,3 +14,11 @@ export function listDetailData(data: any){
         data
     })
 }
+
+export function equipmentTypeDataList(data: any) {
+    return request({
+        url: '/mam/environmentDetail/equipmentTypeDetailData',
+        method: 'post',
+        data
+    })
+}

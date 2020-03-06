@@ -1,26 +1,77 @@
+.btn() {
+    border-color: #3e4f61;
+    border-radius: 8px;
+    font-size: @font-medium;
+}
+
+.btnBGColor(@startColor: #7c83f2, @endColor: #2734e1) {
+    background-color: -webkit-linear-gradient(left, @startColor, @endColor);
+    background: -o-linear-gradient(right, @startColor, @endColor);
+    background: -moz-linear-gradient(right, @startColor, @endColor);
+    background: linear-gradient(to right, @startColor, @endColor);
+}
 
 .environmentList-wrap {
-    margin: 0 2rem;
-    height: 46rem;
+    margin: 0 .15208rem;
+    height: 3.74rem;
 
-    .equipDataContent {
-        width: 59rem;
+    .equipCardData {
+        width: 100%;
         height: 100%;
-        background: linear-gradient(-45deg, rgba(41,48,54,.5), rgba(117,120,125,.8), rgba(41,48,54,.5));
-        padding: .5rem;
-        float: left;
 
-        .dataLis {
-            width: 33.3%;
-            height: 33.3%;
-            padding: .5rem;
+        .equipDataContent {
+            width: 5.3rem;
+            height: 100%;
+            background: linear-gradient(-45deg, rgba(41, 48, 54, 0.5), rgba(117, 120, 125, 0.8), rgba(41, 48, 54, 0.5));
+            padding: 0.05rem;
             float: left;
+
+            .dataLis {
+                width: 33.3%;
+                height: 33.3%;
+                padding: .05rem;
+                float: left;
+            }
+        }
+
+        .video {
+            height: 100%;
+            margin-left: 5.4rem;
+            border: 0.00521rem solid #000;
         }
     }
 
-    .video {
+    .equipTableData {
+        width: 100%;
         height: 100%;
-        margin-left: 60rem;
-        border: 1px solid #000;
+
+        .environTable {
+            height: 3.74rem;
+            border: 1px solid #000;
+            background: linear-gradient(-45deg, rgba(41, 48, 54, .5), rgba(117, 120, 125, .8), rgba(41, 48, 54, .5));
+
+            .ivu-btn:first-child {
+                .btnBGColor();
+                .btn();
+            }
+
+            .ivu-btn:last-child {
+                .btnBGColor(#e49b9b, #f61a1a);
+                .btn();
+            }
+
+            .ivu-btn:nth-child(2) {
+                .btnBGColor(#dcd77c, #cabf11);
+                .btn();
+            }
+
+            .ivu-table-row:hover {
+                background: red;
+            }
+        }
+
+        .page {
+            margin-top: 1rem;
+        }
     }
 }

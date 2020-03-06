@@ -1,3 +1,50 @@
+let commonMessage = {
+    area: "22区",
+    datatypeId: 1,
+    description: "K3+660",
+    time: 1575363600000,
+    tunnel: "古城大街",
+    minNormal: 10,
+    store: "燃气舱"
+}
+let equipMessage = {
+    '6': (() => {
+        return [Object.assign({}, commonMessage, {
+            curValue: 0,
+            name: "甲烷检测仪",
+            unit: "LEL"
+        })]
+    })(),
+    '1': (() => {
+        return [Object.assign({}, commonMessage, {
+            curValue: 12.18,
+            name: "温度检测仪",
+            unit: "℃"
+        })]
+    })(),
+    '2': (() => {
+        return [Object.assign({}, commonMessage, {
+            curValue: 23.18,
+            name: "湿度检测仪",
+            unit: "%RH"
+        })]
+    })(),
+    '3': (() => {
+        return [Object.assign({}, commonMessage, {
+            curValue: 1.18,
+            name: "硫化氢检测仪",
+            unit: "ppm"
+        })]
+    })(),
+    '5': (() => {
+        return [Object.assign({}, commonMessage, {
+            curValue: 5.18,
+            name: "氧气检测仪",
+            unit: "℃"
+        })]
+    })(),
+}
+
 export default [{
         url: '/mam/environment/common/equipmentType',
         type: 'get',
@@ -36,29 +83,16 @@ export default [{
     {
         url: '/mam/environmentDetail/equipmentTypeDetailData',
         type: 'post',
-        response: () => {
+        response: config => {
+            const {
+                objtypeId
+            } = config.body
+
+            let data = equipMessage[objtypeId]
             return {
                 code: 200,
                 msg: "success",
-                data: [{
-                    name: '湿度检测仪',
-                    tunnel: '古城大街',
-                    area: '22区',
-                    store: '综合仓',
-                    description: 'K0+445',
-                    crtTime: '1280977330000',
-                    curValue: '69',
-                    isNormal: '正常',
-                    maxValue: 85,
-                    maxNormal: 25,
-                    storeId: 1006,
-                    datatypeId: 1,
-                    minNormal: 15,
-                    unit: "%",
-                    minValue: -20,
-                    tunnelId: 1,
-                    total: 1
-                }]
+                data: data
             }
         }
     },

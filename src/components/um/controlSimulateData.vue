@@ -60,8 +60,7 @@
     @Component({})
     export default class About extends Vue {
         @Prop({
-            default: Object,
-            require: true
+            default: Object
         }) controlEquipData!: EquipDataInterface
 
         // data 

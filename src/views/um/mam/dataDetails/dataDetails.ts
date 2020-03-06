@@ -106,15 +106,12 @@ export default class About extends Vue {
         return listTunnelInfo().then(res => {
             let {
                 code,
-                data,
-                msg
+                data
             } = res.data
             if (code === 200) {
                 this.tunnels = data
                 this.tunnelSelect.selectOption = this.tunnels
 
-            } else {
-                this.$Message.error('查询管廊信息失败！')
             }
         }).catch(error => {
             (this as any).Log.warn(error)

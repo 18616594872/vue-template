@@ -6,7 +6,8 @@
     <LineChartMultiple v-bind="bindData" v-else-if="bindData.type === 210"></LineChartMultiple>
     <GaugeChartNormal v-bind="bindData" v-else-if="bindData.type === 500"></GaugeChartNormal>
     <BarChartNormal v-bind="bindData" v-else-if="bindData.type === 100"></BarChartNormal>
-    <RadarChartNormal v-bind="bindData" v-else-if="bindData.type === 600" ></RadarChartNormal>
+    <RadarChartNormal v-bind="bindData" v-else-if="bindData.type === 600"></RadarChartNormal>
+    <MixedChartBarAndLine v-bind="bindData" v-else-if="bindData.type === 300"></MixedChartBarAndLine>
 </template>
 
 <script lang="ts">
@@ -18,6 +19,7 @@
     import GaugeChartNormal from '@/components/common/chart/pieChart_normal.vue'
     import BarChartNormal from '@/components/common/chart/barChart_normal.vue'
     import RadarChartNormal from '@/components/common/chart/radarChart_normal.vue'
+    import MixedChartBarAndLine from '@/components/common/chart/mixedChart_barAndLine.vue'
     import {
         ChartBindData,
         ChartType
@@ -38,16 +40,17 @@
             BarChartMultiple,
             LineChartMultiple,
             GaugeChartNormal,
-            RadarChartNormal
+            RadarChartNormal,
+            MixedChartBarAndLine
         }
     })
     export default class About extends Vue {
         @Prop({
             required: true
         }) bindData!: ChartBindData
-    mounted(){
-        // console.log(this.bindData)
-    }
+        mounted() {
+            console.log(this.bindData)
+        }
 
     }
 </script>

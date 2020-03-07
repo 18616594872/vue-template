@@ -13,10 +13,10 @@
                     <mixed-line-and-bar :bindData="mixedLineAndBarData" class="mixedLineAndBar-box"/>
                 </div>
             </div>
-            <!-- <div class="overview-data-wrap">
+            <div class="overview-data-wrap">
                 <DataOverview />
             </div>
-            <div class="video-wrap">
+            <!-- <div class="video-wrap">
                 <VideoDisplay />
             </div> -->
         </div>

@@ -3,8 +3,8 @@ import {
     Vue
 } from 'vue-property-decorator'
 import {
-    TitleBlock
-} from '@/types/components/umtitle.interface'
+    ElementBoxTitle
+} from '@/types/common.interface'
 import Title from '@/components/um/umtitle.vue'
 import SelectTemp from '@/components/um/selectTemp.vue'
 import {
@@ -37,9 +37,9 @@ import {
 })
 export default class About extends Vue {
 
-    triggerDataTitle: TitleBlock = {
+    triggerDataTitle: ElementBoxTitle = {
         titleIcon: require('@/assets/images/um/tigger-icon.png'),
-        title: '触发TOP5'
+        text: '触发TOP5'
     }
 
     tunnels: any[] = []

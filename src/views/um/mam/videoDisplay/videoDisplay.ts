@@ -1,7 +1,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 // import {  } from '@/types/views/videoDisplay.interface'
 import Title from '@/components/um/umtitle.vue'
-import { TitleBlock } from '@/types/components/umtitle.interface'
+import { ElementBoxTitle } from '@/types/common.interface'
 import SelectTemp from '@/components/um/selectTemp.vue'
 import { SelectData } from '@/types/components/selectTemp.interface'
 import { listTunnelInfo } from '@/api/tunnelManage'
@@ -12,9 +12,9 @@ import VideoLoop from '@/components/videoLoop/videoLoop.vue'
 })
 export default class About extends Vue {
 
-    videoDisplayTitle: TitleBlock = {
+    videoDisplayTitle: ElementBoxTitle = {
         titleIcon: require('@/assets/images/um/video-icon.png'),
-        title: '视频展示'
+        text: '视频展示'
     }
 
     tunnels: any[] = []

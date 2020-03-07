@@ -3,7 +3,7 @@ import {
     Vue
 } from 'vue-property-decorator'
 import publicMonitorDetails from '@/components/um/publicMonitorDetails.vue'
-import environmentList from './environmentList/environmentList.vue'
+// import environmentList from './environmentList/environmentList.vue'
 import {
     MonitorType,
     Codition
@@ -19,7 +19,7 @@ import {
 @Component({
     components: {
         publicMonitorDetails,
-        environmentList
+        // environmentList
     }
 })
 export default class About extends Vue {

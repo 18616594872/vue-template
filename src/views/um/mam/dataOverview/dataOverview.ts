@@ -3,8 +3,8 @@ import {
     Vue
 } from 'vue-property-decorator'
 import {
-    TitleBlock
-} from '@/types/components/umtitle.interface'
+    ElementBoxTitle
+} from '@/types/common.interface'
 import Title from '@/components/um/umtitle.vue'
 import SelectTemp from '@/components/um/selectTemp.vue'
 import {
@@ -25,9 +25,9 @@ import { listMonitorData } from '@/api/dataDetails.ts'
 })
 export default class About extends Vue {
 
-    dataOverviewTitle: TitleBlock = {
+    dataOverviewTitle: ElementBoxTitle = {
         titleIcon: require('@/assets/images/um/data-overview-icon.png'),
-        title: '数据总览'
+        text: '数据总览'
     }
 
     guideData: any[] = [{

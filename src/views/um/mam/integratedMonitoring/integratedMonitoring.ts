@@ -3,8 +3,8 @@ import {
     Vue
 } from 'vue-property-decorator'
 import {
-    TitleBlock
-} from '@/types/components/umtitle.interface'
+    ElementBoxTitle
+} from '@/types/common.interface'
 import {
     listObjData,
     listAverageGesInfo
@@ -12,10 +12,6 @@ import {
 import {
     listTunnel
 } from '@/api/commonModule.ts'
-import SelectTemp from '@/components/um/selectTemp.vue'
-import {
-    SelectData
-} from '@/types/components/selectTemp.interface'
 import MixedLineAndBar from '@/components/common/chart/chartComponent.vue'
 import Title from '@/components/um/umtitle.vue'
 import DataOverview from '@/views/um/mam/dataOverview/dataOverview.vue'
@@ -32,7 +28,6 @@ import {
 
 @Component({
     components: {
-        SelectTemp,
         MixedLineAndBar,
         Title,
         DataOverview,
@@ -44,17 +39,17 @@ import {
 })
 export default class About extends Vue {
 
-    doughnutTitle: TitleBlock = {
+    equipTypeTitle: ElementBoxTitle = {
         titleIcon: require('@/assets/images/um/doughnut-icon.png'),
-        title: '监测对象个数统计'
+        text: '监测对象个数统计'
     }
 
-    tempHumidityTitle: TitleBlock = {
+    tempHumidityTitle: ElementBoxTitle = {
         titleIcon: require('@/assets/images/um/temp-humidity-icon.png'),
-        title: '温湿度数据'
+        text: '温湿度数据'
     }
 
-    doughnutData: ChartBindData = {
+    equipTypeDate: ChartBindData = {
         id: 'doughnutId',
         type: ChartType.PIECHART_HOLLOW,
         data: {
@@ -117,13 +112,6 @@ export default class About extends Vue {
             }]
         }
     }
-    tunnels: any[] = []
-    tunnelSelect: SelectData = {
-        selectOption: [],
-        type: 'solid',
-        defaultValue: 0
-    }
-    choosedITunnelId: any = ''
     mixedLineAndBarData: ChartBindData = {
         id: 'mixedLineAndBarId',
         type: ChartType.MIXEDCHART_BARANDLINE,
@@ -144,19 +132,17 @@ export default class About extends Vue {
     }
 
     mounted() {
-        this.initDoughnut()
-        this.listTunnelInfo()
+        this.initEquipTypeDate()
         this.initMixedLineAndBar()
     }
-    // 初始化监测对象个数统计
-    initDoughnut() {
-        return listObjData().then((res: any) => {
+    initEquipTypeDate() {
+        listObjData().then((res: any) => {
             let {
                 code,
                 data
             } = res.data
             if (code === 200) {
-                this.doughnutData.data.series = {
+                this.equipTypeDate.data.series = {
                     name: '对象类型：',
                     unit: '个',
                     data
@@ -166,27 +152,9 @@ export default class About extends Vue {
             (this as any).Log.warn(error)
         })
     }
-    listTunnelInfo() {
-        return listTunnel().then((res: any) => {
-            let {
-                code,
-                data
-            } = res.data
-            if (code === 200) {
-                this.tunnels = data
-                this.tunnelSelect.selectOption = this.tunnels
-            }
-        }).catch((error: any) => {
-            (this as any).Log.warn(error)
-        })
-    }
-
-    propMsg(choosedItem: any) {
-        this.choosedITunnelId = choosedItem.id
-    }
 
     initMixedLineAndBar() {
-        return listAverageGesInfo().then((res: any) => {
+        listAverageGesInfo().then((res: any) => {
             let {
                 code,
                 data
@@ -195,6 +163,8 @@ export default class About extends Vue {
                 (this.mixedLineAndBarData.data.series as any).forEach((el: any) => {
                     el.data = data
                 })
+
+                
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)

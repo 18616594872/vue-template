@@ -10,9 +10,11 @@ import {
     ChartType
 } from '@/types/chart.Interface'
 import {
-    MonitorData,
-    TitleInterface
+    MonitorData
 } from '@/types/views/operationManagement.interface'
+import {
+    ElementBoxTitle
+} from '@/types/common.interface'
 import {
     moniterDataList,
     customerDataList,
@@ -30,20 +32,20 @@ import {
 export default class OperationManagement extends Vue {
 
     monitorDataList: MonitorData[] = []
-    dataOverviewTitle: TitleInterface = {
+    dataOverviewTitle: ElementBoxTitle = {
         titleIcon: require('@/assets/images/um/data-overview-icon.png'),
         text: '数据总览'
     }
-    contractTitle: TitleInterface = {
+    contractTitle: ElementBoxTitle = {
         text: '管廊合同统计'
     }
-    energyTitle: TitleInterface = {
+    energyTitle: ElementBoxTitle = {
         text: '管廊能耗统计'
     }
-    spaceTitle: TitleInterface = {
+    spaceTitle: ElementBoxTitle = {
         text: '管廊空间管理'
     }
-    customerTitle: TitleInterface = {
+    customerTitle: ElementBoxTitle = {
         text: '管廊客户管理'
     }
     contractData: ChartBindData = {

@@ -25,7 +25,7 @@
     } from "vue-property-decorator"
     import {
         keyVal
-    } from '@/types/views/operationManagement.interface'
+    } from '@/types/common.interface'
 
     @Component({})
     export default class About extends Vue {

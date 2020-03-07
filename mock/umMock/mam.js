@@ -172,15 +172,15 @@ export default [{
                 msg: "success",
                 data: [{
                     key: '1区',
-                    val: '20'
+                    value: '20'
                 },
                 {
                     key: '2区',
-                    val: '22'
+                    value: '22'
                 },
                 {
                     key: '3区',
-                    val: '19'
+                    value: '19'
                 }]
             }
         }

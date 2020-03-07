@@ -5,8 +5,3 @@ export interface SelectData {
     defaultValue?: number
 }
 
-export interface TitleBlock {
-    titleIcon: string,
-    title: string
-}
-

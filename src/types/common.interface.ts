@@ -30,3 +30,8 @@ export interface keyVal {
     key: string,
     val: string | number
 }
+
+export interface ElementBoxTitle {
+    text: string,
+    titleIcon?: string
+}

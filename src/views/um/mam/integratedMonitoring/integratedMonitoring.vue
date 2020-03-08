@@ -16,18 +16,18 @@
             <div class="overview-data-wrap">
                 <DataOverview />
             </div>
-            <!-- <div class="video-wrap">
+            <div class="video-wrap">
                 <VideoDisplay />
-            </div> -->
+            </div>
         </div>
-        <!-- <div class="bottom-wrap">
+        <div class="bottom-wrap">
             <div class="data-details-wrap">
                 <DataDetails />
             </div>
             <div class="entrance-guard-wrap">
                 <TirggerData />
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
 

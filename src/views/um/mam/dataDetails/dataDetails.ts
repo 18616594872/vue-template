@@ -6,17 +6,14 @@ import {
     ElementBoxTitle
 } from '@/types/common.interface'
 import Title from '@/components/um/umtitle.vue'
-import SelectTemp from '@/components/um/selectTemp.vue'
-import {
-    SelectData
-} from '@/types/components/selectTemp.interface'
-import {
-    listTunnelInfo
-} from '@/api/tunnelManage.ts'
 import SimpleGauge from '@/components/common/chart/chartComponent.vue'
 import {
     listMeasTriggerCount
 } from '@/api/measureModule.ts'
+import {
+    listcontrolEquip,
+    listEquipStatus
+} from '@/api/mechanicalMonitor.ts'
 import Pie3DChart from '@/components/common/chart/chartComponent.vue'
 import {
     ChartBindData,
@@ -26,7 +23,6 @@ import {
 @Component({
     components: {
         Title,
-        SelectTemp,
         SimpleGauge,
         Pie3DChart
     }
@@ -37,33 +33,10 @@ export default class About extends Vue {
         titleIcon: require('@/assets/images/um/data-details-icon.png'),
         text: '数据详情'
     }
-
-    tunnels: any[] = []
-
-    tunnelSelect: SelectData = {
-        selectOption: [],
-        type: 'border',
-        defaultValue: 0
-    }
-
-    dataOption: any[] = [{
-            id: 1,
-            name: '电子井盖'
-        },
-        {
-            id: 2,
-            name: '电子百叶'
-        },
-        {
-            id: 3,
-            name: '水泵'
-        },
-        {
-            id: 4,
-            name: '风机'
-        }
-    ]
-
+    equipData: {
+        id: number,
+        name: string
+    } [] = []
     pie3DData: ChartBindData = {
         id: 'pie3Did',
         type: ChartType.PIECHART_3D,
@@ -72,50 +45,19 @@ export default class About extends Vue {
             series: {
                 name: '开关详情',
                 unit: '',
-                data: [{
-                        key: '开',
-                        value: 40
-                    },
-                    {
-                        key: '关',
-                        value: 20
-                    },
-                    {
-                        key: '其他',
-                        value: 30
-                    }
-                ]
+                data: []
             }
         }
     }
-
     currentIndex: number = 0
-
     iconSize: number = window.innerWidth * 0.012
     fetchTime: number = 5000
     gaugeCharts: ChartBindData[] = []
-
     dataInterval: any = null
 
     mounted() {
-        this.listTunnelInfo()
         this.getToDayExtreDatas()
-    }
-
-    listTunnelInfo() {
-        return listTunnelInfo().then(res => {
-            let {
-                code,
-                data
-            } = res.data
-            if (code === 200) {
-                this.tunnels = data
-                this.tunnelSelect.selectOption = this.tunnels
-
-            }
-        }).catch(error => {
-            (this as any).Log.warn(error)
-        })
+        this.getListcontrolEquip()
     }
 
     choosedLi(index: number) {
@@ -235,9 +177,40 @@ export default class About extends Vue {
                         }, type, {
                             value
                         })
-                    }) 
+                    })
                 }
             })
+    }
+    getListcontrolEquip() {
+        listcontrolEquip().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.equipData = data
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
+        })
+    }
+    getlistEquipStatus() {
+        let {
+            pie3DData: {
+                data: series
+            }
+        } = this
+        listEquipStatus().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                (series as any).data = data
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
+        })
     }
 
 }

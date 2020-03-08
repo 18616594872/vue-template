@@ -6,20 +6,14 @@ import {
     ElementBoxTitle
 } from '@/types/common.interface'
 import Title from '@/components/um/umtitle.vue'
-import SelectTemp from '@/components/um/selectTemp.vue'
-import {
-    SelectData
-} from '@/types/components/selectTemp.interface'
 import DataBox from '@/components/um/dataBox.vue'
 import {
-    listTunnel
-} from '@/api/commonModule.ts'
-import { listMonitorData } from '@/api/dataDetails.ts'
+    listMonitorData
+} from '@/api/dataDetails.ts'
 
 @Component({
     components: {
         Title,
-        SelectTemp,
         DataBox
     }
 })
@@ -30,7 +24,9 @@ export default class About extends Vue {
         text: '数据总览'
     }
 
-    guideData: any[] = [{
+    guideData: {
+        name: string
+    } [] = [{
             name: '当前'
         },
         {
@@ -40,39 +36,17 @@ export default class About extends Vue {
             name: '近一月'
         }
     ]
-
     monitorData: any[] = []
-
     currentIndex: number = 0
-    tunnelSelect: SelectData = {
-        selectOption: [],
-        type: 'border',
-        defaultValue: 0
-    }
 
     mounted() {
-        this.listTunnelInfo()
         this.getListMonitorData()
     }
 
     choosedLi(index: number) {
         this.currentIndex = index
     }
-
-    listTunnelInfo() {
-        return listTunnel().then(res => {
-            let {
-                code,
-                data
-            } = res.data
-            if (code === 200) {
-                this.tunnelSelect.selectOption = data
-            }
-        }).catch((error: any) => {
-            (this as any).Log.warn(error)
-        })
-    }
-    getListMonitorData(){
+    getListMonitorData() {
         return listMonitorData().then(res => {
             let {
                 code,

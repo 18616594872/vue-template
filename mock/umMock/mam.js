@@ -184,5 +184,49 @@ export default [{
                 }]
             }
         }
+    },
+    {
+        url: '/mam/machanical/controlequipType',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    id: 10,
+                    name: '风机'
+                },
+                {
+                    id: 58,
+                    name: '百叶'
+                },
+                {
+                    id: 59,
+                    name: '排水泵'
+                }]
+            }
+        }
+    },
+    {
+        url: '/mam/machanical/controlequipStatus',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                    id: 10,
+                    name: '风机'
+                },
+                {
+                    id: 58,
+                    name: '百叶'
+                },
+                {
+                    id: 59,
+                    name: '排水泵'
+                }]
+            }
+        }
     }
 ]

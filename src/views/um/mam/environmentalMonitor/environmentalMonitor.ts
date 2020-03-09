@@ -6,7 +6,9 @@ import publicMonitorDetails from '@/components/um/publicMonitorDetails.vue'
 // import environmentList from './environmentList/environmentList.vue'
 import {
     MonitorType,
-    Codition
+    Codition,
+    EquipmentProp,
+    EquipmentDataList
 } from '@/types/views/environmentalMonitor.interface.ts'
 import {
     equipmentTypeList,
@@ -26,12 +28,13 @@ export default class About extends Vue {
 
     // data
     monitorTypeList: MonitorType[] = []
-    equipTypeList: {
-        card: any[],
-        table: any[]
-    } = {
+    equipTypeList: EquipmentDataList = {
         card: [],
-        table: []
+        table: {
+            total: 0, // 数据总数
+            pageSize: 0, //每页条数 
+            equipProp: []
+        }
     }
     showCard: boolean = true // 展示详情 或 表格
 
@@ -68,11 +71,9 @@ export default class About extends Vue {
                     equipTypeList.table = data
 
                     equipTypeList.card.splice(0)
-                    data.forEach((a: any) => {
+                    data.equipProp.forEach((a: EquipmentProp) => {
                         let o = < any > {}
                         o = a
-                        o.ObjName = a.name
-                        o.ObjVal = a.curValue
                         o.clickStatus = false
                         o.objtypeId = condition.objtypeId
                         o.time =
@@ -84,6 +85,7 @@ export default class About extends Vue {
                         o.objtypeName =
                             a.tunnel + a.area + a.store
                         equipTypeList.card.push(o)
+
                     })
 
                 }

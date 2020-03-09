@@ -18,5 +18,5 @@
 <script lang="ts" src="./environmentList.ts"></script>
 
 <style lang="less">
-    @import './environmentList.less';
+    @import '../../../../../assets/less/environment.less';
 </style>

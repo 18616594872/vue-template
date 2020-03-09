@@ -5,43 +5,63 @@ let commonMessage = {
     time: 1575363600000,
     tunnel: "古城大街",
     minNormal: 10,
-    store: "燃气舱"
+    store: "燃气舱",
 }
 let equipMessage = {
     '6': (() => {
-        return [Object.assign({}, commonMessage, {
-            curValue: 0,
-            name: "甲烷检测仪",
-            unit: "LEL"
-        })]
+        return {
+            total: 1, // 数据总数
+            pageSize: 10, //每页条数 
+            equipProp: [Object.assign({}, commonMessage, {
+                curValue: 0,
+                name: "甲烷检测仪",
+                unit: "LEL"
+            })]
+        }
     })(),
     '1': (() => {
-        return [Object.assign({}, commonMessage, {
-            curValue: 12.18,
-            name: "温度检测仪",
-            unit: "℃"
-        })]
+        return {
+            total: 1, // 数据总数
+            pageSize: 10, //每页条数 
+            equipProp: [Object.assign({}, commonMessage, {
+                curValue: 12.18,
+                name: "温度检测仪",
+                unit: "℃"
+            })]
+        }
     })(),
     '2': (() => {
-        return [Object.assign({}, commonMessage, {
-            curValue: 23.18,
-            name: "湿度检测仪",
-            unit: "%RH"
-        })]
+        return {
+            total: 1, // 数据总数
+            pageSize: 10, //每页条数 
+            equipProp: [Object.assign({}, commonMessage, {
+                curValue: 23.18,
+                name: "湿度检测仪",
+                unit: "%RH"
+            })]
+        }
     })(),
     '3': (() => {
-        return [Object.assign({}, commonMessage, {
-            curValue: 1.18,
-            name: "硫化氢检测仪",
-            unit: "ppm"
-        })]
+        return {
+            total: 1, // 数据总数
+            pageSize: 10, //每页条数 
+            equipProp: [Object.assign({}, commonMessage, {
+                curValue: 1.18,
+                name: "硫化氢检测仪",
+                unit: "ppm"
+            })]
+        }
     })(),
     '5': (() => {
-        return [Object.assign({}, commonMessage, {
-            curValue: 5.18,
-            name: "氧气检测仪",
-            unit: "℃"
-        })]
+        return {
+            total: 1, // 数据总数
+            pageSize: 10, //每页条数 
+            equipProp: [Object.assign({}, commonMessage, {
+                curValue: 5.18,
+                name: "氧气检测仪",
+                unit: "℃"
+            })]
+        }
     })(),
 }
 
@@ -115,29 +135,30 @@ export default [{
                 code: 200,
                 msg: "success",
                 data: [{
-                    data: [{
-                        value: '18℃',
-                        name: '最低温'
-                    }, {
-                        value: '28℃',
-                        name: '最高温'
-                    }]
-                },
-                {
-                    data: [{
-                        value: '325',
-                        name: '对象总数'
-                    }]
-                },
-                {
-                    data: [{
-                        value: '1200',
-                        name: '无报警对象'
-                    }, {
-                        value: '1500',
-                        name: '监测对象总数'
-                    }]
-                }]
+                        data: [{
+                            value: '18℃',
+                            name: '最低温'
+                        }, {
+                            value: '28℃',
+                            name: '最高温'
+                        }]
+                    },
+                    {
+                        data: [{
+                            value: '325',
+                            name: '对象总数'
+                        }]
+                    },
+                    {
+                        data: [{
+                            value: '1200',
+                            name: '无报警对象'
+                        }, {
+                            value: '1500',
+                            name: '监测对象总数'
+                        }]
+                    }
+                ]
             }
         }
     },
@@ -149,17 +170,18 @@ export default [{
                 code: 200,
                 msg: "success",
                 data: [{
-                    value: 26,
-                    key: '温度'
-                },
-                {
-                    value: 20,
-                    key: '湿度'
-                },
-                {
-                    value: 8,
-                    key: '氧气'
-                }]
+                        value: 26,
+                        key: '温度'
+                    },
+                    {
+                        value: 20,
+                        key: '湿度'
+                    },
+                    {
+                        value: 8,
+                        key: '氧气'
+                    }
+                ]
             }
         }
     },
@@ -171,17 +193,18 @@ export default [{
                 code: 200,
                 msg: "success",
                 data: [{
-                    key: '1区',
-                    value: '20'
-                },
-                {
-                    key: '2区',
-                    value: '22'
-                },
-                {
-                    key: '3区',
-                    value: '19'
-                }]
+                        key: '1区',
+                        value: '20'
+                    },
+                    {
+                        key: '2区',
+                        value: '22'
+                    },
+                    {
+                        key: '3区',
+                        value: '19'
+                    }
+                ]
             }
         }
     },
@@ -193,17 +216,18 @@ export default [{
                 code: 200,
                 msg: "success",
                 data: [{
-                    id: 10,
-                    name: '风机'
-                },
-                {
-                    id: 58,
-                    name: '百叶'
-                },
-                {
-                    id: 59,
-                    name: '排水泵'
-                }]
+                        id: 10,
+                        name: '风机'
+                    },
+                    {
+                        id: 58,
+                        name: '百叶'
+                    },
+                    {
+                        id: 59,
+                        name: '排水泵'
+                    }
+                ]
             }
         }
     },
@@ -215,17 +239,18 @@ export default [{
                 code: 200,
                 msg: "success",
                 data: [{
-                    id: 10,
-                    name: '风机'
-                },
-                {
-                    id: 58,
-                    name: '百叶'
-                },
-                {
-                    id: 59,
-                    name: '排水泵'
-                }]
+                        id: 10,
+                        name: '风机'
+                    },
+                    {
+                        id: 58,
+                        name: '百叶'
+                    },
+                    {
+                        id: 59,
+                        name: '排水泵'
+                    }
+                ]
             }
         }
     }

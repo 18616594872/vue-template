@@ -5,14 +5,14 @@
                 <img :src="srcImg" class="img">
             </li>
             <li class="quip-title-li">
-                <h2>{{controlEquipData.ObjName}}</h2>
-                <p>{{controlEquipData.location}}</p>
+                <h2>{{controlEquipData.name}}</h2>
+                <p>{{controlEquipData.description}}</p>
             </li>
         </ul>
         <img class="heardImg" :src="resetBut.Img" v-if="controlEquipData.reset" title="复位" @click="reset">
         <div class="statusContent">
             <ul class="status-ul">
-                <li class="status-lis" v-for="item in curImgState" :key="item.id" :style="{width: curImgState.length === 2 ? '50%' : '33.3%'}">
+                <li class="status-lis" v-for="item in curImgState" :key="item.id" :style="{width: curImgState.length === 4 ? '25%' : '33.3%'}">
                     <img class="img" :src="item.img" :title="item.val">
                     <span class="span">{{item.val}}</span>
                 </li>
@@ -30,11 +30,7 @@
                 <p class="time">{{ controlEquipData.objtypeName }}</p>
             </li>
             <li class="quip-bottom-li">
-                <div class="min" v-if="controlEquipData.minNormal != null">
-                    <img :src="srcImg" class="img">
-                </div>
-                <div class="max" v-if="controlEquipData.maxNormal != null">
-                </div>
+                <Icon type="md-trending-up" />
             </li>
         </ul>
 
@@ -51,17 +47,16 @@
     } from "vue-property-decorator"
     import {
         EquipDataInterface,
-        ImgStatus
-    } from '@/types/components/simulateData.ts'
-    import {
+        ImgStatus,
         keyVal
-    } from '@/types/common.interface'
+    } from '@/types/components/simulateData.ts'
+    import { EquipmentProp } from '@/types/views/environmentalMonitor.interface'
 
     @Component({})
     export default class About extends Vue {
         @Prop({
-            default: Object
-        }) controlEquipData!: EquipDataInterface
+            required: true
+        }) controlEquipData!: EquipmentProp
 
         // data 
         swicthState: boolean = false
@@ -92,6 +87,10 @@
             {
                 "objtypeId": 59,
                 "fun": this.changeImg('water-pump', true)
+            },
+            {
+                "objtypeId": 56,
+                "fun": this.changeImg('covers', true)
             }
         ]
         curImgState: any = []
@@ -178,7 +177,7 @@
             if (this.controlEquipData.time != "") {
                 this.isTimeShow = true;
             }
-
+            
             this.imgStatusList.forEach((img: ImgStatus) => {
                 if (img.objtypeId === this.controlEquipData.objtypeId) {
                     img.fun() // 调用函数
@@ -200,17 +199,17 @@
             let {
                 controlEquipData: {
                     objtypeName,
-                    ObjName
+                    name
                 }
             } = this
             let text = data ?
                 "确定打开" +
                 objtypeName +
-                ObjName +
+                name +
                 "吗?" :
                 "确定关闭 " +
                 objtypeName +
-                ObjName +
+                name +
                 " 吗?";
             this.$Modal.confirm({
                 render: (h: any) => {
@@ -223,12 +222,12 @@
         }
         reset() {
             this.resetBut.click = !this.resetBut.click
+
             this.send(this.controlEquipData.id)
-            
         }
         loadStatusImg() {
             this.curImgState = []
-            let EquipStatus: any = this.controlEquipData.ObjVal
+            let EquipStatus: any = this.controlEquipData.curValue
             let EquipStatusKey: string[] = Object.keys(EquipStatus)
 
             for (let i = 0; i < EquipStatusKey.length; i++) {
@@ -281,7 +280,7 @@
 
             return function() {
                 let {
-                    ObjVal: {
+                    curValue: {
                         run,
                         close,
                         open
@@ -309,22 +308,22 @@
         changeSwitchState() {
             let {
                 controlEquipData: {
-                    ObjVal
+                    curValue
                 }
             } = this;
 
-            if (!ObjVal.run && !ObjVal.open) return;
+            if (!curValue.run && !curValue.open) return;
 
             // 给出设备现在的状态，0：关；1：开；2：打开中或者关闭中；3：故障；-1：出错
             let runState: number = -1;
-            if (ObjVal.run) {
-                runState = ObjVal.run.value ? 1 : 0;
+            if (curValue.run) {
+                runState = curValue.run.value ? 1 : 0;
             } else {
-                if (!ObjVal.open.value && ObjVal.close.value) {
+                if (!curValue.open.value && curValue.close.value) {
                     runState = 0;
-                } else if (ObjVal.open.value && !ObjVal.close.value) {
+                } else if (curValue.open.value && !curValue.close.value) {
                     runState = 1;
-                } else if (!ObjVal.open.value && !ObjVal.close.value) {
+                } else if (!curValue.open.value && !curValue.close.value) {
                     runState = 2;
                 } else {
                     runState = 3;
@@ -432,10 +431,14 @@
 
             >:last-child {
                 width: 22%;
-
-                .img {
-                    width: 70%
-                }
+                text-align: center;
+                line-height: .18rem;
+                border-radius: 50%;
+                width: 0.18rem;
+                margin-top: 0.04rem;
+                background-color: rgb(108, 124, 157);
+                height: .18rem;
+                font-size: 0.13rem;
             }
         }
 

@@ -108,6 +108,7 @@ export default class About extends Vue {
     // prop
     @Prop({
         required: true,
+        default: []
     })
     equipmentDataList!: EquipmentDataList
     @Prop({

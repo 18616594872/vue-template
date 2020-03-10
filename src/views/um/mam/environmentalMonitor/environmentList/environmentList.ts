@@ -4,10 +4,14 @@ import {
     Prop,
     Watch
 } from 'vue-property-decorator'
-import equipTypeComponent from '@/components/um/equipTypeComponent.vue'
+import equipTypeComponent from '@/components/um/equipTypeComponent/equipTypeComponent.vue'
 import {
     Page
 } from '@/types/common.interface'
+import {
+    EquipmentDataList,
+    EquipmentProp
+} from '@/types/views/environmentalMonitor.interface.ts'
 
 @Component({
     components: {
@@ -93,11 +97,12 @@ export default class About extends Vue {
         }
     ]
     showCard: boolean = true
+    curTableList: EquipmentProp[] = []
     // prop
     @Prop({
         required: true,
     })
-    equipmentDataList!: any[]
+    equipmentDataList!: EquipmentDataList
     @Prop({
         required: true,
         default: true
@@ -109,8 +114,47 @@ export default class About extends Vue {
     onChang(newValue: boolean){
         this.showCard = newValue
     }
+    @Watch('equipmentDataList.table', {
+        deep: true
+    })
+    onTableChang() {      
+        this.initPage()
 
+    }
     mounted() {
+        this.initPage()
+        
+    }
+    initPage() {
+        let {
+            equipmentDataList: {
+                table
+            },
+            page
+        } = this
+        this.filterData(1) // 默认从0页筛选
+        page.pageSize = table.pageSize // 每页最大数
+        page.total = table.total // 总数
+
+    }
+    filterData(index: number) {
+        let {
+            equipmentDataList: {
+                table: {
+                    pageSize,
+                    equipProp
+                }
+            }
+        } = this
+        this.curTableList = Array.from(equipProp).slice((index - 1) * pageSize, index * pageSize)
+    }
+    handlePage(value: number) {
+        this.page.current = value
+        this.filterData(value)
+    }
+    handlePageSize(value: number) {
+        this.page.pageSize = value
+        this.filterData(value)
     }
 
 }

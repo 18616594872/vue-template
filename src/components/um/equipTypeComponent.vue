@@ -1,7 +1,8 @@
 <template>
     <div class="equipTypeComponent-wrap">
         <simulate-data v-if="equipTypeDate.datatypeId == 1" :equipDetailData="equipTypeDate" v-on="$listeners"></simulate-data>
-        <control-simulate-data v-else-if="equipTypeDate.datatypeId == 200" :controlEquipData="equipTypeDate" v-on="$listeners"></control-simulate-data>
+        <status-date v-else-if="equipTypeDate.datatypeId == 2" :equipStatusData="equipTypeDate" v-on="$listeners"></status-date>
+        <control-simulate-data v-else :controlEquipData="equipTypeDate" v-on="$listeners"></control-simulate-data>
     </div>
 </template>
 
@@ -14,11 +15,13 @@
         Watch
     } from "vue-property-decorator"
     import simulateData from './simulateData.vue'
+    import statusDate from './statusDate.vue'
     import controlSimulateData from './controlSimulateData.vue'
 
     @Component({
         components: {
             simulateData,
+            statusDate,
             controlSimulateData
         }
     })

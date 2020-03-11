@@ -37,7 +37,7 @@ export default class About extends Vue {
     }
 
     getMonitorTypeList() {
-        equipmentTypeList()
+        equipmentTypeList(1)
             .then((res: any) => {
                 let {
                     code,
@@ -48,20 +48,7 @@ export default class About extends Vue {
                 }
             })
             .catch((error: any) => {
-                // (this as any).Log.warn(error)
-                this.monitorTypeList = [{
-                        id: 10,
-                        name: '风机'
-                    },
-                    {
-                        id: 58,
-                        name: '百叶'
-                    },
-                    {
-                        id: 59,
-                        name: '排水泵'
-                    }
-                ]
+                (this as any).Log.warn(error)
             })
     }
     getDetailList(condition: Codition) {

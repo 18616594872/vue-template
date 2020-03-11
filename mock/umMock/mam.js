@@ -63,40 +63,114 @@ let equipMessage = {
             })]
         }
     })(),
+    '63': {
+        total: 1, // 数据总数
+        pageSize: 10, //每页条数 
+        equipProp: [{
+            area: "22区",
+            areaId: 1020,
+            control: true,
+            curValue: {
+                run: {
+                    index: 1,
+                    descript: "输入值",
+                    value: false
+                }
+            },
+            datatypeId: 200,
+            description: "",
+            id: 222015100,
+            name: "布防/撤防",
+            reset: false,
+            store: "污水舱",
+            storeId: 1011,
+            tunnel: "古城大街",
+            tunnelId: 1,
+            time: 1575363603000,
+        }]
+    },
+    '58': {
+        total: 1, // 数据总数
+        pageSize: 10, //每页条数 
+        equipProp: [{
+            area: "22区",
+            areaId: 1020,
+            control: true,
+            curValue: {
+                close: {
+                    index: 1,
+                    descript: "关足",
+                    value: false
+                },
+                fault: {
+                    index: 3,
+                    descript: "故障",
+                    value: true
+                },
+                open: {
+                    index: 2,
+                    descript: "开足",
+                    value: false
+                }
+            },
+            datatypeId: 200,
+            description: "K3+640",
+            id: 222234200,
+            name: "电动百叶",
+            reset: true,
+            store: "综合舱排风口",
+            storeId: 1016,
+            time: 1575363603000,
+            tunnel: "古城大街",
+            tunnelId: 1,
+        }]
+    }
 }
 
+let equipmentType = {
+    '0': [{
+            id: 1,
+            name: '湿度'
+        },
+        {
+            id: 2,
+            name: '湿度'
+        },
+        {
+            id: 3,
+            name: '硫化氢'
+        },
+        {
+            id: 5,
+            name: '氧气'
+        },
+        {
+            id: 6,
+            name: '甲烷'
+        }
+    ],
+    '1': [{
+        id: 63,
+        name: "联动"
+    }],
+    '2': [{
+        id: 58,
+        name: '百叶'
+    }]
+}
 export default [{
         url: '/mam/environment/common/equipmentType',
         type: 'get',
-        response: () => {
+        response: config => {
+            const {
+                equipmentTypeId
+            } = config.body
+
+            let data = equipmentType[equipmentTypeId]
             return {
                 code: 200,
                 msg: "success",
-                data: [{
-                        id: 1,
-                        name: '湿度'
-                    },
-                    {
-                        id: 2,
-                        name: '湿度'
-                    },
-                    {
-                        id: 3,
-                        name: '硫化氢'
-                    },
-                    {
-                        id: 4,
-                        name: '一氧化碳'
-                    },
-                    {
-                        id: 5,
-                        name: '氧气'
-                    },
-                    {
-                        id: 6,
-                        name: '甲烷'
-                    }
-                ]
+                data: data
             }
         }
     },
@@ -249,6 +323,33 @@ export default [{
                     {
                         id: 59,
                         name: '排水泵'
+                    }
+                ]
+            }
+        }
+    },
+    {
+        url: '/mam/security/dataType',
+        type: 'get',
+        response: () => {
+            return {
+                code: 200,
+                msg: "success",
+                data: [{
+                        id: 56,
+                        name: "智能井盖"
+                    },
+                    {
+                        id: 64,
+                        name: "联动"
+                    },
+                    {
+                        id: 41,
+                        name: "声光报警"
+                    },
+                    {
+                        id: 57,
+                        name: "红外"
                     }
                 ]
             }

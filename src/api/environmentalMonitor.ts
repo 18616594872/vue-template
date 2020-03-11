@@ -1,9 +1,10 @@
 import request from '@/utils/request.ts'
 
-export function equipmentTypeList() {
+export function equipmentTypeList(data: any) {
     return request({
         url: '/mam/environment/common/equipmentType',
-        method: 'get'
+        method: 'post',
+        data
     })
 }
 

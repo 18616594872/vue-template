@@ -2,7 +2,6 @@
     <div class="triggerData-wrap">
         <Title :data="triggerDataTitle" />
         <div class="trigger-chart-wrap">
-            <SelectTemp class="select-temp-wrap" :data="tunnelSelect" />
             <div class="left-wrap">
                 <CrossBarChart :bindData="crossBarData"/>
             </div>

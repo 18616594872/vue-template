@@ -6,7 +6,6 @@ import {
     ElementBoxTitle
 } from '@/types/common.interface'
 import Title from '@/components/um/umtitle.vue'
-import SelectTemp from '@/components/um/selectTemp.vue'
 import {
     SelectData
 } from '@/types/components/selectTemp.interface'
@@ -16,9 +15,6 @@ import {
 import {
     listAverageGesInfo
 } from '@/api/integratedMonitoring'
-import {
-    listTunnel
-} from '@/api/commonModule.ts'
 import CrossBarChart from '@/components/common/chart/chartComponent.vue'
 import SimpleBarChart from '@/components/common/chart/chartComponent.vue'
 import {
@@ -30,7 +26,6 @@ import {
 @Component({
     components: {
         Title,
-        SelectTemp,
         CrossBarChart,
         SimpleBarChart
     }
@@ -43,12 +38,6 @@ export default class About extends Vue {
     }
 
     tunnels: any[] = []
-
-    tunnelSelect: SelectData = {
-        selectOption: [],
-        type: 'border',
-        defaultValue: 0
-    }
     currentIndex: number = 0
     crossBarData: ChartBindData = {
         id: 'crossBarId',
@@ -76,23 +65,7 @@ export default class About extends Vue {
     }
 
     mounted() {
-        this.listTunnelInfo()
         this.listSeriesData()
-    }
-
-    listTunnelInfo() {
-        return listTunnel().then((res: any) => {
-            let {
-                code,
-                data
-            } = res.data
-            if (code === 200) {
-                this.tunnels = data
-                this.tunnelSelect.selectOption = this.tunnels
-            }
-        }).catch((error: any) => {
-            (this as any).Log.warn(error)
-        })
     }
     listSeriesData() {
         let {
@@ -103,7 +76,7 @@ export default class About extends Vue {
             },
             simpleBarData
         } = this
-        return listTunnelInfo().then((res: any) => {
+        return listAverageGesInfo().then((res: any) => {
             let {
                 code,
                 data

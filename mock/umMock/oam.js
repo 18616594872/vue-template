@@ -35,8 +35,7 @@ const stores = {
     '2': [{
         key: 2,
         val: '燃气舱'
-    }
-    ]
+    }]
 }
 export default [{
     url: '/oam/operation/moniter/data',
@@ -416,7 +415,7 @@ export default [{
         const {
             areaId
         } = config.body
-        
+
         const areaList = areas[areaId]
 
         return {
@@ -432,7 +431,7 @@ export default [{
         const {
             storeId
         } = config.body
-        
+
         const storeList = stores[storeId]
 
         return {

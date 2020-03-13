@@ -7,12 +7,6 @@ import {
 } from '@/types/common.interface'
 import Title from '@/components/um/umtitle.vue'
 import {
-    SelectData
-} from '@/types/components/selectTemp.interface'
-import {
-    listTunnelInfo
-} from '@/api/tunnelManage'
-import {
     listAverageGesInfo
 } from '@/api/integratedMonitoring'
 import CrossBarChart from '@/components/common/chart/chartComponent.vue'
@@ -34,10 +28,8 @@ export default class About extends Vue {
 
     triggerDataTitle: ElementBoxTitle = {
         titleIcon: require('@/assets/images/um/tigger-icon.png'),
-        text: '触发TOP5'
+        text: '触发'
     }
-
-    tunnels: any[] = []
     currentIndex: number = 0
     crossBarData: ChartBindData = {
         id: 'crossBarId',
@@ -67,13 +59,12 @@ export default class About extends Vue {
     mounted() {
         this.listSeriesData()
     }
+    IS(p: Series | Series[]): p is Series{
+        return ({}).toString.call(p) === '[object object]'
+    }
     listSeriesData() {
         let {
-            crossBarData: {
-                data: {
-                    series
-                }
-            },
+            crossBarData,
             simpleBarData
         } = this
         return listAverageGesInfo().then((res: any) => {
@@ -82,7 +73,11 @@ export default class About extends Vue {
                 data
             } = res.data
             if (code === 200) {
-                (series as any).data = data(simpleBarData.data.series as any).data = data
+                
+                if(this.IS(crossBarData.data.series)){
+                    crossBarData.data.series.data = data(simpleBarData.data.series as any).data = data
+                }
+                
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)

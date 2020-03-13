@@ -22,7 +22,7 @@
         </div>
         <div class="bottom-wrap">
             <div class="data-details-wrap">
-                <DataDetails />
+                <TirggerData />
             </div>
             <div class="entrance-guard-wrap">
                 <TirggerData />

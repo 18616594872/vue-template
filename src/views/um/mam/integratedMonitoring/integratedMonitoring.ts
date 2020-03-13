@@ -15,7 +15,6 @@ import {
 import MixedLineAndBar from '@/components/common/chart/chartComponent.vue'
 import Title from '@/components/um/umtitle.vue'
 import DataOverview from '@/views/um/mam/dataOverview/dataOverview.vue'
-import DataDetails from '@/views/um/mam/dataDetails/dataDetails.vue'
 import TirggerData from '@/views/um/mam/triggerData/triggerData.vue'
 import HollowPieChart from '@/components/common/chart/chartComponent.vue'
 import {
@@ -30,7 +29,6 @@ import {
         MixedLineAndBar,
         Title,
         DataOverview,
-        DataDetails,
         TirggerData,
         HollowPieChart
     }

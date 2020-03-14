@@ -23,28 +23,11 @@ export default class About extends Vue {
         titleIcon: require('@/assets/images/um/data-overview-icon.png'),
         text: '数据总览'
     }
-
-    guideData: {
-        name: string
-    } [] = [{
-            name: '当前'
-        },
-        {
-            name: '近一周'
-        },
-        {
-            name: '近一月'
-        }
-    ]
     monitorData: any[] = []
     currentIndex: number = 0
 
     mounted() {
         this.getListMonitorData()
-    }
-
-    choosedLi(index: number) {
-        this.currentIndex = index
     }
     getListMonitorData() {
         return listMonitorData().then(res => {

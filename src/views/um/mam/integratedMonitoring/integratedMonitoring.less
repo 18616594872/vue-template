@@ -50,14 +50,31 @@
     }
     .bottom-wrap {
         display: flex;
-        height: 34%;
-        margin: auto 20px;
-        .data-details-wrap,
-        .entrance-guard-wrap {
+        height: 40%;
+       
+        .tunnel-contract-wrap, .energy-consumption-wrap {
             flex: 1;
+            margin-left: 26px;
         }
-        .data-details-wrap {
+        .tunnel-contract-wrap {
+            margin-left: 20px;
+
+            .contractChart{
+                background: @box-background-color-theme;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                height: 260px;
+            }
+        }
+        .energy-consumption-wrap {
             margin-right: 20px;
+
+            .energyChart{
+                background: @box-background-color-theme;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                height: 260px;
+            }
         }
     }
 }

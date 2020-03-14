@@ -49,19 +49,11 @@ export default class About extends Vue {
             }
         }
     }
-    currentIndex: number = 0
-    iconSize: number = window.innerWidth * 0.012
-    fetchTime: number = 5000
     gaugeCharts: ChartBindData[] = []
-    dataInterval: any = null
 
     mounted() {
         this.getToDayExtreDatas()
         this.getListcontrolEquip()
-    }
-
-    choosedLi(index: number) {
-        this.currentIndex = index
     }
 
     getToDayExtreDatas() {

@@ -10,13 +10,16 @@ import {
     listAverageGesInfo
 } from '@/api/integratedMonitoring'
 import {
-    listTunnel
-} from '@/api/commonModule.ts'
+    moniterDataList,
+    customerDataList,
+    energyDataList
+} from '@/api/operationManagement'
 import MixedLineAndBar from '@/components/common/chart/chartComponent.vue'
 import Title from '@/components/um/umtitle.vue'
 import DataOverview from '@/views/um/mam/dataOverview/dataOverview.vue'
 import TirggerData from '@/views/um/mam/triggerData/triggerData.vue'
 import HollowPieChart from '@/components/common/chart/chartComponent.vue'
+import Chart from '@/components/common/chart/chartComponent.vue'
 import {
     Series,
     ChartBindData,
@@ -30,7 +33,8 @@ import {
         Title,
         DataOverview,
         TirggerData,
-        HollowPieChart
+        HollowPieChart,
+        Chart
     }
 })
 export default class About extends Vue {
@@ -44,7 +48,12 @@ export default class About extends Vue {
         titleIcon: require('@/assets/images/um/temp-humidity-icon.png'),
         text: '温湿度数据'
     }
-
+    energyTitle: ElementBoxTitle = {
+        text: '管廊能耗统计'
+    }
+    contractTitle: ElementBoxTitle = {
+        text: '管廊合同统计'
+    }
     equipTypeDate: ChartBindData = {
         id: 'doughnutId',
         type: ChartType.PIECHART_HOLLOW,
@@ -126,6 +135,14 @@ export default class About extends Vue {
             ]
         },
     }
+    energyData: ChartBindData = {
+        id: 'operationManageEnergy',
+        type: ChartType.LINECHART_MULTIPLE,
+        data: {
+            title: '',
+            series: []
+        }
+    }
 
     mounted() {
         this.initEquipTypeDate()
@@ -148,7 +165,6 @@ export default class About extends Vue {
             (this as any).Log.warn(error)
         })
     }
-
     initMixedLineAndBar() {
         listAverageGesInfo().then((res: any) => {
             let {
@@ -161,6 +177,23 @@ export default class About extends Vue {
                 })
 
                 
+            }
+        }).catch((error: any) => {
+            (this as any).Log.warn(error)
+        })
+    }
+    getEnergyDataList() {
+        return energyDataList().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.energyData.data.series = [{
+                    name: '古城大街',
+                    unit: '千瓦时',
+                    data
+                }]
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)

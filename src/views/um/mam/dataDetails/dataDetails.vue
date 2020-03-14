@@ -4,10 +4,6 @@
         <div class="data-details-chart-wrap">
             <SelectTemp class="select-temp-wrap" :data="tunnelSelect" />
             <div class="left-wrap">
-                <ul class="data-option-wrap">
-                    <li class="data-option" v-for="(item, index) in equipData" :key="index" @click="choosedLi(index)"
-                        :class="{'active-li' : currentIndex===index}">{{item.name}}</li>
-                </ul>
                 <div class="pie-3d-chart-wrap">
                     <Pie3DChart :bindData="pie3DData" />
                 </div>

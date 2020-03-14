@@ -1,34 +1,34 @@
 <template>
     <div class="equipDetail-wrap" @click="locationEquimpent">
-            <ul class="quip-title-ul">
-                <li class="quip-title-li">
-                    <img :src="srcImg" class="img"> 
-                    <img src="../../assets/images/um/fault.png" class="img" v-if="!inRange">
-                </li>
-                <li class="quip-title-li"> 
-                    <h2 >{{equipDetailData.ObjName}}</h2>
-                    <p >{{equipDetailData.location}}</p>
-                </li>
-            </ul>
-            <p class="quip-center-span">
-                <span class="value">{{ inRange ? equipDetailData.ObjVal : '故障' }}</span>
-                <span style="font-size: 2vmin" v-if="inRange">{{ equipDetailData.unit }}</span>
-            </p>
+        <ul class="quip-title-ul">
+            <li class="quip-title-li">
+                <img :src="srcImg" class="img">
+                <img src="../../assets/images/um/fault.png" class="img" v-if="!inRange">
+            </li>
+            <li class="quip-title-li">
+                <h2>{{equipDetailData.ObjName}}</h2>
+                <p>{{equipDetailData.location}}</p>
+            </li>
+        </ul>
+        <p class="quip-center-span">
+            <span class="value">{{ inRange ? equipDetailData.ObjVal : '故障' }}</span>
+            <span style="font-size: 2vmin" v-if="inRange">{{ equipDetailData.unit }}</span>
+        </p>
 
-            <ul class="quip-bottom-ul">
-                <li class="quip-bottom-li">
-                    <p class="time" v-if="isTimeShow">{{ equipDetailData.time }}</p>
-                    <p class="time" >{{ equipDetailData.objtypeName }}</p>
-                </li>
-                <li class="quip-bottom-li"> 
-                    <div class="min" v-if="equipDetailData.minNormal != null">
-                        <img :src="srcImg" class="img"> 
-                    </div>
-                    <div class="max" v-if="equipDetailData.maxNormal != null">
-                    </div>
-                </li>
-            </ul>
-            
+        <ul class="quip-bottom-ul">
+            <li class="quip-bottom-li">
+                <p class="time" v-if="isTimeShow">{{ equipDetailData.time }}</p>
+                <p class="time">{{ equipDetailData.objtypeName }}</p>
+            </li>
+            <li class="quip-bottom-li">
+                <div class="min" v-if="equipDetailData.minNormal != null">
+                    <img :src="srcImg" class="img">
+                </div>
+                <div class="max" v-if="equipDetailData.maxNormal != null">
+                </div>
+            </li>
+        </ul>
+
     </div>
 </template>
 
@@ -77,8 +77,7 @@
         click: boolean = false
         clickTimer: any = null
         srcImg: string = ''
-        imgStatusList: ImgStatus[] = [
-            {
+        imgStatusList: ImgStatus[] = [{
                 "objtypeId": 1,
                 "fun": this.changeImg('temp')
             },
@@ -150,11 +149,11 @@
                 true;
 
             this.imgStatusList.forEach((img: ImgStatus) => {
-                if(img.objtypeId === this.equipDetailData.objtypeId){
+                if (img.objtypeId === this.equipDetailData.objtypeId) {
                     img.fun() // 调用函数
                 }
             })
-                
+
         }
         locationEquimpent() {
             this.click = !this.click;
@@ -162,12 +161,12 @@
                 this.clickTimer = setTimeout(() => this.click = false, 2000)
             }
         }
-        changeImg(Img: string){
+        changeImg(Img: string) {
             let _this = this
-            return function(){
-                    let img: string = _this.normal ? `${Img}-normal` : ( _this.inRange ? `${Img}-error` : '' )
+            return function () {
+                let img: string = _this.normal ? `${Img}-normal` : (_this.inRange ? `${Img}-error` : '')
 
-                    _this.srcImg = require(`@/assets/images/um/${img}.png`)
+                _this.srcImg = require(`@/assets/images/um/${img}.png`)
             }
         }
 
@@ -188,7 +187,7 @@
             padding-top: 4%;
 
             .quip-title-li {
-                float: left;    
+                float: left;
 
             }
 
@@ -200,12 +199,13 @@
                     width: 70%
                 }
             }
+
             >:last-child {
                 width: 55%;
                 text-align: center;
             }
         }
-        
+
         .quip-center-span {
 
             .value {
@@ -216,11 +216,11 @@
         }
 
         .quip-bottom-ul {
-            
+
             overflow: hidden;
 
             .quip-bottom-li {
-                float: left;    
+                float: left;
             }
 
             >:first-child {
@@ -229,6 +229,7 @@
                 font-size: 1.6vmin;
 
             }
+
             >:last-child {
                 width: 22%;
                 margin-left: -4%;
@@ -240,5 +241,4 @@
         }
 
     }
-    
 </style>

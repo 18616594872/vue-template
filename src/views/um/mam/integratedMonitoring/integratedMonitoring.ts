@@ -10,8 +10,6 @@ import {
     listAverageGesInfo
 } from '@/api/integratedMonitoring'
 import {
-    moniterDataList,
-    customerDataList,
     energyDataList
 } from '@/api/operationManagement'
 import MixedLineAndBar from '@/components/common/chart/chartComponent.vue'
@@ -21,10 +19,12 @@ import TirggerData from '@/views/um/mam/triggerData/triggerData.vue'
 import HollowPieChart from '@/components/common/chart/chartComponent.vue'
 import Chart from '@/components/common/chart/chartComponent.vue'
 import {
-    Series,
     ChartBindData,
     ChartType
 } from '@/types/chart.Interface'
+import {
+    isSeriesArray
+} from '@/utils/common.ts'
 
 
 @Component({
@@ -38,21 +38,12 @@ import {
     }
 })
 export default class About extends Vue {
+    title: any = {
+        equipType: '监测对象个数统计',
+        tempHumidity: '温湿度数据',
+        energy: '管廊能耗统计',
+        contract: '管廊合同统计'
 
-    equipTypeTitle: ElementBoxTitle = {
-        titleIcon: require('@/assets/images/um/doughnut-icon.png'),
-        text: '监测对象个数统计'
-    }
-
-    tempHumidityTitle: ElementBoxTitle = {
-        titleIcon: require('@/assets/images/um/temp-humidity-icon.png'),
-        text: '温湿度数据'
-    }
-    energyTitle: ElementBoxTitle = {
-        text: '管廊能耗统计'
-    }
-    contractTitle: ElementBoxTitle = {
-        text: '管廊合同统计'
     }
     equipTypeDate: ChartBindData = {
         id: 'doughnutId',
@@ -149,13 +140,16 @@ export default class About extends Vue {
         this.initMixedLineAndBar()
     }
     initEquipTypeDate() {
+        let {
+            equipTypeDate
+        } = this
         listObjData().then((res: any) => {
             let {
                 code,
                 data
             } = res.data
             if (code === 200) {
-                this.equipTypeDate.data.series = {
+                equipTypeDate.data.series = {
                     name: '对象类型：',
                     unit: '个',
                     data
@@ -166,34 +160,50 @@ export default class About extends Vue {
         })
     }
     initMixedLineAndBar() {
+        let {
+            mixedLineAndBarData: {
+                data: {
+                    series
+                }
+            }
+        } = this
         listAverageGesInfo().then((res: any) => {
             let {
                 code,
                 data
             } = res.data
             if (code === 200) {
-                (this.mixedLineAndBarData.data.series as any).forEach((el: any) => {
-                    el.data = data
-                })
-
-                
+                if (isSeriesArray(series)) {
+                    series.forEach((el: any) => {
+                        el.data = data
+                    })
+                }
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)
         })
     }
     getEnergyDataList() {
+        let {
+            energyData: {
+                data: {
+                    series
+                }
+            }
+        } = this
         return energyDataList().then((res: any) => {
             let {
                 code,
                 data
             } = res.data
             if (code === 200) {
-                this.energyData.data.series = [{
-                    name: '古城大街',
-                    unit: '千瓦时',
-                    data
-                }]
+                if (isSeriesArray(series)) {
+                    series = [{
+                        name: '古城大街',
+                        unit: '千瓦时',
+                        data
+                    }]
+                }
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)

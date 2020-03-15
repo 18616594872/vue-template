@@ -3,12 +3,12 @@
         <div class="top-wrap">
             <div class="type-data-wrap">
                 <div class="doughnut-wrap">
-                    <Title :Title="equipTypeTitle" />
+                    <Title :Text="equipTypeTitle" />
                     <hollow-pie-chart :bindData="equipTypeDate" class="doughnut-box" />
                 </div>
                 <div class="temp-humidity-wrap">
                     <div class="title">
-                        <Title :Title="tempHumidityTitle" />
+                        <Title :Text="title.tempHumidity" />
                     </div>
                     <mixed-line-and-bar :bindData="mixedLineAndBarData" class="mixedLineAndBar-box" />
                 </div>
@@ -18,12 +18,12 @@
             </div>
             <div class="type-data-wrap">
                 <div class="doughnut-wrap">
-                    <Title :Title="equipTypeTitle" />
+                    <Title :Text="title.equipType" />
                     <hollow-pie-chart :bindData="equipTypeDate" class="doughnut-box" />
                 </div>
                 <div class="temp-humidity-wrap">
                     <div class="title">
-                        <Title :Title="tempHumidityTitle" />
+                        <Title :Text="title.tempHumidity" />
                     </div>
                     <mixed-line-and-bar :bindData="mixedLineAndBarData" class="mixedLineAndBar-box" />
                 </div>
@@ -31,13 +31,13 @@
         </div>
         <div class="bottom-wrap">
             <div class="tunnel-contract-wrap">
-                <Title :Title="contractTitle" />
+                <Title :Text="title.contract" />
                 <div class="contractChart">
                     <Chart :bindData="contractData" />
                 </div>
             </div>
             <div class="energy-consumption-wrap">
-                <Title :Title="energyTitle" />
+                <Title :Text="title.energy" />
                 <div class="energyChart">
                     <Chart :bindData="energyData" />
                 </div>

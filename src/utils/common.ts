@@ -1,4 +1,7 @@
 import Cookies from 'js-cookie'
+import {
+    Series
+} from '@/types/chart.Interface'
 
 export const TOKEN_KEY: string = 'token'
 export const USERNAME_KEY: string = 'userName'
@@ -151,4 +154,8 @@ export class ChartFontSize {
         return 0
     }
 
+}
+
+export function isSeriesArray(series: Series | Series[] | undefined): series is Series[] {
+    return ({}).toString.call(series) === "[object Array]"
 }

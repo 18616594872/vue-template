@@ -4,7 +4,7 @@ import {
 } from 'vue-property-decorator'
 import {
     customerDataList
-} from '@/api/listCustomer.ts'
+} from '@/api/listCustomer'
 import {
     Page
 } from '@/types/common.interface'

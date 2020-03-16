@@ -3,13 +3,13 @@ import {
     Vue
 } from 'vue-property-decorator'
 import publicMonitorDetails from '@/components/um/publicMonitorDetails.vue'
-// import environmentList from './environmentList/environmentList.vue'
+import environmentList from './environmentList/environmentList.vue'
 import {
     MonitorType,
     Codition,
     EquipmentProp,
     EquipmentDataList
-} from '@/types/views/environmentalMonitor.interface.ts'
+} from '@/types/views/environmentalMonitor.interface'
 import {
     equipmentTypeList,
     equipmentTypeDataList
@@ -21,7 +21,7 @@ import {
 @Component({
     components: {
         publicMonitorDetails,
-        // environmentList
+        environmentList
     }
 })
 export default class About extends Vue {

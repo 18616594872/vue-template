@@ -59,9 +59,6 @@ export default class About extends Vue {
     mounted() {
         this.listSeriesData()
     }
-    IS(p: Series | Series[]): p is Series{
-        return ({}).toString.call(p) === '[object object]'
-    }
     listSeriesData() {
         let {
             crossBarData,
@@ -74,10 +71,7 @@ export default class About extends Vue {
             } = res.data
             if (code === 200) {
                 
-                if(this.IS(crossBarData.data.series)){
-                    crossBarData.data.series.data = data(simpleBarData.data.series as any).data = data
-                }
-                
+                // crossBarData.data.series.data = data(simpleBarData.data.series as any).data = data
             }
         }).catch((error: any) => {
             (this as any).Log.warn(error)

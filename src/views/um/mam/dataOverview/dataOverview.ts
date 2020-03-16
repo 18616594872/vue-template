@@ -9,7 +9,7 @@ import Title from '@/components/um/umtitle.vue'
 import DataBox from '@/components/um/dataBox.vue'
 import {
     listMonitorData
-} from '@/api/dataDetails.ts'
+} from '@/api/dataDetails'
 
 @Component({
     components: {

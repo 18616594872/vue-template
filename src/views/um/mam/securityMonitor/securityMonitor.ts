@@ -9,7 +9,7 @@ import {
     Codition,
     EquipmentProp,
     EquipmentDataList
-} from '@/types/views/environmentalMonitor.interface.ts'
+} from '@/types/views/environmentalMonitor.interface'
 import {
     equipmentTypeList,
     equipmentTypeDataList

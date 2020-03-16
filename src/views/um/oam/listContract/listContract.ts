@@ -6,7 +6,7 @@ import {
     getPayType,
     getContractStatus,
     contractDatagrid
-} from '@/api/listContract.ts'
+} from '@/api/listContract'
 import {
     Page,
     keyVal

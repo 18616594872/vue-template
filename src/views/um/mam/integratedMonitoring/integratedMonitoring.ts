@@ -24,7 +24,7 @@ import {
 } from '@/types/chart.Interface'
 import {
     isSeriesArray
-} from '@/utils/common.ts'
+} from '@/utils/common'
 
 
 @Component({

@@ -9,11 +9,11 @@ import Title from '@/components/um/umtitle.vue'
 import SimpleGauge from '@/components/common/chart/chartComponent.vue'
 import {
     listMeasTriggerCount
-} from '@/api/measureModule.ts'
+} from '@/api/measureModule'
 import {
     listcontrolEquip,
     listEquipStatus
-} from '@/api/mechanicalMonitor.ts'
+} from '@/api/mechanicalMonitor'
 import Pie3DChart from '@/components/common/chart/chartComponent.vue'
 import {
     ChartBindData,

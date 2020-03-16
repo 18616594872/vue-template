@@ -6,16 +6,16 @@ import Chart from "@/components/common/chart/chartComponent.vue"
 import {
     ChartBindData,
     ChartType
-} from '@/types/chart.Interface.ts'
+} from '@/types/chart.Interface'
 import {
     TableInterface
-} from '@/types/views/energyConsumption.interface.ts'
+} from '@/types/views/energyConsumption.interface'
 import {
     tableList,
     energyConsumptionDataList,
     energyAverageECDataList,
     energyPeriodECDataList
-} from '@/api/energyConsumption.ts'
+} from '@/api/energyConsumption'
 @Component({
     components: {
         Chart

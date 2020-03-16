@@ -124,7 +124,8 @@ let equipMessage = {
             tunnel: "古城大街",
             tunnelId: 1,
         }]
-    }
+    },
+    
 }
 
 let equipmentType = {

@@ -11,7 +11,7 @@ import {
 import {
     EquipmentDataList,
     EquipmentProp
-} from '@/types/views/environmentalMonitor.interface.ts'
+} from '@/types/views/environmentalMonitor.interface'
 
 @Component({
     components: {

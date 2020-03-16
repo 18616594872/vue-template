@@ -18,12 +18,7 @@ export const constantRoutes: any[] = [{
 
 ]
 
-export const asyncRoutes: any[] = [{
-        path: '/VMMain',
-        name: 'VMMain',
-        component: (resolve: any) =>
-            require(["@/views/vm/visualizations/visualizations.vue"], resolve)
-    },
+export const asyncRoutes: any[] = [
     {
         path: '/UMMain',
         name: 'ummain',

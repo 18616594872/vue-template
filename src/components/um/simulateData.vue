@@ -3,7 +3,6 @@
         <ul class="quip-title-ul">
             <li class="quip-title-li">
                 <img :src="srcImg" class="img">
-                <img src="../../../assets/images/um/fault.png" class="img" v-if="!inRange">
             </li>
             <li class="quip-title-li">
                 <h2>{{equipDetailData.name}}</h2>
@@ -38,10 +37,11 @@
     } from "vue-property-decorator"
     import {
         EquipDataInterface,
-        ImgStatus,
-        keyVal
+        ImgStatus
     } from '@/types/components/simulateData.ts'
-    import { EquipmentProp } from '@/types/views/environmentalMonitor.interface'
+    import {
+        EquipmentProp
+    } from '@/types/views/environmentalMonitor.interface'
 
     @Component({})
     export default class About extends Vue {
@@ -142,7 +142,7 @@
         }
         changeImg(Img: string) {
             let _this = this
-            return function() {
+            return function () {
                 let img: string = _this.normal ? `${Img}-normal` : (_this.inRange ? `${Img}-error` : '')
 
                 _this.srcImg = require(`@/assets/images/um/${img}.png`)

@@ -28,6 +28,6 @@
 <script lang="ts" src="./securityList.ts"></script>
 
 <style lang="less">
-    @import '../../../../../assets/less/environment.less';
+    @import '../../../../../../assets/less/environment.less';
 </style>
 

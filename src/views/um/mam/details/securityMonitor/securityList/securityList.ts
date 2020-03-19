@@ -4,7 +4,7 @@ import {
     Prop,
     Watch
 } from 'vue-property-decorator'
-import equipTypeComponent from '@/components/um/equipTypeComponent/equipTypeComponent.vue'
+import equipTypeComponent from '@/components/um/equipTypeComponent.vue'
 import {
     Page
 } from '@/types/common.interface'

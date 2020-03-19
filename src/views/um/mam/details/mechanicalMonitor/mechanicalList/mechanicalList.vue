@@ -27,5 +27,5 @@
 <script lang="ts" src="./mechanicalList.ts"></script>
 
 <style lang="less">
-    @import '../../../../../assets/less/environment.less';
+    @import '../../../../../../assets/less/environment.less';
 </style>

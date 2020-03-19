@@ -2,7 +2,7 @@ import {
     Component,
     Vue
 } from 'vue-property-decorator'
-import publicMonitorDetails from '@/components/um/publicMonitorDetails/publicMonitorDetails.vue'
+import publicMonitorDetails from '@/components/um/publicMonitorDetails.vue'
 import securityList from './securityList/securityList.vue'
 import {
     MonitorType,

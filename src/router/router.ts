@@ -80,6 +80,22 @@ export const asyncRoutes: any[] = [
                 meta: {
                     title: '环境监测', // 设置在侧边栏中展示的名字
                 }
+            },
+            {
+                path: 'securityMonitor',
+                name: '安防监控',
+                component: (resolve: any) => require(["@/views/um/mam/details/securityMonitor/securityMonitor.vue"], resolve),
+                meta: {
+                    title: '安防监控', // 设置在侧边栏中展示的名字
+                }
+            },
+            {
+                path: 'mechanicalMonitor',
+                name: '机电监控',
+                component: (resolve: any) => require(["@/views/um/mam/details/mechanicalMonitor/mechanicalMonitor.vue"], resolve),
+                meta: {
+                    title: '机电监控', // 设置在侧边栏中展示的名字
+                }
             }]
         }]
     }

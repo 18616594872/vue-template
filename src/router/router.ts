@@ -5,17 +5,16 @@
  * @param {string} title 页面标题
  */
 
- import mainPage from '@/views/um/mainPage/mainPage.vue'
+import mainPage from '@/views/um/mainPage/mainPage.vue'
 
 export const constantRoutes: any[] = [{
-        path: '/VMLogin',
-        name: 'VMLogin',
+        path: '/login',
         component: (resolve: any) =>
             require(["@/views/vm/login/login.vue"], resolve),
     },
     {
         path: "/",
-        redirect: "/VMLogin"
+        redirect: "/login"
     },
 
 ]
@@ -24,33 +23,39 @@ export const asyncRoutes: any[] = [
     {
         path: '/UMMain',
         name: 'ummain',
-        component: (resolve: any) => require(["@/views/um/umMain/umMain/umMain.vue"], resolve),
+        component: (resolve: any) => require(["@/views/um/umMain/umMain.vue"], resolve),
     },
     {
-        path: '/VM',
-        name: '可视化主页',
+        path: '/visual',
+        name: '可视化',
+        component: (resolve: any) => require(["@/views/vm/visualizations/visualizations.vue"], resolve),
+    },
+    {   
+        path: '/visualDetail',
+        name: '可视化详情',
+        redirect: '/visualDetail/environment',
         component: (resolve: any) =>
             require(["@/views/vm/overviewMain/overviewMain.vue"], resolve),
         children: [{
-                path: '/VM/environment',
+                path: 'environment',
                 name: '综合监控',
                 component: (resolve: any) =>
                     require(["@/views/vm/environmentMonitor/environmentMonitor.vue"], resolve)
             },
             {
-                path: '/VM/tunnelIntroduct',
+                path: 'tunnelIntroduct',
                 name: '管廊简介',
                 component: (resolve: any) =>
                     require(["@/views/vm/tunnelIntroduction/tunnelIntroduction.vue"], resolve)
             },
             {
-                path: '/VM/PlanManage',
+                path: 'PlanManage',
                 name: '预案管理',
                 component: (resolve: any) =>
                     require(["@/views/vm/planManage/planManage.vue"], resolve)
             },
             {
-                path: '/VM/operatManage',
+                path: 'operatManage',
                 name: '运营管理',
                 component: (resolve: any) =>
                     require(["@/views/vm/operatManage/operatManage.vue"], resolve)

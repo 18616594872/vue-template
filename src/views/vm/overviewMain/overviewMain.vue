@@ -1,6 +1,5 @@
 <template>
-    <div class="overviewMain-wrap"
-    >
+    <div class="overviewMain-wrap">
     <router-view />
     </div>
 </template>

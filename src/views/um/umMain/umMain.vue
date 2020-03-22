@@ -175,8 +175,8 @@
                 <Col span="6" offset="1">
                     <h2 class="menusTitle">综合监控</h2>
                     <Col span="8">
-                        <Button class="btn-xunjian normalBtn" type="info" :disabled="findPath('/UM/IntegratedMonitoring')?false:true"
-                            @click="goToMoudle({ path:'/UM/IntegratedMonitoring'})">
+                        <Button class="btn-xunjian normalBtn" type="info"
+                            @click="goToMoudle({ path:'/mam/details'})">
                             <div>
                                 <img class="entranceImg" :src="environment">
                                 <div class="entranceTitle">环境监测</div>

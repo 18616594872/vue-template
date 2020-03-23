@@ -39,6 +39,9 @@
         SubFunModuleItem,
         DetailSubFunModuleItem
     } from '@/types/components/umtopPage.interface.ts'
+    import {
+        getNavBarNum
+    } from '@/api/mainPage'
     @Component({})
     export default class About extends Vue {
 
@@ -47,17 +50,7 @@
         defaultValue: string = "1"
         itemNavigation: any[] = []
         currentIndex: number = 0
-
-        // prop
-        @Prop({
-            required: false,
-            default: ''
-        }) itemMenu!: ModuleItem[]
-
-        @Prop({
-            required: false,
-            default: ''
-        }) refeshPath!: ''
+        itemMenu: ModuleItem[] = []
 
         @Watch('itemMenu', {
             deep: true
@@ -136,6 +129,20 @@
             }
 
         }
+        getNavBarList() {
+        return getNavBarNum().then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+                this.itemMenu = data
+            }
+        }).catch(error => {
+            (this as any).Log.warn(error)
+        })
+
+    }
         backToMain() {
             this.$router.push('/UMMain')
         }

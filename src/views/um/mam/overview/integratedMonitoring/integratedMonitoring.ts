@@ -14,8 +14,8 @@ import {
 } from '@/api/operationManagement'
 import MixedLineAndBar from '@/components/common/chart/chartComponent.vue'
 import Title from '@/components/um/umtitle.vue'
-import DataOverview from '@/views/um/mam/dataOverview/dataOverview.vue'
-import TirggerData from '@/views/um/mam/triggerData/triggerData.vue'
+import DataOverview from '@/views/um/mam/details/dataOverview/dataOverview.vue'
+import TirggerData from '@/views/um/mam/details/triggerData/triggerData.vue'
 import HollowPieChart from '@/components/common/chart/chartComponent.vue'
 import Chart from '@/components/common/chart/chartComponent.vue'
 import {

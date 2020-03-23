@@ -5,15 +5,13 @@ import 'nprogress/nprogress.css'; // Progress 进度条样式
 import {
     getToken,
     TOKEN_KEY,
-    USERNAME_KEY,
-    PASSWORD_KEY
 } from '@/utils/common' // get token from cookie
 
 NProgress.configure({
     showSpinner: false
 }) // NProgress Configuration
 
-const whiteList: string[] = ['/VMLogin'] // no redirect 的白名单
+const whiteList: string[] = ['/login'] // no redirect 的白名单
 
 const permission = async () => {
     router.beforeEach(async (to: any, from: object, next: any) => {
@@ -23,7 +21,7 @@ const permission = async () => {
         const hasToken: string | boolean = getToken(TOKEN_KEY)
 
         if (hasToken) {
-            if (to.path === '/VMLogin') {
+            if (to.path === '/login') {
                 // 如果是登录 重定向到首页
                 next()
                 NProgress.done()
@@ -48,7 +46,7 @@ const permission = async () => {
                     } catch (error) {
                         // remove token and go to login page to re-login
                         await store.dispatch('resetToken')
-                        next(`/VMLogin`)
+                        next(`/login`)
                         NProgress.done()
                     }
                 }
@@ -60,7 +58,7 @@ const permission = async () => {
                 next()
             } else {
                 // 没有访问权限的其他页将重定向到登录页。
-                next(`/VMLogin`)
+                next(`/login`)
                 NProgress.done()
             }
         }

@@ -103,6 +103,18 @@ export const asyncRoutes: any[] = [
                 }
             }]
         }]
+    },{
+        path: '/oam',
+        redirect: '/oam/overview',
+        component: mainPage,
+        children: [
+            {
+                path: 'overview',
+                name: '运营管理总览',
+                hidden: true, // 不显示在左侧栏
+                component: (resolve: any) => require(["@/views/um/oam/overview/operationManagement/operationManagement.vue"], resolve)
+            }
+        ]
     }
 ]
 

@@ -6,6 +6,9 @@ import {
     getToken,
     TOKEN_KEY,
 } from '@/utils/common' // get token from cookie
+import {
+    Route
+} from 'vue-router'
 
 NProgress.configure({
     showSpinner: false
@@ -14,7 +17,7 @@ NProgress.configure({
 const whiteList: string[] = ['/login'] // no redirect 的白名单
 
 const permission = async () => {
-    router.beforeEach(async (to: any, from: object, next: any) => {
+    router.beforeEach(async (to: Route, from: Route, next: any) => {
 
         NProgress.start()
         // 确定用户是否登录

@@ -1,6 +1,6 @@
 <template>
     <div class="mainPage-wrap layout-wrap">
-        <UMTopPage />
+        <UMTopPage :path="url"/>
         <router-view />
         <div class="footer-wrap">
             2019-2020

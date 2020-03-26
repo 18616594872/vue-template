@@ -65,7 +65,7 @@ export const asyncRoutes: any[] = [
     {
         path: '/mam',
         redirect: '/mam/overview',
-        component: mainPage,
+        component: (resolve: any) => require(["@/views/um/mainPage/mainPage.vue"], resolve),
         children: [{
             path: 'overview',
             name: '运营管理总览',
@@ -103,10 +103,11 @@ export const asyncRoutes: any[] = [
                 }
             }]
         }]
-    },{
+    },
+    {
         path: '/oam',
         redirect: '/oam/overview',
-        component: mainPage,
+        component: (resolve: any) => require(["@/views/um/mainPage/mainPage.vue"], resolve),
         children: [
             {
                 path: 'overview',
@@ -117,35 +118,3 @@ export const asyncRoutes: any[] = [
         ]
     }
 ]
-
-// children: [{
-//     path: '/UM/IntegratedMonitoring',
-//     name: '综合监控',
-//     component: (resolve: any) => require(["@/views/um/mam/integratedMonitoring/integratedMonitoring.vue"], resolve)
-// },
-// {
-//     path: '/UM/operationManagement',
-//     name: '运营管理',
-//     component: (resolve: any) => require(["@/views/um/oam/operationManagement/operationManagement.vue"], resolve)
-// },
-// {
-//     path: '/UM/energyConsumption',
-//     name: '能耗管理',
-//     component: (resolve: any) => require(["@/views/um/oam/energyConsumption/energyConsumption.vue"], resolve)
-// },
-// {
-//     path: '/UM/listContract',
-//     name: '合同管理',
-//     component: (resolve: any) => require(["@/views/um/oam/listContract/listContract.vue"], resolve)
-// },
-// {
-//     path: '/UM/listCustomer',
-//     name: '客户管理',
-//     component: (resolve: any) => require(["@/views/um/oam/listCustomer/listCustomer.vue"], resolve)
-// },
-// {
-//     path: '/UM/environmentalMonitor',
-//     name: '环境监测',
-//     component: (resolve: any) => require(["@/views/um/mam/environmentalMonitor/environmentalMonitor.vue"], resolve)
-// }
-// ]

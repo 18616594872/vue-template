@@ -7,108 +7,71 @@ export default [{
             msg: "success",
             data: [{
                     id: '1',
-                    navBarParentName: '综合监控',
+                    navBarName: '综合监控',
+                    path: '/mam',
                     children: [{
                             id: '1-1',
-                            navBarName: '监控总览',
-                            url: '/UM/IntegratedMonitoring'
+                            secondMenuName: '监控总览',
+                            url: '/mam/overview'
                         },
                         {
                             id: '1-2',
-                            navBarName: '监控详情',
-                            children: [{
-                                    id: '1-2-1',
-                                    menuName: '环境监测',
-                                    url: '/UM/environmentalMonitor'
-                                },
-                                {
-                                    id: '1-2-2',
-                                    menuName: '安防监控',
-                                    url: ''
-                                },
-                                {
-                                    id: '1-2-3',
-                                    menuName: '机电监控',
-                                    url: ''
-                                },
-                                {
-                                    id: '1-2-4',
-                                    menuName: '人员定位',
-                                    url: ''
-                                },
-                                {
-                                    id: '1-2-5',
-                                    menuName: '视频监控',
-                                    url: '/UM/videoMonitoring/1'
-                                }
-                            ]
+                            secondMenuName: '监控详情',
+                            url: '/mam/details'
+                        },
+                        {
+                            id: '1-3',
+                            secondMenuName: '数据分析',
+                            url: '/mam/dataAna'
                         }
                     ]
                 },
                 {
                     id: '2',
-                    navBarParentName: '运营管理',
+                    navBarName: '运营管理',
+                    path: '/oam',
                     children: [{
                             id: '2-1',
-                            navBarName: '运营总览',
-                            url: '/UM/operationManagement'
+                            secondMenuName: '运营总览',
+                            url: '/oam/overview'
                         },
                         {
                             id: '2-2',
-                            navBarName: '运营详情',
-                            children: [{
-                                    id: '2-2-1',
-                                    menuName: '能耗管理',
-                                    url: '/UM/environmentalMonitor'
-                                },
-                                {
-                                    id: '2-2-2',
-                                    menuName: '合同管理',
-                                    url: '/UM/listContract'
-                                },
-                                {
-                                    id: '2-2-3',
-                                    menuName: '企业客户',
-                                    url: '/UM/listCustomer'
-                                }
-                            ]
+                            secondMenuName: '运营详情',
+                            url: '/oam/details'
+                        },
+                        {
+                            id: '2-3',
+                            secondMenuName: '数据分析',
+                            url: '/oam/dataAna'
                         }
                     ]
                 },
                 {
                     id: '3',
-                    navBarParentName: '运维管理',
+                    navBarName: '运维管理',
+                    path: '/omm',
                     children: [{
                             id: '3-1',
-                            navBarName: '运维总览',
-                            url: '/UM/patrolScheme'
+                            secondMenuName: '运维总览',
+                            url: '/omm/overview'
                         },
                         {
                             id: '3-2',
-                            navBarName: '巡检详情',
-                            children: [{
-                                    id: '3-2-1',
-                                    menuName: '巡检管理',
-                                    url: '/UM/patrolManage'
-                                },
-                                {
-                                    id: '3-2-2',
-                                    menuName: '巡检任务',
-                                    url: '/UM/patrolTask/query'
-                                },
-                                {
-                                    id: '3-2-3',
-                                    menuName: '缺陷管理',
-                                    url: '/UM/defect/query'
-                                }
-                            ]
+                            secondMenuName: '运维详情',
+                            url: '/omm/details'
+                        },
+                        {
+                            id: '3-3',
+                            secondMenuName: '数据分析',
+                            url: '/omm/dataAna'
                         }
                     ]
                 }
             ]
         }
     }
-},{
+}, {
     url: '/mam/environment/equipmentType',
     type: 'get',
     response: () => {
@@ -116,32 +79,33 @@ export default [{
             code: 200,
             msg: "success",
             data: [{
-                id: 1,
-                title: '湿度'
-            },
-            {
-                id: 2,
-                title: '湿度'
-            },
-            {
-                id: 3,
-                title: '硫化氢'
-            },
-            {
-                id: 4,
-                title: '一氧化碳'
-            },
-            {
-                id: 5,
-                title: '氧气'
-            },
-            {
-                id: 6,
-                title: '甲烷'
-            }]
+                    id: 1,
+                    title: '湿度'
+                },
+                {
+                    id: 2,
+                    title: '湿度'
+                },
+                {
+                    id: 3,
+                    title: '硫化氢'
+                },
+                {
+                    id: 4,
+                    title: '一氧化碳'
+                },
+                {
+                    id: 5,
+                    title: '氧气'
+                },
+                {
+                    id: 6,
+                    title: '甲烷'
+                }
+            ]
         }
     }
-},{
+}, {
     url: '/mam/environment/equipmentType',
     type: 'get',
     response: () => {
@@ -149,32 +113,33 @@ export default [{
             code: 200,
             msg: "success",
             data: [{
-                id: 1,
-                title: '湿度'
-            },
-            {
-                id: 2,
-                title: '湿度'
-            },
-            {
-                id: 3,
-                title: '硫化氢'
-            },
-            {
-                id: 4,
-                title: '一氧化碳'
-            },
-            {
-                id: 5,
-                title: '氧气'
-            },
-            {
-                id: 6,
-                title: '甲烷'
-            }]
+                    id: 1,
+                    title: '湿度'
+                },
+                {
+                    id: 2,
+                    title: '湿度'
+                },
+                {
+                    id: 3,
+                    title: '硫化氢'
+                },
+                {
+                    id: 4,
+                    title: '一氧化碳'
+                },
+                {
+                    id: 5,
+                    title: '氧气'
+                },
+                {
+                    id: 6,
+                    title: '甲烷'
+                }
+            ]
         }
     }
-},{
+}, {
     url: '/mam/environment/equipmentType',
     type: 'get',
     response: () => {
@@ -182,29 +147,30 @@ export default [{
             code: 200,
             msg: "success",
             data: [{
-                id: 1,
-                title: '湿度'
-            },
-            {
-                id: 2,
-                title: '湿度'
-            },
-            {
-                id: 3,
-                title: '硫化氢'
-            },
-            {
-                id: 4,
-                title: '一氧化碳'
-            },
-            {
-                id: 5,
-                title: '氧气'
-            },
-            {
-                id: 6,
-                title: '甲烷'
-            }]
+                    id: 1,
+                    title: '湿度'
+                },
+                {
+                    id: 2,
+                    title: '湿度'
+                },
+                {
+                    id: 3,
+                    title: '硫化氢'
+                },
+                {
+                    id: 4,
+                    title: '一氧化碳'
+                },
+                {
+                    id: 5,
+                    title: '氧气'
+                },
+                {
+                    id: 6,
+                    title: '甲烷'
+                }
+            ]
         }
     }
 }]

@@ -14,8 +14,10 @@ import {
 })
 export default class About extends Vue {
 
+    toUrl: string = ''
+    
     beforeRouteUpdate(to: Route, from: Route, next: () => void) {
-        sessionStorage.setItem('fromPath', from.path)
+        this.toUrl =  from.path
         next()
     }
 }

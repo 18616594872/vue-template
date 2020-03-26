@@ -1,19 +1,13 @@
 
 export interface ModuleItem {
     id: string, 
-    navBarParentName: string, 
+    navBarName: string, 
+    path: string,
     children: SubFunModuleItem[]
 }
 
 export interface SubFunModuleItem {
     id: string,
-    navBarName: string,
-    url?: string,
-    children?: DetailSubFunModuleItem[]
-}
-
-export interface DetailSubFunModuleItem {
-    id: string,
-    menuName: string,
+    secondMenuName: string,
     url: string
 }

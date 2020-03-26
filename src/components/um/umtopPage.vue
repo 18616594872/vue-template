@@ -6,12 +6,12 @@
                 <li class="select-li-wrap">
                     <Select v-model="defaultValue" class="select-wrap" @on-change="changeNavParent">
                         <Option v-for="(item ,index) in itemMenu" :key="index" :value="item.id">
-                            {{item.navBarParentName}}</Option>
+                            {{item.navBarName}}</Option>
                     </Select>
                 </li>
-                <li v-for="(item, index) in itemNavigation" :key="index" @click="chooseNav(index, item)">
+                <li v-for="(item, index) in itemNavigation" :key="index" @click="chooseNav(item)">
                     <div class="nav-bar-name" :class="{ 'active-li': currentIndex === index }">
-                        {{item.navBarName}}
+                        {{item.secondMenuName}}
                     </div>
                     <div class="active-line"></div>
                 </li>
@@ -36,12 +36,12 @@
     } from "vue-property-decorator"
     import {
         ModuleItem,
-        SubFunModuleItem,
-        DetailSubFunModuleItem
+        SubFunModuleItem
     } from '@/types/components/umtopPage.interface.ts'
     import {
         getNavBarNum
     } from '@/api/mainPage'
+
     @Component({})
     export default class About extends Vue {
 
@@ -49,100 +49,69 @@
         headSign: string = require("@/assets/images/um/my-info.png")
         defaultValue: string = "1"
         itemNavigation: any[] = []
-        currentIndex: number = 0
+        currentIndex: string = ''
         itemMenu: ModuleItem[] = []
 
-        @Watch('itemMenu', {
-            deep: true
-        })
-        onItemMenu() {
-            this.changeNavParent({
-                id: this.defaultValue
-            }) // 接收传入数据页面初始化调用首选项
+        @Prop()
+        path!: string
+
+        @Watch('path')
+        pathChange() {
+            this.initPath()
         }
 
-        @Watch('refeshPath', {
-            deep: true
-        })
-        onWatchRefreshPath(newVal: string) {
-            // f5 刷新
-            this.itemMenu.forEach((item: ModuleItem, index: number) => {
+        mounted() {
+            this.getNavBarList()
+        }
+        initPath() {
+            if (!this.path) {
+                return
+            }
+
+            this.itemMenu.forEach((item: ModuleItem, index: number) => { 
                 item.children.forEach((ele: SubFunModuleItem, idx: number) => {
-                    // 无左侧菜单
-                    if (ele.url) {
-                        if (ele.url === newVal) {
-                            this.changeNavParent(item.id)
-                            this.defaultValue = item.id
-                        }
-                    }
-                    // 有左侧菜单
-                    else if (ele.children) {
-                        ele.children.forEach((tep: DetailSubFunModuleItem) => {
-                            if (tep.url === newVal || tep.url === sessionStorage.getItem(
-                                    'fromPath')) {
-                                this.changeNavParent({
-                                    id: item.id,
-                                    index: idx
-                                })
-                                this.defaultValue = item.id
-                            }
-                        })
+                    if (this.path.indexOf(ele.url) !== -1) {
+                        this.evaluation(item.id, ele.id, item.children)
                     }
                 })
             })
         }
-
-        @Emit('bingSend')
-        send(leftMenu: DetailSubFunModuleItem[]) {}
-
-        @Emit('bingIsShow')
-        isShow(isShowLeftMenu: boolean) {}
-
-        changeNavParent(param: any) {
-            let navParam = typeof param === 'string' ? {
-                id: param
-            } : param
+        changeNavParent(id: string) {
             let {
                 itemMenu
             } = this
 
             itemMenu.forEach((item: ModuleItem) => {
-                if (navParam.id === item.id) {
-                    this.itemNavigation = item.children
-                    this.chooseNav(navParam.index || 0, this.itemNavigation[0])
+                if (id === item.id) {
+                    this.evaluation(item.id, item.children[0].id, item.children)
+                    this.$router.push(item.path)
                 }
             })
 
         }
-        // 三级菜单
-        chooseNav(index: number, leftMenu: SubFunModuleItem) {
-            this.currentIndex = index
-
-            if (leftMenu.url) {
-                this.$router.push(leftMenu.url)
-                this.isShow(false)
-            }
-
-            if (leftMenu.children) {
-                this.send(leftMenu.children)
-                this.isShow(true)
-            }
-
+        evaluation(id: string, childId: string,child:　Array<any>){
+            this.currentIndex = childId
+            this.defaultValue = id
+            this.itemNavigation = child
         }
         getNavBarList() {
-        return getNavBarNum().then((res: any) => {
-            let {
-                code,
-                data
-            } = res.data
-            if (code === 200) {
-                this.itemMenu = data
-            }
-        }).catch(error => {
-            (this as any).Log.warn(error)
-        })
+            return getNavBarNum().then((res: any) => {
+                let {
+                    code,
+                    data
+                } = res.data
+                if (code === 200) {
+                    this.itemMenu = data
+                }
+            }).catch((error: any) => {
+                (this as any).Log.warn(error)
+            })
 
-    }
+        }
+        chooseNav(item: SubFunModuleItem){
+            this.currentIndex = item.id
+            this.$router.push(item.url)
+        }
         backToMain() {
             this.$router.push('/UMMain')
         }

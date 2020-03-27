@@ -52,7 +52,9 @@
         currentIndex: string = ''
         itemMenu: ModuleItem[] = []
 
-        @Prop()
+        @Prop({
+            default: ''
+        })
         path!: string
 
         @Watch('path')
@@ -62,6 +64,7 @@
 
         mounted() {
             this.getNavBarList()
+            this.initPath()
         }
         initPath() {
             if (!this.path) {

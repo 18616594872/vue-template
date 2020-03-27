@@ -12,7 +12,7 @@
         </ul>
         <p class="quip-center-span">
             <span class="value">{{ inRange ? equipDetailData.ObjVal : '故障' }}</span>
-            <span style="font-size: 2vmin" v-if="inRange">{{ equipDetailData.unit }}</span>
+            <span style="font-size: 3vmin" v-if="inRange">{{ equipDetailData.unit }}</span>
         </p>
 
         <ul class="quip-bottom-ul">

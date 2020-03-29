@@ -193,8 +193,8 @@
 
             .value {
                 font-weight: bold;
-                font-size: .3rem;
-                margin-right: .1rem;
+                font-size: 3rem;
+                margin-right: 1rem;
             }
         }
 
@@ -215,15 +215,14 @@
             }
 
             >:last-child {
-                width: 22%;
                 text-align: center;
-                line-height: .18rem;
+                line-height: 2rem;
                 border-radius: 50%;
-                width: 0.18rem;
-                margin-top: 0.04rem;
-                background-color: rgb(108, 124, 157);
-                height: .18rem;
-                font-size: 0.13rem;
+                width: 2rem;
+                margin-top: .7rem;
+                background-color: #6c7c9d;
+                height: 2rem;
+                font-size: 1.3rem;
             }
         }
 

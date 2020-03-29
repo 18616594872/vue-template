@@ -40,7 +40,7 @@ export default class About extends Vue {
     }
 
     getMonitorTypeList() {
-        equipmentTypeList(2)
+        equipmentTypeList({equipmentTypeId: 2})
             .then((res: any) => {
                 let {
                     code,

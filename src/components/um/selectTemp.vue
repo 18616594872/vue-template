@@ -208,7 +208,7 @@
                 border-top-left-radius: 6px;
                 border-bottom-left-radius: 6px;
                 display: inline-block;
-                padding: 7px 14px;
+                padding: 4px 14px;
                 margin-right: 5px;
             }
 

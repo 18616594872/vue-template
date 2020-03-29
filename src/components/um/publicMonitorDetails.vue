@@ -102,6 +102,9 @@
             deep: true
         })
         onEquipmentType(newVal: any) {
+            if( !newVal.lenght ){
+                return false
+            }
             let [first, ...othent] = newVal // 监听设备类型变化 默认选中首项数据
             this.equipmentTypeId = first.id
         }
@@ -265,7 +268,7 @@
         margin-left: 0.5rem;
 
         .title-list {
-            margin: 0.5rem 0;
+            margin: 0.4rem .9rem;
             overflow: hidden;
 
             .titleUl {

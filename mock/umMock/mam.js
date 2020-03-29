@@ -125,7 +125,7 @@ let equipMessage = {
             tunnelId: 1,
         }]
     },
-    
+
 }
 
 let equipmentType = {
@@ -161,12 +161,12 @@ let equipmentType = {
 }
 export default [{
         url: '/mam/environment/common/equipmentType',
-        type: 'get',
+        type: 'post',
         response: config => {
             const {
                 equipmentTypeId
             } = config.body
-
+            console.log(config.body)
             let data = equipmentType[equipmentTypeId]
             return {
                 code: 200,

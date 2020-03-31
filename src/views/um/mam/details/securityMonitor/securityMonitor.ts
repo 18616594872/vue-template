@@ -14,6 +14,7 @@ import {
     equipmentTypeList,
     equipmentTypeDataList
 } from '@/api/environmentalMonitor'
+import { ExtendDate } from '@/utils/common'
 
 @Component({
     components: {
@@ -76,7 +77,7 @@ export default class About extends Vue {
                         o.time =
                             a.time == undefined || a.time == "" ?
                             "" :
-                            new Date(a.time).format(
+                            new ExtendDate(a.time).format(
                                 "yyyy-MM-dd hh:mm:ss"
                             )
                         o.objtypeName =

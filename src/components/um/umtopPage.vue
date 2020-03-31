@@ -1,6 +1,6 @@
 <template>
     <div class="UMTopPage-wrap">
-        <div class="sys-title" @click="backToMain">后台管理平台</div>
+        <div class="sys-title">后台管理平台</div>
         <div class="navigation-wrap">
             <ul class="ul-wrap">
                 <li class="select-li-wrap">
@@ -71,7 +71,7 @@
                 return
             }
 
-            this.itemMenu.forEach((item: ModuleItem, index: number) => { 
+            this.itemMenu.forEach((item: ModuleItem, index: number) => {
                 item.children.forEach((ele: SubFunModuleItem, idx: number) => {
                     if (this.path.indexOf(ele.url) !== -1) {
                         this.evaluation(item.id, ele.id, item.children)
@@ -92,7 +92,7 @@
             })
 
         }
-        evaluation(id: string, childId: string,child:　Array<any>){
+        evaluation(id: string, childId: string, child: Array < any > ) {
             this.currentIndex = childId
             this.defaultValue = id
             this.itemNavigation = child
@@ -111,12 +111,9 @@
             })
 
         }
-        chooseNav(item: SubFunModuleItem){
+        chooseNav(item: SubFunModuleItem) {
             this.currentIndex = item.id
             this.$router.push(item.url)
-        }
-        backToMain() {
-            this.$router.push('/UMMain')
         }
     }
 </script>

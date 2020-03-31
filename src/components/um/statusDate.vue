@@ -43,8 +43,7 @@
     } from "vue-property-decorator"
     import {
         EquipDataInterface,
-        ImgStatus,
-        keyVal
+        ImgStatus
     } from '@/types/components/simulateData.ts'
     import { EquipmentProp } from '@/types/views/environmentalMonitor.interface'
 

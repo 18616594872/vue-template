@@ -12,6 +12,7 @@ import {
     EquipmentDataList,
     EquipmentProp
 } from '@/types/views/environmentalMonitor.interface'
+import { ExtendDate } from '@/utils/common'
 
 @Component({
     components: {
@@ -56,7 +57,7 @@ export default class About extends Vue {
             render: (h: any, params: any) => {
                 return h(
                     "div",
-                    new Date(params.row.time).format(
+                    new ExtendDate(params.row.time).format(
                         "yyyy-MM-dd hh:mm:ss"
                     )
                 );

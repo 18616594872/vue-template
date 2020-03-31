@@ -1,6 +1,7 @@
 import {
     Component,
-    Vue
+    Vue,
+    Watch
 } from 'vue-property-decorator'
 import {
     FormValidate,
@@ -31,7 +32,6 @@ export default class About extends Vue {
         }]
     }
     errTipMes: string = ''
-
     // methods
     handleSubmit(name: string) {
         let ref: any = this.$refs[name];
@@ -48,11 +48,11 @@ export default class About extends Vue {
                         this.errTipMes = ''
                         this.loading = false
                         this.$router.push({
-                            path: "/UMMain"
+                            path: "/mam"
                         });
 
                     })
-                    .catch((err) => {
+                    .catch((err: any) => {
                         this.errTipMes = "用户名或密码错误"
                         this.loading = false
                     });

@@ -50,7 +50,7 @@
         defaultValue: string = "1"
         itemNavigation: any[] = []
         currentIndex: string = ''
-        itemMenu: ModuleItem[] = []
+        itemMenu: any[] = []
 
         @Prop({
             default: ''
@@ -61,16 +61,18 @@
         pathChange() {
             this.initPath()
         }
+        get Routers(){
+            return this.$store.getters.routers
+        }
 
         mounted() {
-            this.getNavBarList()
+            this.itemMenu = this.getRoutes(this.Routers)
             this.initPath()
         }
         initPath() {
             if (!this.path) {
                 return
             }
-
             this.itemMenu.forEach((item: ModuleItem, index: number) => {
                 item.children.forEach((ele: SubFunModuleItem, idx: number) => {
                     if (this.path.indexOf(ele.url) !== -1) {
@@ -78,6 +80,16 @@
                     }
                 })
             })
+        }
+        getRoutes(Routers: any[]){
+            let o: any = []
+            Array.isArray(Routers) && Routers.forEach((router: any) => {
+                if(!router.hidden){
+                    o.push(router)
+                    router.children && (router.children = this.getRoutes(router.children))
+                }
+            })
+            return o
         }
         changeNavParent(id: string) {
             let {
@@ -96,20 +108,6 @@
             this.currentIndex = childId
             this.defaultValue = id
             this.itemNavigation = child
-        }
-        getNavBarList() {
-            return getNavBarNum().then((res: any) => {
-                let {
-                    code,
-                    data
-                } = res.data
-                if (code === 200) {
-                    this.itemMenu = data
-                }
-            }).catch((error: any) => {
-                (this as any).Log.warn(error)
-            })
-
         }
         chooseNav(item: SubFunModuleItem) {
             this.currentIndex = item.id

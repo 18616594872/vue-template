@@ -9,11 +9,13 @@ import mainPage from '@/views/um/mainPage/mainPage.vue'
 
 export const constantRoutes: any[] = [{
         path: '/login',
+        hidden: true, // 不显示在左侧栏
         component: (resolve: any) =>
             require(["@/views/vm/login/login.vue"], resolve),
     },
     {
         path: "/",
+        hidden: true, // 不显示在左侧栏
         redirect: "/login"
     },
 
@@ -22,12 +24,14 @@ export const constantRoutes: any[] = [{
 export const asyncRoutes: any[] = [
     {
         path: '/visual',
+        hidden: true,
         name: '可视化',
         component: (resolve: any) => require(["@/views/vm/visualizations/visualizations.vue"], resolve),
     },
     {   
         path: '/visualDetail',
         name: '可视化详情',
+        hidden: true,
         redirect: '/visualDetail/environment',
         component: (resolve: any) =>
             require(["@/views/vm/overviewMain/overviewMain.vue"], resolve),
@@ -71,7 +75,6 @@ export const asyncRoutes: any[] = [
             path: 'details',
             redirect: '/mam/details/environmentalMonitor',
             name: '巡检计划详情',
-            hidden: true, // 不显示在左侧栏
             component: (resolve: any) => require(["@/views/um/mam/details/detailsMain/detailsMain.vue"], resolve),
             children: [{
                 path: 'environmentalMonitor',

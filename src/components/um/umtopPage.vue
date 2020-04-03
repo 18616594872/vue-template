@@ -6,12 +6,12 @@
                 <li class="select-li-wrap">
                     <Select v-model="defaultValue" class="select-wrap" @on-change="changeNavParent">
                         <Option v-for="(item ,index) in itemMenu" :key="index" :value="item.id">
-                            {{item.navBarName}}</Option>
+                            {{item.name}}</Option>
                     </Select>
                 </li>
-                <li v-for="(item, index) in itemNavigation" :key="index" @click="chooseNav(item)">
+                <li v-for="(item, index) in itemNavigation" :key="index" @click="chooseNav(item, index)">
                     <div class="nav-bar-name" :class="{ 'active-li': currentIndex === index }">
-                        {{item.secondMenuName}}
+                        {{item.name}}
                     </div>
                     <div class="active-line"></div>
                 </li>
@@ -47,7 +47,7 @@
 
         tips: string = require("@/assets/images/um/tips.png")
         headSign: string = require("@/assets/images/um/my-info.png")
-        defaultValue: string = "1"
+        defaultValue: string = "0"
         itemNavigation: any[] = []
         currentIndex: string = ''
         itemMenu: any[] = []
@@ -66,27 +66,35 @@
         }
 
         mounted() {
-            this.itemMenu = this.getRoutes(this.Routers)
+            this.initRouters()
             this.initPath()
         }
         initPath() {
-            if (!this.path) {
+            let toPath = sessionStorage.getItem('toPath')
+            if (!toPath) {
                 return
             }
-            this.itemMenu.forEach((item: ModuleItem, index: number) => {
-                item.children.forEach((ele: SubFunModuleItem, idx: number) => {
-                    if (this.path.indexOf(ele.url) !== -1) {
-                        this.evaluation(item.id, ele.id, item.children)
-                    }
+            this.itemMenu.forEach((item: ModuleItem) => {
+                item.children.forEach((ele: SubFunModuleItem, idx: any) => {
+                    if (toPath && toPath.indexOf(`${item.path}/${ele.path}`) !== -1) {
+                            this.evaluation(item.id, idx, item.children)
+                            ele.children && this.chooseNav(ele, idx) //跳转非总览界面,进行二级跳转
+                        }
                 })
             })
         }
-        getRoutes(Routers: any[]){
+        initRouters(){
+            this.itemMenu = this.parseRouters(this.Routers).map((router: any, index: number) => {
+                router.id = index
+                return router
+            })
+        }
+        parseRouters(Routers: any[]){
             let o: any = []
             Array.isArray(Routers) && Routers.forEach((router: any) => {
                 if(!router.hidden){
                     o.push(router)
-                    router.children && (router.children = this.getRoutes(router.children))
+                    router.children && (router.children = this.parseRouters(router.children))
                 }
             })
             return o
@@ -105,13 +113,22 @@
 
         }
         evaluation(id: string, childId: string, child: Array < any > ) {
-            this.currentIndex = childId
             this.defaultValue = id
+            this.currentIndex = childId
             this.itemNavigation = child
         }
-        chooseNav(item: SubFunModuleItem) {
-            this.currentIndex = item.id
-            this.$router.push(item.url)
+        chooseNav(item: any, index: any) {   
+            this.currentIndex = index
+
+            let router = item.children ? Object.assign({
+                name: item.name,
+                params: {
+                    children: item.children
+                }
+            }) : {
+                name: item.name
+            }
+            this.$router.push(router)
         }
     }
 </script>

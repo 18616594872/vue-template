@@ -9,5 +9,6 @@ export interface ModuleItem {
 export interface SubFunModuleItem {
     id: string,
     secondMenuName: string,
-    url: string
+    path: string,
+    children?: SubFunModuleItem[]
 }

@@ -6,6 +6,7 @@ import UMTopPage from "@/components/um/umtopPage.vue" // 组件
 import {
     Route
 } from 'vue-router'
+import {} from '@/utils/common'
 
 @Component({
     components: {
@@ -14,11 +15,9 @@ import {
 })
 export default class About extends Vue {
 
-    toUrl: string = ''
-
     beforeRouteUpdate(to: Route, from: Route, next: () => void) {
-        console.log(from.path)
-        this.toUrl =  from.path
+        
+        sessionStorage.setItem('toPath', to.path)
         next()
     }
 }

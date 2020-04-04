@@ -1,6 +1,6 @@
 <template>
     <div class="detailsMain-wrap">
-        <div class="UMLeftMenu-wrap-single" ref="UMLeftMenu-wrap">
+        <div class="UMLeftMenu-wrap-single left-menu" :class="styleClase">
             <div class="meun-icon">
                 <Icon type="md-menu" size="22" class="md-menu" @click="toggle()"/>
                 <span class="menu-open" v-show="isOpen" @click="toggle()">展开</span>

@@ -52,21 +52,13 @@
         currentIndex: string = ''
         itemMenu: any[] = []
 
-        @Prop({
-            default: ''
-        })
-        path!: string
-
-        @Watch('path')
-        pathChange() {
-            this.initPath()
-        }
         get Routers(){
             return this.$store.getters.routers
         }
 
         mounted() {
             this.initRouters()
+            console.log('itemMenu',this.itemMenu)
             this.initPath()
         }
         initPath() {
@@ -74,11 +66,11 @@
             if (!toPath) {
                 return
             }
-            this.itemMenu.forEach((item: ModuleItem) => {
-                item.children.forEach((ele: SubFunModuleItem, idx: any) => {
-                    if (toPath && toPath.indexOf(`${item.path}/${ele.path}`) !== -1) {
-                            this.evaluation(item.id, idx, item.children)
-                            ele.children && this.chooseNav(ele, idx) //跳转非总览界面,进行二级跳转
+            this.itemMenu.forEach((parent: ModuleItem) => {
+                parent.children.forEach((child: SubFunModuleItem, idx: any) => {
+                    if (toPath && toPath.indexOf(`${parent.path}/${child.path}`) !== -1) {
+                            this.evaluation(parent.id, idx, parent.children)
+                            child.children && this.chooseNav(child, idx) //跳转非总览界面,进行二级跳转
                         }
                 })
             })
@@ -88,6 +80,7 @@
                 router.id = index
                 return router
             })
+            
         }
         parseRouters(Routers: any[]){
             let o: any = []
@@ -104,10 +97,10 @@
                 itemMenu
             } = this
 
-            itemMenu.forEach((item: ModuleItem) => {
-                if (id === item.id) {
-                    this.evaluation(item.id, item.children[0].id, item.children)
-                    this.$router.push(item.path)
+            itemMenu.forEach((parent: ModuleItem) => {
+                if (id === parent.id) {
+                    this.evaluation(parent.id, '0', parent.children)
+                    this.$router.push(parent.path)
                 }
             })
 
@@ -120,15 +113,11 @@
         chooseNav(item: any, index: any) {   
             this.currentIndex = index
 
-            let router = item.children ? Object.assign({
-                name: item.name,
-                params: {
-                    children: item.children
-                }
-            }) : {
+            item.children && this.$store.commit("SET_TREEROUTRES", item.children) 
+
+            this.$router.push({
                 name: item.name
-            }
-            this.$router.push(router)
+            })
         }
     }
 </script>

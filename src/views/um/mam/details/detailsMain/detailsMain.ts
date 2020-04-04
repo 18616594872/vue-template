@@ -1,62 +1,71 @@
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import { mapGetters } from 'vuex'
+import {
+    Component,
+    Vue
+} from 'vue-property-decorator'
+import {
+    SubFunModuleItem
+} from '@/types/components/umtopPage.interface.ts'
 
 @Component({})
 export default class About extends Vue {
 
-    menuData: any[] = [
-        {
-            id: 'left-1',
-            url: '/mam/details/environmentalMonitor',
-            name: '环境监测',
-            picUrl: require('@/assets/images/um/tips.png')
-        },
-        {
-            id: 'left-2',
-            url: '/mam/details/securityMonitor',
-            name: '安防监控',
-            picUrl: require('@/assets/images/um/tips.png')
-        },
-        {
-            id: 'left-3',
-            url: '/mam/details/mechanicalMonitor',
-            name: '机电监控',
-            picUrl: require('@/assets/images/um/tips.png')
-        },
-        {
-            id: 'left-4',
-            url: '/mam/details/personalPosition',
-            name: '人员定位',
-            picUrl: require('@/assets/images/um/tips.png')
-        }
-    ]
+    // menuData: any[] = [
+    //     {
+    //         id: 'left-1',
+    //         url: '/mam/details/environmentalMonitor',
+    //         name: '环境监测',
+    //         picUrl: require('@/assets/images/um/tips.png')
+    //     },
+    //     {
+    //         id: 'left-2',
+    //         url: '/mam/details/securityMonitor',
+    //         name: '安防监控',
+    //         picUrl: require('@/assets/images/um/tips.png')
+    //     },
+    //     {
+    //         id: 'left-3',
+    //         url: '/mam/details/mechanicalMonitor',
+    //         name: '机电监控',
+    //         picUrl: require('@/assets/images/um/tips.png')
+    //     },
+    //     {
+    //         id: 'left-4',
+    //         url: '/mam/details/personalPosition',
+    //         name: '人员定位',
+    //         picUrl: require('@/assets/images/um/tips.png')
+    //     }
+    // ]
 
-
-
-    count: number = 0
 
     isOpen: boolean = true
     isPickUp: boolean = true
     isChildMenu: boolean = false
-    currentMenu: string = 'left-1'
+    currentMenu: string = '0'
     currentChild: string = ''
 
-    get Routers (): any{
-        return this.$store.getters.routers
-    } 
+    get treeRouters(): any {
+        return this.$store.getters.leftTreeRouters
+    }
+    get styleClase(): string {
+        let bool = this.treeRouters.some((treeRouters: SubFunModuleItem) => treeRouters.children !== undefined)
+        return bool ? 'UMLeftMenu-wrap-double' : 'UMLeftMenu-wrap-single'
+    }
 
     mounted() {
-        console.log('Routers',this.Routers)
-        this.choosedMenuStyle()
+        console.log('treeRouters', this.styleClase)
+
         let toPath = sessionStorage.getItem('toPath')
-        if (toPath!== null) {
+        if (!toPath) {
+            return
+        }
+        if (toPath !== null) {
             try {
-                this.menuData.forEach((item: any) => {
+                this.treeRouters.forEach((item: any) => {
                     if (!item.children && (toPath as string).indexOf(item.url) === 0) {
                         this.currentMenu = item.id
                         this.isChildMenu = false
                         console.log('this.currentMenu', this.currentMenu)
-                        throw new Error ('EndIterative')
+                        throw new Error('EndIterative')
                     } else if (item.children) {
                         try {
                             item.children.forEach((ele: any) => {
@@ -64,7 +73,7 @@ export default class About extends Vue {
                                     this.currentMenu = item.id
                                     this.currentChild = ele.id
                                     this.isChildMenu = true
-                                    throw new Error ('EndIterative')
+                                    throw new Error('EndIterative')
                                 }
                             })
                         } catch (e) {
@@ -111,20 +120,4 @@ export default class About extends Vue {
         this.$router.push(ele.url);
         (event as Event).stopPropagation()
     }
-
-
-    choosedMenuStyle() {
-        let leftMenu = this.$refs['UMLeftMenu-wrap'] as HTMLElement
-        this.menuData.forEach(item => {
-            if (item.children) {
-                this.count++
-            } 
-        })
-        if (this.count > 0) {
-            leftMenu.setAttribute('class', 'UMLeftMenu-wrap-double left-menu')
-        } else {
-            leftMenu.setAttribute('class', 'UMLeftMenu-wrap-single left-menu')
-        }
-    }
 }
-

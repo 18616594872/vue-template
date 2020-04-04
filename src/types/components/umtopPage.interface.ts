@@ -1,14 +1,18 @@
 
 export interface ModuleItem {
     id: string, 
-    navBarName: string, 
+    name: string, 
     path: string,
-    children: SubFunModuleItem[]
+    component: Function,
+    hidden?: boolean,
+    children: Array< SubFunModuleItem >
 }
 
 export interface SubFunModuleItem {
-    id: string,
-    secondMenuName: string,
+    name: string,
     path: string,
-    children?: SubFunModuleItem[]
+    component: Function,
+    hidden?: boolean,
+    children?: Array< SubFunModuleItem >,
+    meta?:Object
 }

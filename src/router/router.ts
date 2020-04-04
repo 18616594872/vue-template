@@ -5,8 +5,6 @@
  * @param {string} title 页面标题
  */
 
-import mainPage from '@/views/um/mainPage/mainPage.vue'
-
 export const constantRoutes: any[] = [{
         path: '/login',
         hidden: true, // 不显示在左侧栏
@@ -64,17 +62,17 @@ export const asyncRoutes: any[] = [
     {
         path: '/mam',
         redirect: '/mam/overview',
+        name: '综合监控',
         component: (resolve: any) => require(["@/views/um/mainPage/mainPage.vue"], resolve),
         children: [{
             path: 'overview',
-            name: '运营管理总览',
-            hidden: true, // 不显示在左侧栏
+            name: '监控总览',
             component: (resolve: any) => require(["@/views/um/mam/overview/integratedMonitoring/integratedMonitoring.vue"], resolve)
         },
         {
             path: 'details',
             redirect: '/mam/details/environmentalMonitor',
-            name: '巡检计划详情',
+            name: '监控详情',
             component: (resolve: any) => require(["@/views/um/mam/details/detailsMain/detailsMain.vue"], resolve),
             children: [{
                 path: 'environmentalMonitor',
@@ -82,6 +80,7 @@ export const asyncRoutes: any[] = [
                 component: (resolve: any) => require(["@/views/um/mam/details/environmentalMonitor/environmentalMonitor.vue"], resolve),
                 meta: {
                     title: '环境监测', // 设置在侧边栏中展示的名字
+                    icon: 'tips' // 设置左侧图标
                 }
             },
             {
@@ -90,6 +89,7 @@ export const asyncRoutes: any[] = [
                 component: (resolve: any) => require(["@/views/um/mam/details/securityMonitor/securityMonitor.vue"], resolve),
                 meta: {
                     title: '安防监控', // 设置在侧边栏中展示的名字
+                    icon: 'tips' // 设置左侧图标
                 }
             },
             {
@@ -98,6 +98,7 @@ export const asyncRoutes: any[] = [
                 component: (resolve: any) => require(["@/views/um/mam/details/mechanicalMonitor/mechanicalMonitor.vue"], resolve),
                 meta: {
                     title: '机电监控', // 设置在侧边栏中展示的名字
+                    icon: 'tips' // 设置左侧图标
                 }
             }]
         }]
@@ -105,12 +106,12 @@ export const asyncRoutes: any[] = [
     {
         path: '/oam',
         redirect: '/oam/overview',
+        name: '运营管理',
         component: (resolve: any) => require(["@/views/um/mainPage/mainPage.vue"], resolve),
         children: [
             {
                 path: 'overview',
                 name: '运营管理总览',
-                hidden: true, // 不显示在左侧栏
                 component: (resolve: any) => require(["@/views/um/oam/overview/operationManagement/operationManagement.vue"], resolve)
             }
         ]

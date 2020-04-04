@@ -47,6 +47,7 @@ export default class About extends Vue {
 
                         this.errTipMes = ''
                         this.loading = false
+                        sessionStorage.setItem('toPath', '/mam/overview')
                         this.$router.push({
                             path: "/mam"
                         });

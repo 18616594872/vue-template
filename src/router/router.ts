@@ -73,7 +73,7 @@ export const asyncRoutes: any[] = [
             path: 'details',
             redirect: '/mam/details/environmentalMonitor',
             name: '监控详情',
-            component: (resolve: any) => require(["@/views/um/mam/details/detailsMain/detailsMain.vue"], resolve),
+            component: (resolve: any) => require(["@/components/um/umDetailsMain.vue"], resolve),
             children: [{
                 path: 'environmentalMonitor',
                 name: '环境监测',
@@ -113,6 +113,23 @@ export const asyncRoutes: any[] = [
                 path: 'overview',
                 name: '运营管理总览',
                 component: (resolve: any) => require(["@/views/um/oam/overview/operationManagement/operationManagement.vue"], resolve)
+            },
+            {
+                path: 'details',
+                redirect: '/oam/details/contract_list',
+                name: '运营详情',
+                component: (resolve: any) => require(["@/components/um/umDetailsMain.vue"], resolve),
+                children:[
+                    {
+                        path: 'contract_list',
+                        name: '合同管理',
+                        component: (resolve: any) => require(["@/views/um/oam/details/listContract/listContract.vue"], resolve),
+                        meta: {
+                            title: '合同管理', // 设置在侧边栏中展示的名字
+                            icon: 'tips' // 设置左侧图标
+                        }
+                    }
+                ]
             }
         ]
     }

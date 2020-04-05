@@ -10,7 +10,7 @@
                     </Select>
                 </li>
                 <li v-for="(item, index) in itemNavigation" :key="index" @click="chooseNav(item, index)">
-                    <div class="nav-bar-name" :class="{ 'active-li': currentIndex === index }">
+                    <div class="nav-bar-name" :class="{ 'active-li': currentIndex == index }">
                         {{item.name}}
                     </div>
                     <div class="active-line"></div>
@@ -48,9 +48,9 @@
         tips: string = require("@/assets/images/um/tips.png")
         headSign: string = require("@/assets/images/um/my-info.png")
         defaultValue: string = "0"
-        itemNavigation: any[] = []
-        currentIndex: string = ''
-        itemMenu: any[] = []
+        itemNavigation: Array< SubFunModuleItem > = []
+        currentIndex: string = '0'
+        itemMenu: Array< ModuleItem > = []
 
         get Routers(){
             return this.$store.getters.routers
@@ -58,7 +58,6 @@
 
         mounted() {
             this.initRouters()
-            console.log('itemMenu',this.itemMenu)
             this.initPath()
         }
         initPath() {
@@ -69,7 +68,7 @@
             this.itemMenu.forEach((parent: ModuleItem) => {
                 parent.children.forEach((child: SubFunModuleItem, idx: any) => {
                     if (toPath && toPath.indexOf(`${parent.path}/${child.path}`) !== -1) {
-                            this.evaluation(parent.id, idx, parent.children)
+                            this.evaluation(parent, idx, parent.children)
                             child.children && this.chooseNav(child, idx) //跳转非总览界面,进行二级跳转
                         }
                 })
@@ -98,17 +97,15 @@
             } = this
 
             itemMenu.forEach((parent: ModuleItem) => {
-                if (id === parent.id) {
-                    this.evaluation(parent.id, '0', parent.children)
-                    this.$router.push(parent.path)
-                }
+                id === parent.id && this.evaluation(parent, '0', parent.children)
             })
 
         }
-        evaluation(id: string, childId: string, child: Array < any > ) {
-            this.defaultValue = id
+        evaluation(parent: ModuleItem, childId: string, child: Array < any > ) {
+            this.defaultValue = parent.id
             this.currentIndex = childId
             this.itemNavigation = child
+            this.$router.push(parent.path)
         }
         chooseNav(item: any, index: any) {   
             this.currentIndex = index

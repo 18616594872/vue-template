@@ -25,7 +25,11 @@ import router, {
 const state: UserState = {
     token: getToken(TOKEN_KEY),
     name: '',
-    routelist: []
+    routelist: [],
+    permissions: [{
+        name: 'contract_list',
+        permission: [':search']
+    }]
 }
 
 // 更改state

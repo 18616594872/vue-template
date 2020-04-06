@@ -12,6 +12,7 @@ import {
 } from 'view-design';
 import '@/utils/log';
 import '@/assets/less/custom.less'
+import '@/directive'
 
 Vue.use(iview)
 

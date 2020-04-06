@@ -3,7 +3,8 @@ export interface UserState {
     token?: string | false,
     name?: string,
     routelist?: string[],
-    queueName?: string
+    queueName?: string,
+    permissions?: Array<Object>,
 }
 export interface UserInfo {
     userName: string,

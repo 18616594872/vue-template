@@ -5,7 +5,7 @@ import getters from '@/store/getters'
 Vue.use(Vuex)
 
 const modulesFiles = require.context('./module', true, /\.ts$/)
-
+console.log('modulesFiles,',modulesFiles)
 // 不需要 `import app from './modules/app'`
 // 自动识别模块中的所有vuex模块
 const modules = modulesFiles.keys().reduce((modules: any, modulePath: any) => {

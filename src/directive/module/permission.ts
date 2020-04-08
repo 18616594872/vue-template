@@ -6,10 +6,7 @@ export default {
             const {
                 value
             } = binding
-            const moduleName = window.location.href.slice(window.location.href.lastIndexOf('/') + 1)
-            const [dirPermissions] = store.getters && store.getters.permissions.map((module: any) => {
-                return module.name === moduleName && module.permission
-            })
+            const dirPermissions = store.getters && store.getters.permissions
             if (value && value instanceof Array && value.length > 0) {
                 const directive = value
                 const hasPermission =  directive && directive.some((promission: string) => {  // :* 表示通配权限

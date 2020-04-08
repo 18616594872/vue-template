@@ -63,7 +63,7 @@
                     </Poptip>
                 </Col>
                 <Col span="6">
-                    <Button type="primary" @click="resetPageAndSearch" icon="ios-search" v-permission="[':search']">查询</Button>
+                    <Button type="primary" @click="resetPageAndSearch" icon="ios-search" v-permission="['contract_list:search']">查询</Button>
                 </Col>
             </Row>
         </div>

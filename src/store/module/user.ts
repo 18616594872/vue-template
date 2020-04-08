@@ -26,10 +26,7 @@ const state: UserState = {
     token: getToken(TOKEN_KEY),
     name: '',
     routelist: [],
-    permissions: [{
-        name: 'contract_list',
-        permission: [':search']
-    }]
+    permissions: ['contract_list:search']
 }
 
 // 更改state

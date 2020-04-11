@@ -132,5 +132,18 @@ export const asyncRoutes: any[] = [
                 ]
             }
         ]
+    },
+    {
+        path: '/permission',
+        redirect: '/permission/overview',
+        name: '权限管理',
+        component: (resolve: any) => require(["@/views/um/mainPage/mainPage.vue"], resolve),
+        children: [
+            {
+                path: 'overview',
+                name: '角色权限',
+                component: (resolve: any) => require(["@/views/cm/permission/permission.vue"], resolve)
+            },
+        ]
     }
 ]

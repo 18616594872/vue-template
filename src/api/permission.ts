@@ -1,10 +1,9 @@
 import request from '@/utils/request.ts'
 
-export function test(data: any) {
+export function listRouter() {
     return request({
-        url: '',
-        method: 'post',
-        data
+        url: 'cm/permission/routes',
+        method: 'get'
     })
 }
 

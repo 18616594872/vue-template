@@ -159,3 +159,4 @@ export class ChartFontSize {
 export function isSeriesArray(series: Series | Series[] | undefined): series is Series[] {
     return ({}).toString.call(series) === "[object Array]"
 }
+

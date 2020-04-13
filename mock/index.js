@@ -3,7 +3,7 @@ import user from './user'
 import visual from './visual'
 import um from './umMock'
 import cm from './cm'
-console.log(cm)
+console.log('cm',um)
 
 const mocks = [
     ...user,

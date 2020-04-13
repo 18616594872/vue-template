@@ -38,7 +38,8 @@ const {
     Tabs,
     TabPane,
     InputNumber,
-    Card
+    Card,
+    Tree
 } = require('view-design')
 
 const iview = {
@@ -79,7 +80,9 @@ const iview = {
         Vue.component('Tabs', Tabs)
         Vue.component('TabPane', TabPane)
         Vue.component('InputNumber', InputNumber)
-        Vue.component('Card', Card)
+        Vue.component('Card', Card),
+        Vue.component('Tree', Tree)
+
     }
 }
 

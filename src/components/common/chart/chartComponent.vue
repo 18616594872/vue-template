@@ -49,7 +49,6 @@
             required: true
         }) bindData!: ChartBindData
         mounted() {
-            console.log(this.bindData)
         }
 
     }

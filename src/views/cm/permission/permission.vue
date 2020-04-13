@@ -10,16 +10,7 @@
                     <Input v-model="role.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入角色备注"></Input>
                 </FormItem>
                 <FormItem label="权限">
-                    <Tree 
-                    ref="tree" 
-                    :data="data4" 
-                    show-checkbox 
-                    multiple>
-                    </Tree>
-                </FormItem>
-                <FormItem>
-                    <Button >取消</Button>
-                    <Button type="primary" style="margin-left: 8px">确认</Button>
+                    <Tree :data="routes" show-checkbox multiple ref="routeTree"></Tree>
                 </FormItem>
             </Form>
         </Modal>

@@ -16,9 +16,9 @@ export default class About extends Vue {
         desc: '',
         routes: []
     }
-    routes: Array<any> =  []
+    routes: Array < any > = []
 
-    created(){
+    created() {
         this.init()
     }
     addRole() {
@@ -28,9 +28,10 @@ export default class About extends Vue {
 
     async init() {
         let res = await this.getListRouter()
-        this.routes = this.generateRoutes(res.data)
+        this.routes = await this.parseRoutes(res)
+        
     }
-    getListRouter(){
+    getListRouter() {
         return listRouter()
             .then((res: any) => {
                 let {
@@ -45,9 +46,34 @@ export default class About extends Vue {
                 (this as any).Log.warn(error)
             })
     }
-    generateRoutes(routers: Array< any >){
-        
-        return []
+    parseRoutes(routers: Array < any > ) {
+        return Array.isArray(routers) && routers.reduce((arr, route) => {
+            if(route.hidden){
+                return arr
+            }
+            let o = < any > {}
+            o.title = route.name
+            o.checked = false
+            
+            o.children = route.children ? this.parseRoutes(route.children) : this.insturction()
+             
+            return arr.concat(o)
+        }, [])
+    }
+    insturction(){ // 默认指令权限
+        return [{
+            title: '增加',
+            checked: true
+        },{
+            title: '删除',
+            checked: true
+        },{
+            title: '修改',
+            checked: true
+        },{
+            title: '查找',
+            checked: true
+        }]
     }
 
 }

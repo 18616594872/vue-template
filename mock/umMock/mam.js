@@ -166,7 +166,6 @@ export default [{
             const {
                 equipmentTypeId
             } = config.body
-            console.log(config.body)
             let data = equipmentType[equipmentTypeId]
             return {
                 code: 200,

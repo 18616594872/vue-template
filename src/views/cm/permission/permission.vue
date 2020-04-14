@@ -1,6 +1,14 @@
 <template>
     <div class="permission-wrap">
         <Button type="info" @click="addRole">角色管理</Button>
+        <Table 
+            border 
+            ref="selection" 
+            :columns="roleColumns" 
+            :data="rolesData" 
+            @on-selection-change="startdelete" 
+            style="margin:20px;"
+        ></Table>
         <Modal v-model="visableModal" :title="this.ModalType === 'new' ? '添加角色' : '修改角色'">
             <Form :model="role" :label-width="80">
                 <FormItem label="名字">

@@ -7,3 +7,9 @@ export function listRouter() {
     })
 }
 
+export function listRole() {
+    return request({
+        url: '/cm/permission/roles',
+        method: 'get'
+    })
+}

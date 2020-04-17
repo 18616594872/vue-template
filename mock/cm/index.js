@@ -2,28 +2,27 @@ import {
     routes
 } from './role'
 
+function getRoutersName(routes, path){
+    let routersName = []
+    for(let route of routes){
+        if(path && (route.path.indexOf(path) !== -1)){
+            continue
+        }
+        route.name && routersName.push(route.   name)
+        route.children &&  routersName.push(...getRoutersName(route.children))
+    }
+    return routersName
+}
+
 const roles = [{
         name: 'admin',
         description: '管理员',
-        routes: (function(path){
-            let routersName = []
-            function getRoutersName(routes,path){
-                for(let route in routes){
-                    if(route.path === path){
-                        return
-                    }
-                    route.children ? getRoutersName(route.children) : routersName.push(route.name)
-                }
-            }
-            getRoutersName(routes)
-        
-            return routersName
-        })('/oam').toString()
+        routes: getRoutersName(routes)
     },
     {
         name: 'editor',
         description: '普通用户',
-        routes: []
+        routes: getRoutersName(routes,'visual')
     }
 ]
 

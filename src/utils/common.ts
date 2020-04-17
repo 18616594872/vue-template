@@ -160,3 +160,17 @@ export function isSeriesArray(series: Series | Series[] | undefined): series is 
     return ({}).toString.call(series) === "[object Array]"
 }
 
+export function deepCop( root: any){
+    if (!root && typeof root !== 'object') {
+        return 
+    }
+    let o: any = root.constructor.name === 'Array' ? [] : {}
+    Object.keys(root).forEach((keys: any) => {
+        if(root[keys] && typeof root[keys] === 'object') {
+            o[keys] = deepCop(root[keys])
+        }else {
+            o[keys] = root[keys]
+        }
+    })
+}
+

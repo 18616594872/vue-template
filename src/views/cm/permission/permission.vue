@@ -1,6 +1,6 @@
 <template>
     <div class="permission-wrap">
-        <Button type="info" @click="addRole">角色管理</Button>
+        <Button type="info" @click="addRole()">角色管理</Button>
         <Table 
             border 
             ref="selection" 
@@ -9,7 +9,7 @@
             @on-selection-change="startdelete" 
             style="margin:20px;"
         ></Table>
-        <Modal v-model="visableModal" :title="this.ModalType === 'new' ? '添加角色' : '修改角色'">
+        <Modal v-model="visableModal" :title="this.ModalType === 'new' ? '添加角色' : '修改角色'" @on-ok="addOrEditRole">
             <Form :model="role" :label-width="80">
                 <FormItem label="名字">
                     <Input v-model="role.name" placeholder="请输入角色名字"></Input>
@@ -18,7 +18,7 @@
                     <Input v-model="role.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入角色备注"></Input>
                 </FormItem>
                 <FormItem label="权限">
-                    <Tree :data="routes" show-checkbox multiple ref="routeTree"></Tree>
+                    <Tree :data="role.routes" show-checkbox multiple ref="routeTree"></Tree>
                 </FormItem>
             </Form>
         </Modal>

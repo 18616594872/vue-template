@@ -172,5 +172,6 @@ export function deepCop( root: any){
             o[keys] = root[keys]
         }
     })
+    return o
 }
 

@@ -159,10 +159,9 @@ export default class About extends Vue {
 
         return routers
     }
-    del({
-        $index,
-        row
-    }: any) {}
+    del({row}: any) {
+        this.rolesData.filter((role: any, index: number, arr: any) => (role.name === row.name) && (arr.splice(index, 1)))
+    }
     addOrEditRole() {
         let nodesName = this.getActiveNodes((this.$refs.routeTree as any).getCheckedNodes()) // 获取所有的选中节点
 

@@ -1,7 +1,13 @@
 <template>
     <div class="permission-wrap">
-        <Button type="info" @click="addRole()">角色管理</Button>
-        <Table 
+        <Row>
+            <Col span="3">
+                <Button type="info" @click="addRole()">角色管理</Button>
+            </Col>
+        </Row>
+        <Row>
+            <Col span="24">
+                <Table 
             border 
             ref="selection" 
             :columns="roleColumns" 
@@ -22,6 +28,31 @@
                 </FormItem>
             </Form>
         </Modal>
+        <Modal
+            v-model="showPermission"
+            title="修改权限"
+            width="40vw"
+            class="white-modal"
+        >
+            <div class="role">
+                <div v-for="(item, index) in permission" :key="index" class="role-menu-wrap">
+                    <div class="menu-name">{{moduleName(permission,index)}}</div>
+                    <div class="opera-btn">
+                        <CheckboxGroup v-model="permission[index]" @on-change="checkAllGroupChange">
+                            <Checkbox :label="pmissionName(permission,index,0)">增加</Checkbox>
+                            <Checkbox :label="pmissionName(permission,index,1)">删除</Checkbox>
+                            <Checkbox :label="pmissionName(permission,index,2)">查询</Checkbox>
+                            <Checkbox :label="pmissionName(permission,index,3)">修改</Checkbox>
+                        </CheckboxGroup>
+                    </div>
+                </div>
+            </div>
+            <div slot="footer">
+                <Button type="primary" @click="submitPermission()">确定</Button>
+            </div>
+        </Modal>
+            </Col>
+        </Row>
     </div>
 </template>
 

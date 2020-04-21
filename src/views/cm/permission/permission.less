@@ -1,4 +1,45 @@
-
 .permission-wrap {
     width: 100%;
+ 
+}
+.role-name-wrap {
+    .name, .name-input {
+        display: inline-block;
+    }
+    margin-bottom: 40px;
+}
+.role {
+    height: 20rem;
+    overflow-y: auto;
+    .role-menu-wrap {
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid #ccc;
+    }
+    .menu-name, .check-all-btn, .opera-btn {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .menu-name {
+        width: 25%;
+        text-align: center;
+    }
+    .opera-btn {
+        .ivu-checkbox-group-item {
+            width: 100px;
+            text-align: right;
+        }
+    }
+}
+.role::-webkit-scrollbar{
+    width: 4px;
+    height: 4px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.role::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px rgb(27, 102, 207);
+    background: rgba(0, 0, 0, 0.2)
 }

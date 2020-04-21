@@ -10,7 +10,7 @@ import {
     deepCop
 } from '@/utils/common'
 
-const definaRole: any = {
+const defineRole: any = {
     name: '',
     desc: '',
     routes: []
@@ -21,8 +21,8 @@ export default class About extends Vue {
 
     visableModal: boolean = false
     ModalType: string = 'new'
-    role: any = definaRole
-    rolesList: string = ''
+    operationType: string = 'role'
+    role: any = defineRole
     roleColumns: Array < any > = [
 
         {
@@ -59,6 +59,20 @@ export default class About extends Vue {
                             type: "primary",
                             size: "small"
                         },
+                        style: {
+                            marginRight: "5px"
+                        },
+                        on: {
+                            click: () => {
+                                this.editPermission(params)
+                            }
+                        }
+                    }, '指令权限'),
+                    h('Button', {
+                        props: {
+                            type: "primary",
+                            size: "small"
+                        },
                         on: {
                             click: () => {
                                 this.del(params)
@@ -70,16 +84,29 @@ export default class About extends Vue {
         }
     ]
     rolesData: Array < any > = []
+    permission: Array < any > = []
+    showPermission: boolean = false
+
+    get moduleName() {
+        return function (arr: Array < any > , index: number) {
+            return arr[index][0].slice(0, arr[index][0].indexOf(":"))
+        }
+    }
+    get pmissionName() {
+        return function (permissionArr: Array < string > , index: number, childIndex: number) {
+            return permissionArr[index][childIndex]
+        }
+    }
 
     created() {
         this.init()
     }
     async init() {
         await this.getListRole()
-        definaRole.routes = this.parseRoutes(await this.getListRouter()) // 保存默认的routes    
+        defineRole.routes = this.parseRoutes(await this.getListRouter()) // 保存默认的routes    
     }
     addRole() {
-        this.role = deepCop(definaRole)
+        this.role = deepCop(defineRole)
         this.$nextTick(() => {
             this.ModalType = 'new'
             this.visableModal = true
@@ -130,7 +157,8 @@ export default class About extends Vue {
         }, [])
     }
     edit(params: any) {
-        let routes = this.selectedRoutes(deepCop(definaRole.routes), params.row.routes)
+        this.operationType = 'role'
+        let routes = this.selectedRoutes(deepCop(defineRole.routes), params.row.routes)
         let [editRole] = this.rolesData.filter((role: any) => role.name === params.row.name)
 
         this.role = {
@@ -145,6 +173,15 @@ export default class About extends Vue {
         })
 
     }
+    editPermission(params: any) {
+        this.operationType = 'permission'
+        this.permission.length = 0
+        this.selectedRoutes(deepCop(defineRole.routes), params.row.routes)
+        this.$nextTick(() => {
+            this.showPermission = true
+        })
+
+    }
     selectedRoutes(routers: Array < any > , routerName: Array < string > ): Array < object > {
         if (!routers.length) {
             return routers
@@ -153,13 +190,18 @@ export default class About extends Vue {
             if (o.children) {
                 this.selectedRoutes(o.children, routerName)
             } else {
-                routerName.find(name => name === o.title) && (o.checked = true)
+                routerName.find(name => name === o.title) &&
+                    ((this.operationType === 'role') ?
+                        (o.checked = true) :
+                        this.permission.push([`${o.title}:add`, `${o.title}:del`, `${o.title}:update`, `${o.title}:list`]))
             }
         })
 
         return routers
     }
-    del({row}: any) {
+    del({
+        row
+    }: any) {
         this.rolesData.filter((role: any, index: number, arr: any) => (role.name === row.name) && (arr.splice(index, 1)))
     }
     addOrEditRole() {
@@ -174,7 +216,7 @@ export default class About extends Vue {
                 routes: nodesName
             }))))
         }
-        this.role = deepCop(definaRole)
+        this.role = deepCop(defineRole)
     }
     getActiveNodes(Nodes: Array < any > ): Array < string > {
         if (!Array.isArray(Nodes)) {
@@ -187,6 +229,9 @@ export default class About extends Vue {
             node.children && nodesName.push(...this.getActiveNodes(node.children))
         })
         return nodesName
+    }
+    checkAllGroupChange (data: any) {
+        console.log(data)
     }
 
 }

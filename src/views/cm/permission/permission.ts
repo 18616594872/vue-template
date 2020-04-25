@@ -87,14 +87,14 @@ export default class About extends Vue {
     permission: Array < any > = []
     showPermission: boolean = false
 
-    get moduleName() {
-        return function (arr: Array < any > , index: number) {
-            return arr[index][0].slice(0, arr[index][0].indexOf(":"))
+    get moduleName(): Object {
+        return function (pmission: Object) {
+            return Object.keys(pmission)[0]
         }
     }
     get pmissionName() {
-        return function (permissionArr: Array < string > , index: number, childIndex: number) {
-            return permissionArr[index][childIndex]
+        return function (pmission: any, childIndex: number) {
+            return pmission[Object.keys(pmission)[0]][childIndex]
         }
     }
 
@@ -193,7 +193,7 @@ export default class About extends Vue {
                 routerName.find(name => name === o.title) &&
                     ((this.operationType === 'role') ?
                         (o.checked = true) :
-                        this.permission.push([`${o.title}:add`, `${o.title}:del`, `${o.title}:update`, `${o.title}:list`]))
+                        this.permission.push({[o.title]: [`${o.title}:add`, `${o.title}:del`, `${o.title}:update`, `${o.title}:list`]}))
             }
         })
 

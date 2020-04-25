@@ -36,13 +36,13 @@
         >
             <div class="role">
                 <div v-for="(item, index) in permission" :key="index" class="role-menu-wrap">
-                    <div class="menu-name">{{moduleName(permission,index)}}</div>
+                    <div class="menu-name">{{moduleName(item)}}</div>
                     <div class="opera-btn">
-                        <CheckboxGroup v-model="permission[index]" @on-change="checkAllGroupChange">
-                            <Checkbox :label="pmissionName(permission,index,0)">增加</Checkbox>
-                            <Checkbox :label="pmissionName(permission,index,1)">删除</Checkbox>
-                            <Checkbox :label="pmissionName(permission,index,2)">查询</Checkbox>
-                            <Checkbox :label="pmissionName(permission,index,3)">修改</Checkbox>
+                        <CheckboxGroup v-model="item[Object.keys(arr)[0]]">
+                            <Checkbox :label="pmissionName(item, 0)">增加</Checkbox>
+                            <Checkbox :label="pmissionName(item, 1)">删除</Checkbox>
+                            <Checkbox :label="pmissionName(item, 2)">查询</Checkbox>
+                            <Checkbox :label="pmissionName(item, 3)">修改</Checkbox>
                         </CheckboxGroup>
                     </div>
                 </div>

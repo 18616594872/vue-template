@@ -16,13 +16,15 @@ function getRoutersName(routes, path){
 
 const roles = [{
         name: 'admin',
-        description: '管理员',
-        routes: getRoutersName(routes)
+        desc: '管理员',
+        routes: getRoutersName(routes),
+        permission: []
     },
     {
         name: 'editor',
-        description: '普通用户',
-        routes: getRoutersName(routes,'visual')
+        desc: '普通用户',
+        routes: getRoutersName(routes,'mam'),
+        permission: []
     }
 ]
 

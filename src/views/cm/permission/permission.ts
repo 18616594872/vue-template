@@ -13,7 +13,8 @@ import {
 const defineRole: any = {
     name: '',
     desc: '',
-    routes: []
+    routes: [],
+    permission: []
 }
 
 @Component({})
@@ -32,7 +33,7 @@ export default class About extends Vue {
         },
         {
             title: '描述',
-            key: 'description',
+            key: 'desc',
             align: 'center'
         },
         {
@@ -50,7 +51,7 @@ export default class About extends Vue {
                         },
                         on: {
                             click: () => {
-                                this.edit(params)
+                                this.editRoutes(params)
                             }
                         }
                     }, '编辑权限'),
@@ -87,30 +88,12 @@ export default class About extends Vue {
     permission: Array < any > = []
     showPermission: boolean = false
 
-    get moduleName(): Object {
-        return function (pmission: Object) {
-            return Object.keys(pmission)[0]
-        }
-    }
-    get pmissionName() {
-        return function (pmission: any, childIndex: number) {
-            return pmission[Object.keys(pmission)[0]][childIndex]
-        }
-    }
-
     created() {
         this.init()
     }
     async init() {
         await this.getListRole()
         defineRole.routes = this.parseRoutes(await this.getListRouter()) // 保存默认的routes    
-    }
-    addRole() {
-        this.role = deepCop(defineRole)
-        this.$nextTick(() => {
-            this.ModalType = 'new'
-            this.visableModal = true
-        })
     }
     getListRouter() {
         return listRouter()
@@ -156,31 +139,12 @@ export default class About extends Vue {
             return arr.concat(o)
         }, [])
     }
-    edit(params: any) {
-        this.operationType = 'role'
-        let routes = this.selectedRoutes(deepCop(defineRole.routes), params.row.routes)
-        let [editRole] = this.rolesData.filter((role: any) => role.name === params.row.name)
-
-        this.role = {
-            name: editRole.name,
-            desc: editRole.description,
-            routes: routes
-        }
-
+    addRole() {
+        this.role = deepCop(defineRole)
         this.$nextTick(() => {
-            this.ModalType = 'edit'
+            this.ModalType = 'new'
             this.visableModal = true
         })
-
-    }
-    editPermission(params: any) {
-        this.operationType = 'permission'
-        this.permission.length = 0
-        this.selectedRoutes(deepCop(defineRole.routes), params.row.routes)
-        this.$nextTick(() => {
-            this.showPermission = true
-        })
-
     }
     selectedRoutes(routers: Array < any > , routerName: Array < string > ): Array < object > {
         if (!routers.length) {
@@ -193,30 +157,45 @@ export default class About extends Vue {
                 routerName.find(name => name === o.title) &&
                     ((this.operationType === 'role') ?
                         (o.checked = true) :
-                        this.permission.push({[o.title]: [`${o.title}:add`, `${o.title}:del`, `${o.title}:update`, `${o.title}:list`]}))
+                        this.permission.push({
+                            [o.title]: [`${o.title}:add`, `${o.title}:del`, `${o.title}:update`, `${o.title}:list`],
+                            add: `${o.title}:add`,
+                            del: `${o.title}:del`,
+                            update: `${o.title}:update`,
+                            list: `${o.title}:list`
+                        }))
             }
         })
 
         return routers
     }
+    editRoutes(params: any) {
+        this.operationType = 'role'
+        let routes = this.selectedRoutes(deepCop(defineRole.routes), params.row.routes)
+        let [editRole] = this.rolesData.filter((role: any) => role.name === params.row.name)
+
+        this.role = Object.assign({}, editRole, {
+            routes
+        })
+
+        this.$nextTick(() => {
+            this.ModalType = 'edit'
+            this.visableModal = true
+        })
+
+    }
+    editPermission(params: any) {
+        let [role] = this.rolesData.filter((role: any) => (role.name === params.row.name))
+        this.permission = role.permission
+        this.$nextTick(() => {
+            this.showPermission = true
+        })
+
+    }
     del({
         row
     }: any) {
         this.rolesData.filter((role: any, index: number, arr: any) => (role.name === row.name) && (arr.splice(index, 1)))
-    }
-    addOrEditRole() {
-        let nodesName = this.getActiveNodes((this.$refs.routeTree as any).getCheckedNodes()) // 获取所有的选中节点
-
-        if (this.ModalType === 'new') { // 添加新角色
-            this.rolesData.push(Object.assign(this.role, {
-                routes: nodesName
-            }))
-        } else {
-            this.rolesData.filter((role: any, index: number, arr: any) => (role.name === this.role.name) && (arr.splice(index, 1, Object.assign(this.role, {
-                routes: nodesName
-            }))))
-        }
-        this.role = deepCop(defineRole)
     }
     getActiveNodes(Nodes: Array < any > ): Array < string > {
         if (!Array.isArray(Nodes)) {
@@ -230,8 +209,44 @@ export default class About extends Vue {
         })
         return nodesName
     }
-    checkAllGroupChange (data: any) {
-        console.log(data)
+    addOrEditRole() {
+        let nodesName = this.getActiveNodes((this.$refs.routeTree as any).getCheckedNodes()) // 获取所有的选中节点
+        let lastPermission: any = deepCop(this.role.permission)
+        this.operationType = 'permission'
+        this.permission.length = 0
+        this.selectedRoutes(defineRole.routes, nodesName) // 筛选权限
+
+        if (this.ModalType === 'new') { // 添加新角色
+            this.rolesData.push(Object.assign(this.role, {
+                routes: nodesName,
+                permission: this.permission
+            }))
+        } else {
+            this.rolesData.filter((role: any, index: number, arr: any) => {
+                if (role.name === this.role.name) {
+                    // 权限同步
+                    this.permission.forEach((newModul: any) => {
+                        lastPermission.forEach((oldModul: any) => {
+                            let newKey: Array < string > = Object.keys(newModul)
+                            let oldKey: Array < string > = Object.keys(oldModul)
+                            if (oldKey[0] === newKey[0]) {
+                                newModul[newKey[0]] = oldModul[oldKey[0]]
+                            }
+                        })
+                    })
+
+                    arr.splice(index, 1, Object.assign(this.role, {
+                        routes: nodesName,
+                        permission: this.permission
+                    }))
+                }
+            })
+        }
+
+        this.role = deepCop(defineRole)
+    }
+    submitPermission() {
+        this.showPermission = false
     }
 
 }

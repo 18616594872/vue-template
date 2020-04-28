@@ -12,7 +12,6 @@
             ref="selection" 
             :columns="roleColumns" 
             :data="rolesData" 
-            @on-selection-change="startdelete" 
             style="margin:20px;"
         ></Table>
         <Modal v-model="visableModal" :title="this.ModalType === 'new' ? '添加角色' : '修改角色'" @on-ok="addOrEditRole">
@@ -36,13 +35,13 @@
         >
             <div class="role">
                 <div v-for="(item, index) in permission" :key="index" class="role-menu-wrap">
-                    <div class="menu-name">{{moduleName(item)}}</div>
+                    <div class="menu-name">{{Object.keys(item)[0]}}</div>
                     <div class="opera-btn">
-                        <CheckboxGroup v-model="item[Object.keys(arr)[0]]">
-                            <Checkbox :label="pmissionName(item, 0)">增加</Checkbox>
-                            <Checkbox :label="pmissionName(item, 1)">删除</Checkbox>
-                            <Checkbox :label="pmissionName(item, 2)">查询</Checkbox>
-                            <Checkbox :label="pmissionName(item, 3)">修改</Checkbox>
+                        <CheckboxGroup v-model="item[Object.keys(item)[0]]">
+                            <Checkbox :label="item['add']">增加</Checkbox>
+                            <Checkbox :label="item['del']">删除</Checkbox>
+                            <Checkbox :label="item['update']">查询</Checkbox>
+                            <Checkbox :label="item['list']">修改</Checkbox>
                         </CheckboxGroup>
                     </div>
                 </div>

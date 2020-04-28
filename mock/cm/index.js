@@ -14,7 +14,7 @@ function getRoutersName(routes, path){
     return routersName
 }
 
-const roles = [{
+let roles = [{
         name: 'admin',
         desc: '管理员',
         routes: getRoutersName(routes),
@@ -38,10 +38,26 @@ export default [{
             data: routes
         }
     }
-},{
+}, {
     url: '/cm/permission/roles',
     type: 'get',
     response: () => {
+        return {
+            code: 200,
+            msg: "success",
+            data: roles
+        }
+    }
+}, {
+    url: '/cm/permission/updateRoles',
+    type: 'post',
+    response: config => {
+        const {
+            updateRoles
+        } = config.body
+        
+        roles = updateRoles
+        
         return {
             code: 200,
             msg: "success",

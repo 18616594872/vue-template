@@ -13,3 +13,11 @@ export function listRole() {
         method: 'get'
     })
 }
+
+export function updateRole(data: any) {
+    return request({
+        url: '/cm/permission/updateRoles',
+        method: 'post',
+        data
+    })
+}

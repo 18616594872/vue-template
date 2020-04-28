@@ -4,7 +4,8 @@ import {
 } from 'vue-property-decorator'
 import {
     listRouter,
-    listRole
+    listRole,
+    updateRole
 } from '@/api/permission'
 import {
     deepCop
@@ -186,7 +187,7 @@ export default class About extends Vue {
     }
     editPermission(params: any) {
         let [role] = this.rolesData.filter((role: any) => (role.name === params.row.name))
-        this.permission = role.permission
+        this.permission = params.row.permission
         this.$nextTick(() => {
             this.showPermission = true
         })
@@ -248,5 +249,17 @@ export default class About extends Vue {
     submitPermission() {
         this.showPermission = false
     }
+
+    beforeRouteLeave (to: any, from: any, next: Function) {
+        updateRole({updateRoles: this.rolesData}).then((res: any) => {
+            let {
+                code,
+                data
+            } = res.data
+            if (code === 200) {
+            }
+        })
+        next()
+      }
 
 }

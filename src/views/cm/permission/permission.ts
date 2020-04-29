@@ -250,7 +250,12 @@ export default class About extends Vue {
         this.showPermission = false
     }
 
-    beforeRouteLeave (to: any, from: any, next: Function) {
+    beforeRouteLeave(to: any, from: any, next: Function) {
+        if(!this.rolesData.length){
+            next()
+            return
+        }
+        
         updateRole({updateRoles: this.rolesData}).then((res: any) => {
             let {
                 code,

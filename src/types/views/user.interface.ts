@@ -4,7 +4,7 @@ export interface UserState {
     name?: string,
     routelist?: string[],
     queueName?: string,
-    permissions?: Array<Object>,
+    permissions: Array<Object>,
 }
 export interface UserInfo {
     userName: string,

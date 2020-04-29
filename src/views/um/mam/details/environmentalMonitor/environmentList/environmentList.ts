@@ -89,7 +89,6 @@ export default class About extends Vue {
                             },
                             on: {
                                 click: () => {
-                                    console.log(params)
                                 }
                             }
                         },

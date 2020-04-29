@@ -6,6 +6,7 @@ export default {
             const {
                 value
             } = binding
+            console.log('ss')
             const dirPermissions = store.getters && store.getters.permissions
             if (value && value instanceof Array && value.length > 0) {
                 const directive = value

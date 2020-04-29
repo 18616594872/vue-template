@@ -26,7 +26,7 @@ const state: UserState = {
     token: getToken(TOKEN_KEY),
     name: '',
     routelist: [],
-    permissions: ['contract_list:search']
+    permissions: []
 }
 
 // 更改state
@@ -38,8 +38,17 @@ const mutations: MutationTree < UserState > = {
     SET_NAME: (state: UserState, name: string) => {
         state.name = name
     },
-    SET_ROUTLIST: (state: UserState, routeList: string) => {
-        state.routelist = routeList.split(',')
+    SET_ROUTLIST: (state: UserState, routeList: Array< string >) => {
+        state.routelist = routeList
+    },
+    SET_PERMISSIONS: (state: UserState, permissions: Array < object > ) => {
+        if (!permissions.length) {
+            state.permissions = permissions
+            return
+        }
+        for (let o of permissions) {
+            typeof o !== 'string' && state.permissions.push(...state.permissions)
+        }
     }
 }
 
@@ -58,7 +67,7 @@ const actions: ActionTree < UserState, any > = {
                 userName,
                 passWord
             }).then((response: any) => {
-
+                console.log('ss')
                 const {
                     code,
                     data,
@@ -94,11 +103,13 @@ const actions: ActionTree < UserState, any > = {
                 if (code === 200) {
                     const {
                         name,
-                        routeList
+                        routes,
+                        permission
                     } = data[0]
 
                     commit('SET_NAME', name)
-                    commit('SET_ROUTLIST', routeList)
+                    commit('SET_ROUTLIST', routes)
+                    commit('SET_PERMISSIONS', permission)
                     resolve(data)
                 }
 
@@ -117,12 +128,11 @@ const actions: ActionTree < UserState, any > = {
         return new Promise((resolve, reject) => {
             logout().then((result: any) => {
                 commit('SET_TOKEN', '')
-                commit('SET_QUEUENAME', [])
                 commit('SET_NAME', '')
                 commit('SET_ROUTLIST', '')
+                commit('SET_PERMISSIONS', [])
                 removeToken(TOKEN_KEY)
                 resetRouter()
-
                 resolve()
             }).catch(error => {
                 reject(error)

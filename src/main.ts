@@ -13,9 +13,11 @@ import {
 import '@/utils/log';
 import '@/assets/less/custom.less'
 import '@/directive'
+import { Component } from "vue-property-decorator";
+
+Component.registerHooks(["beforeRouteEnter", "beforeRouteLeave", "beforeRouteUpdate"]);
 
 Vue.use(iview)
-
 Vue.config.productionTip = false;
 
 Vue.prototype.$echarts = echarts;

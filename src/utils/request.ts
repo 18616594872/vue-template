@@ -27,7 +27,6 @@ service.interceptors.request.use(
         return config
     },
     (error: any) => {
-        console.log(error)
         return Promise.reject(error)
     }
 )

@@ -58,7 +58,6 @@ export default class About extends Vue {
                         this.loading = false
                     });
             } else {
-                console.log("输入不合法!")
             }
         });
     }

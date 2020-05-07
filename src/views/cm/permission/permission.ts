@@ -94,7 +94,7 @@ export default class About extends Vue {
     }
     async init() {
         await this.getListRole()
-        defineRole.routes = this.parseRoutes(await this.getListRouter()) // 保存默认的routes    
+        defineRole.routes = this.parseRoutes(await this.getListRouter()) // initializes the route permission    
     }
     getListRouter() {
         return listRouter()
@@ -128,7 +128,7 @@ export default class About extends Vue {
     }
     parseRoutes(routers: Array < any > ) {
         return Array.isArray(routers) && routers.reduce((arr, route) => {
-            if (route.hidden) {
+            if (route.hidden) { // not shown in routing permission selection
                 return arr
             }
             let o = < any > {}
@@ -158,7 +158,7 @@ export default class About extends Vue {
                 routerName.find(name => name === o.title) &&
                     ((this.operationType === 'role') ?
                         (o.checked = true) :
-                        this.permission.push({
+                        this.role.permission.push({
                             [o.title]: [`${o.title}:add`, `${o.title}:del`, `${o.title}:update`, `${o.title}:list`],
                             add: `${o.title}:add`,
                             del: `${o.title}:del`,
@@ -211,34 +211,35 @@ export default class About extends Vue {
         return nodesName
     }
     addOrEditRole() {
-        let nodesName = this.getActiveNodes((this.$refs.routeTree as any).getCheckedNodes()) // 获取所有的选中节点
-        let lastPermission: any = deepCop(this.role.permission)
+        let allCheckedNodeName = this.getActiveNodes((this.$refs.routeTree as any).getCheckedNodes()) // filter all selected nodes
+        let prevPermission: any = deepCop(this.role.permission)
         this.operationType = 'permission'
-        this.permission.length = 0
-        this.selectedRoutes(defineRole.routes, nodesName) // 筛选权限
+        this.role.permission.length = 0
+        this.selectedRoutes(this.role.routes, allCheckedNodeName) // filters the current user directive permissions
 
-        if (this.ModalType === 'new') { // 添加新角色
+        if (this.ModalType === 'new') { // add a new role
             this.rolesData.push(Object.assign(this.role, {
-                routes: nodesName,
-                permission: this.permission
+                routes: allCheckedNodeName
             }))
-        } else {
-            this.rolesData.filter((role: any, index: number, arr: any) => {
-                if (role.name === this.role.name) {
-                    // 权限同步
-                    this.permission.forEach((newModul: any) => {
-                        lastPermission.forEach((oldModul: any) => {
-                            let newKey: Array < string > = Object.keys(newModul)
-                            let oldKey: Array < string > = Object.keys(oldModul)
-                            if (oldKey[0] === newKey[0]) {
-                                newModul[newKey[0]] = oldModul[oldKey[0]]
-                            }
-                        })
-                    })
+        } else { // modify the role directive premissions
+            /**
+             * permissions synchronization
+             * the old directive premissions and new directive premissions have the same routing permission
+             * the old directive permission is synchronized to the new directive permission
+             */
+            prevPermission.length && prevPermission.forEach((oldPermission: any) => {
+                this.role.permission.forEach((newPermission: any, index: number, newArray: Array < any > ) => {
+                    let oldkey = Object.keys(oldPermission)
+                    if (oldkey.includes(this.gatherKey(newPermission))) {
+                        newArray[index] = oldPermission
+                    }
+                })
+            })
 
+            this.rolesData.forEach((data: any, index: number, arr: Array < any > ) => {
+                if (this.role.name === data.name) {
                     arr.splice(index, 1, Object.assign(this.role, {
-                        routes: nodesName,
-                        permission: this.permission
+                        routes: allCheckedNodeName
                     }))
                 }
             })
@@ -249,22 +250,28 @@ export default class About extends Vue {
     submitPermission() {
         this.showPermission = false
     }
-
+    gatherKey(o: any): any {
+        for (let i in o) {
+            return typeof o[i] !== 'string' && i
+        }
+        return ''
+    }
     beforeRouteLeave(to: any, from: any, next: Function) {
-        if(!this.rolesData.length){
+        if (!this.rolesData.length) {
             next()
             return
         }
-        
-        updateRole({updateRoles: this.rolesData}).then((res: any) => {
+
+        updateRole({
+            updateRoles: this.rolesData
+        }).then((res: any) => {
             let {
                 code,
                 data
             } = res.data
-            if (code === 200) {
-            }
+            if (code === 200) {}
         })
         next()
-      }
+    }
 
 }

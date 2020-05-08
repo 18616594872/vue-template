@@ -21,3 +21,11 @@ export function updateRole(data: any) {
         data
     })
 }
+
+export function addNewRole(data: any) {
+    return request({
+        url: '/cm/permission/addRole',
+        method: 'post',
+        data
+    })
+}

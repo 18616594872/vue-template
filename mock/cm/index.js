@@ -2,6 +2,8 @@ import {
     routes
 } from './role'
 
+let uid = 1
+
 function getRoutersName(routes, path) {
     let routersName = []
     for (let route of routes) {
@@ -24,12 +26,14 @@ const tokens = {
 }
 
 let roles = [{
+        id: uid++,
         name: 'admin',
         desc: '管理员',
         routes: getRoutersName(routes),
         permission: []
     },
     {
+        id: uid++,
         name: 'editor',
         desc: '普通用户',
         routes: getRoutersName(routes, 'mam'),
@@ -58,14 +62,34 @@ export default [{
             }
         }
     }, {
+        url: '/cm/permission/addRole',
+        type: 'post',
+        response: config => {
+            const {
+                newRole
+            } = config.body
+
+            roles.push(Object.assign({
+                id: uid++
+            }, newRole))
+
+            return {
+                code: 200,
+                msg: "success",
+                data: 1
+            }
+        }
+    }, {
         url: '/cm/permission/updateRoles',
         type: 'post',
         response: config => {
             const {
-                updateRoles
+                id,
+                updateRole
             } = config.body
 
-            roles = updateRoles
+            roles.forEach( (role, index, rolesArray) => (role.id === id) && rolesArray.splice(index, 1, updateRole))
+
             return {
                 code: 200,
                 msg: "success",

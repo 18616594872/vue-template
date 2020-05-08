@@ -5,7 +5,8 @@ import {
 import {
     listRouter,
     listRole,
-    updateRole
+    updateRole,
+    addNewRole
 } from '@/api/permission'
 import {
     deepCop
@@ -173,7 +174,7 @@ export default class About extends Vue {
     editRoutes(params: any) {
         this.operationType = 'role'
         let routes = this.selectedRoutes(deepCop(defineRole.routes), params.row.routes)
-        let [editRole] = this.rolesData.filter((role: any) => role.name === params.row.name)
+        let [editRole] = this.rolesData.filter((role: any) => role.id === params.row.id)
 
         this.role = Object.assign({}, editRole, {
             routes
@@ -186,7 +187,8 @@ export default class About extends Vue {
 
     }
     editPermission(params: any) {
-        let [role] = this.rolesData.filter((role: any) => (role.name === params.row.name))
+        
+        let [ role ] = this.rolesData.filter((role: any) => (role.id === params.row.id))
         this.permission = params.row.permission
         this.$nextTick(() => {
             this.showPermission = true
@@ -210,7 +212,7 @@ export default class About extends Vue {
         })
         return nodesName
     }
-    addOrEditRole() {
+    async addOrEditRole() {
         let allCheckedNodeName = this.getActiveNodes((this.$refs.routeTree as any).getCheckedNodes()) // filter all selected nodes
         let prevPermission: any = deepCop(this.role.permission)
         this.operationType = 'permission'
@@ -218,9 +220,13 @@ export default class About extends Vue {
         this.selectedRoutes(this.role.routes, allCheckedNodeName) // filters the current user directive permissions
 
         if (this.ModalType === 'new') { // add a new role
-            this.rolesData.push(Object.assign(this.role, {
-                routes: allCheckedNodeName
-            }))
+
+            await addNewRole({
+                newRole: Object.assign(this.role, {
+                    routes: allCheckedNodeName
+                })
+            })
+            
         } else { // modify the role directive premissions
             /**
              * permissions synchronization
@@ -235,16 +241,15 @@ export default class About extends Vue {
                     }
                 })
             })
-
-            this.rolesData.forEach((data: any, index: number, arr: Array < any > ) => {
-                if (this.role.name === data.name) {
-                    arr.splice(index, 1, Object.assign(this.role, {
-                        routes: allCheckedNodeName
-                    }))
-                }
+            
+            await updateRole({
+                id: this.role.id,
+                updateRole: Object.assign(this.role, {
+                    routes: allCheckedNodeName
+                })
             })
         }
-
+        await this.getListRole()
         this.role = deepCop(defineRole)
     }
     submitPermission() {

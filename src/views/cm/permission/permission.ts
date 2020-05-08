@@ -187,9 +187,14 @@ export default class About extends Vue {
 
     }
     editPermission(params: any) {
+        let [{
+            id,
+            permission
+        }] = this.rolesData.filter((role: any) => (role.id === params.row.id))
         
-        let [ role ] = this.rolesData.filter((role: any) => (role.id === params.row.id))
-        this.permission = params.row.permission
+        this.role.permission = permission
+        this.role.id = id
+
         this.$nextTick(() => {
             this.showPermission = true
         })
@@ -226,7 +231,7 @@ export default class About extends Vue {
                     routes: allCheckedNodeName
                 })
             })
-            
+
         } else { // modify the role directive premissions
             /**
              * permissions synchronization
@@ -241,7 +246,7 @@ export default class About extends Vue {
                     }
                 })
             })
-            
+
             await updateRole({
                 id: this.role.id,
                 updateRole: Object.assign(this.role, {
@@ -252,31 +257,23 @@ export default class About extends Vue {
         await this.getListRole()
         this.role = deepCop(defineRole)
     }
-    submitPermission() {
+    async submitPermission() {
         this.showPermission = false
+
+        let [ role ] = this.rolesData.filter((role: any) => (role.id === this.role.id))
+
+        await updateRole({
+            id: this.role.id,
+            updateRole: role
+        })
+        await this.getListRole()
+        this.role = deepCop(defineRole)
     }
     gatherKey(o: any): any {
         for (let i in o) {
             return typeof o[i] !== 'string' && i
         }
         return ''
-    }
-    beforeRouteLeave(to: any, from: any, next: Function) {
-        if (!this.rolesData.length) {
-            next()
-            return
-        }
-
-        updateRole({
-            updateRoles: this.rolesData
-        }).then((res: any) => {
-            let {
-                code,
-                data
-            } = res.data
-            if (code === 200) {}
-        })
-        next()
     }
 
 }

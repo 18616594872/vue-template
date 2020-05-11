@@ -24,7 +24,7 @@
             </Modal>
             <Modal v-model="showPermission" title="修改权限" width="40vw" class="white-modal">
                 <div class="role">
-                    <div v-for="(item, index) in role.permission" class="role-menu-wrap">
+                    <div v-for="(item, index) in role.permission" :key="index" class="role-menu-wrap">
                         <div class="menu-name">{{Object.keys(item)[0]}}</div>
                         <div class="opera-btn">
                             <CheckboxGroup v-model="item[Object.keys(item)[0]]">

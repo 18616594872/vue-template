@@ -29,3 +29,11 @@ export function addNewRole(data: any) {
         data
     })
 }
+
+export function delRole(data: any) {
+    return request({
+        url: '/cm/permission/delRole',
+        method: 'post',
+        data
+    })
+}

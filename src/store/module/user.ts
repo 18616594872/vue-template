@@ -67,7 +67,6 @@ const actions: ActionTree < UserState, any > = {
                 userName,
                 passWord
             }).then((response: any) => {
-                console.log('ss')
                 const {
                     code,
                     data,

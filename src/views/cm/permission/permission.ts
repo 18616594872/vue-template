@@ -6,7 +6,8 @@ import {
     listRouter,
     listRole,
     updateRole,
-    addNewRole
+    addNewRole,
+    delRole
 } from '@/api/permission'
 import {
     deepCop
@@ -95,7 +96,7 @@ export default class About extends Vue {
     }
     async init() {
         await this.getListRole()
-        defineRole.routes = this.parseRoutes(await this.getListRouter()) // initializes the route permission    
+        defineRole.routes = this.parseRoutes(await this.getListRouter()) // initializes the router
     }
     getListRouter() {
         return listRouter()
@@ -191,7 +192,7 @@ export default class About extends Vue {
             id,
             permission
         }] = this.rolesData.filter((role: any) => (role.id === params.row.id))
-        
+
         this.role.permission = permission
         this.role.id = id
 
@@ -203,7 +204,7 @@ export default class About extends Vue {
     del({
         row
     }: any) {
-        this.rolesData.filter((role: any, index: number, arr: any) => (role.name === row.name) && (arr.splice(index, 1)))
+        delRole({id: row.id}) // delRole
     }
     getActiveNodes(Nodes: Array < any > ): Array < string > {
         if (!Array.isArray(Nodes)) {
@@ -225,7 +226,7 @@ export default class About extends Vue {
         this.selectedRoutes(this.role.routes, allCheckedNodeName) // filters the current user directive permissions
 
         if (this.ModalType === 'new') { // add a new role
-
+            
             await addNewRole({
                 newRole: Object.assign(this.role, {
                     routes: allCheckedNodeName
@@ -246,7 +247,7 @@ export default class About extends Vue {
                     }
                 })
             })
-
+            
             await updateRole({
                 id: this.role.id,
                 updateRole: Object.assign(this.role, {

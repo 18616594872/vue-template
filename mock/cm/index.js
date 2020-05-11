@@ -69,7 +69,7 @@ export default [{
                 newRole
             } = config.body
 
-            roles.push(Object.assign({
+            roles.length && roles.push(Object.assign({
                 id: uid++
             }, newRole))
 
@@ -88,7 +88,7 @@ export default [{
                 updateRole
             } = config.body
 
-            roles.forEach( (role, index, rolesArray) => (role.id === id) && rolesArray.splice(index, 1, updateRole))
+            roles.forEach((role, index, rolesArray) => (role.id === id) && rolesArray.splice(index, 1, updateRole))
 
             return {
                 code: 200,
@@ -96,7 +96,24 @@ export default [{
                 data: roles
             }
         }
-    }, // user login
+    }, {
+        url: '/cm/permission/delRole',
+        type: 'post',
+        response: config => {
+            const {
+                id
+            } = config.body
+
+            roles.forEach((role, index, rolesArray) => (role.id === id) && rolesArray.splice(index, 1))
+
+            return {
+                code: 200,
+                msg: "success",
+                data: roles
+            }
+        }
+    },
+    // user login
     {
         url: '/auth/shiro/login',
         type: 'post',
@@ -110,7 +127,7 @@ export default [{
             // mock error
             if (!token) {
                 return {
-                    code: 60204,
+                    code: 500,
                     message: 'Account and password are incorrect.'
                 }
             }
